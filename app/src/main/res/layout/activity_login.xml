@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="13sp"
+        android:textColor="#000000"
+        android:lineSpacingExtra="2.5sp"
+
+        android:text="LOGIN"
+        android:layout_gravity="center"
+        android:layout_marginTop="22dp"
+        android:layout_marginBottom="60.1dp"
+        />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@null"
+        android:src="@mipmap/logo"
+        android:layout_gravity="center"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="11sp"
+        android:textColor="#b1b1b1"
+        android:lineSpacingExtra="2.5sp"
+        android:text="스터디의 시간"
+        android:layout_gravity="center"
+        android:layout_marginBottom="5.5dp"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="13sp"
+        android:textColor="#b1b1b1"
+        android:lineSpacingExtra="2.5sp"
+        android:text="STUDY SESSION"
+        android:layout_gravity="center"
+        android:layout_marginBottom="35dp"
+        />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@drawable/light_blue"
+        android:layout_marginHorizontal="27.5dp"
+        android:layout_marginBottom="49dp">
+        
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="209.7dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50.5dp"
+            android:layout_marginBottom="20dp"
+            android:layout_gravity="center">
+            <android.support.design.widget.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:textColorHint="#707070"
+                android:hint="아이디"/>
+        </android.support.design.widget.TextInputLayout>
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="209.7dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center">
+            <android.support.design.widget.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:textColorHint="#707070"
+                android:hint="비밀번호"/>
+        </android.support.design.widget.TextInputLayout>
+
+        <TextView
+            android:layout_width="209.7dp"
+            android:layout_height="31.2dp"
+            android:textSize="15sp"
+            android:textColor="#4a81ff"
+            android:lineSpacingExtra="3sp"
+            android:text="LOGIN"
+            android:background="@drawable/btn_login"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:layout_marginTop="32dp"
+            android:layout_marginBottom="18.8dp"
+            android:clickable="true"
+            />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="14.5dp"
+            android:layout_gravity="center"
+            android:layout_marginBottom="61.5dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="12sp"
+                android:textColor="#707070"
+                android:lineSpacingExtra="2.5sp"
+                android:text="아이디 찾기"
+                android:layout_marginRight="8dp"
+                android:clickable="true"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="12sp"
+                android:textColor="#707070"
+                android:lineSpacingExtra="2.5sp"
+                android:text="|"
+                android:layout_marginRight="8dp"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="12sp"
+                android:textColor="#707070"
+                android:lineSpacingExtra="2.5sp"
+                android:text="비밀번호 찾기"
+                android:layout_marginRight="8dp"
+                android:clickable="true"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="12sp"
+                android:textColor="#707070"
+                android:lineSpacingExtra="2.5sp"
+                android:text="|"
+                android:layout_marginRight="8dp"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="12sp"
+                android:textColor="#707070"
+                android:lineSpacingExtra="2.5sp"
+                android:text="회원가입"
+                android:clickable="true"
+                />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:layout_marginBottom="40.2dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="11sp"
+                android:textColor="#000000"
+                android:lineSpacingExtra="2.5sp"
+                android:text="구글 로그인"
+                android:layout_marginRight="10dp"
+                android:clickable="true"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="11sp"
+                android:textColor="#000000"
+                android:lineSpacingExtra="2.5sp"
+                android:text="|"
+                android:layout_marginRight="10dp"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="11sp"
+                android:textColor="#000000"
+                android:lineSpacingExtra="2.5sp"
+                android:text="카카오 로그인"
+                android:layout_marginRight="10dp"
+                android:clickable="true"
+                />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+
+</LinearLayout>
+</ScrollView>
