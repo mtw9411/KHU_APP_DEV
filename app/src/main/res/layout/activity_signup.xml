@@ -118,6 +118,7 @@
     </View>
 
     <TextView
+        android:id="@+id/sign_up_next"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="16.5sp"
