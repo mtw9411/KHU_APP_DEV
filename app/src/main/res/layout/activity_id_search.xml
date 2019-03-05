@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="52dp"
+        android:textSize="13sp"
+        android:textColor="#222222"
+        android:lineSpacingExtra="2.5sp"
+        android:text="고객센터"
+        android:gravity="center"
+        android:layout_marginBottom="105dp"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="15sp"
+        android:textColor="#707070"
+        android:lineSpacingExtra="3sp"
+        android:text="아이디 찾기"
+        android:layout_marginLeft="55.5dp"
+        android:layout_marginBottom="45.5dp"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="12sp"
+        android:textColor="#707070"
+        android:lineSpacingExtra="2.5sp"
+        android:text="이메일로 아이디 찾기"
+        android:layout_marginLeft="55.5dp"
+        android:layout_marginBottom="14.5dp"
+        />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/gray_border"
+        android:padding="13dp"
+        android:hint="이메일 주소"
+        android:textColorHint="@color/colorLightGray"
+        android:textSize="12sp"
+        android:layout_marginHorizontal="42dp"
+        android:layout_marginBottom="50dp"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="12sp"
+        android:textColor="#707070"
+        android:lineSpacingExtra="2.5sp"
+        android:text="휴대폰 번호로 아이디 찾기"
+        android:layout_marginLeft="55.5dp"
+        android:layout_marginBottom="14.5dp"
+        />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/gray_border"
+        android:padding="13dp"
+        android:hint="-없이 휴대폰 번호 입력"
+        android:textColorHint="@color/colorLightGray"
+        android:textSize="12sp"
+        android:layout_marginHorizontal="42dp"
+        android:layout_marginBottom="89.5dp"
+        />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="41dp"
+        android:textSize="16.5sp"
+        android:textColor="#2f78db"
+        android:lineSpacingExtra="3.5sp"
+        android:text="아이디 찾기"
+        android:background="@drawable/btn_login"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:layout_marginHorizontal="42dp"
+        android:layout_marginBottom="100dp"
+        />
+
+</LinearLayout>
+</ScrollView>

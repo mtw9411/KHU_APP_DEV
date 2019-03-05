@@ -126,7 +126,6 @@
         android:lineSpacingExtra="3.5sp"
         android:paddingVertical="16dp"
         android:gravity="center"
-        android:clickable="true"
         android:text="다음"
         />
 </LinearLayout>
