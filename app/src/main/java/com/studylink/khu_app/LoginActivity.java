@@ -6,6 +6,7 @@ import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
@@ -27,6 +28,7 @@ public class LoginActivity extends AppCompatActivity {
     private static final int RC_SIGN_IN = 100;
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
+    private TextView signinStart;
 
     private GoogleSignInClient mGoogleSignInClient;
 
@@ -36,6 +38,17 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
         Intent intent = new Intent(this, LoadingActivity.class);
         startActivity(intent);
+
+        signinStart = (TextView)findViewById(R.id.signinStart);
+        signinStart.setClickable(true);
+        signinStart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(LoginActivity.this, SignUpActivity.class);
+                startActivity(intent);
+            }
+        });
+
 
         mAuth = FirebaseAuth.getInstance();
 
