@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "1088753648687",
+    "firebase_url": "https://studylink-ec173.firebaseio.com",
+    "project_id": "studylink-ec173",
+    "storage_bucket": "studylink-ec173.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1088753648687:android:2b08140e66116df1",
+        "android_client_info": {
+          "package_name": "com.studylink.khu_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1088753648687-di59recnk7rc6utm6gmouq1jo1s6tcni.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD2CH9BMnTuEfbsDVcHx4YooakLt0ipJtA"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
