@@ -6,6 +6,7 @@ import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
@@ -30,12 +31,36 @@ public class LoginActivity extends AppCompatActivity {
 
     private GoogleSignInClient mGoogleSignInClient;
 
+    TextView search_id_btn, search_password_btn;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         Intent intent = new Intent(this, LoadingActivity.class);
         startActivity(intent);
+
+        search_id_btn = findViewById(R.id.search_id_btn);
+        search_password_btn = findViewById(R.id.search_password_btn);
+
+        search_id_btn.setClickable(true);
+        search_id_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(LoginActivity.this, IdSearchActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        search_password_btn.setClickable(true);
+        search_password_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(LoginActivity.this, PasswordSearchActivity.class);
+                startActivity(intent);
+            }
+        });
+
 
         mAuth = FirebaseAuth.getInstance();
 
