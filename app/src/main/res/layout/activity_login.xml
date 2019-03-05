@@ -158,7 +158,8 @@
             android:gravity="center"
             android:layout_marginBottom="40.2dp">
 
-            <TextView
+            <com.google.android.gms.common.SignInButton
+                android:id="@+id/googleLoginButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="11sp"
