@@ -8,21 +8,22 @@ import android.widget.TextView;
 
 public class IdFinActivity extends AppCompatActivity {
 
-    TextView client_email_2;
+    TextView client_email;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_id_fin);
 
+        client_email = findViewById(R.id.client_email);
+
         Intent intent = getIntent();
         Bundle bundle = intent.getExtras();
         String email = bundle.getString("email");
 
-        client_email_2.setText(email);
+        client_email.setText(email);
 
-//        client_email_2 = findViewById(R.id.client_email_2);
-//        Linkify.addLinks(client_email_2, Linkify.EMAIL_ADDRESSES);
+        Linkify.addLinks(client_email, Linkify.EMAIL_ADDRESSES);
 
     }
 }

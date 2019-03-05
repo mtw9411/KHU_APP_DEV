@@ -8,15 +8,15 @@ import android.widget.TextView;
 
 public class PasswordFinActivity extends AppCompatActivity {
 
-    TextView client_email;
+    TextView client_email_2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_password_fin);
 
-        client_email = findViewById(R.id.client_email);
-        Linkify.addLinks(client_email, Linkify.EMAIL_ADDRESSES);
+        client_email_2 = findViewById(R.id.client_email_2);
+        Linkify.addLinks(client_email_2, Linkify.EMAIL_ADDRESSES);
 
     }
 }
