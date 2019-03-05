@@ -35,14 +35,12 @@ public class SignUpFinalActivity extends AppCompatActivity {
 
         signupEmail = (EditText)findViewById(R.id.signupEmail);
         signupPassword = (EditText) findViewById(R.id.signupPassword);
-        sign_up_finish = findViewById(R.id.sign_up_finish);
+        sign_up_finish = (Button)findViewById(R.id.sign_up_finish);
 
         sign_up_finish.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 createUser(signupEmail.getText().toString(), signupPassword.getText().toString());
-                Intent intent = new Intent(SignUpFinalActivity.this, LoginActivity.class);
-                startActivity(intent);
             }
         });
 
@@ -63,8 +61,9 @@ public class SignUpFinalActivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             // Sign in success, update UI with the signed-in user's information
-                            FirebaseUser user = mAuth.getCurrentUser();
                             Toast.makeText(SignUpFinalActivity.this, "회원가입 성공", Toast.LENGTH_SHORT).show();
+                            Intent intent = new Intent(SignUpFinalActivity.this, LoginActivity.class);
+                            startActivity(intent);
                         } else {
                             // If sign in fails, display a message to the user.
                             Toast.makeText(SignUpFinalActivity.this, "Authentication failed.",
@@ -79,13 +78,5 @@ public class SignUpFinalActivity extends AppCompatActivity {
         super.onStart();
         // Check if user is signed in (non-null) and update UI accordingly.
         FirebaseUser currentUser = mAuth.getCurrentUser();
-    }
-
-    @Override
-    public void onStop() {
-        super.onStop();
-        if (mAuthListener != null) {
-            mAuth.removeAuthStateListener(mAuthListener);
-        }
     }
 }
