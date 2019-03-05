@@ -41,6 +41,12 @@
         <activity android:name=".IdFinActivity">
 
         </activity>
+        <activity android:name=".PasswordResetActivity">
+
+        </activity>
+        <activity android:name=".PasswordResetFinActivity">
+
+        </activity>
     </application>
 
 </manifest>
