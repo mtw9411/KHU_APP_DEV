@@ -28,7 +28,7 @@ public class LoginActivity extends AppCompatActivity {
     private static final int RC_SIGN_IN = 100;
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
-    private TextView signinStart;
+    private TextView signinStart, search_password_btn, search_id_btn;
     private TextView email_login_email;
     private TextView email_login_password;
     private TextView email_login_button;
@@ -45,7 +45,28 @@ public class LoginActivity extends AppCompatActivity {
         email_login_password = (TextView)findViewById(R.id.email_login_password);
         email_login_button = (TextView) findViewById(R.id.email_login_button);
 
+        search_id_btn = findViewById(R.id.search_id_btn);
+        search_password_btn = findViewById(R.id.search_password_btn);
         signinStart = (TextView)findViewById(R.id.signinStart);
+
+        search_id_btn.setClickable(true);
+        search_id_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(LoginActivity.this, IdSearchActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        search_password_btn.setClickable(true);
+        search_password_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(LoginActivity.this, PasswordSearchActivity.class);
+                startActivity(intent);
+            }
+        });
+
         signinStart.setClickable(true);
         signinStart.setOnClickListener(new View.OnClickListener() {
             @Override

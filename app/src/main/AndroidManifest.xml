@@ -29,7 +29,24 @@
         <activity android:name=".SignUpFinalActivity">
 
         </activity>
+        <activity android:name=".IdSearchActivity">
 
+        </activity>
+        <activity android:name=".PasswordSearchActivity">
+
+        </activity>
+        <activity android:name=".PasswordFinActivity">
+
+        </activity>
+        <activity android:name=".IdFinActivity">
+
+        </activity>
+        <activity android:name=".PasswordResetActivity">
+
+        </activity>
+        <activity android:name=".PasswordResetFinActivity">
+
+        </activity>
     </application>
 
 </manifest>

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView android:layout_width="match_parent"
+<ScrollView xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:android="http://schemas.android.com/apk/res/android">
     <LinearLayout
@@ -47,11 +48,11 @@
             <EditText
                 android:id="@+id/signupEmail"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="9
-"
+                android:layout_height="match_parent"
                 android:layout_marginHorizontal="1dp"
                 android:layout_marginBottom="1dp"
+                android:layout_weight="9
+"
                 android:background="@drawable/gray_border"
                 android:hint="이메일"
                 android:padding="13dp"
@@ -66,7 +67,7 @@
                 android:background="@drawable/btn_blue"
                 android:gravity="center"
                 android:lineSpacingExtra="1sp"
-                android:text="인증메일 발송"
+                android:text="메일 유효성 확인"
                 android:textColor="#2f78db"
                 android:textSize="12sp" />
         </LinearLayout>
@@ -90,10 +91,12 @@
                 android:padding="13dp"
                 android:textColorHint="@color/colorLightGray"
                 android:textSize="12sp" />
+
             <CheckBox
+                android:id="@+id/signupCheckBox1"
                 android:layout_width="wrap_content"
                 android:layout_height="19dp"
-                android:layout_weight="1"/>
+                android:layout_weight="1" />
         </LinearLayout>
 
         <LinearLayout
@@ -115,10 +118,12 @@
                 android:padding="13dp"
                 android:textColorHint="@color/colorLightGray"
                 android:textSize="12sp" />
-            <CheckBox
-                android:layout_width="wrap_content"
-                android:layout_height="19dp"
-                android:layout_weight="1"/>
+
+            <Button
+                android:id="@+id/signupCheckBox2"
+                android:layout_width="28dp"
+                android:layout_height="30dp"
+                android:gravity="center" />
         </LinearLayout>
 
         <android.support.design.widget.TextInputLayout
@@ -189,6 +194,7 @@
             android:lineSpacingExtra="3.5sp"
             android:paddingVertical="16dp"
             android:text="완료"
+            android:background="@color/colorWhite"
             android:textColor="#3664cd"
             android:textSize="16.5sp" />
     </LinearLayout>
