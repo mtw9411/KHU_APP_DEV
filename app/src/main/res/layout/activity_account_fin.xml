@@ -1,239 +1,285 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
-<LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="52dp"
-        android:textSize="13sp"
-        android:textColor="#222222"
-        android:lineSpacingExtra="2.5sp"
-        android:text="계정 설정"
-        android:gravity="center"
-        />
-
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:weightSum="10"
-        android:background="@drawable/gray_border_statusbar"
-        android:layout_marginBottom="17.7dp">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="5.8dp"
-            android:layout_weight="5"
-            android:background="@color/colorBlue"/>
-    </LinearLayout>
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="11sp"
-        android:textColor="#707070"
-        android:lineSpacingExtra="2.5sp"
-        android:text="다음에 하기"
-        android:layout_gravity="right"
-        android:layout_marginRight="22.5dp"
-        android:layout_marginBottom="9dp"
-        />
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="12sp"
-        android:textColor="#707070"
-        android:lineSpacingExtra="6sp"
-        android:text="이름"
-        android:layout_marginLeft="41dp"
-        android:layout_marginBottom="10dp"
-        />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="X"
+                android:textSize="15.9dp"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="14.7dp"/>
 
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="38dp"
-        android:layout_marginHorizontal="39dp"
-        android:layout_marginBottom="30.5dp"
-        android:background="@drawable/gray_border_register"/>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="12sp"
-        android:textColor="#707070"
-        android:lineSpacingExtra="6sp"
-        android:text="생년월일"
-        android:layout_marginLeft="41dp"
-        android:layout_marginBottom="10dp"
-        />
-
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="38dp"
-        android:layout_marginHorizontal="39dp"
-        android:layout_marginBottom="30.5dp"
-        android:background="@drawable/gray_border_register"/>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="12sp"
-        android:textColor="#707070"
-        android:lineSpacingExtra="6sp"
-        android:text="성별"
-        android:layout_marginLeft="41dp"
-        android:layout_marginBottom="10dp"
-        />
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="39dp"
-        android:layout_marginBottom="30.5dp"
-        android:weightSum="10">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="52dp"
+                android:textSize="13sp"
+                android:textColor="#222222"
+                android:lineSpacingExtra="2.5sp"
+                android:text="성향 선택"
+                android:gravity="center"
+                />
+        </RelativeLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:weightSum="10"
+            android:background="@drawable/gray_border_statusbar"
+            android:layout_marginBottom="97.5dp">
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="5.8dp"
+                android:layout_weight="10"
+                android:background="@color/colorBlue"/>
+        </LinearLayout>
 
         <TextView
-            android:id="@+id/gender_male"
             android:layout_width="wrap_content"
-            android:layout_height="38dp"
-            android:layout_weight="5"
-            android:background="@drawable/gray_border_register"
+            android:layout_height="wrap_content"
             android:textSize="12sp"
-            android:textColor="#e4e4e4"
-            android:lineSpacingExtra="6sp"
-            android:text="남"
-            android:gravity="center"
-            android:layout_marginRight="12.5dp"/>
+            android:textColor="#707070"
+            android:lineSpacingExtra="2.5sp"
+            android:text="자신의 공부 성향을 선택해보세요. 매칭률이 올라갑니다!"
+            android:layout_marginLeft="40dp"
+            android:layout_marginBottom="85.3dp"
+            />
 
-        <TextView
-            android:id="@+id/gender_female"
-            android:layout_width="wrap_content"
-            android:layout_height="38dp"
-            android:layout_weight="5"
-            android:background="@drawable/gray_border_register"
-            android:textSize="12sp"
-            android:textColor="#e4e4e4"
-            android:lineSpacingExtra="6sp"
-            android:text="여"
-            android:gravity="center"/>
-    </LinearLayout>
+        <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="12sp"
-        android:textColor="#707070"
-        android:lineSpacingExtra="6sp"
-        android:text="주소"
-        android:layout_marginLeft="41dp"
-        android:layout_marginBottom="10dp"
-        />
+            <LinearLayout
+                android:id="@+id/btn1"
+                android:layout_width="160dp"
+                android:layout_height="55dp"
+                app:layout_constraintHorizontal_chainStyle="packed"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toLeftOf="@+id/btn2"
+                android:gravity="center">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/gray_border_register"
-        android:layout_marginHorizontal="39dp"
-        android:layout_marginBottom="30.5dp"
-        android:weightSum="10">
+                <TextView
+                    android:id="@+id/btn1_txt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:lineSpacingExtra="6.5sp"
+                    android:text="외향적인"
+                    android:textColor="#66222222"
+                    android:textSize="14sp" />
+
+                <ImageView
+                    android:id="@+id/btn1_img"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@null"
+                    android:src="@mipmap/check_btn" />
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/btn2"
+                android:layout_width="160dp"
+                android:layout_height="55dp"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintLeft_toRightOf="@+id/btn1"
+                android:gravity="center">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:textSize="14sp"
+                    android:textColor="#66222222"
+                    android:lineSpacingExtra="6.5sp"
+                    android:text="내향적인"
+                    />
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@null"
+                    android:src="@mipmap/check_btn"/>
+            </LinearLayout>
+        </android.support.constraint.ConstraintLayout>
+        <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:id="@+id/btn3"
+                android:layout_width="160dp"
+                android:layout_height="55dp"
+                app:layout_constraintHorizontal_chainStyle="packed"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toLeftOf="@+id/btn4"
+                android:gravity="center">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:lineSpacingExtra="6.5sp"
+                    android:text="직관적인"
+                    android:textColor="#66222222"
+                    android:textSize="14sp" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@null"
+                    android:src="@mipmap/check_btn" />
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/btn4"
+                android:layout_width="160dp"
+                android:layout_height="55dp"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintLeft_toRightOf="@+id/btn3"
+                android:gravity="center">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:textSize="14sp"
+                    android:textColor="#66222222"
+                    android:lineSpacingExtra="6.5sp"
+                    android:text="현실적인"
+                    />
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@null"
+                    android:src="@mipmap/check_btn"/>
+            </LinearLayout>
+        </android.support.constraint.ConstraintLayout>
+        <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:id="@+id/btn5"
+                android:layout_width="160dp"
+                android:layout_height="55dp"
+                app:layout_constraintHorizontal_chainStyle="packed"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toLeftOf="@+id/btn6"
+                android:gravity="center">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:lineSpacingExtra="6.5sp"
+                    android:text="이성적인"
+                    android:textColor="#66222222"
+                    android:textSize="14sp" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@null"
+                    android:src="@mipmap/check_btn" />
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/btn6"
+                android:layout_width="160dp"
+                android:layout_height="55dp"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintLeft_toRightOf="@+id/btn5"
+                android:gravity="center">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:textSize="14sp"
+                    android:textColor="#66222222"
+                    android:lineSpacingExtra="6.5sp"
+                    android:text="원칙적인"
+                    />
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@null"
+                    android:src="@mipmap/check_btn"/>
+            </LinearLayout>
+        </android.support.constraint.ConstraintLayout>
+        <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="110dp">
+
+            <LinearLayout
+                android:id="@+id/btn7"
+                android:layout_width="160dp"
+                android:layout_height="55dp"
+                app:layout_constraintHorizontal_chainStyle="packed"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toLeftOf="@+id/btn8"
+                android:gravity="center">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:lineSpacingExtra="6.5sp"
+                    android:text="계획적인"
+                    android:textColor="#66222222"
+                    android:textSize="14sp" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@null"
+                    android:src="@mipmap/check_btn" />
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/btn8"
+                android:layout_width="160dp"
+                android:layout_height="55dp"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintLeft_toRightOf="@+id/btn7"
+                android:gravity="center">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:textSize="14sp"
+                    android:textColor="#66222222"
+                    android:lineSpacingExtra="6.5sp"
+                    android:text="탐색적인"
+                    />
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@null"
+                    android:src="@mipmap/check_btn"/>
+            </LinearLayout>
+        </android.support.constraint.ConstraintLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="7.5dp"
+            android:layout_gravity="bottom"
+            android:background="@drawable/shadow_top">
+        </View>
 
         <TextView
             android:layout_width="match_parent"
-            android:layout_height="38dp"
-            android:layout_weight="9"
-            android:textSize="12sp"
-            android:textColor="#e4e4e4"
-            android:lineSpacingExtra="6sp"
-            android:gravity="center" />
+            android:layout_height="wrap_content"
+            android:textSize="16.5sp"
+            android:textColor="#b1b1b1"
+            android:lineSpacingExtra="3.5sp"
+            android:paddingVertical="16dp"
+            android:gravity="center"
+            android:text="완료"
+            />
 
-        <ImageView
-            android:layout_width="38dp"
-            android:layout_height="38dp"
-            android:background="@null"
-            android:src="@mipmap/glass"
-            android:layout_marginRight="18dp"/>
     </LinearLayout>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="12sp"
-        android:textColor="#707070"
-        android:lineSpacingExtra="6sp"
-        android:text="관심있는 분야를 선택해보세요!"
-        android:layout_marginLeft="41dp"
-        android:layout_marginBottom="10dp"
-        />
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/gray_border_register"
-        android:layout_marginHorizontal="39dp"
-        android:layout_marginBottom="41.5dp"
-        android:weightSum="10">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="38dp"
-            android:layout_weight="4"
-            android:text="분야"
-            android:textSize="12sp"
-            android:textColor="#e4e4e4"
-            android:lineSpacingExtra="6sp"
-            android:gravity="center" />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="38dp"
-            android:layout_weight="1"
-            android:text="V"
-            android:textSize="12sp"
-            android:textColor="#e4e4e4"
-            android:lineSpacingExtra="6sp"
-            android:gravity="center" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="38dp"
-            android:layout_weight="4"
-            android:text="상세분야"
-            android:textSize="12sp"
-            android:textColor="#e4e4e4"
-            android:lineSpacingExtra="6sp"
-            android:gravity="center" />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="38dp"
-            android:layout_weight="1"
-            android:text="V"
-            android:textSize="12sp"
-            android:textColor="#e4e4e4"
-            android:lineSpacingExtra="6sp"
-            android:gravity="center" />
-    </LinearLayout>
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="7.5dp"
-        android:layout_gravity="bottom"
-        android:background="@drawable/shadow_top">
-    </View>
-
-    <TextView
-        android:id="@+id/sign_up_next"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="16.5sp"
-        android:textColor="#3664cd"
-        android:lineSpacingExtra="3.5sp"
-        android:paddingVertical="16dp"
-        android:gravity="center"
-        android:text="다음"
-        />
-
-</LinearLayout>
 </ScrollView>
