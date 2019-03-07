@@ -29,6 +29,9 @@ public class LoginActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
     private TextView signinStart, search_password_btn, search_id_btn;
+    private TextView email_login_email;
+    private TextView email_login_password;
+    private TextView email_login_button;
 
     private GoogleSignInClient mGoogleSignInClient;
 
@@ -38,6 +41,9 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
         Intent intent = new Intent(this, LoadingActivity.class);
         startActivity(intent);
+        email_login_email = (TextView)findViewById(R.id.email_login_email);
+        email_login_password = (TextView)findViewById(R.id.email_login_password);
+        email_login_button = (TextView) findViewById(R.id.email_login_button);
 
         search_id_btn = findViewById(R.id.search_id_btn);
         search_password_btn = findViewById(R.id.search_password_btn);
@@ -67,6 +73,14 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(LoginActivity.this, SignUpActivity.class);
                 startActivity(intent);
+            }
+        });
+
+        email_login_button.setClickable(true);
+        email_login_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                loginUser(email_login_email.getText().toString(),email_login_password.getText().toString());
             }
         });
 
@@ -104,6 +118,24 @@ public class LoginActivity extends AppCompatActivity {
                 }
             }
         };
+    }
+
+    private void loginUser(String email, String password){
+        mAuth.signInWithEmailAndPassword(email, password)
+                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+                            // Sign in success, update UI with the signed-in user's information
+                            Toast.makeText(LoginActivity.this, "이메일 로그인 완료", Toast.LENGTH_SHORT).show();
+                        } else {
+                            // If sign in fails, display a message to the user.
+                            Toast.makeText(LoginActivity.this, "Authentication failed.",
+                                    Toast.LENGTH_SHORT).show();
+                        }
+                        // ...
+                    }
+                });
     }
 
 
