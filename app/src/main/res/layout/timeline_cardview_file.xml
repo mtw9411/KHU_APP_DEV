@@ -70,15 +70,16 @@
             android:layout_marginRight="24dp"
             android:orientation="horizontal" />
 
-        <ImageView
-            android:id="@+id/imageView8"
-            android:layout_width="291dp"
-            android:layout_height="wrap_content"
+        <TextView
+            android:id="@+id/textView12"
+            android:layout_width="290dp"
+            android:layout_height="1dp"
+            android:background="#000000"
+            tools:layout_editor_absoluteX="110dp"
+            tools:layout_editor_absoluteY="368dp"
             android:layout_marginLeft="12dp"
-            android:layout_marginTop="190dp"
-            android:layout_marginRight="12dp"
-            app:srcCompat="#070707"
-            />
+            android:layout_marginTop="195dp"/>
+
 
         <ImageView
             android:id="@+id/imageView9"
@@ -109,4 +110,5 @@
 
 
     </android.support.v7.widget.CardView>
+
 </android.support.constraint.ConstraintLayout>

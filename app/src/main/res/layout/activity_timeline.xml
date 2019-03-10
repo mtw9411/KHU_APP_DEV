@@ -7,7 +7,7 @@
     android:isScrollContainer="true"
     android:overScrollMode="ifContentScrolls"
     android:scrollbars="vertical"
-    tools:context=".Timeline">
+    tools:context=".TimelineActivity">
 
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"

@@ -70,14 +70,15 @@
             android:layout_marginRight="24dp"
             android:orientation="vertical" />
 
-        <ImageView
-            android:id="@+id/imageView13"
-            android:layout_width="291dp"
-            android:layout_height="wrap_content"
+        <TextView
+            android:id="@+id/textView12"
+            android:layout_width="290dp"
+            android:layout_height="1dp"
+            android:background="#000000"
+            tools:layout_editor_absoluteX="110dp"
+            tools:layout_editor_absoluteY="368dp"
             android:layout_marginLeft="12dp"
-            android:layout_marginTop="190dp"
-            android:layout_marginRight="12dp"
-            app:srcCompat="#070707" />
+            android:layout_marginTop="195dp"/>
 
         <ImageView
             android:id="@+id/imageView14"
@@ -115,7 +116,7 @@
             android:text="투표하기"
             android:textSize="13sp"
             android:textColor="#0036b2"
-            android:lineSpacingExtra="3..5sp"
+            android:lineSpacingExtra="3.5sp"
             />
 
 
