@@ -36,67 +36,125 @@
         android:layout_marginBottom="23dp"
         />
 
-    <TextView
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="12sp"
-        android:textColor="#707070"
-        android:lineSpacingExtra="2.5sp"
-        android:text="전체 동의"
+        android:layout_height="40.5dp"
         android:background="@drawable/gray_border"
-        android:paddingVertical="13dp"
         android:paddingLeft="13dp"
         android:layout_marginHorizontal="42dp"
         android:layout_marginBottom="11.5dp"
         android:clickable="true"
-        />
+        >
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="12sp"
+            android:textColor="#707070"
+            android:lineSpacingExtra="2.5sp"
+            android:text="전체 동의"
+            android:paddingVertical="13dp"
+            />
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/check_btn"
+            android:layout_alignParentRight="true"/>
+    </RelativeLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:paddingVertical="23dp"
+        android:paddingVertical="15dp"
         android:paddingLeft="13dp"
         android:layout_marginHorizontal="42dp"
         android:layout_marginBottom="18dp"
         android:background="@drawable/gray_border"
         >
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="12sp"
-            android:textColor="#707070"
-            android:lineSpacingExtra="2.5sp"
-            android:text="서비스 이용약관 동의 (필수)"
-            android:layout_marginBottom="23dp"
-            />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="12sp"
-            android:textColor="#707070"
-            android:lineSpacingExtra="2.5sp"
-            android:text="위치기반서비스 이용약관 동의 (필수)"
-            android:layout_marginBottom="23dp"
-            />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="12sp"
-            android:textColor="#707070"
-            android:lineSpacingExtra="2.5sp"
-            android:text="개인정보 수집 및 제3자 제공 동의 (필수)"
-            android:layout_marginBottom="23dp"
-            />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="12sp"
-            android:textColor="#707070"
-            android:lineSpacingExtra="2.5sp"
-            android:text="마케팅 정보 수신 동의 (선택)"
-            />
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="40.5dp"
+            android:clickable="true"
+            >
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="12sp"
+                android:textColor="#707070"
+                android:lineSpacingExtra="2.5sp"
+                android:text="서비스 이용약관 동의 (필수)"
+                android:paddingVertical="13dp"
+                />
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/check_btn"
+                android:layout_alignParentRight="true"/>
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="40.5dp"
+            android:clickable="true"
+            >
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="12sp"
+                android:textColor="#707070"
+                android:lineSpacingExtra="2.5sp"
+                android:text="위치기반서비스 이용약관 동의 (필수)"
+                android:paddingVertical="13dp"
+                />
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/check_btn"
+                android:layout_alignParentRight="true"/>
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="40.5dp"
+            android:clickable="true"
+            >
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="12sp"
+                android:textColor="#707070"
+                android:lineSpacingExtra="2.5sp"
+                android:text="개인정보 수집 및 제3자 제공 동의 (필수)"
+                android:paddingVertical="13dp"
+                />
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/check_btn"
+                android:layout_alignParentRight="true"/>
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="40.5dp"
+            android:clickable="true"
+            >
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="12sp"
+                android:textColor="#707070"
+                android:lineSpacingExtra="2.5sp"
+                android:text="마케팅 정보 수신 동의 (선택)"
+                android:paddingVertical="13dp"
+                />
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/check_btn"
+                android:layout_alignParentRight="true"/>
+        </RelativeLayout>
+
+
     </LinearLayout>
 
     <TextView
