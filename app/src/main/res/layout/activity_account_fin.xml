@@ -80,8 +80,8 @@
 
                 <ImageView
                     android:id="@+id/btn1_img"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="70dp"
+                    android:layout_height="40dp"
                     android:background="@null"
                     android:src="@mipmap/check_btn" />
             </LinearLayout>
@@ -93,6 +93,7 @@
                 app:layout_constraintLeft_toRightOf="@+id/btn1"
                 android:gravity="center">
                 <TextView
+                    android:id="@+id/btn2_txt"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="center"
@@ -102,8 +103,9 @@
                     android:text="내향적인"
                     />
                 <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:id="@+id/btn2_img"
+                    android:layout_width="70dp"
+                    android:layout_height="40dp"
                     android:background="@null"
                     android:src="@mipmap/check_btn"/>
             </LinearLayout>
@@ -122,6 +124,7 @@
                 android:gravity="center">
 
                 <TextView
+                    android:id="@+id/btn3_txt"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="center"
@@ -131,8 +134,9 @@
                     android:textSize="14sp" />
 
                 <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:id="@+id/btn3_img"
+                    android:layout_width="70dp"
+                    android:layout_height="40dp"
                     android:background="@null"
                     android:src="@mipmap/check_btn" />
             </LinearLayout>
@@ -144,6 +148,7 @@
                 app:layout_constraintLeft_toRightOf="@+id/btn3"
                 android:gravity="center">
                 <TextView
+                    android:id="@+id/btn4_txt"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="center"
@@ -153,8 +158,9 @@
                     android:text="현실적인"
                     />
                 <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:id="@+id/btn4_img"
+                    android:layout_width="70dp"
+                    android:layout_height="40dp"
                     android:background="@null"
                     android:src="@mipmap/check_btn"/>
             </LinearLayout>
@@ -173,6 +179,7 @@
                 android:gravity="center">
 
                 <TextView
+                    android:id="@+id/btn5_txt"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="center"
@@ -182,8 +189,9 @@
                     android:textSize="14sp" />
 
                 <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:id="@+id/btn5_img"
+                    android:layout_width="70dp"
+                    android:layout_height="40dp"
                     android:background="@null"
                     android:src="@mipmap/check_btn" />
             </LinearLayout>
@@ -195,6 +203,7 @@
                 app:layout_constraintLeft_toRightOf="@+id/btn5"
                 android:gravity="center">
                 <TextView
+                    android:id="@+id/btn6_txt"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="center"
@@ -204,8 +213,9 @@
                     android:text="원칙적인"
                     />
                 <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:id="@+id/btn6_img"
+                    android:layout_width="70dp"
+                    android:layout_height="40dp"
                     android:background="@null"
                     android:src="@mipmap/check_btn"/>
             </LinearLayout>
@@ -225,6 +235,7 @@
                 android:gravity="center">
 
                 <TextView
+                    android:id="@+id/btn7_txt"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="center"
@@ -234,8 +245,9 @@
                     android:textSize="14sp" />
 
                 <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:id="@+id/btn7_img"
+                    android:layout_width="70dp"
+                    android:layout_height="40dp"
                     android:background="@null"
                     android:src="@mipmap/check_btn" />
             </LinearLayout>
@@ -247,6 +259,7 @@
                 app:layout_constraintLeft_toRightOf="@+id/btn7"
                 android:gravity="center">
                 <TextView
+                    android:id="@+id/btn8_txt"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="center"
@@ -256,8 +269,9 @@
                     android:text="탐색적인"
                     />
                 <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:id="@+id/btn8_img"
+                    android:layout_width="70dp"
+                    android:layout_height="40dp"
                     android:background="@null"
                     android:src="@mipmap/check_btn"/>
             </LinearLayout>
@@ -271,6 +285,7 @@
         </View>
 
         <TextView
+            android:id="@+id/main_btn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="16.5sp"
