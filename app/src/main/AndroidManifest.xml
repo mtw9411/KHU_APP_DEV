@@ -26,16 +26,21 @@
         <activity android:name=".PasswordResetFinActivity"></activity>
         <activity android:name=".AccountSetActivity"></activity>
         <activity android:name=".AccountFinActivity"></activity>
-        <activity android:name=".TimelineActivity"><intent-filter>
-            <action android:name="android.intent.action.MAIN" />
-
-            <category android:name="android.intent.category.LAUNCHER" />
-        </intent-filter>
-        </activity>
+        <activity android:name=".TimelineActivity"></activity>
         <activity android:name=".MainDetailActivity"></activity>
         <activity android:name=".StudydetailActivity" />
         <activity android:name=".AbsentActivity" />
         <activity android:name=".ScheduleActivity"></activity>
+        <activity android:name=".MakeStudyActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".MakeStudyFinActivity"></activity>
+        <activity android:name=".StudySearchActivity"></activity>
+        <activity android:name=".StudySearchingActivity"></activity>
     </application>
 
 </manifest>
