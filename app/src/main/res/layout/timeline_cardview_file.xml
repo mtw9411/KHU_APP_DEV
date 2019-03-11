@@ -77,7 +77,6 @@
             android:layout_marginLeft="12dp"
             android:layout_marginTop="190dp"
             android:layout_marginRight="12dp"
-            app:srcCompat="#070707"
             />
 
         <ImageView

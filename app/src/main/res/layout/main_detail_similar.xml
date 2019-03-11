@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="96dp"
+    android:layout_height="96dp"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@drawable/study_test">
+
+    <TextView
+        android:id="@+id/textView27"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="14sp"
+        android:textColor="#ffffff"
+        android:lineSpacingExtra="6.5sp"
+        tools:text="수원시 영통동"
+        android:layout_centerInParent="true"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="11sp"
+        android:textColor="#8cd8e8"
+        android:lineSpacingExtra="5.5sp"
+        tools:text="수원시 영통동"
+        android:layout_below="@+id/textView27"
+        android:layout_centerHorizontal="true"/>
+
+</RelativeLayout>

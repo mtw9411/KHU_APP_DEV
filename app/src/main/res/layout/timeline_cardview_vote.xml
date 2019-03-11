@@ -73,11 +73,11 @@
         <ImageView
             android:id="@+id/imageView13"
             android:layout_width="291dp"
-            android:layout_height="wrap_content"
+            android:layout_height="0.1dp"
             android:layout_marginLeft="12dp"
             android:layout_marginTop="190dp"
             android:layout_marginRight="12dp"
-            app:srcCompat="#070707" />
+            android:background="#78222222"/>
 
         <ImageView
             android:id="@+id/imageView14"
@@ -115,7 +115,6 @@
             android:text="투표하기"
             android:textSize="13sp"
             android:textColor="#0036b2"
-            android:lineSpacingExtra="3..5sp"
             />
 
 

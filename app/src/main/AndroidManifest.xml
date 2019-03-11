@@ -14,11 +14,7 @@
             android:name=".LoadingActivity"
             android:theme="@style/NoTitleBar"></activity>
         <activity android:name=".LoginActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity android:name=".SignUpActivity"></activity>
         <activity android:name=".SignUpFinalActivity"></activity>
@@ -30,7 +26,12 @@
         <activity android:name=".PasswordResetFinActivity"></activity>
         <activity android:name=".AccountSetActivity"></activity>
         <activity android:name=".AccountFinActivity"></activity>
-        <activity android:name=".Timeline"></activity>
+        <activity android:name=".Timeline"><intent-filter>
+            <action android:name="android.intent.action.MAIN" />
+
+            <category android:name="android.intent.category.LAUNCHER" />
+        </intent-filter></activity>
+        <activity android:name=".MainDetailActivity"></activity>
     </application>
 
 </manifest>
