@@ -27,7 +27,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:text="스터디 세션"
+            android:text="스터디 세션"
             />
 
         <android.support.v7.widget.RecyclerView
@@ -174,7 +174,7 @@
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="@+id/textView8"
             app:layout_constraintTop_toBottomOf="@+id/textView8"
-            tools:text="면접 스터디" />
+            android:text="면접 스터디" />
 
         <TextView
             android:id="@+id/textView10"
@@ -189,7 +189,7 @@
             app:layout_constraintStart_toEndOf="@+id/textView9"
             app:layout_constraintTop_toTopOf="@+id/textView9"
             app:layout_constraintVertical_bias="1.0"
-            tools:text="스터디 상세정보" />
+            android:text="스터디 상세정보" />
 
         <ImageView
             android:id="@+id/imageView7"

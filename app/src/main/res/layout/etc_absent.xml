@@ -91,7 +91,7 @@
             android:lineSpacingExtra="6sp"
             android:textSize="15sp"
             android:textStyle="bold"
-            tools:text="스터디 벌금" />
+            android:text="스터디 벌금" />
 
         <TextView
             android:layout_width="wrap_content"
