@@ -13,7 +13,6 @@
         <activity
             android:name=".LoadingActivity"
             android:theme="@style/NoTitleBar" />
-        <activity android:name=".LoginActivity"></activity>
         <activity android:name=".SignUpActivity" />
         <activity android:name=".SignUpFinalActivity" />
         <activity android:name=".IdSearchActivity" />
@@ -24,13 +23,14 @@
         <activity android:name=".PasswordResetFinActivity" />
         <activity android:name=".AccountSetActivity" />
         <activity android:name=".AccountFinActivity" />
-        <activity android:name=".TimelineActivity">
+        <activity android:name=".TimelineActivity"></activity>
+        <activity android:name=".LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".MainDetailActivity"></activity>
         <activity android:name=".StudydetailActivity" />
         <activity android:name=".AbsentActivity" />
         <activity android:name=".ScheduleActivity" />

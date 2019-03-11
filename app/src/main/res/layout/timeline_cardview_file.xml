@@ -78,8 +78,9 @@
             tools:layout_editor_absoluteX="110dp"
             tools:layout_editor_absoluteY="368dp"
             android:layout_marginLeft="12dp"
-            android:layout_marginTop="195dp"/>
-
+            android:layout_marginTop="190dp"
+            android:layout_marginRight="12dp"
+            />
 
         <ImageView
             android:id="@+id/imageView9"
