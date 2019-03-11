@@ -9,10 +9,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity"></activity>
+        <activity android:name=".MainActivity" />
         <activity
             android:name=".LoadingActivity"
-            android:theme="@style/NoTitleBar"></activity>
+            android:theme="@style/NoTitleBar" />
         <activity android:name=".LoginActivity">
 
         </activity>
@@ -26,12 +26,16 @@
         <activity android:name=".PasswordResetFinActivity"></activity>
         <activity android:name=".AccountSetActivity"></activity>
         <activity android:name=".AccountFinActivity"></activity>
-        <activity android:name=".Timeline"><intent-filter>
+        <activity android:name=".TimelineActivity"><intent-filter>
             <action android:name="android.intent.action.MAIN" />
 
             <category android:name="android.intent.category.LAUNCHER" />
-        </intent-filter></activity>
+        </intent-filter>
+        </activity>
         <activity android:name=".MainDetailActivity"></activity>
+        <activity android:name=".StudydetailActivity" />
+        <activity android:name=".AbsentActivity" />
+        <activity android:name=".ScheduleActivity"></activity>
     </application>
 
 </manifest>
