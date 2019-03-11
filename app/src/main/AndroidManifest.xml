@@ -23,19 +23,22 @@
         <activity android:name=".PasswordResetFinActivity" />
         <activity android:name=".AccountSetActivity" />
         <activity android:name=".AccountFinActivity" />
-        <activity android:name=".TimelineActivity"></activity>
+        <activity android:name=".TimelineActivity" />
         <activity android:name=".LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MainDetailActivity"></activity>
+        <activity android:name=".MainDetailActivity" />
         <activity android:name=".StudydetailActivity" />
         <activity android:name=".AbsentActivity" />
         <activity android:name=".ScheduleActivity" />
         <activity android:name=".absent_registrate" />
-        <activity android:name=".Timeline_writing"></activity>
+        <activity android:name=".Timeline_writing" />
+        <activity android:name=".VoteMain" />
+        <activity android:name=".AlarmActivity"></activity>
     </application>
 
 </manifest>
