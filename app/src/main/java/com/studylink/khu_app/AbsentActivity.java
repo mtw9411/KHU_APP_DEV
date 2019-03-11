@@ -8,6 +8,6 @@ public class AbsentActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_absent);
+        setContentView(R.layout.etc_absent);
     }
 }
