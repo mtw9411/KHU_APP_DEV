@@ -20,7 +20,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/imageView13"
         app:layout_constraintTop_toTopOf="@+id/imageView13"
-        tools:text="공기업 스터디 출결관리" />
+        android:text="공기업 스터디 출결관리" />
 
     <ImageView
         android:id="@+id/imageView13"

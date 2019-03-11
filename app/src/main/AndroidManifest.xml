@@ -13,9 +13,7 @@
         <activity
             android:name=".LoadingActivity"
             android:theme="@style/NoTitleBar" />
-        <activity android:name=".LoginActivity">
-
-        </activity>
+        <activity android:name=".LoginActivity"></activity>
         <activity android:name=".SignUpActivity" />
         <activity android:name=".SignUpFinalActivity" />
         <activity android:name=".IdSearchActivity" />
@@ -36,7 +34,8 @@
         <activity android:name=".StudydetailActivity" />
         <activity android:name=".AbsentActivity" />
         <activity android:name=".ScheduleActivity" />
-        <activity android:name=".absent_registrate"></activity>
+        <activity android:name=".absent_registrate" />
+        <activity android:name=".Timeline_writing"></activity>
     </application>
 
 </manifest>

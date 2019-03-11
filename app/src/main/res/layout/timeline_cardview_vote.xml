@@ -25,7 +25,7 @@
             app:srcCompat="@color/colorLightBlue" />
 
         <TextView
-            tools:text="Zkqmmsl"
+            android:text="Zkqmmsl"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="68dp"
@@ -74,11 +74,11 @@
             android:id="@+id/textView12"
             android:layout_width="290dp"
             android:layout_height="1dp"
-            android:background="#000000"
-            tools:layout_editor_absoluteX="110dp"
-            tools:layout_editor_absoluteY="368dp"
             android:layout_marginLeft="12dp"
-            android:layout_marginTop="195dp"/>
+            android:layout_marginTop="195dp"
+            android:background="#cccccc"
+            tools:layout_editor_absoluteX="110dp"
+            tools:layout_editor_absoluteY="368dp" />
 
         <ImageView
             android:id="@+id/imageView14"

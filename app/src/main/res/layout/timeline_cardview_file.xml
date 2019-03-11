@@ -32,7 +32,7 @@
             android:lineSpacingExtra="2.5sp"
             android:textColor="#707070"
             android:textSize="13sp"
-            tools:text="Zkqmmsl" />
+            android:text="Zkqmmsl" />
 
         <TextView
             android:id="@+id/textView3"
