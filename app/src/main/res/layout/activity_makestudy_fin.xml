@@ -109,6 +109,7 @@
                     android:text="/300 자"
                     android:textColor="#e4e4e4"
                     android:textSize="9sp" />
+
             </RelativeLayout>
         </android.support.v7.widget.CardView>
     </LinearLayout>
@@ -123,7 +124,7 @@
         android:textSize="14sp"
         android:textColor="#E6222222"
         android:lineSpacingExtra="6.5sp"
-        tools:text="배경사진 변경하기"
+        android:text="배경사진 변경하기"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout2" />
 
@@ -146,7 +147,7 @@
         android:textSize="14sp"
         android:textColor="#2f78db"
         android:lineSpacingExtra="6.5sp"
-        tools:text="스터디 만들기"
+        android:text="스터디 만들기"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView64" />
