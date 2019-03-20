@@ -31,18 +31,19 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MainDetailActivity"></activity>
+        <activity android:name=".MainDetailActivity" />
         <activity android:name=".StudydetailActivity" />
         <activity android:name=".AbsentActivity" />
-        <activity android:name=".ScheduleActivity"></activity>
-        <activity android:name=".MakeStudyActivity"></activity>
-        <activity android:name=".MakeStudyFinActivity"></activity>
-        <activity android:name=".StudySearchActivity"></activity>
-        <activity android:name=".StudySearchingActivity"></activity>
+        <activity android:name=".ScheduleActivity" />
+        <activity android:name=".MakeStudyActivity" />
+        <activity android:name=".MakeStudyFinActivity" />
+        <activity android:name=".StudySearchActivity" />
+        <activity android:name=".StudySearchingActivity" />
         <activity android:name=".absent_registrate" />
         <activity android:name=".Timeline_writing" />
         <activity android:name=".VoteMain" />
-        <activity android:name=".AlarmActivity"></activity>
+        <activity android:name=".AlarmActivity" />
+        <activity android:name=".Mypage_main"></activity>
     </application>
 
 </manifest>
