@@ -54,11 +54,13 @@
         />
 
     <EditText
+        android:id="@+id/account_username"
         android:layout_width="match_parent"
         android:layout_height="38dp"
         android:layout_marginHorizontal="39dp"
         android:layout_marginBottom="30.5dp"
-        android:background="@drawable/gray_border_register"/>
+        android:background="@drawable/gray_border_register"
+        android:inputType=""/>
 
     <TextView
         android:layout_width="wrap_content"
@@ -72,11 +74,18 @@
         />
 
     <EditText
+        android:id="@+id/account_userbirth"
         android:layout_width="match_parent"
         android:layout_height="38dp"
         android:layout_marginHorizontal="39dp"
         android:layout_marginBottom="30.5dp"
-        android:background="@drawable/gray_border_register"/>
+        android:background="@drawable/gray_border_register"
+        android:hint="ex) 19970715"
+        android:textSize="14sp"
+        android:paddingLeft="5sp"
+        android:inputType="number"
+        android:maxLength="8"
+        />
 
     <TextView
         android:layout_width="wrap_content"
@@ -142,13 +151,14 @@
         android:weightSum="10">
 
         <TextView
+            android:id="@+id/account_useraddress"
             android:layout_width="match_parent"
             android:layout_height="38dp"
             android:layout_weight="9"
-            android:textSize="12sp"
-            android:textColor="#e4e4e4"
+            android:gravity="center"
             android:lineSpacingExtra="6sp"
-            android:gravity="center" />
+            android:textColor="#e4e4e4"
+            android:textSize="12sp" />
 
         <ImageView
             android:layout_width="38dp"

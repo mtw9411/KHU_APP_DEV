@@ -7,7 +7,7 @@
     android:layout_height="match_parent">
 
     <android.support.v7.widget.CardView
-        android:id="@+id/cardview"
+        android:id="@+id/cardview_studyname"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="5dp"
@@ -17,16 +17,16 @@
         <LinearLayout
             android:layout_width="88dp"
             android:layout_height="31dp"
-            android:orientation="horizontal"
-            android:gravity="center">
+            android:gravity="center"
+            android:orientation="horizontal">
 
             <TextView
                 android:id="@+id/title"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
+                android:gravity="center"
                 android:lineSpacingExtra="3.5sp"
                 android:text="공기업"
-                android:gravity="center"
                 android:textColor="#ffffff"
                 android:textSize="13sp" />
 

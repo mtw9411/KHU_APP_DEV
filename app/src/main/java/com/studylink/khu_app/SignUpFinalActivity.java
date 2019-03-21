@@ -1,8 +1,10 @@
 package com.studylink.khu_app;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -34,7 +36,10 @@ public class SignUpFinalActivity extends AppCompatActivity {
     private EditText signupPassword_check;
     private CheckBox signupCheckBox1;
     private CheckBox signupCheckBox2;
-    private boolean password_check = false;
+    private boolean email_check = false;
+    private boolean password_check1 = false;
+    private boolean password_check2 = false;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,7 +60,7 @@ public class SignUpFinalActivity extends AppCompatActivity {
         sign_up_finish.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                createUser(signupEmail.getText().toString(), signupPassword.getText().toString());
+                confirm();
             }
         });
 
@@ -67,6 +72,7 @@ public class SignUpFinalActivity extends AppCompatActivity {
                     Toast.makeText(SignUpFinalActivity.this, "이메일 형식이 아닙니다", Toast.LENGTH_SHORT).show();
                 } else{
                     Toast.makeText(SignUpFinalActivity.this, "이메일 형식이 확인되었습니다", Toast.LENGTH_SHORT).show();
+                    email_check = true;
                 }
             }
         });
@@ -82,8 +88,10 @@ public class SignUpFinalActivity extends AppCompatActivity {
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 if(signupPassword.getText().toString().equals(signupPassword_check.getText().toString())){
                     signupCheckBox2.setChecked(true);
+                    password_check2 = true;
                 } else{
                     signupCheckBox2.setChecked(false);
+                    password_check2 = false;
                 }
             }
 
@@ -106,8 +114,10 @@ public class SignUpFinalActivity extends AppCompatActivity {
                 if(!Pattern.matches("^[a-zA-Z0-9]{8,20}$", signupPassword.getText().toString()))
                 {
                     signupCheckBox1.setChecked(false);
+                    password_check1 = false;
                 } else{
                     signupCheckBox1.setChecked(true);
+                    password_check1 = true;
                 }
             }
 
@@ -135,8 +145,7 @@ public class SignUpFinalActivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             // Sign in success, update UI with the signed-in user's information
-                            Toast.makeText(SignUpFinalActivity.this, "회원가입 성공", Toast.LENGTH_SHORT).show();
-                            Intent intent = new Intent(SignUpFinalActivity.this, LoginActivity.class);
+                            Intent intent = new Intent(SignUpFinalActivity.this, AccountSetActivity.class);
                             startActivity(intent);
                         } else {
                             // If sign in fails, display a message to the user.
@@ -147,7 +156,13 @@ public class SignUpFinalActivity extends AppCompatActivity {
                 });
     }
 
-
+    private void confirm(){
+        if(email_check == true && password_check1 == true && password_check2 == true){
+            createUser(signupEmail.getText().toString(), signupPassword.getText().toString());
+        } else{
+            Toast.makeText(this, "아이디와 비밀번호를 확인해주세요", Toast.LENGTH_SHORT).show();
+        }
+    }
 
     @Override
     public void onStart() {
