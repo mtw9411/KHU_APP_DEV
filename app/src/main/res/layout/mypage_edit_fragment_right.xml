@@ -1,0 +1,313 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <TextView
+        android:id="@+id/textView87"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="47dp"
+        android:layout_marginLeft="47dp"
+        android:layout_marginTop="49.4dp"
+        android:layout_marginEnd="47dp"
+        android:layout_marginRight="47dp"
+        android:textSize="12sp"
+        android:textColor="#8c47ff"
+        android:lineSpacingExtra="6sp"
+        android:text="성향 설정은 나에게 맞는 세션을 찾는데 도움을 줍니다."
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/constraintLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="85dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginRight="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView87">
+
+        <LinearLayout
+            android:id="@+id/btn1"
+            android:layout_width="160dp"
+            android:layout_height="55dp"
+            android:gravity="center"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toLeftOf="@+id/btn2">
+
+            <TextView
+                android:id="@+id/btn1_txt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:lineSpacingExtra="6.5sp"
+                android:text="외향적인"
+                android:textColor="#66222222"
+                android:textSize="14sp" />
+
+            <ImageView
+                android:id="@+id/btn1_img"
+                android:layout_width="70dp"
+                android:layout_height="40dp"
+                android:background="@null"
+                android:src="@mipmap/check_btn" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/btn2"
+            android:layout_width="160dp"
+            android:layout_height="55dp"
+            android:gravity="center"
+            app:layout_constraintLeft_toRightOf="@+id/btn1"
+            app:layout_constraintRight_toRightOf="parent">
+
+            <TextView
+                android:id="@+id/btn2_txt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:lineSpacingExtra="6.5sp"
+                android:text="내향적인"
+                android:textColor="#66222222"
+                android:textSize="14sp" />
+
+            <ImageView
+                android:id="@+id/btn2_img"
+                android:layout_width="70dp"
+                android:layout_height="40dp"
+                android:background="@null"
+                android:src="@mipmap/check_btn" />
+        </LinearLayout>
+    </android.support.constraint.ConstraintLayout>
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/constraintLayout2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginRight="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout">
+
+        <LinearLayout
+            android:id="@+id/btn3"
+            android:layout_width="160dp"
+            android:layout_height="55dp"
+            android:gravity="center"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toLeftOf="@+id/btn4">
+
+            <TextView
+                android:id="@+id/btn3_txt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:lineSpacingExtra="6.5sp"
+                android:text="직관적인"
+                android:textColor="#66222222"
+                android:textSize="14sp" />
+
+            <ImageView
+                android:id="@+id/btn3_img"
+                android:layout_width="70dp"
+                android:layout_height="40dp"
+                android:background="@null"
+                android:src="@mipmap/check_btn" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/btn4"
+            android:layout_width="160dp"
+            android:layout_height="55dp"
+            android:gravity="center"
+            app:layout_constraintLeft_toRightOf="@+id/btn3"
+            app:layout_constraintRight_toRightOf="parent">
+
+            <TextView
+                android:id="@+id/btn4_txt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:lineSpacingExtra="6.5sp"
+                android:text="현실적인"
+                android:textColor="#66222222"
+                android:textSize="14sp" />
+
+            <ImageView
+                android:id="@+id/btn4_img"
+                android:layout_width="70dp"
+                android:layout_height="40dp"
+                android:background="@null"
+                android:src="@mipmap/check_btn" />
+        </LinearLayout>
+    </android.support.constraint.ConstraintLayout>
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/constraintLayout3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginRight="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout2">
+
+        <LinearLayout
+            android:id="@+id/btn5"
+            android:layout_width="160dp"
+            android:layout_height="55dp"
+            android:gravity="center"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toLeftOf="@+id/btn6">
+
+            <TextView
+                android:id="@+id/btn5_txt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:lineSpacingExtra="6.5sp"
+                android:text="이성적인"
+                android:textColor="#66222222"
+                android:textSize="14sp" />
+
+            <ImageView
+                android:id="@+id/btn5_img"
+                android:layout_width="70dp"
+                android:layout_height="40dp"
+                android:background="@null"
+                android:src="@mipmap/check_btn" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/btn6"
+            android:layout_width="160dp"
+            android:layout_height="55dp"
+            android:gravity="center"
+            app:layout_constraintLeft_toRightOf="@+id/btn5"
+            app:layout_constraintRight_toRightOf="parent">
+
+            <TextView
+                android:id="@+id/btn6_txt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:lineSpacingExtra="6.5sp"
+                android:text="원칙적인"
+                android:textColor="#66222222"
+                android:textSize="14sp" />
+
+            <ImageView
+                android:id="@+id/btn6_img"
+                android:layout_width="70dp"
+                android:layout_height="40dp"
+                android:background="@null"
+                android:src="@mipmap/check_btn" />
+        </LinearLayout>
+    </android.support.constraint.ConstraintLayout>
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/constraintLayout4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginRight="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout3">
+
+        <LinearLayout
+            android:id="@+id/btn7"
+            android:layout_width="160dp"
+            android:layout_height="55dp"
+            android:gravity="center"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toLeftOf="@+id/btn8">
+
+            <TextView
+                android:id="@+id/btn7_txt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:lineSpacingExtra="6.5sp"
+                android:text="계획적인"
+                android:textColor="#66222222"
+                android:textSize="14sp" />
+
+            <ImageView
+                android:id="@+id/btn7_img"
+                android:layout_width="70dp"
+                android:layout_height="40dp"
+                android:background="@null"
+                android:src="@mipmap/check_btn" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/btn8"
+            android:layout_width="160dp"
+            android:layout_height="55dp"
+            android:gravity="center"
+            app:layout_constraintLeft_toRightOf="@+id/btn7"
+            app:layout_constraintRight_toRightOf="parent">
+
+            <TextView
+                android:id="@+id/btn8_txt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:lineSpacingExtra="6.5sp"
+                android:text="탐색적인"
+                android:textColor="#66222222"
+                android:textSize="14sp" />
+
+            <ImageView
+                android:id="@+id/btn8_img"
+                android:layout_width="70dp"
+                android:layout_height="40dp"
+                android:background="@null"
+                android:src="@mipmap/check_btn" />
+        </LinearLayout>
+    </android.support.constraint.ConstraintLayout>
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="108.3dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginRight="20dp"
+        app:cardBackgroundColor="#63f5f5f5"
+        app:cardCornerRadius="5dp"
+        app:cardElevation="3dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout4">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:lineSpacingExtra="6sp"
+            android:text="선택 완료"
+            android:textColor="#70222222"
+            android:textSize="12sp" />
+    </android.support.v7.widget.CardView>
+</android.support.constraint.ConstraintLayout>

@@ -13,7 +13,13 @@
         <activity
             android:name=".LoadingActivity"
             android:theme="@style/NoTitleBar" />
-        <activity android:name=".SignUpActivity" />
+        <activity android:name=".SignUpActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity android:name=".SignUpFinalActivity" />
         <activity android:name=".IdSearchActivity" />
         <activity android:name=".PasswordSearchActivity" />
@@ -25,11 +31,7 @@
         <activity android:name=".AccountFinActivity" />
         <activity android:name=".TimelineActivity" />
         <activity android:name=".LoginActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity android:name=".MainDetailActivity"></activity>
         <activity android:name=".StudydetailActivity" />
@@ -43,6 +45,9 @@
         <activity android:name=".Timeline_writing" />
         <activity android:name=".VoteMain" />
         <activity android:name=".AlarmActivity"></activity>
+        <activity android:name=".MypageEditActivity">
+
+        </activity>
     </application>
 
 </manifest>
