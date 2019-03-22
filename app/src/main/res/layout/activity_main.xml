@@ -68,7 +68,7 @@
         app:layout_constraintTop_toTopOf="@+id/file_textview" />
 
     <TextView
-        android:id="@+id/textView8"
+        android:id="@+id/makeStudy"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="19dp"
@@ -81,15 +81,49 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/textView7" />
 
+    <RelativeLayout
+        android:id="@+id/addStudy"
+        android:layout_width="103dp"
+        android:layout_height="103dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="11dp"
+        android:layout_marginRight="11dp"
+        android:background="@drawable/blue_circle"
+        app:layout_constraintEnd_toStartOf="@+id/recyclerView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/file_textview">
+
+        <ImageView
+            android:layout_width="65dp"
+            android:layout_height="65dp"
+            android:layout_alignParentTop="true"
+            android:layout_centerInParent="true"
+            android:layout_marginTop="19dp"
+            app:srcCompat="@mipmap/study_add" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="16dp"
+            android:lineSpacingExtra="5sp"
+            android:text="스터디 추가"
+            android:textColor="#ffffff"
+            android:textSize="10.5sp" />
+
+    </RelativeLayout>
+
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recyclerView"
         android:layout_width="0dp"
-        android:layout_height="102.5dp"
-        android:layout_marginLeft="20dp"
+        android:layout_height="103dp"
         android:layout_marginTop="20dp"
-        android:layout_marginRight="20dp"
+        android:scrollbars="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/addStudy"
         app:layout_constraintTop_toBottomOf="@+id/file_textview">
 
 
@@ -140,6 +174,7 @@
         android:id="@+id/recyclerView2"
         android:layout_width="match_parent"
         android:layout_height="182.9dp"
+        android:scrollbars="horizontal"
         android:layout_marginLeft="20dp"
         android:layout_marginTop="10.6dp"
         android:layout_marginRight="20dp"
@@ -178,6 +213,7 @@
         android:id="@+id/recyclerView3"
         android:layout_width="match_parent"
         android:layout_height="170.5dp"
+        android:scrollbars="horizontal"
         android:layout_marginStart="20dp"
         android:layout_marginLeft="20dp"
         android:layout_marginTop="11.3dp"
