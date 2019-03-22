@@ -82,11 +82,11 @@ public class AccountFinActivity extends AppCompatActivity {
         btn1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                selectChange(btn1_txt, btn2_txt, btn1_img, btn2_img);
-                check1 = true;
-                dispoList.set(0,"1_1");
-            }
-        });
+            selectChange(btn1_txt, btn2_txt, btn1_img, btn2_img);
+            check1 = true;
+            dispoList.set(0,"1_1");
+        }
+    });
 
         btn2.setClickable(true);
         btn2.setOnClickListener(new View.OnClickListener() {
