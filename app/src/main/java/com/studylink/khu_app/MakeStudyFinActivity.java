@@ -16,6 +16,7 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.OnProgressListener;
@@ -24,6 +25,7 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
 import java.io.IOException;
+import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -32,7 +34,8 @@ public class MakeStudyFinActivity extends AppCompatActivity {
 
     private ImageView changeBackImg,showBackImg;
     private TextView makeStudyFin,studyIntro;
-    private FirebaseDatabase database;
+
+    private DatabaseReference databaseRoom;
 
     private Uri filePath;
 
@@ -44,6 +47,9 @@ public class MakeStudyFinActivity extends AppCompatActivity {
         showBackImg = findViewById(R.id.showBackImg);
         makeStudyFin = findViewById(R.id.makeStudyFin);
         studyIntro =findViewById(R.id.studyIntro);
+
+        Intent intent = getIntent();
+        final RoomDTO room = (RoomDTO) intent.getExtras().getSerializable("room");
 
         changeBackImg.setClickable(true);
         changeBackImg.setOnClickListener(new View.OnClickListener() {
@@ -61,7 +67,7 @@ public class MakeStudyFinActivity extends AppCompatActivity {
         makeStudyFin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                uploadFile();
+                uploadFile(room);
                 Intent intent = new Intent(MakeStudyFinActivity.this, TimelineActivity.class);
                 startActivity(intent);
             }
@@ -86,15 +92,22 @@ public class MakeStudyFinActivity extends AppCompatActivity {
     }
 
     //데이터 업로드
-    private void uploadFile() {
-        //업로드 진행 Dialog 보이기
-        final ProgressDialog progressDialog = new ProgressDialog(this);
-        progressDialog.setTitle("업로드중...");
-        progressDialog.show();
+    private void uploadFile(RoomDTO room) {
+        databaseRoom= FirebaseDatabase.getInstance().getReference("room");
+        final RoomDTO roomFin = room;
 
-
+        String contentCheck = studyIntro.getText().toString();
+        //업로드할 내용이 있으면 수행
+        if (contentCheck.trim().length()>0) {
+            roomFin.setContent(contentCheck);
+        }
         //업로드할 이미지가 있으면 수행
         if (filePath != null) {
+            //업로드 진행 Dialog 보이기
+            final ProgressDialog progressDialog = new ProgressDialog(this);
+            progressDialog.setTitle("업로드중...");
+            progressDialog.show();
+
             //storage
             FirebaseStorage storage = FirebaseStorage.getInstance();
 
@@ -130,9 +143,12 @@ public class MakeStudyFinActivity extends AppCompatActivity {
                             progressDialog.setMessage("Uploaded " + ((int) progress) + "% ...");
                         }
                     });
+            roomFin.setimageName(filename);
         }
+
+        databaseRoom.child(room.getId()).setValue(roomFin);
     }
-    
+
     @Override
     public void onBackPressed() {
         super.onBackPressed();

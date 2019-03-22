@@ -182,8 +182,6 @@ public class MakeStudyActivity extends AppCompatActivity {
         next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(MakeStudyActivity.this, MakeStudyFinActivity.class));
-
                 addRoom();
             }
         });
@@ -203,25 +201,36 @@ public class MakeStudyActivity extends AppCompatActivity {
     }
 
     private void addRoom(){
-        String name=editTextName.getText().toString();
-        Long fine =  Long.parseLong(editFine.getText().toString());
+        // 방제목 입력 확인
+        String name = editTextName.getText().toString();
+        if(name.trim().length()>0){
+            // 성향 입력 확인
+            if(check1 == true && check2 == true && check3 == true && check4 == true) {
+                // 벌금 입력 확인
+                String fineCheck = editFine.getText().toString();
+                Long fine = (fineCheck.trim().length()>0) ? Long.parseLong(fineCheck) : 0L;
 
-        if(check1 == true && check2 == true && check3 == true && check4 == true) {
-            String id= databaseRoom.push().getKey();
-            RoomDTO roomDTO = new RoomDTO();
-            roomDTO.setFine(fine);
-            roomDTO.setRoomName(name);
-            roomDTO.setId(id);
-            roomDTO.setRoomdisposition(dispoRoom);
+                String id = databaseRoom.push().getKey();
+                RoomDTO roomDTO = new RoomDTO();
+                roomDTO.setId(id);
+                roomDTO.setRoomName(name);
+                roomDTO.setFine(fine);
+                roomDTO.setRoomdisposition(dispoRoom);
 
+                databaseRoom.child(id).setValue(roomDTO);
 
-            databaseRoom.child(id).setValue(roomDTO);
+                Toast.makeText(this, "room added", Toast.LENGTH_LONG).show();
 
-
-            databaseRoom.child(id).child("dispo").setValue(roomDTO.getRoomdisposition());
-
-            Toast.makeText(this, "room added", Toast.LENGTH_LONG).show();
-
+                //다음 화면에 roomDTO 객체 전달
+                Intent intent = new Intent(MakeStudyActivity.this, MakeStudyFinActivity.class);
+                intent.putExtra("room", roomDTO);
+                startActivity(intent);
+            }
+            else{
+                Toast.makeText(this, "성향을 모두 선택해 주세요.", Toast.LENGTH_SHORT).show();
+            }
+        }else{
+            Toast.makeText(this, "방 이름을 입력해 주세요.", Toast.LENGTH_SHORT).show();
         }
 
     }
