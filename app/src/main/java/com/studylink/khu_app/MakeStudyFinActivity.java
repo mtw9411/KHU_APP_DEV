@@ -40,7 +40,6 @@ public class MakeStudyFinActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_makestudy_fin);
-
         changeBackImg = findViewById(R.id.changeBackImg);
         showBackImg = findViewById(R.id.showBackImg);
         makeStudyFin = findViewById(R.id.makeStudyFin);
@@ -133,9 +132,9 @@ public class MakeStudyFinActivity extends AppCompatActivity {
                     });
         }
     }
-
+    
     @Override
-    public void onBackPressed(){
+    public void onBackPressed() {
         super.onBackPressed();
     }
 

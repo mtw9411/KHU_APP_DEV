@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="classfication1">
+
+        <item >어학</item>
+        <item >자격증</item>
+        <item >공무원</item>
+        <item >기타</item>
+
+    </string-array>
+
+
+
+
+
+</resources>
