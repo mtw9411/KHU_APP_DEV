@@ -159,7 +159,6 @@ public class AccountFinActivity extends AppCompatActivity {
                 showMessage();
             }
         });
-        alreadysign();
     }
 
     public void selectChange(TextView change_blue, TextView change_gray, ImageView selected_image, ImageView non_image){
@@ -176,7 +175,7 @@ public class AccountFinActivity extends AppCompatActivity {
             String uid = auth.getCurrentUser().getUid();
             Accountset.disposition = dispoList;
 
-            FirebaseDatabase.getReference().child("users").child(uid).child("dispo").setValue(dispoList);
+            FirebaseDatabase.getReference().child("users").child(uid).child("dispo").setValue(Accountset.disposition);
 
             Toast.makeText(this, "성공", Toast.LENGTH_SHORT).show();
         }
@@ -209,10 +208,4 @@ public class AccountFinActivity extends AppCompatActivity {
         dialog.show();
     }
 
-    private void alreadysign(){
-        if(check1 == true && check2 == true && check3 == true && check4 == true){
-            Intent intent = new Intent (AccountFinActivity.this, MainActivity.class);
-            startActivity(intent);
-        }
-    }
 }

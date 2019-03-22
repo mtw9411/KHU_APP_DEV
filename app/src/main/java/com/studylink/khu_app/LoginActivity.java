@@ -111,7 +111,7 @@ public class LoginActivity extends AppCompatActivity {
                 FirebaseUser user = firebaseAuth.getCurrentUser();
                 if (user != null) {
                     // User is signed in
-                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);      //MainActivity 부분에 getApplicationContext()를 넣어도 됨
+                    Intent intent = new Intent(LoginActivity.this, AccountSetActivity.class);      //MainActivity 부분에 getApplicationContext()를 넣어도 됨
                     startActivity(intent);
                     finish();
                 } else {

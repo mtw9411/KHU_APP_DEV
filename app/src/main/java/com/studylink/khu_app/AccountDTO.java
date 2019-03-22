@@ -12,6 +12,7 @@ public class AccountDTO {
     public String userbirth;
     public String usersex;
     public List<String> disposition;
+    public String registcheck = "false";
 
    /* public AccountDTO(){
 

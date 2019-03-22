@@ -4,6 +4,8 @@ import android.accounts.Account;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.EditText;
@@ -11,8 +13,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -73,6 +79,7 @@ public class AccountSetActivity extends AppCompatActivity {
             }
         });
 
+        alreadysign();
     }
 
     public void colorChange(TextView change_blue, TextView change_gray){
@@ -89,10 +96,37 @@ public class AccountSetActivity extends AppCompatActivity {
         Accountset.username = account_username.getText().toString();
         Accountset.userbirth = account_userbirth.getText().toString();
         Accountset.usersex = sex_check;
+        Accountset.registcheck = "true";
 
-        FirebaseDatabase.getReference().child("users").child(uid).setValue(Accountset);
+        FirebaseDatabase.getReference().child("users").child(uid).child("impo").setValue(Accountset);
         Toast.makeText(this, "성공", Toast.LENGTH_SHORT).show();
     }
+
+
+    private void alreadysign(){
+        String myuid = auth.getCurrentUser().getUid();
+
+        FirebaseDatabase.getReference("users").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for(DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
+                    AccountDTO accountDTO = dataSnapshot1.getValue(AccountDTO.class);
+                    String a = accountDTO.registcheck;
+                    if (a.equals("true")) {
+                        Intent intent = new Intent(AccountSetActivity.this, MainActivity.class);
+                        startActivity(intent);
+                    }
+                    Toast.makeText(AccountSetActivity.this, a, Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+    }
+
 
     /*public void postFirebaseDatabase(boolean add){
         FirebaseDatabase = FirebaseDatabase.getInstance();
