@@ -8,6 +8,7 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -37,48 +38,130 @@ public class MakeStudyActivity extends AppCompatActivity {
     TextView btn1, btn2, btn3, btn4, btn5, btn6, btn7, btn8;
     TextView next;
 
+    ArrayAdapter<CharSequence> adspin1, adspin2;
+    String choice_do="";
+    String choice_se="";
+
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_makestudy);
 
-        Spinner s1 = (Spinner)findViewById(R.id.spinner1);
-        Spinner s2 =(Spinner)findViewById(R.id.spinner2);
+       final Spinner s1 = (Spinner)findViewById(R.id.spinner1);
+       final Spinner s2 =(Spinner)findViewById(R.id.spinner2);
 
-        final String [] classification1 = {"어학","자격증","공무원","기타"};
-        final String [] classification2 = {"영어","중국어","일어"};
+       adspin1 = ArrayAdapter.createFromResource(this, R.array.classification1, android.R.layout.simple_spinner_dropdown_item);
+       adspin1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+       s1.setAdapter(adspin1);
 
-        ArrayAdapter adapter = new ArrayAdapter(
-                getApplicationContext(), R.layout.spin,classification1 );
-        adapter.setDropDownViewResource( R.layout.spin_dropdown);
-
-        s1.setAdapter(adapter);
         s1.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
-            public void onItemSelected(AdapterView<?> parent, View view,
-                                       int position, long id) {
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                if (adspin1.getItem(i).equals("어학")) {
+                    choice_do = "어학";
+                    adspin2 = ArrayAdapter.createFromResource(MakeStudyActivity.this, R.array.classification2_language, android.R.layout.simple_spinner_dropdown_item);
+                    adspin2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                    s2.setAdapter(adspin2);
+                    s2.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+
+                        @Override
+                        public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                            choice_se = adspin2.getItem(i).toString();
+                            databaseRoom.child("spinner1").setValue(choice_do);
+                            databaseRoom.child("spinner2").setValue(choice_se);
+
+                        }
+
+                        @Override
+                        public void onNothingSelected(AdapterView<?> adapterView) {
+
+                        }
+                    });
+                } else if (adspin1.getItem(i).equals("자격증")) {
+                    choice_do = "자격증";
+                    adspin2 = ArrayAdapter.createFromResource(MakeStudyActivity.this, R.array.classification2_certificate, android.R.layout.simple_spinner_dropdown_item);
+                    adspin2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                    s2.setAdapter(adspin2);
+                    s2.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+
+                        @Override
+                        public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                            choice_se = adspin2.getItem(i).toString();
+                            databaseRoom.child("spinner1").setValue(choice_do);
+                            databaseRoom.child("spinner2").setValue(choice_se);
+                        }
+
+                        @Override
+                        public void onNothingSelected(AdapterView<?> adapterView) {
+                        }
+                    });
+                }
+
+                else if (adspin1.getItem(i).equals("공무원")) {
+                    choice_do = "공무원";
+                    adspin2 = ArrayAdapter.createFromResource(MakeStudyActivity.this, R.array.classification2_official, android.R.layout.simple_spinner_dropdown_item);
+                    adspin2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                    s2.setAdapter(adspin2);
+                    s2.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+
+                        @Override
+                        public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                            choice_se = adspin2.getItem(i).toString();
+                            databaseRoom.child("spinner1").setValue(choice_do);
+                            databaseRoom.child("spinner2").setValue(choice_se);
+                        }
+
+                        @Override
+                        public void onNothingSelected(AdapterView<?> adapterView) {
+                        }
+                    });
+                }
+
+                else if (adspin1.getItem(i).equals("기타")) {
+                    choice_do = "기타";
+                    adspin2 = ArrayAdapter.createFromResource(MakeStudyActivity.this, R.array.classification2_etc, android.R.layout.simple_spinner_dropdown_item);
+                    adspin2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                    s2.setAdapter(adspin2);
+                    s2.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+
+                        @Override
+                        public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                            choice_se = adspin2.getItem(i).toString();
+                            databaseRoom.child("spinner1").setValue(choice_do);
+                            databaseRoom.child("spinner2").setValue(choice_se);
+                        }
+
+                        @Override
+                        public void onNothingSelected(AdapterView<?> adapterView) {
+                        }
+                    });
+                }
+
+
+
             }
+
+
+
+
+
+
             @Override
-            public void onNothingSelected(AdapterView<?> parent) {}
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
         });
 
 
-        ArrayAdapter adapter2 = new ArrayAdapter(
-                getApplicationContext(),
-                R.layout.spin,
-                classification2);
-        adapter2.setDropDownViewResource(R.layout.spin_dropdown);
 
-        s2.setAdapter(adapter2);
 
-        s2.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view,
-                                       int position, long id) {
-            }
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {}
-        });
+
+
+
+
 
 
 
@@ -204,7 +287,7 @@ public class MakeStudyActivity extends AppCompatActivity {
 
     private void addRoom(){
         String name=editTextName.getText().toString();
-        Long fine =  Long.parseLong(editFine.getText().toString());
+        Long fine = Long.parseLong(editFine.getText().toString());
 
         if(check1 == true && check2 == true && check3 == true && check4 == true) {
             String id= databaseRoom.push().getKey();
