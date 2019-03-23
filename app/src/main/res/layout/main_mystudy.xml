@@ -1,34 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
 
-    <RelativeLayout
-    android:id="@+id/relativeLayout"
-    android:layout_width="103dp"
-    android:layout_height="103dp"
-    android:background="@drawable/blue_circle">
-
-    <ImageView
-    android:layout_width="65dp"
-    android:layout_height="65dp"
-    android:layout_alignParentTop="true"
-    android:layout_centerInParent="true"
-    android:layout_marginTop="19dp"
-    app:srcCompat="@mipmap/study_add" />
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/imageView_makeStudy"
+        android:layout_width="103dp"
+        android:layout_height="103dp"
+        android:src="@drawable/study_test"/>
 
     <TextView
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_alignParentBottom="true"
-    android:layout_centerHorizontal="true"
-    android:layout_marginBottom="16dp"
-    android:lineSpacingExtra="5sp"
-    android:text="스터디 추가"
-    android:textColor="#ffffff"
-    android:textSize="10.5sp" />
-    </RelativeLayout>
+        android:id="@+id/textView_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="10.5sp"
+        android:textColor="#ffffff"
+        android:lineSpacingExtra="5sp"
+        android:text="영어 회화 모여라"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="60dp"/>
+    <TextView
+        android:id="@+id/textView_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="10.5sp"
+        android:textColor="#ffffff"
+        android:lineSpacingExtra="5sp"
+        android:text="15분 전"
+        android:layout_below="@+id/textView_title"
+        android:layout_centerHorizontal="true"
+        />
 
-
-</android.support.constraint.ConstraintLayout>
+</RelativeLayout>

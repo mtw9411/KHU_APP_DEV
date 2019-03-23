@@ -1,8 +1,9 @@
 package com.studylink.khu_app;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class RoomDTO {
+public class RoomDTO implements Serializable {
 
     private String roomName;
     private String id;
