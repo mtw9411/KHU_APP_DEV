@@ -1,7 +1,9 @@
 package com.studylink.khu_app;
 
 import android.accounts.Account;
+import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -82,9 +84,10 @@ public class AccountSetActivity extends AppCompatActivity {
         alreadysign();
     }
 
+    @SuppressLint("NewApi")
     public void colorChange(TextView change_blue, TextView change_gray){
-        change_blue.setBackground(getResources().getDrawable(R.drawable.blue_border_register));
-        change_gray.setBackground(getResources().getDrawable(R.drawable.gray_border_register));
+        change_blue.setBackground(getResources().getDrawable(R.drawable.blue_border_register, null));
+        change_gray.setBackground(getResources().getDrawable(R.drawable.gray_border_register, null));
         change_blue.setTextColor(Color.parseColor("#2f78db"));
         change_gray.setTextColor(Color.parseColor("#e4e4e4"));
     }

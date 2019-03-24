@@ -1,5 +1,6 @@
 package com.studylink.khu_app;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -193,9 +194,10 @@ public class MakeStudyActivity extends AppCompatActivity {
 
 
 
+    @SuppressLint("NewApi")
     public void colorChange(TextView select, TextView non){
-        select.setBackground(getResources().getDrawable(R.drawable.red_border));
-        non.setBackground(getResources().getDrawable(R.drawable.gray_border));
+        select.setBackground(getResources().getDrawable(R.drawable.red_border, null));
+        non.setBackground(getResources().getDrawable(R.drawable.gray_border, null));
         select.setTextColor(Color.parseColor("#ff0930"));
         non.setTextColor(Color.parseColor("#707070"));
     }

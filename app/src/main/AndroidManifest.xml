@@ -28,18 +28,18 @@
         <activity android:name=".AccountFinActivity" />
         <activity android:name=".TimelineActivity" />
         <activity android:name=".LoginActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity android:name=".MainDetailActivity" />
         <activity android:name=".StudydetailActivity" />
         <activity android:name=".AbsentActivity" />
         <activity android:name=".ScheduleActivity" />
         <activity android:name=".MakeStudyActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity android:name=".MakeStudyFinActivity"/>
         <activity android:name=".StudySearchActivity" />
