@@ -12,12 +12,19 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
+
+import org.w3c.dom.Text;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class TimelineActivity extends AppCompatActivity {
 
     private ImageView toMypage;
     private RecyclerView recycler_studyname;
     private RecyclerView recycler_timelineBoard;
+    private List<AccountDTO> AccountDTOs = new ArrayList<>();
     private StudynameRecyclerViewAdapter StudynameRecyclerViewAdapter;
     private TimelineBoardViewAdapter TimelineBoardViewAdapter;
 
@@ -46,6 +53,7 @@ public class TimelineActivity extends AppCompatActivity {
         recycler_timelineBoard.setLayoutManager(new LinearLayoutManager(this));
         TimelineBoardViewAdapter = new TimelineBoardViewAdapter();
         recycler_timelineBoard.setAdapter(TimelineBoardViewAdapter);
+
     }
 
     class StudynameRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {      //어느 스터디인지를 선택하는 부분의 recycler
@@ -60,7 +68,9 @@ public class TimelineActivity extends AppCompatActivity {
 
         @Override
         public void onBindViewHolder(@NonNull RecyclerView.ViewHolder viewHolder, int i) {
-
+            for(int j = 0; j < AccountDTOs.get(i).mystudyRoom.size(); j++) {
+                ((StudynameViewHolder) viewHolder).studyname_title.setText(AccountDTOs.get(i).mystudyRoom.get(j));
+            }
         }
 
         @Override
@@ -69,13 +79,15 @@ public class TimelineActivity extends AppCompatActivity {
         }
 
 
-        class StudynameViewHolder extends RecyclerView.ViewHolder{
+        private class StudynameViewHolder extends RecyclerView.ViewHolder{
 
             CardView cardView_studyname;
+            TextView studyname_title;
 
-            public StudynameViewHolder(@NonNull View itemView) {
+            public StudynameViewHolder(View itemView) {
                 super(itemView);
                 cardView_studyname = (CardView) findViewById(R.id.cardview_studyname);
+                studyname_title = (TextView) findViewById(R.id.studyname_title);
             }
         }
 

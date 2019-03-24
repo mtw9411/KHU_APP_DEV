@@ -107,27 +107,30 @@ public class AccountSetActivity extends AppCompatActivity {
 
 
     private void alreadysign(){
-        String myuid = auth.getCurrentUser().getUid();
+        if(AccountDTO.registcheck == "true"){
+            Intent intent = new Intent(AccountSetActivity.this, MainActivity.class);
+            startActivity(intent);
+        }
 
-        FirebaseDatabase.getReference("users").addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                for(DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
-                    AccountDTO accountDTO = dataSnapshot1.getValue(AccountDTO.class);
-                    String a = accountDTO.registcheck;
-                    if (a.equals("true")) {
-                        Intent intent = new Intent(AccountSetActivity.this, MainActivity.class);
-                        startActivity(intent);
-                    }
-                    Toast.makeText(AccountSetActivity.this, a, Toast.LENGTH_SHORT).show();
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
+//        FirebaseDatabase.getReference("users").addListenerForSingleValueEvent(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+//                for(DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
+//                    AccountDTO accountDTO = dataSnapshot1.getValue(AccountDTO.class);
+//                    String a = accountDTO.registcheck;
+//                    if (a.equals("true")) {
+//                        Intent intent = new Intent(AccountSetActivity.this, MainActivity.class);
+//                        startActivity(intent);
+//                    }
+//                    Toast.makeText(AccountSetActivity.this, a, Toast.LENGTH_SHORT).show();
+//                }
+//            }
+//
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError databaseError) {
+//
+//            }
+//        });
     }
 
 

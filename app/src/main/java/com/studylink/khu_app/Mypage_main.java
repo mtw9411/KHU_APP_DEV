@@ -1,8 +1,10 @@
 package com.studylink.khu_app;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.media.Image;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Layout;
@@ -57,9 +59,7 @@ public class Mypage_main extends AppCompatActivity{
         mypage_Logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                auth.signOut();
-                Intent intent = new Intent (Mypage_main.this, LoginActivity.class);
-                startActivity(intent);
+                showMessage();
             }
         });
     }
@@ -79,5 +79,30 @@ public class Mypage_main extends AppCompatActivity{
 
             layoutIndex = 1;
         }
+    }
+
+    private void showMessage(){
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("로그아웃");
+        builder.setMessage("로그아웃 하시겠습니까?");
+        builder.setIcon(android.R.mipmap.sym_def_app_icon);
+
+        builder.setPositiveButton("예", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                auth.signOut();
+                Intent intent = new Intent(Mypage_main.this, LoginActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        builder.setNegativeButton("아니요", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                finish();
+            }
+        });
+        AlertDialog dialog = builder.create();
+        dialog.show();
     }
 }
