@@ -22,6 +22,10 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -32,7 +36,8 @@ public class LoginActivity extends AppCompatActivity {
     private TextView email_login_email;
     private TextView email_login_password;
     private TextView email_login_button;
-
+    private FirebaseUser mUser;
+    private FirebaseDatabase Database;
     private GoogleSignInClient mGoogleSignInClient;
 
     @Override
@@ -42,6 +47,8 @@ public class LoginActivity extends AppCompatActivity {
         Intent intent = new Intent(LoginActivity.this, LoadingActivity.class);
         startActivity(intent);
 
+        mUser = FirebaseAuth.getInstance().getCurrentUser();
+        Database = FirebaseDatabase.getInstance();
         email_login_email = (TextView)findViewById(R.id.email_login_email);
         email_login_password = (TextView)findViewById(R.id.email_login_password);
         email_login_button = (TextView) findViewById(R.id.email_login_button);
@@ -110,11 +117,10 @@ public class LoginActivity extends AppCompatActivity {
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
                 FirebaseUser user = firebaseAuth.getCurrentUser();
                 if (user != null) {
-                    // User is signed in
-                    Intent intent = new Intent(LoginActivity.this, AccountSetActivity.class);      //MainActivity 부분에 getApplicationContext()를 넣어도 됨
+                    Intent intent = new Intent (LoginActivity.this, MainActivity.class);
                     startActivity(intent);
-                    finish();
-                } else {
+                }           // User is signed in
+                else {
                     // User is signed out
                 }
             }

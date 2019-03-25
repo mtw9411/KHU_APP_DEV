@@ -13,7 +13,7 @@ public class AccountDTO {
     public String usersex;
     public List<String> disposition;
     public List<String> mystudyRoom;
-    public static String registcheck = "false";
+//    public String registcheck = "false";
 
    /* public AccountDTO(){
 
