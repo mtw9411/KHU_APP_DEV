@@ -23,6 +23,9 @@
             android:theme="@style/NoTitleBar" />
         <activity android:name=".SignUpActivity"/>
         <activity android:name=".SignUpFinalActivity" />
+        <activity android:name=".temp_SearchroomActivity">
+
+        </activity>
         <activity android:name=".IdSearchActivity" />
         <activity android:name=".PasswordSearchActivity" />
         <activity android:name=".PasswordFinActivity" />

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string-array name="classfication1">
+    <string-array name="classification1">
 
         <item >어학</item>
         <item >자격증</item>
@@ -9,4 +9,31 @@
 
     </string-array>
 
+    <string-array name="classification2_language">
+        <item >영어</item>
+        <item >중국어</item>
+        <item >일어</item>
+        <item >프랑스어</item>
+    </string-array>
+
+    <string-array name="classification2_certificate">
+        <item >전기기사</item>
+        <item >기계기사</item>
+        <item >화공기사</item>
+        <item >건축기사</item>
+    </string-array>
+
+    <string-array name="classification2_official">
+        <item >9급공무원</item>
+        <item >7급공무원</item>
+        <item >기술직</item>
+        <item >국가직</item>
+    </string-array>
+
+    <string-array name="classification2_etc">
+        <item >요리</item>
+        <item >예체능</item>
+        <item >면접</item>
+        <item >취업</item>
+    </string-array>
 </resources>

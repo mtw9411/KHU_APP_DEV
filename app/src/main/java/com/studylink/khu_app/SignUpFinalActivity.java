@@ -61,6 +61,7 @@ public class SignUpFinalActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 confirm();
+
             }
         });
 
@@ -159,6 +160,7 @@ public class SignUpFinalActivity extends AppCompatActivity {
     private void confirm(){
         if(email_check == true && password_check1 == true && password_check2 == true){
             createUser(signupEmail.getText().toString(), signupPassword.getText().toString());
+
         } else{
             Toast.makeText(this, "아이디와 비밀번호를 확인해주세요", Toast.LENGTH_SHORT).show();
         }

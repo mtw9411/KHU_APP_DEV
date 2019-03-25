@@ -9,9 +9,20 @@ public class RoomDTO implements Serializable {
     private String id;
     private Long fine;
     private String imageName;
-    private String spinner;
+    private String spinner1;
+    private String spinner2;
     private String content;
     private List<String> roomdisposition;
+    private Long total_member;
+
+
+    public Long getTotal_member() {
+        return total_member;
+    }
+
+    public void setTotal_member(Long total_member) {
+        this.total_member = total_member;
+    }
 
     public String getContent() {
         return content;
@@ -53,13 +64,6 @@ public class RoomDTO implements Serializable {
         this.imageName = imageName;
     }
 
-    public String getSpinner() {
-        return spinner;
-    }
-
-    public void setSpinner(String spinner) {
-        this.spinner = spinner;
-    }
 
     public List<String> getRoomdisposition() {
         return roomdisposition;
@@ -68,5 +72,21 @@ public class RoomDTO implements Serializable {
     public void setRoomdisposition(List<String> roomdisposition) {
         this.roomdisposition = roomdisposition;
     }
+    public String getSpinner1() {
+        return spinner1;
+    }
+
+    public void setSpinner1(String spinner1) {
+        this.spinner1 = spinner1;
+    }
+
+    public String getSpinner2() {
+        return spinner2;
+    }
+
+    public void setSpinner2(String spinner2) {
+        this.spinner2 = spinner2;
+    }
+
 
 }

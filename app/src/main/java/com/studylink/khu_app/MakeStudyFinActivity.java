@@ -68,7 +68,7 @@ public class MakeStudyFinActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 uploadFile(room);
-                Intent intent = new Intent(MakeStudyFinActivity.this, TimelineActivity.class);
+                Intent intent = new Intent(MakeStudyFinActivity.this, temp_SearchroomActivity.class);
                 startActivity(intent);
             }
         });
@@ -100,6 +100,8 @@ public class MakeStudyFinActivity extends AppCompatActivity {
         //업로드할 내용이 있으면 수행
         if (contentCheck.trim().length()>0) {
             roomFin.setContent(contentCheck);
+
+
         }
         //업로드할 이미지가 있으면 수행
         if (filePath != null) {

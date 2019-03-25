@@ -1,9 +1,13 @@
 package com.studylink.khu_app;
 
 import android.accounts.Account;
+import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.EditText;
@@ -11,8 +15,13 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -22,6 +31,7 @@ import static android.os.Build.ID;
 public class AccountSetActivity extends AppCompatActivity {
     private FirebaseDatabase FirebaseDatabase;
     private FirebaseAuth auth;
+    private FirebaseUser mUser;
     private TextView account_set_next;
     private EditText account_username;
     private EditText account_userbirth;
@@ -36,6 +46,7 @@ public class AccountSetActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_account_set);
         auth = FirebaseAuth.getInstance();
+        mUser = FirebaseAuth.getInstance().getCurrentUser();
         FirebaseDatabase = FirebaseDatabase.getInstance();
         account_username = (EditText) findViewById(R.id.account_username);
         account_userbirth = (EditText) findViewById(R.id.account_userbirth);
@@ -72,12 +83,12 @@ public class AccountSetActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
     }
 
+    @SuppressLint("NewApi")
     public void colorChange(TextView change_blue, TextView change_gray){
-        change_blue.setBackground(getResources().getDrawable(R.drawable.blue_border_register));
-        change_gray.setBackground(getResources().getDrawable(R.drawable.gray_border_register));
+        change_blue.setBackground(getResources().getDrawable(R.drawable.blue_border_register, null));
+        change_gray.setBackground(getResources().getDrawable(R.drawable.gray_border_register, null));
         change_blue.setTextColor(Color.parseColor("#2f78db"));
         change_gray.setTextColor(Color.parseColor("#e4e4e4"));
     }
@@ -89,10 +100,53 @@ public class AccountSetActivity extends AppCompatActivity {
         Accountset.username = account_username.getText().toString();
         Accountset.userbirth = account_userbirth.getText().toString();
         Accountset.usersex = sex_check;
+//        Accountset.registcheck = "true";
 
         FirebaseDatabase.getReference().child("users").child(uid).setValue(Accountset);
         Toast.makeText(this, "성공", Toast.LENGTH_SHORT).show();
     }
+
+
+
+    /*public void alreadysign() {
+        FirebaseDatabase.getReference().child("users").child(mUser.getUid()).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                AccountDTO accountDTOs = dataSnapshot.getValue(AccountDTO.class);
+                if(accountDTOs.registcheck.equals("true")){
+                    Intent intent = new Intent(AccountSetActivity.this, MainActivity.class);
+                    startActivity(intent);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+    }*/
+
+//        FirebaseDatabase.getReference("users").addListenerForSingleValueEvent(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+//                for(DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
+//                    AccountDTO accountDTO = dataSnapshot1.getValue(AccountDTO.class);
+//                    String a = accountDTO.registcheck;
+//                    if (a.equals("true")) {
+//                        Intent intent = new Intent(AccountSetActivity.this, MainActivity.class);
+//                        startActivity(intent);
+//                    }
+//                    Toast.makeText(AccountSetActivity.this, a, Toast.LENGTH_SHORT).show();
+//                }
+//            }
+//
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError databaseError) {
+//
+//            }
+//        });
+}
+
 
     /*public void postFirebaseDatabase(boolean add){
         FirebaseDatabase = FirebaseDatabase.getInstance();
@@ -105,4 +159,3 @@ public class AccountSetActivity extends AppCompatActivity {
         childUpdates.put("/users/" + auth.getCurrentUser().getUid(), accountValues);
         FirebaseDatabase.getReference().updateChildren(childUpdates);
     }*/
-}
