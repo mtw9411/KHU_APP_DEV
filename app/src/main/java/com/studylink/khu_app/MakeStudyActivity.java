@@ -25,19 +25,16 @@ public class MakeStudyActivity extends AppCompatActivity {
 
     EditText editTextName;
     EditText editFine;
-
+    EditText editTotalmember;
     public FirebaseAuth auth;
     public boolean check1 = false;
     public boolean check2 = false;
     public boolean check3 = false;
     public boolean check4 = false;
-
     DatabaseReference databaseRoom;
     public List<String> dispoRoom = new ArrayList<>();
-
     TextView btn1, btn2, btn3, btn4, btn5, btn6, btn7, btn8;
     TextView next;
-
     ArrayAdapter<CharSequence> adspin1, adspin2;
     String choice_do="";
     String choice_se="";
@@ -50,6 +47,8 @@ public class MakeStudyActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_makestudy);
 
+
+
        final Spinner s1 = (Spinner)findViewById(R.id.spinner1);
        final Spinner s2 =(Spinner)findViewById(R.id.spinner2);
 
@@ -60,6 +59,7 @@ public class MakeStudyActivity extends AppCompatActivity {
         s1.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+
                 if (adspin1.getItem(i).equals("어학")) {
                     choice_do = "어학";
                     adspin2 = ArrayAdapter.createFromResource(MakeStudyActivity.this, R.array.classification2_language, android.R.layout.simple_spinner_dropdown_item);
@@ -70,8 +70,8 @@ public class MakeStudyActivity extends AppCompatActivity {
                         @Override
                         public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                             choice_se = adspin2.getItem(i).toString();
-                            databaseRoom.child("spinner1").setValue(choice_do);
-                            databaseRoom.child("spinner2").setValue(choice_se);
+
+
 
                         }
 
@@ -90,8 +90,7 @@ public class MakeStudyActivity extends AppCompatActivity {
                         @Override
                         public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                             choice_se = adspin2.getItem(i).toString();
-                            databaseRoom.child("spinner1").setValue(choice_do);
-                            databaseRoom.child("spinner2").setValue(choice_se);
+
                         }
 
                         @Override
@@ -110,8 +109,7 @@ public class MakeStudyActivity extends AppCompatActivity {
                         @Override
                         public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                             choice_se = adspin2.getItem(i).toString();
-                            databaseRoom.child("spinner1").setValue(choice_do);
-                            databaseRoom.child("spinner2").setValue(choice_se);
+
                         }
 
                         @Override
@@ -130,8 +128,7 @@ public class MakeStudyActivity extends AppCompatActivity {
                         @Override
                         public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                             choice_se = adspin2.getItem(i).toString();
-                            databaseRoom.child("spinner1").setValue(choice_do);
-                            databaseRoom.child("spinner2").setValue(choice_se);
+
                         }
 
                         @Override
@@ -139,14 +136,7 @@ public class MakeStudyActivity extends AppCompatActivity {
                         }
                     });
                 }
-
-
-
             }
-
-
-
-
 
 
             @Override
@@ -156,22 +146,11 @@ public class MakeStudyActivity extends AppCompatActivity {
         });
 
 
-
-
-
-
-
-
-
-
-
-
         databaseRoom= FirebaseDatabase.getInstance().getReference("room");
         dispoRoom.add("a");
         dispoRoom.add("b");
         dispoRoom.add("c");
         dispoRoom.add("d");
-
 
         btn1 = findViewById(R.id.textView43); //외향적인
         btn2 = findViewById(R.id.textView49); //내향적인
@@ -185,7 +164,7 @@ public class MakeStudyActivity extends AppCompatActivity {
 
         editTextName = (EditText) findViewById(R.id.roomName);
         editFine =(EditText) findViewById(R.id.fine);
-
+        editTotalmember=(EditText) findViewById(R.id.totalmember);
 
         btn1.setClickable(true);
         btn1.setOnClickListener(new View.OnClickListener() {
@@ -194,7 +173,7 @@ public class MakeStudyActivity extends AppCompatActivity {
 
                 colorChange(btn1,btn2);
                 check1 = true;
-                dispoRoom.set(0,"1_1");
+                dispoRoom.set(0,"외향적인");
             }
         });
         btn2.setClickable(true);
@@ -203,7 +182,7 @@ public class MakeStudyActivity extends AppCompatActivity {
             public void onClick(View v) {
                 colorChange(btn2,btn1);
                 check1 = true;
-                dispoRoom.set(0,"1_2");
+                dispoRoom.set(0,"내향적인");
             }
         });
         btn3.setClickable(true);
@@ -212,7 +191,7 @@ public class MakeStudyActivity extends AppCompatActivity {
             public void onClick(View v) {
                 colorChange(btn3,btn4);
                 check2 = true;
-                dispoRoom.set(1,"2_1");
+                dispoRoom.set(1,"직관적인");
             }
         });
         btn4.setClickable(true);
@@ -221,7 +200,7 @@ public class MakeStudyActivity extends AppCompatActivity {
             public void onClick(View v) {
                 colorChange(btn4,btn3);
                 check2 = true;
-                dispoRoom.set(1,"2_2");
+                dispoRoom.set(1,"현실적인");
             }
         });
         btn5.setClickable(true);
@@ -230,7 +209,7 @@ public class MakeStudyActivity extends AppCompatActivity {
             public void onClick(View v) {
                 colorChange(btn5,btn6);
                 check3 = true;
-                dispoRoom.set(2,"3_1");
+                dispoRoom.set(2,"이상적인");
             }
         });
         btn6.setClickable(true);
@@ -239,7 +218,7 @@ public class MakeStudyActivity extends AppCompatActivity {
             public void onClick(View v) {
                 colorChange(btn6,btn5);
                 check3 = true;
-                dispoRoom.set(2,"3_2");
+                dispoRoom.set(2,"원칙적인");
             }
         });
         btn7.setClickable(true);
@@ -248,7 +227,7 @@ public class MakeStudyActivity extends AppCompatActivity {
             public void onClick(View v) {
                 colorChange(btn7,btn8);
                 check4 = true;
-                dispoRoom.set(3,"4_1");
+                dispoRoom.set(3,"계획적인");
             }
         });
         btn8.setClickable(true);
@@ -257,7 +236,7 @@ public class MakeStudyActivity extends AppCompatActivity {
             public void onClick(View v) {
                 colorChange(btn8,btn7);
                 check4 = true;
-                dispoRoom.set(3,"4_2");
+                dispoRoom.set(3,"탐색적인");
             }
         });
 
@@ -270,12 +249,6 @@ public class MakeStudyActivity extends AppCompatActivity {
         });
     }
 
-
-
-
-
-
-
     public void colorChange(TextView select, TextView non){
         select.setBackground(getResources().getDrawable(R.drawable.red_border));
         non.setBackground(getResources().getDrawable(R.drawable.gray_border));
@@ -286,28 +259,36 @@ public class MakeStudyActivity extends AppCompatActivity {
     private void addRoom(){
         // 방제목 입력 확인
         String name = editTextName.getText().toString();
+        String totalMember=editTotalmember.getText().toString();
         if(name.trim().length()>0){
             // 성향 입력 확인
             if(check1 == true && check2 == true && check3 == true && check4 == true) {
                 // 벌금 입력 확인
                 String fineCheck = editFine.getText().toString();
                 Long fine = (fineCheck.trim().length()>0) ? Long.parseLong(fineCheck) : 0L;
-
+                Long totalmember = Long.parseLong(totalMember);
                 String id = databaseRoom.push().getKey();
-                RoomDTO roomDTO = new RoomDTO();
-                roomDTO.setId(id);
-                roomDTO.setRoomName(name);
-                roomDTO.setFine(fine);
-                roomDTO.setRoomdisposition(dispoRoom);
 
-                databaseRoom.child(id).setValue(roomDTO);
+                if(totalmember<20) {
+                    RoomDTO roomDTO = new RoomDTO();
+                    roomDTO.setTotal_member(totalmember);
+                    roomDTO.setId(id);
+                    roomDTO.setSpinner1(choice_do);
+                    roomDTO.setSpinner2(choice_se);
+                    roomDTO.setRoomName(name);
+                    roomDTO.setFine(fine);
+                    roomDTO.setRoomdisposition(dispoRoom);
 
-                Toast.makeText(this, "room added", Toast.LENGTH_LONG).show();
-
-                //다음 화면에 roomDTO 객체 전달
-                Intent intent = new Intent(MakeStudyActivity.this, MakeStudyFinActivity.class);
-                intent.putExtra("room", roomDTO);
-                startActivity(intent);
+                    databaseRoom.child(id).setValue(roomDTO);
+                    Toast.makeText(this, "room added", Toast.LENGTH_LONG).show();
+                    //다음 화면에 roomDTO 객체 전달
+                    Intent intent = new Intent(MakeStudyActivity.this, MakeStudyFinActivity.class);
+                    intent.putExtra("room", roomDTO);
+                    startActivity(intent);
+                }
+                else{
+                    Toast.makeText(this, "최대 정원은 20명입니다.", Toast.LENGTH_SHORT).show();
+                }
             }
             else{
                 Toast.makeText(this, "성향을 모두 선택해 주세요.", Toast.LENGTH_SHORT).show();
@@ -318,6 +299,7 @@ public class MakeStudyActivity extends AppCompatActivity {
         }
 
     }
+
 
 
 

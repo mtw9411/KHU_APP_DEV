@@ -16,8 +16,12 @@
             android:theme="@style/NoTitleBar" />
         <activity android:name=".SignUpActivity">
 
+
         </activity>
         <activity android:name=".SignUpFinalActivity" />
+        <activity android:name=".temp_SearchroomActivity">
+
+        </activity>
         <activity android:name=".IdSearchActivity" />
         <activity android:name=".PasswordSearchActivity" />
         <activity android:name=".PasswordFinActivity" />
@@ -28,6 +32,7 @@
         <activity android:name=".AccountFinActivity" />
         <activity android:name=".TimelineActivity" />
         <activity android:name=".LoginActivity">
+
 
         </activity>
         <activity android:name=".MainDetailActivity" />
@@ -40,6 +45,7 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
         </activity>
         <activity android:name=".MakeStudyFinActivity"/>
         <activity android:name=".StudySearchActivity" />

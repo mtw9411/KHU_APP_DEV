@@ -13,14 +13,36 @@ public class AccountDTO {
     public String usersex;
     public List<String> disposition;
 
-   /* public AccountDTO(){
 
+    public String getUsername() {
+        return username;
     }
 
-    public AccountDTO(String username, String userbirth, String usersex, List<String> disposition){
+    public void setUsername(String username) {
         this.username = username;
-        this.userbirth= userbirth;
+    }
+
+    public String getUserbirth() {
+        return userbirth;
+    }
+
+    public void setUserbirth(String userbirth) {
+        this.userbirth = userbirth;
+    }
+
+    public String getUsersex() {
+        return usersex;
+    }
+
+    public void setUsersex(String usersex) {
         this.usersex = usersex;
+    }
+
+    public List<String> getDisposition() {
+        return disposition;
+    }
+
+    public void setDisposition(List<String> disposition) {
         this.disposition = disposition;
     }
 
@@ -32,5 +54,5 @@ public class AccountDTO {
         result.put("usersex", usersex);
         result.put("disposition", disposition);
         return result;
-    }*/
+    }
 }

@@ -84,7 +84,7 @@ public class AccountFinActivity extends AppCompatActivity {
             public void onClick(View v) {
             selectChange(btn1_txt, btn2_txt, btn1_img, btn2_img);
             check1 = true;
-            dispoList.set(0,"1_1");
+            dispoList.set(0,"외향적인");
         }
     });
 
@@ -94,7 +94,7 @@ public class AccountFinActivity extends AppCompatActivity {
             public void onClick(View v) {
                 selectChange(btn2_txt, btn1_txt, btn2_img, btn1_img);
                 check1 = true;
-                dispoList.set(0,"1_2");
+                dispoList.set(0,"내향적인");
             }
         });
         btn3.setClickable(true);
@@ -103,7 +103,7 @@ public class AccountFinActivity extends AppCompatActivity {
             public void onClick(View v) {
                 selectChange(btn3_txt, btn4_txt, btn3_img, btn4_img);
                 check2 = true;
-                dispoList.set(1,"2_1");
+                dispoList.set(1,"직관적인");
             }
         });
         btn4.setClickable(true);
@@ -112,7 +112,7 @@ public class AccountFinActivity extends AppCompatActivity {
             public void onClick(View v) {
                 selectChange(btn4_txt, btn3_txt, btn4_img, btn3_img);
                 check2 = true;
-                dispoList.set(1,"2_2");
+                dispoList.set(1,"현실적인");
             }
         });
         btn5.setClickable(true);
@@ -121,7 +121,7 @@ public class AccountFinActivity extends AppCompatActivity {
             public void onClick(View v) {
                 selectChange(btn5_txt, btn6_txt, btn5_img, btn6_img);
                 check3 = true;
-                dispoList.set(2,"3_1");
+                dispoList.set(2,"이성적인");
             }
         });
         btn6.setClickable(true);
@@ -130,7 +130,7 @@ public class AccountFinActivity extends AppCompatActivity {
             public void onClick(View v) {
                 selectChange(btn6_txt, btn5_txt, btn6_img, btn5_img);
                 check3 = true;
-                dispoList.set(2,"3_2");
+                dispoList.set(2,"원칙적인");
             }
         });
         btn7.setClickable(true);
@@ -139,7 +139,7 @@ public class AccountFinActivity extends AppCompatActivity {
             public void onClick(View v) {
                 selectChange(btn7_txt, btn8_txt, btn7_img, btn8_img);
                 check4 = true;
-                dispoList.set(3,"4_1");
+                dispoList.set(3,"계획적인");
             }
         });
         btn8.setClickable(true);
@@ -148,7 +148,7 @@ public class AccountFinActivity extends AppCompatActivity {
             public void onClick(View v) {
                 selectChange(btn8_txt, btn7_txt, btn8_img, btn7_img);
                 check4 = true;
-                dispoList.set(3,"4_2");
+                dispoList.set(3,"탐색적인");
             }
         });
 
