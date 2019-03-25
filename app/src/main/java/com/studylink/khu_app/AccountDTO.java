@@ -12,6 +12,8 @@ public class AccountDTO {
     public String userbirth;
     public String usersex;
     public List<String> disposition;
+    public List<String> mystudyRoom;
+//    public String registcheck = "false";
 
 
     public String getUsername() {

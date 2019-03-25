@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:layout_height="wrap_content">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -16,57 +17,59 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="X"
-                android:textSize="15.9dp"
                 android:layout_centerVertical="true"
-                android:layout_marginLeft="14.7dp"/>
+                android:layout_marginLeft="14.7dp"
+                android:text="X"
+                android:textSize="15.9dp" />
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="52dp"
-                android:textSize="13sp"
-                android:textColor="#222222"
+                android:gravity="center"
                 android:lineSpacingExtra="2.5sp"
                 android:text="성향 선택"
-                android:gravity="center"
-                />
+                android:textColor="#222222"
+                android:textSize="13sp" />
         </RelativeLayout>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:weightSum="10"
+            android:layout_marginBottom="97.5dp"
             android:background="@drawable/gray_border_statusbar"
-            android:layout_marginBottom="97.5dp">
+            android:weightSum="10">
+
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="5.8dp"
                 android:layout_weight="10"
-                android:background="@color/colorBlue"/>
+                android:background="@color/colorBlue" />
         </LinearLayout>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="12sp"
-            android:textColor="#707070"
-            android:lineSpacingExtra="2.5sp"
-            android:text="자신의 공부 성향을 선택해보세요. 매칭률이 올라갑니다!"
             android:layout_marginLeft="40dp"
             android:layout_marginBottom="85.3dp"
-            />
+            android:lineSpacingExtra="2.5sp"
+            android:text="자신의 공부 성향을 선택해보세요. 매칭률이 올라갑니다!"
+            android:textColor="#707070"
+            android:textSize="12sp" />
 
         <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            app:layout_constraintEnd_toEndOf="@+id/btn1"
+            app:layout_constraintStart_toEndOf="@+id/btn1">
 
             <LinearLayout
                 android:id="@+id/btn1"
                 android:layout_width="160dp"
                 android:layout_height="55dp"
+                android:gravity="center"
                 app:layout_constraintHorizontal_chainStyle="packed"
                 app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toLeftOf="@+id/btn2"
-                android:gravity="center">
+                app:layout_constraintRight_toLeftOf="@+id/btn2">
 
                 <TextView
                     android:id="@+id/btn1_txt"
@@ -85,31 +88,34 @@
                     android:background="@null"
                     android:src="@mipmap/check_btn" />
             </LinearLayout>
+
             <LinearLayout
                 android:id="@+id/btn2"
                 android:layout_width="160dp"
                 android:layout_height="55dp"
-                app:layout_constraintRight_toRightOf="parent"
+                android:gravity="center"
                 app:layout_constraintLeft_toRightOf="@+id/btn1"
-                android:gravity="center">
+                app:layout_constraintRight_toRightOf="parent">
+
                 <TextView
                     android:id="@+id/btn2_txt"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:textSize="14sp"
-                    android:textColor="#66222222"
                     android:lineSpacingExtra="6.5sp"
                     android:text="내향적인"
-                    />
+                    android:textColor="#66222222"
+                    android:textSize="14sp" />
+
                 <ImageView
                     android:id="@+id/btn2_img"
                     android:layout_width="70dp"
                     android:layout_height="40dp"
                     android:background="@null"
-                    android:src="@mipmap/check_btn"/>
+                    android:src="@mipmap/check_btn" />
             </LinearLayout>
         </android.support.constraint.ConstraintLayout>
+
         <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
@@ -118,10 +124,10 @@
                 android:id="@+id/btn3"
                 android:layout_width="160dp"
                 android:layout_height="55dp"
+                android:gravity="center"
                 app:layout_constraintHorizontal_chainStyle="packed"
                 app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toLeftOf="@+id/btn4"
-                android:gravity="center">
+                app:layout_constraintRight_toLeftOf="@+id/btn4">
 
                 <TextView
                     android:id="@+id/btn3_txt"
@@ -140,31 +146,34 @@
                     android:background="@null"
                     android:src="@mipmap/check_btn" />
             </LinearLayout>
+
             <LinearLayout
                 android:id="@+id/btn4"
                 android:layout_width="160dp"
                 android:layout_height="55dp"
-                app:layout_constraintRight_toRightOf="parent"
+                android:gravity="center"
                 app:layout_constraintLeft_toRightOf="@+id/btn3"
-                android:gravity="center">
+                app:layout_constraintRight_toRightOf="parent">
+
                 <TextView
                     android:id="@+id/btn4_txt"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:textSize="14sp"
-                    android:textColor="#66222222"
                     android:lineSpacingExtra="6.5sp"
                     android:text="현실적인"
-                    />
+                    android:textColor="#66222222"
+                    android:textSize="14sp" />
+
                 <ImageView
                     android:id="@+id/btn4_img"
                     android:layout_width="70dp"
                     android:layout_height="40dp"
                     android:background="@null"
-                    android:src="@mipmap/check_btn"/>
+                    android:src="@mipmap/check_btn" />
             </LinearLayout>
         </android.support.constraint.ConstraintLayout>
+
         <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
@@ -173,10 +182,10 @@
                 android:id="@+id/btn5"
                 android:layout_width="160dp"
                 android:layout_height="55dp"
+                android:gravity="center"
                 app:layout_constraintHorizontal_chainStyle="packed"
                 app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toLeftOf="@+id/btn6"
-                android:gravity="center">
+                app:layout_constraintRight_toLeftOf="@+id/btn6">
 
                 <TextView
                     android:id="@+id/btn5_txt"
@@ -195,31 +204,34 @@
                     android:background="@null"
                     android:src="@mipmap/check_btn" />
             </LinearLayout>
+
             <LinearLayout
                 android:id="@+id/btn6"
                 android:layout_width="160dp"
                 android:layout_height="55dp"
-                app:layout_constraintRight_toRightOf="parent"
+                android:gravity="center"
                 app:layout_constraintLeft_toRightOf="@+id/btn5"
-                android:gravity="center">
+                app:layout_constraintRight_toRightOf="parent">
+
                 <TextView
                     android:id="@+id/btn6_txt"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:textSize="14sp"
-                    android:textColor="#66222222"
                     android:lineSpacingExtra="6.5sp"
                     android:text="원칙적인"
-                    />
+                    android:textColor="#66222222"
+                    android:textSize="14sp" />
+
                 <ImageView
                     android:id="@+id/btn6_img"
                     android:layout_width="70dp"
                     android:layout_height="40dp"
                     android:background="@null"
-                    android:src="@mipmap/check_btn"/>
+                    android:src="@mipmap/check_btn" />
             </LinearLayout>
         </android.support.constraint.ConstraintLayout>
+
         <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -229,10 +241,10 @@
                 android:id="@+id/btn7"
                 android:layout_width="160dp"
                 android:layout_height="55dp"
+                android:gravity="center"
                 app:layout_constraintHorizontal_chainStyle="packed"
                 app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toLeftOf="@+id/btn8"
-                android:gravity="center">
+                app:layout_constraintRight_toLeftOf="@+id/btn8">
 
                 <TextView
                     android:id="@+id/btn7_txt"
@@ -251,29 +263,31 @@
                     android:background="@null"
                     android:src="@mipmap/check_btn" />
             </LinearLayout>
+
             <LinearLayout
                 android:id="@+id/btn8"
                 android:layout_width="160dp"
                 android:layout_height="55dp"
-                app:layout_constraintRight_toRightOf="parent"
+                android:gravity="center"
                 app:layout_constraintLeft_toRightOf="@+id/btn7"
-                android:gravity="center">
+                app:layout_constraintRight_toRightOf="parent">
+
                 <TextView
                     android:id="@+id/btn8_txt"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:textSize="14sp"
-                    android:textColor="#66222222"
                     android:lineSpacingExtra="6.5sp"
                     android:text="탐색적인"
-                    />
+                    android:textColor="#66222222"
+                    android:textSize="14sp" />
+
                 <ImageView
                     android:id="@+id/btn8_img"
                     android:layout_width="70dp"
                     android:layout_height="40dp"
                     android:background="@null"
-                    android:src="@mipmap/check_btn"/>
+                    android:src="@mipmap/check_btn" />
             </LinearLayout>
         </android.support.constraint.ConstraintLayout>
 
@@ -281,20 +295,18 @@
             android:layout_width="match_parent"
             android:layout_height="7.5dp"
             android:layout_gravity="bottom"
-            android:background="@drawable/shadow_top">
-        </View>
+            android:background="@drawable/shadow_top"></View>
 
         <TextView
             android:id="@+id/main_btn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="16.5sp"
-            android:textColor="#b1b1b1"
+            android:gravity="center"
             android:lineSpacingExtra="3.5sp"
             android:paddingVertical="16dp"
-            android:gravity="center"
             android:text="완료"
-            />
+            android:textColor="#b1b1b1"
+            android:textSize="16.5sp" />
 
     </LinearLayout>
 </ScrollView>

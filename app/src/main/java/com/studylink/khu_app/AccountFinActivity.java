@@ -13,6 +13,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -24,6 +25,7 @@ import java.util.Map;
 public class AccountFinActivity extends AppCompatActivity {
     private FirebaseDatabase FirebaseDatabase;
     private FirebaseAuth auth;
+    private FirebaseUser mUser;
 
 
     LinearLayout btn1, btn2, btn3, btn4, btn5, btn6, btn7, btn8;
@@ -45,6 +47,7 @@ public class AccountFinActivity extends AppCompatActivity {
         setContentView(R.layout.activity_account_fin);
         FirebaseDatabase = FirebaseDatabase.getInstance();
         auth= FirebaseAuth.getInstance();
+        mUser = FirebaseAuth.getInstance().getCurrentUser();
 
         dispoList.add("a");
         dispoList.add("b");
@@ -159,7 +162,6 @@ public class AccountFinActivity extends AppCompatActivity {
                 showMessage();
             }
         });
-        alreadysign();
     }
 
     public void selectChange(TextView change_blue, TextView change_gray, ImageView selected_image, ImageView non_image){
@@ -176,7 +178,7 @@ public class AccountFinActivity extends AppCompatActivity {
             String uid = auth.getCurrentUser().getUid();
             Accountset.disposition = dispoList;
 
-            FirebaseDatabase.getReference().child("users").child(uid).child("dispo").setValue(dispoList);
+            FirebaseDatabase.getReference().child("users").child(uid).setValue(Accountset.disposition);
 
             Toast.makeText(this, "성공", Toast.LENGTH_SHORT).show();
         }
@@ -209,10 +211,4 @@ public class AccountFinActivity extends AppCompatActivity {
         dialog.show();
     }
 
-    private void alreadysign(){
-        if(check1 == true && check2 == true && check3 == true && check4 == true){
-            Intent intent = new Intent (AccountFinActivity.this, MainActivity.class);
-            startActivity(intent);
-        }
-    }
 }
