@@ -1,15 +1,25 @@
 package com.studylink.khu_app;
 
 import android.content.Intent;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
     private FirebaseAuth auth;                                                                      //아이디, 비번 받아올 것
@@ -17,6 +27,11 @@ public class MainActivity extends AppCompatActivity {
     private ImageView toMypage;
     private TextView makeStudy;
     private RelativeLayout addStudy;
+    private RecyclerView recyclerView_myStudy,recyclerView_matching;
+    private ArrayList<RoomDTO>arrayList_myStudy = new ArrayList<>();
+    private ArrayList<RoomDTO>arrayList_matching = new ArrayList<>();
+    private AdapterMyStudy myStudy_Adapter;
+    private AdapterMatching matching_Adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,9 +41,11 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
 
         auth = FirebaseAuth.getInstance();
-        toMypage = (ImageView) findViewById(R.id.toMypage);
+        toMypage = findViewById(R.id.toMypage);
         makeStudy = findViewById(R.id.makeStudy);
         addStudy = findViewById(R.id.addStudy);
+        recyclerView_myStudy = findViewById(R.id.recyclerView_myStudy);
+        recyclerView_matching = findViewById(R.id.recyclerView_matching);
 
         toMypage.setClickable(true);
         toMypage.setOnClickListener(new View.OnClickListener() {
@@ -59,9 +76,70 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+
+// "내가 참여중인 방" RecyclerView 구현
+        // 레이아웃 종류 정의
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
+        ((LinearLayoutManager) layoutManager).setOrientation(LinearLayoutManager.HORIZONTAL);
+        recyclerView_myStudy.setLayoutManager(layoutManager);
+
+        // 어댑터 연결
+        myStudy_Adapter = new AdapterMyStudy(arrayList_myStudy);
+        recyclerView_myStudy.setAdapter(myStudy_Adapter);
+
+// "스터디 매칭" RecyclerView 구현
+        // 레이아웃 종류 정의
+        RecyclerView.LayoutManager layoutManager2 = new LinearLayoutManager(this);
+        ((LinearLayoutManager) layoutManager2).setOrientation(LinearLayoutManager.HORIZONTAL);
+        recyclerView_matching.setLayoutManager(layoutManager2);
+
+        // 어댑터 연결
+        matching_Adapter = new AdapterMatching(arrayList_matching, new View.OnClickListener() {
+            @Override
+            // "자세히 보기" 클릭 이벤트
+            public void onClick(View v) {
+                Object obj = v.getTag();
+                if (obj != null) {
+                    int position = (int) obj;
+                    Intent intent = new Intent(MainActivity.this, MainDetailActivity.class);
+                    intent.putExtra("roomDetail", matching_Adapter.getRoom(position));
+                    startActivity(intent);
+                }
+            }
+        }, new View.OnClickListener() {
+            @Override
+            // "방 입장하기" 클릭 이벤트
+            public void onClick(View v) {
+                Object obj = v.getTag();
+                if (obj != null) {
+                    int position = (int) obj;
+                    Intent intent = new Intent(MainActivity.this, TimelineActivity.class);
+                    intent.putExtra("Timeline", matching_Adapter.getRoom(position));
+                    startActivity(intent);
+                }
+            }
+        });
+        recyclerView_matching.setAdapter(matching_Adapter);
+
+
+// firebase에 저장된 데이터 가져오기
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference myRef = database.getReference().child("room");
+
+        myRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                    RoomDTO roomDTO = snapshot.getValue(RoomDTO.class);
+                    myStudy_Adapter.addRoom(roomDTO);
+                    matching_Adapter.addRoom(roomDTO);
+                }
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+            }
+        });
     }
 
-
-
-
 }
+

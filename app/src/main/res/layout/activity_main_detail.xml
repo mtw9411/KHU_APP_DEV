@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView
-    xmlns:tools="http://schemas.android.com/tools"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
@@ -17,7 +16,7 @@
         android:textSize="13sp"
         android:textColor="#222222"
         android:lineSpacingExtra="6sp"
-        tools:text="스터디 상세"
+        android:text="스터디 상세"
         android:gravity="center"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -48,7 +47,7 @@
         app:layout_constraintTop_toTopOf="@+id/textView22" />
 
     <TextView
-        android:id="@+id/textView24"
+        android:id="@+id/Detail_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
@@ -57,7 +56,7 @@
         android:textSize="16sp"
         android:textColor="#E6222222"
         android:lineSpacingExtra="7.5sp"
-        tools:text="공기업 스터디"
+        android:text="공기업 스터디"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView23" />
 
@@ -71,8 +70,8 @@
         android:textSize="13sp"
         android:textColor="#222222"
         android:lineSpacingExtra="3.5sp"
-        tools:text=" 4"
-        app:layout_constraintStart_toEndOf="@+id/textView24"
+        android:text=" 4"
+        app:layout_constraintStart_toEndOf="@+id/Detail_title"
         app:layout_constraintTop_toBottomOf="@+id/textView23" />
 
     <TextView
@@ -85,7 +84,7 @@
         android:textSize="11sp"
         app:layout_constraintStart_toEndOf="@+id/textView25"
         app:layout_constraintTop_toBottomOf="@+id/textView23"
-        tools:text=" /6" />
+        android:text=" /6" />
 
     <LinearLayout
         android:id="@+id/linearLayout"
@@ -95,7 +94,7 @@
         android:layout_marginLeft="20dp"
         android:layout_marginTop="18.5dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView24">
+        app:layout_constraintTop_toBottomOf="@+id/Detail_title">
 
         <TextView
             android:layout_width="wrap_content"
@@ -104,7 +103,7 @@
             android:lineSpacingExtra="5sp"
             android:textColor="#222222"
             android:textSize="10.5sp"
-            tools:text="경기도 수원" />
+            android:text="경기도 수원" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -121,7 +120,7 @@
             android:lineSpacingExtra="5sp"
             android:textColor="#222222"
             android:textSize="10.5sp"
-            tools:text="30세 미만" />
+            android:text="30세 미만" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -137,7 +136,7 @@
             android:lineSpacingExtra="5sp"
             android:textColor="#222222"
             android:textSize="10.5sp"
-            tools:text="성별 상관없음" />
+            android:text="성별 상관없음" />
     </LinearLayout>
 
     <android.support.constraint.ConstraintLayout
@@ -162,7 +161,7 @@
             app:layout_constraintRight_toLeftOf="@+id/next_2"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:text="1" />
+            android:text="1" />
 
         <TextView
             android:id="@+id/next_2"
@@ -175,7 +174,7 @@
             app:layout_constraintLeft_toRightOf="@+id/num_2"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:text="위" />
+            android:text="위" />
 
         <TextView
             android:id="@+id/textView19"
@@ -192,7 +191,7 @@
             android:layout_marginRight="5dp"
             android:layout_marginTop="3dp"
 
-            tools:text="매칭률" />
+            android:text="매칭률" />
 
         <TextView
             android:id="@+id/matching_rate"
@@ -205,7 +204,7 @@
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintLeft_toRightOf="@+id/textView19"
             app:layout_constraintTop_toBottomOf="@+id/num_2"
-            tools:text="90%" />
+            android:text="90%" />
     </android.support.constraint.ConstraintLayout>
 
     <TextView
@@ -218,7 +217,7 @@
         android:textSize="12.5sp"
         android:textColor="#222222"
         android:lineSpacingExtra="6sp"
-        tools:text="방 입장하기"
+        android:text="방 입장하기"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
 
@@ -254,7 +253,7 @@
         android:textSize="14sp"
         android:textColor="#E6222222"
         android:lineSpacingExtra="6.5sp"
-        tools:text="스터디 소개"
+        android:text="스터디 소개"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/view2" />
 
@@ -277,7 +276,7 @@
         android:textSize="12.5sp"
         android:textColor="#E62f78db"
         android:lineSpacingExtra="2.5sp"
-        tools:text="5000 won"
+        android:text="5000 won"
         app:layout_constraintStart_toEndOf="@+id/imageView17"
         app:layout_constraintTop_toBottomOf="@+id/view2" />
 
@@ -294,7 +293,7 @@
         android:textColor="#707070"
         android:letterSpacing="-0.03"
         android:lineSpacingExtra="6sp"
-        tools:text="공기업 스터디 열심히 하실 분을 모십니다!
+        android:text="공기업 스터디 열심히 하실 분을 모십니다!
 자소서 + 인적성 + 면접까지 서로 부족한 부분을 전체적으로 스터디 하실 분을 구합니다. 끝까지 열심히 하실 분은 모두 신청해주세요.
 장소는 수원역 근처입니다."
         app:layout_constraintEnd_toEndOf="parent"
@@ -311,7 +310,7 @@
         android:textSize="12sp"
         android:textColor="#222222"
         android:lineSpacingExtra="6sp"
-        tools:text="스터디 성향분석"
+        android:text="스터디 성향분석"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView31" />
 
@@ -325,7 +324,7 @@
     android:textSize="11.5sp"
     android:textColor="#2f78db"
     android:lineSpacingExtra="5.5sp"
-    tools:text="외향적인"
+    android:text="외향적인"
     android:gravity="center"
     android:background="@drawable/main_detail"
     app:layout_constraintStart_toStartOf="parent"
@@ -345,7 +344,7 @@
         android:textSize="11.5sp"
         app:layout_constraintStart_toEndOf="@+id/textView33"
         app:layout_constraintTop_toBottomOf="@+id/textView32"
-        tools:text="직관적인" />
+        android:text="직관적인" />
 
     <TextView
         android:id="@+id/textView35"
@@ -361,7 +360,7 @@
         android:textSize="11.5sp"
         app:layout_constraintStart_toEndOf="@+id/textView34"
         app:layout_constraintTop_toBottomOf="@+id/textView32"
-        tools:text="원칙적인" />
+        android:text="원칙적인" />
 
     <TextView
         android:id="@+id/textView36"
@@ -377,7 +376,7 @@
         android:textSize="11.5sp"
         app:layout_constraintStart_toEndOf="@+id/textView35"
         app:layout_constraintTop_toBottomOf="@+id/textView32"
-        tools:text="계획적인" />
+        android:text="계획적인" />
 
     <View
         android:id="@+id/view"
@@ -403,7 +402,7 @@
         android:textSize="14sp"
         android:textColor="#E6222222"
         android:lineSpacingExtra="6.5sp"
-        tools:text="비슷한 스터디"
+        android:text="비슷한 스터디"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/view" />
 
