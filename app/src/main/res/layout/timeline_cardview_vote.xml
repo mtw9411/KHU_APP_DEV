@@ -25,12 +25,12 @@
             app:srcCompat="@color/colorLightBlue" />
 
         <TextView
-            android:text="Zkqmmsl"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="68dp"
             android:layout_marginTop="16sp"
             android:lineSpacingExtra="2.5sp"
+            android:text="Zkqmmsl"
             android:textColor="#707070"
             android:textSize="13sp" />
 
@@ -113,11 +113,10 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="135dp"
             android:layout_marginTop="168dp"
-            android:text="투표하기"
-            android:textSize="13sp"
-            android:textColor="#0036b2"
             android:lineSpacingExtra="3.5sp"
-            />
+            android:text="투표하기"
+            android:textColor="#0036b2"
+            android:textSize="13sp" />
 
 
     </android.support.v7.widget.CardView>

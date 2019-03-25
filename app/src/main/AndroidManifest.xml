@@ -2,6 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.studylink.khu_app">
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.INTERNET"/>
 
     <application
         android:allowBackup="true"
@@ -10,14 +11,17 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity" />
+        <activity android:name=".MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity
             android:name=".LoadingActivity"
             android:theme="@style/NoTitleBar" />
-        <activity android:name=".SignUpActivity">
-
-
-        </activity>
+        <activity android:name=".SignUpActivity"/>
         <activity android:name=".SignUpFinalActivity" />
         <activity android:name=".temp_SearchroomActivity">
 
@@ -31,13 +35,7 @@
         <activity android:name=".AccountSetActivity" />
         <activity android:name=".AccountFinActivity" />
         <activity android:name=".TimelineActivity" />
-        <activity android:name=".LoginActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+        <activity android:name=".LoginActivity"/>
         <activity android:name=".MainDetailActivity" />
         <activity android:name=".StudydetailActivity" />
         <activity android:name=".AbsentActivity" />
@@ -51,7 +49,7 @@
         <activity android:name=".Timeline_writing" />
         <activity android:name=".VoteMain" />
         <activity android:name=".AlarmActivity" />
-        <activity android:name=".Mypage_main"></activity>
+        <activity android:name=".Mypage_main"/>
     </application>
 
 </manifest>

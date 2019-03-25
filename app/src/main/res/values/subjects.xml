@@ -9,7 +9,6 @@
 
     </string-array>
 
-
     <string-array name="classification2_language">
         <item >영어</item>
         <item >중국어</item>
@@ -37,6 +36,4 @@
         <item >면접</item>
         <item >취업</item>
     </string-array>
-
-
 </resources>
