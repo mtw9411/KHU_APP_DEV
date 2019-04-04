@@ -14,6 +14,7 @@ public class AccountDTO implements Serializable {
     public String usersex;
     public List<String> disposition;
     public List<String> mystudyRoom;
+    private List<String> roomId;
 //    public String registcheck = "false";
 
 
@@ -48,6 +49,15 @@ public class AccountDTO implements Serializable {
     public void setDisposition(List<String> disposition) {
         this.disposition = disposition;
     }
+
+    public List<String> getRoomId() {
+        return roomId;
+    }
+
+    public void setRoomId(List<String> roomId) {
+        this.roomId = roomId;
+    }
+
 
     @Exclude
     public Map<String, Object> toMap() {

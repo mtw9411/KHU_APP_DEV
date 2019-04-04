@@ -2,16 +2,30 @@ package com.studylink.khu_app;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class MainDetailActivity extends AppCompatActivity {
 
     TextView Detail_title, Detail_member, Detail_totalMem, Detail_fine, Detail_content, Detail_roomdipo1, Detail_roomdipo2, Detail_roomdipo3, Detail_roomdipo4;
     RelativeLayout Detail_entrance;
-
+    private List<String> roomList = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,7 +34,7 @@ public class MainDetailActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         Bundle bundle = intent.getExtras();
-        RoomDTO roomDTO = (RoomDTO)bundle.get("roomDetail");
+        final RoomDTO roomDTO = (RoomDTO)bundle.get("roomDetail");
 
         Detail_title = findViewById(R.id.Detail_title);
         Detail_member = findViewById(R.id.Detail_member);
@@ -43,12 +57,58 @@ public class MainDetailActivity extends AppCompatActivity {
         Detail_roomdipo3.setText(roomDTO.getRoomdisposition().get(2));
         Detail_roomdipo4.setText(roomDTO.getRoomdisposition().get(3));
 
+        String current_user = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        final DatabaseReference dr = FirebaseDatabase.getInstance().getReference().child("users").child(current_user);
+
         Detail_entrance.setClickable(true);
         Detail_entrance.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainDetailActivity.this, TimelineActivity.class);
-                startActivity(intent);
+                dr.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        AccountDTO currentUser = dataSnapshot.getValue(AccountDTO.class);
+                        // 참여한 스터디가 1개라도 있으면
+                        if(currentUser.getRoomId() != null){
+                            boolean check = true;
+                            // 같은 스터디인지 확인
+                            for(int i = 0; i<currentUser.getRoomId().size(); i++){
+                                // 중복된 스터디이면
+                                if (currentUser.getRoomId().get(i).equals(roomDTO.getId())){
+                                    check = false;
+                                    break;
+                                }
+                            }
+                            // 중복된 스터디가 없으면
+                            if(check){
+                                currentUser.getRoomId().add(roomDTO.getId());
+                                dr.setValue(currentUser);
+
+                                Intent intent = new Intent(MainDetailActivity.this, TimelineActivity.class);
+                                startActivity(intent);
+                            }
+                            // 중복된 스터디가 있으면
+                            else{
+                                Toast.makeText(MainDetailActivity.this, "이미 참여한 스터디입니다.", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                        // 참여한 스터디가 없으면
+                        else{
+                            roomList.add(roomDTO.getId());
+                            currentUser.setRoomId(roomList);
+                            dr.setValue(currentUser);
+
+                            Intent intent = new Intent(MainDetailActivity.this, TimelineActivity.class);
+                            intent.putExtra("Timeline", roomDTO);
+                            startActivity(intent);
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                    }
+                });
             }
         });
     }
