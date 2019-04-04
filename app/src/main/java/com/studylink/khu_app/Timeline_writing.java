@@ -133,9 +133,9 @@ public class Timeline_writing extends AppCompatActivity {
 //            upload_image.setImageURI(Uri.fromFile(f));                                                 //경로의 파일을 이미지뷰에 올리기
 //        }
 
-    public String getPath(Uri uri){                                 //경로 코드
-        String [] proj = {MediaStore.Images.Media.DATA};
-        CursorLoader cursorLoader = new CursorLoader(this, uri, proj, null,null,null);
+    public String getPath(Uri uri) {                                 //경로 코드
+        String[] proj = {MediaStore.Images.Media.DATA};
+        CursorLoader cursorLoader = new CursorLoader(this, uri, proj, null, null, null);
 
         Cursor cursor = cursorLoader.loadInBackground();
         int index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
@@ -145,7 +145,7 @@ public class Timeline_writing extends AppCompatActivity {
         return cursor.getString(index);
     }
 
-    class WritingRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
+    class WritingRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
         @NonNull
         @Override
@@ -157,7 +157,7 @@ public class Timeline_writing extends AppCompatActivity {
 
         @Override
         public void onBindViewHolder(@NonNull RecyclerView.ViewHolder viewHolder, int i) {
-            ((WritingViewHolder)viewHolder).upload_image.setImageResource(mDataset.get(i).img);
+            ((WritingViewHolder) viewHolder).upload_image.setImageResource(mDataset.get(i).img);
         }
 
         @Override
@@ -165,10 +165,11 @@ public class Timeline_writing extends AppCompatActivity {
             return 0;
         }
 
-        private class WritingViewHolder extends RecyclerView.ViewHolder{
+        private class WritingViewHolder extends RecyclerView.ViewHolder {
             ImageView upload_image;
             ImageView delete_picture;
-            public WritingViewHolder(View view){
+
+            public WritingViewHolder(View view) {
                 super(view);
                 upload_image = findViewById(R.id.upload_imageview);
                 delete_picture = findViewById(R.id.delete_picture);
@@ -228,10 +229,12 @@ public class Timeline_writing extends AppCompatActivity {
             }
         });
     }
-}
-class MyData{
-    public int img;
-    public MyData(int img){
-        this.img = img;
+
+    class MyData {
+        public int img;
+
+        public MyData(int img) {
+            this.img = img;
+        }
     }
 }
