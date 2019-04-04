@@ -36,7 +36,7 @@ public class AdapterMatching extends RecyclerView.Adapter<AdapterMatching.MyView
 
     // 아이템 뷰에서 아이디 찾기
     public static class MyViewHolder extends RecyclerView.ViewHolder {
-        public TextView matching_title;
+        public TextView matching_title,matching_member,matching_totalMember;
         public ImageView imageView_matching;
         public LinearLayout btn_detail, btn_entrance;
         public View root;
@@ -44,6 +44,8 @@ public class AdapterMatching extends RecyclerView.Adapter<AdapterMatching.MyView
             super(v);
             root = v;
             matching_title = v.findViewById(R.id.matching_title);
+            matching_member = v.findViewById(R.id.matching_member);
+            matching_totalMember = v.findViewById(R.id.matching_totalMember);
             imageView_matching = v.findViewById(R.id.imageView_matching);
             btn_detail = v.findViewById(R.id.btn_detail);
             btn_entrance = v.findViewById(R.id.btn_entrance);
@@ -85,6 +87,9 @@ public class AdapterMatching extends RecyclerView.Adapter<AdapterMatching.MyView
         }
         // 텍스트 설정
         holder.matching_title.setText(room.getRoomName());
+        // 인원 수 설정
+        holder.matching_member.setText(String.valueOf(room.getMember()));
+        holder.matching_totalMember.setText("/" + room.getTotal_member().toString());
 
         // 태그 설정
         holder.btn_detail.setTag(position);

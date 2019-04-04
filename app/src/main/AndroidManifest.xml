@@ -12,11 +12,6 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".MainActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name=".LoadingActivity"
@@ -35,13 +30,18 @@
         <activity android:name=".AccountSetActivity" />
         <activity android:name=".AccountFinActivity" />
         <activity android:name=".TimelineActivity" />
-        <activity android:name=".LoginActivity"/>
+        <activity android:name=".LoginActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity android:name=".MainDetailActivity" />
         <activity android:name=".StudydetailActivity" />
         <activity android:name=".AbsentActivity" />
         <activity android:name=".ScheduleActivity" />
-        <activity android:name=".MakeStudyActivity">
-        </activity>
+        <activity android:name=".MakeStudyActivity"/>
         <activity android:name=".MakeStudyFinActivity"/>
         <activity android:name=".StudySearchActivity" />
         <activity android:name=".StudySearchingActivity" />
@@ -49,7 +49,11 @@
         <activity android:name=".Timeline_writing" />
         <activity android:name=".VoteMain" />
         <activity android:name=".AlarmActivity" />
-        <activity android:name=".Mypage_main"/>
+        <activity android:name=".Mypage_main">
+
+        </activity>
+        <activity android:name=".MypageEditActivity"/>
+        <activity android:name=".MypageEditPopupActivity"></activity>
     </application>
 
 </manifest>

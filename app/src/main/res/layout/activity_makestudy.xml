@@ -345,6 +345,18 @@
             android:text="Won" />
     </android.support.v7.widget.CardView>
 
+    <EditText
+        android:id="@+id/totalmember"
+        android:layout_width="183dp"
+        android:layout_height="52dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:hint="스터디정원"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cardView5"
+        app:layout_constraintVertical_bias="0.882"
+        tools:layout_editor_absoluteX="0dp" />
+
     <TextView
         android:id="@+id/textView61"
         android:layout_width="wrap_content"
@@ -358,17 +370,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/cardView5" />
 
-    <EditText
-        android:id="@+id/totalmember"
-        android:layout_width="183dp"
-        android:layout_height="52dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="8dp"
-        android:hint="스터디정원"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cardView5"
-        app:layout_constraintVertical_bias="0.882"
-        tools:layout_editor_absoluteX="0dp" />
 
 
 </android.support.constraint.ConstraintLayout>

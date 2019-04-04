@@ -268,11 +268,12 @@ public class MakeStudyActivity extends AppCompatActivity {
                 // 벌금 입력 확인
                 String fineCheck = editFine.getText().toString();
                 Long fine = (fineCheck.trim().length()>0) ? Long.parseLong(fineCheck) : 0L;
-                Long totalmember = Long.parseLong(totalMember);
+                Long totalmember = (totalMember.trim().length()>0) ? Long.parseLong(totalMember) : 6L;
                 String id = databaseRoom.push().getKey();
 
-                if(totalmember<20) {
+                if(totalmember<=20) {
                     RoomDTO roomDTO = new RoomDTO();
+                    roomDTO.setMember(1);
                     roomDTO.setTotal_member(totalmember);
                     roomDTO.setId(id);
                     roomDTO.setSpinner1(choice_do);
