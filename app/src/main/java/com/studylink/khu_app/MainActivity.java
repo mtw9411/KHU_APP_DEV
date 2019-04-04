@@ -36,8 +36,8 @@ public class MainActivity extends AppCompatActivity {
     private ArrayList<RoomDTO>arrayList_matching = new ArrayList<>();
     private AdapterMyStudy myStudy_Adapter;
     private AdapterMatching matching_Adapter;
-    private int myStudyroomNum;
     private List<String> roomList = new ArrayList<>();
+    private AccountDTO currentUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -124,6 +124,18 @@ public class MainActivity extends AppCompatActivity {
         String current_user = FirebaseAuth.getInstance().getCurrentUser().getUid();
         final DatabaseReference dr = FirebaseDatabase.getInstance().getReference().child("users").child(current_user);
 
+        dr.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                currentUser = dataSnapshot.getValue(AccountDTO.class);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
         // 어댑터 연결
         matching_Adapter = new AdapterMatching(arrayList_matching, new View.OnClickListener() {
             @Override
@@ -147,52 +159,41 @@ public class MainActivity extends AppCompatActivity {
                     final RoomDTO selectRoom = matching_Adapter.getRoom(position);
 
                     // 현재 유저에 클릭한 방 아이디 저장
-                    dr.addListenerForSingleValueEvent(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                            AccountDTO currentUser = dataSnapshot.getValue(AccountDTO.class);
-                            // 참여한 스터디가 1개라도 있으면
-                            if(currentUser.getRoomId() != null){
-                                boolean check = true;
-                                // 같은 스터디인지 확인
-                                for(int i = 0; i<currentUser.getRoomId().size(); i++){
-                                    // 중복된 스터디이면
-                                    if (currentUser.getRoomId().get(i).equals(selectRoom.getId())){
-                                        check = false;
-                                        break;
-                                    }
-                                }
-                                // 중복된 스터디가 없으면
-                                if(check){
-                                    currentUser.getRoomId().add(selectRoom.getId());
-                                    dr.setValue(currentUser);
-
-                                    Intent intent = new Intent(MainActivity.this, TimelineActivity.class);
-                                    intent.putExtra("Timeline", selectRoom);
-                                    startActivity(intent);
-                                }
-                                // 중복된 스터디가 있으면
-                                else{
-                                    Toast.makeText(MainActivity.this, "이미 참여한 스터디입니다.", Toast.LENGTH_SHORT).show();
-                                }
-                            }
-                            // 참여한 스터디가 없으면
-                            else{
-                                roomList.add(selectRoom.getId());
-                                currentUser.setRoomId(roomList);
-                                dr.setValue(currentUser);
-
-                                Intent intent = new Intent(MainActivity.this, TimelineActivity.class);
-                                intent.putExtra("Timeline", selectRoom);
-                                startActivity(intent);
+                    // 참여한 스터디가 1개라도 있으면
+                    if(currentUser.getRoomId() != null){
+                        boolean check = true;
+                        // 같은 스터디인지 확인
+                        for(int i = 0; i<currentUser.getRoomId().size(); i++){
+                            // 중복된 스터디이면
+                            if (currentUser.getRoomId().get(i).equals(selectRoom.getId())){
+                                check = false;
+                                break;
                             }
                         }
+                        // 중복된 스터디가 없으면
+                        if(check){
+                            currentUser.getRoomId().add(selectRoom.getId());
+                            dr.setValue(currentUser);
 
-                        @Override
-                        public void onCancelled(@NonNull DatabaseError databaseError) {
-
+                            Intent intent = new Intent(MainActivity.this, TimelineActivity.class);
+                            intent.putExtra("Timeline", selectRoom);
+                            startActivity(intent);
                         }
-                    });
+                        // 중복된 스터디가 있으면
+                        else{
+                            Toast.makeText(MainActivity.this, "이미 참여한 스터디입니다.", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                    // 참여한 스터디가 없으면
+                    else{
+                        roomList.add(selectRoom.getId());
+                        currentUser.setRoomId(roomList);
+                        dr.setValue(currentUser);
+
+                        Intent intent = new Intent(MainActivity.this, TimelineActivity.class);
+                        intent.putExtra("Timeline", selectRoom);
+                        startActivity(intent);
+                    }
                 }
             }
         });
@@ -208,9 +209,17 @@ public class MainActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                     RoomDTO roomDTO = snapshot.getValue(RoomDTO.class);
-                    myStudy_Adapter.addRoom(roomDTO);
+                    // 참여한 방이 있으면
+                    if(currentUser.getRoomId() != null){
+                        // room의 id가 유저가 참여한 방과 같으면
+                        for(int i=0; i<currentUser.getRoomId().size(); i++){
+                            if(roomDTO.getId().equals(currentUser.getRoomId().get(i))){
+                                myStudy_Adapter.addRoom(roomDTO);
+                                break;
+                            }
+                        }
+                    }
                     matching_Adapter.addRoom(roomDTO);
-                    Log.d("###############first", Integer.toString(myStudy_Adapter.getItemCount()));
                 }
                 myStudyNum.setText("+" + myStudy_Adapter.getItemCount());
             }
@@ -218,6 +227,7 @@ public class MainActivity extends AppCompatActivity {
             public void onCancelled(@NonNull DatabaseError databaseError) {
             }
         });
+
     }
 
 }
