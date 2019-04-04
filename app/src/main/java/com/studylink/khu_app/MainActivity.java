@@ -53,6 +53,7 @@ public class MainActivity extends AppCompatActivity {
         recyclerView_myStudy = findViewById(R.id.recyclerView_myStudy);
         recyclerView_matching = findViewById(R.id.recyclerView_matching);
 
+
         toMypage.setClickable(true);
         toMypage.setOnClickListener(new View.OnClickListener() {
             @Override
