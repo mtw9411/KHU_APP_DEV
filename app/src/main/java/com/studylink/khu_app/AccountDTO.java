@@ -48,6 +48,14 @@ public class AccountDTO {
         this.disposition = disposition;
     }
 
+    public List<String> getMystudyRoom() {
+        return  mystudyRoom;
+    }
+
+    public void setMystudyRoom(List<String> mystudyRoom) {
+        this.mystudyRoom = mystudyRoom;
+    }
+
     @Exclude
     public Map<String, Object> toMap() {
         HashMap<String, Object> result = new HashMap<>();

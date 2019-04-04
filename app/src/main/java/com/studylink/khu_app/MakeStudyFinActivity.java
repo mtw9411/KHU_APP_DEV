@@ -34,9 +34,7 @@ public class MakeStudyFinActivity extends AppCompatActivity {
 
     private ImageView changeBackImg,showBackImg;
     private TextView makeStudyFin,studyIntro;
-
     private DatabaseReference databaseRoom;
-
     private Uri filePath;
 
     @Override
@@ -100,8 +98,6 @@ public class MakeStudyFinActivity extends AppCompatActivity {
         //업로드할 내용이 있으면 수행
         if (contentCheck.trim().length()>0) {
             roomFin.setContent(contentCheck);
-
-
         }
         //업로드할 이미지가 있으면 수행
         if (filePath != null) {
@@ -118,7 +114,7 @@ public class MakeStudyFinActivity extends AppCompatActivity {
             Date now = new Date();
             String filename = formatter.format(now) + ".jpeg";
             //storage 주소와 폴더 파일명을 지정해 준다.
-            StorageReference storageRef = storage.getReferenceFromUrl("gs://studylink-ec173.appspot.com").child("images/" + filename);
+            StorageReference storageRef = storage.getReferenceFromUrl("gs://studylink-ec173.appspot.com").child("images/" + roomFin.getRoomName() + filename);
             storageRef.putFile(filePath)
                     //성공시
                     .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {

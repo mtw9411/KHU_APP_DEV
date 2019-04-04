@@ -57,9 +57,11 @@ public class TimelineActivity extends AppCompatActivity {
     }
 
     class StudynameRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {      //어느 스터디인지를 선택하는 부분의 recycler
+
         @NonNull
         @Override
         public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+
             View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.timeline_cardview, viewGroup, false);
 
             return new StudynameViewHolder(view);
@@ -88,6 +90,10 @@ public class TimelineActivity extends AppCompatActivity {
                 super(itemView);
                 cardView_studyname = (CardView) findViewById(R.id.cardview_studyname);
                 studyname_title = (TextView) findViewById(R.id.studyname_title);
+
+                AccountDTO account = new AccountDTO();
+                account.getMystudyRoom();
+
             }
         }
 
@@ -95,15 +101,26 @@ public class TimelineActivity extends AppCompatActivity {
 
     class TimelineBoardViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{           //Timeline에 올라가는 컨텐츠의 recycler
 
-        @NonNull
+        private static final int VIEW_TYPE_FILE = 0;
+        private static final int VIEW_TYPE_VOTE = 1;
+
         @Override
-        public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-            View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.timeline_cardview_file, viewGroup, false);
-
-
-            return new TimelineBoardViewHolder(view);
+        public int getItemViewType(int position){
+            return position % 2 == 0 ? VIEW_TYPE_FILE : VIEW_TYPE_VOTE;
         }
 
+        @NonNull
+        @Override
+        public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int viewType) {
+
+            if (viewType == VIEW_TYPE_FILE) {
+                View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.timeline_cardview_file, viewGroup, false);
+                return new FileViewHolder(view);
+            } else {
+                View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.timeline_cardview_vote, viewGroup, false);
+                return new VoteViewHolder(view);
+            }
+        }
         @Override
         public void onBindViewHolder(@NonNull RecyclerView.ViewHolder viewHolder, int i) {
 
@@ -124,6 +141,20 @@ public class TimelineActivity extends AppCompatActivity {
 
                 timeline_cardview_file = (CardView) findViewById(R.id.timeline_cardview_file);
 
+            }
+        }
+
+        class FileViewHolder extends RecyclerView.ViewHolder{
+
+            public FileViewHolder(@NonNull View itemView) {
+                super(itemView);
+            }
+        }
+
+        class VoteViewHolder extends RecyclerView.ViewHolder{
+
+            public VoteViewHolder(@NonNull View itemView) {
+                super(itemView);
             }
         }
     }
