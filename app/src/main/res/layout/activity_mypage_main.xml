@@ -33,25 +33,25 @@
         app:srcCompat="@mipmap/icon_23" />
 
     <ImageView
-        android:id="@+id/imageView24"
-        android:layout_width="65dp"
-        android:layout_height="65dp"
+        android:id="@+id/mypage_editProfile"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView22"
         app:srcCompat="@mipmap/icon_34" />
 
     <TextView
-        android:id="@+id/textView77"
+        android:id="@+id/mypage_myName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
         android:text="지영님,"
         android:textColor="#707070"
         android:textSize="15sp"
-        app:layout_constraintEnd_toEndOf="@+id/imageView24"
-        app:layout_constraintStart_toStartOf="@+id/imageView24"
-        app:layout_constraintTop_toBottomOf="@+id/imageView24" />
+        app:layout_constraintEnd_toEndOf="@+id/mypage_editProfile"
+        app:layout_constraintStart_toStartOf="@+id/mypage_editProfile"
+        app:layout_constraintTop_toBottomOf="@+id/mypage_editProfile" />
 
     <TextView
         android:id="@+id/textView78"
@@ -61,9 +61,9 @@
         android:text="일정을 추가하고 관리하세요."
         android:textColor="#707070"
         android:textSize="11sp"
-        app:layout_constraintEnd_toEndOf="@+id/textView77"
-        app:layout_constraintStart_toStartOf="@+id/textView77"
-        app:layout_constraintTop_toBottomOf="@+id/textView77" />
+        app:layout_constraintEnd_toEndOf="@+id/mypage_myName"
+        app:layout_constraintStart_toStartOf="@+id/mypage_myName"
+        app:layout_constraintTop_toBottomOf="@+id/mypage_myName" />
 
     <ImageView
         android:id="@+id/mypage_schedule"

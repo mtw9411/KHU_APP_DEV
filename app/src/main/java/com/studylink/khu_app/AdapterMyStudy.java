@@ -1,12 +1,14 @@
 package com.studylink.khu_app;
 
 
+import android.content.Intent;
 import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -19,8 +21,12 @@ import java.util.ArrayList;
 public class AdapterMyStudy extends RecyclerView.Adapter<AdapterMyStudy.MyViewHolder> {
 
     private ArrayList<RoomDTO> arrayList;
-    public AdapterMyStudy(ArrayList<RoomDTO> items){
+    private static View.OnClickListener onClickListener;
+
+
+    public AdapterMyStudy(ArrayList<RoomDTO> items, View.OnClickListener onClick){
         arrayList = items;
+        onClickListener = onClick;
     }
 
     private FirebaseStorage storage = FirebaseStorage.getInstance();
@@ -30,13 +36,17 @@ public class AdapterMyStudy extends RecyclerView.Adapter<AdapterMyStudy.MyViewHo
     // 아이템 뷰에서 아이디 찾기
     public static class MyViewHolder extends RecyclerView.ViewHolder {
         public TextView textView_title;
-        public ImageView imageView_makeStudy;
+        public ImageView imageView_myStudy;
         public View root;
         public MyViewHolder(View v) {
             super(v);
             root = v;
             textView_title = v.findViewById(R.id.textView_title);
-            imageView_makeStudy = v.findViewById(R.id.imageView_makeStudy);
+            imageView_myStudy = v.findViewById(R.id.imageView_myStudy);
+
+            imageView_myStudy.setClickable(true);
+            imageView_myStudy.setEnabled(true);
+            imageView_myStudy.setOnClickListener(onClickListener);
         }
     }
 
@@ -60,14 +70,17 @@ public class AdapterMyStudy extends RecyclerView.Adapter<AdapterMyStudy.MyViewHo
             storageRef.child(fileName).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                 @Override
                 public void onSuccess(Uri uri) {
-                    holder.imageView_makeStudy.setImageURI(uri);
-                    Glide.with(holder.root).load(uri.toString()).into(holder.imageView_makeStudy);
+                    holder.imageView_myStudy.setImageURI(uri);
+                    Glide.with(holder.root).load(uri.toString()).into(holder.imageView_myStudy);
                 }
             });
         }
 
         // 텍스트 설정
         holder.textView_title.setText(room.getRoomName());
+
+        // 태그 설정
+        holder.imageView_myStudy.setTag(position);
 
     }
 
@@ -80,5 +93,8 @@ public class AdapterMyStudy extends RecyclerView.Adapter<AdapterMyStudy.MyViewHo
     public void addRoom(RoomDTO room){
         arrayList.add(room);
         notifyItemInserted(arrayList.size()-1);
+    }
+    public RoomDTO getRoom(int position){
+        return arrayList.get(position);
     }
 }

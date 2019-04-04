@@ -4,8 +4,10 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -14,8 +16,11 @@ import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -173,12 +178,22 @@ public class AccountFinActivity extends AppCompatActivity {
 
     public void Accountfinal(){                                                                     //파이어베이스에 성향을 올림. 네개 다 체크가 되어야 확인이 눌리도록설정
         if(check1 == true && check2 == true && check3 == true && check4 == true) {
-            AccountDTO Accountset = new AccountDTO();
-
             String uid = auth.getCurrentUser().getUid();
-            Accountset.disposition = dispoList;
 
-            FirebaseDatabase.getReference().child("users").child(uid).setValue(Accountset.disposition);
+            final DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference().child("users").child(uid);
+
+            databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    AccountDTO accountDTO = dataSnapshot.getValue(AccountDTO.class);
+                    accountDTO.disposition = dispoList;
+                    databaseReference.setValue(accountDTO);
+                }
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                }
+            });
 
             Toast.makeText(this, "성공", Toast.LENGTH_SHORT).show();
         }

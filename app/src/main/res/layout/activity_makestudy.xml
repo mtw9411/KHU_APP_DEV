@@ -345,19 +345,6 @@
             android:text="Won" />
     </android.support.v7.widget.CardView>
 
-    <TextView
-        android:id="@+id/textView61"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="38dp"
-        android:textSize="14sp"
-        android:textColor="#2f78db"
-        android:lineSpacingExtra="6.5sp"
-        android:text="다음"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/writing_cardview" />
-
     <EditText
         android:id="@+id/totalmember"
         android:layout_width="183dp"
@@ -370,6 +357,18 @@
         app:layout_constraintVertical_bias="0.882"
         tools:layout_editor_absoluteX="0dp" />
 
+    <TextView
+        android:id="@+id/textView61"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="38dp"
+        android:textSize="14sp"
+        android:textColor="#2f78db"
+        android:lineSpacingExtra="6.5sp"
+        android:text="다음"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/writing_cardview" />
 
 </android.support.constraint.ConstraintLayout>
 </ScrollView>

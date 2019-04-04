@@ -14,7 +14,7 @@ public class RoomDTO implements Serializable {
     private String content;
     private List<String> roomdisposition;
     private Long total_member;
-
+    private int member;
 
     public Long getTotal_member() {
         return total_member;
@@ -86,6 +86,14 @@ public class RoomDTO implements Serializable {
 
     public void setSpinner2(String spinner2) {
         this.spinner2 = spinner2;
+    }
+
+    public int getMember() {
+        return member;
+    }
+
+    public void setMember(int member) {
+        this.member = member;
     }
 
 

@@ -2,11 +2,12 @@ package com.studylink.khu_app;
 
 import com.google.firebase.database.Exclude;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class AccountDTO {
+public class AccountDTO implements Serializable {
 
     public String username;
     public String userbirth;

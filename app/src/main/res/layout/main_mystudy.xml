@@ -6,7 +6,7 @@
     android:layout_marginRight="10.5dp">
 
     <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/imageView_makeStudy"
+        android:id="@+id/imageView_myStudy"
         android:layout_width="103dp"
         android:layout_height="103dp"
         android:src="@drawable/study_test"/>

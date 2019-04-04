@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -19,19 +20,22 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class MainActivity extends AppCompatActivity {
     private FirebaseAuth auth;                                                                      //아이디, 비번 받아올 것
 
     private ImageView toMypage;
-    private TextView makeStudy;
+    private TextView makeStudy, dateNow, myStudyNum;
     private RelativeLayout addStudy;
     private RecyclerView recyclerView_myStudy,recyclerView_matching;
     private ArrayList<RoomDTO>arrayList_myStudy = new ArrayList<>();
     private ArrayList<RoomDTO>arrayList_matching = new ArrayList<>();
     private AdapterMyStudy myStudy_Adapter;
     private AdapterMatching matching_Adapter;
+    private int myStudyroomNum;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,7 +46,9 @@ public class MainActivity extends AppCompatActivity {
 
         auth = FirebaseAuth.getInstance();
         toMypage = findViewById(R.id.toMypage);
+        dateNow = findViewById(R.id.dateNow);
         makeStudy = findViewById(R.id.makeStudy);
+        myStudyNum = findViewById(R.id.myStudyNum);
         addStudy = findViewById(R.id.addStudy);
         recyclerView_myStudy = findViewById(R.id.recyclerView_myStudy);
         recyclerView_matching = findViewById(R.id.recyclerView_matching);
@@ -55,6 +61,13 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        // 오늘 날짜 가져오기
+        Date date = new Date(System.currentTimeMillis());
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy년 M월 d일");
+        String getTime = sdf.format(date);
+        dateNow.setText(getTime);
+
 
         // 스터디 만들기 버튼
         makeStudy.setClickable(true);
@@ -84,7 +97,19 @@ public class MainActivity extends AppCompatActivity {
         recyclerView_myStudy.setLayoutManager(layoutManager);
 
         // 어댑터 연결
-        myStudy_Adapter = new AdapterMyStudy(arrayList_myStudy);
+        myStudy_Adapter = new AdapterMyStudy(arrayList_myStudy, new View.OnClickListener() {
+            @Override
+            // "참여중인 스터디방" 클릭 이벤트
+            public void onClick(View v) {
+                Object obj = v.getTag();
+                if (obj != null) {
+                    int position = (int) obj;
+                    Intent intent = new Intent(MainActivity.this, TimelineActivity.class);
+                    intent.putExtra("Timeline", myStudy_Adapter.getRoom(position));
+                    startActivity(intent);
+                }
+            }
+        });
         recyclerView_myStudy.setAdapter(myStudy_Adapter);
 
 // "스터디 매칭" RecyclerView 구현
@@ -133,7 +158,9 @@ public class MainActivity extends AppCompatActivity {
                     RoomDTO roomDTO = snapshot.getValue(RoomDTO.class);
                     myStudy_Adapter.addRoom(roomDTO);
                     matching_Adapter.addRoom(roomDTO);
+                    Log.d("###############first", Integer.toString(myStudy_Adapter.getItemCount()));
                 }
+                myStudyNum.setText("+" + myStudy_Adapter.getItemCount());
             }
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
