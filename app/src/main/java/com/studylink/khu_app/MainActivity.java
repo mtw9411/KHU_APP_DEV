@@ -108,7 +108,7 @@ public class MainActivity extends AppCompatActivity {
                 if (obj != null) {
                     int position = (int) obj;
                     Intent intent = new Intent(MainActivity.this, TimelineActivity.class);
-                    intent.putExtra("Timeline", myStudy_Adapter.getRoom(position));
+                    intent.putExtra("Timeline", myStudy_Adapter.getRoom(position));         //누른 스터디방의 이름
                     startActivity(intent);
                 }
             }
@@ -169,7 +169,7 @@ public class MainActivity extends AppCompatActivity {
                                     dr.setValue(currentUser);
 
                                     Intent intent = new Intent(MainActivity.this, TimelineActivity.class);
-                                    intent.putExtra("Timeline", selectRoom);
+                                    intent.putExtra("Timeline", selectRoom);                //roomDTO 넘어옴
                                     startActivity(intent);
                                 }
                                 // 중복된 스터디가 있으면

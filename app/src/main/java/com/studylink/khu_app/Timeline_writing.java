@@ -221,7 +221,7 @@ public class Timeline_writing extends AppCompatActivity {
                             writingDTO.setImageName(file.getLastPathSegment());
                             writingDTO.setImageUrl(downloadUrl.toString());
 
-                            database.getReference().child("room").child(roomDTOs.getRoomName()).child("roomcontent").setValue(writingDTO);
+                            database.getReference().child(roomDTOs.getRoomName()).child("roomcontent").setValue(writingDTO);
                             Toast.makeText(Timeline_writing.this, "업로드 성공", Toast.LENGTH_SHORT).show();
                         }
                     }

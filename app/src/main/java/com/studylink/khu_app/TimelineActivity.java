@@ -1,5 +1,6 @@
 package com.studylink.khu_app;
 
+import android.accounts.Account;
 import android.content.Intent;
 import android.graphics.drawable.GradientDrawable;
 import android.support.annotation.NonNull;
@@ -14,8 +15,15 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
 import org.w3c.dom.Text;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,14 +32,19 @@ public class TimelineActivity extends AppCompatActivity {
     private ImageView toMypage;
     private RecyclerView recycler_studyname;
     private RecyclerView recycler_timelineBoard;
-    private List<AccountDTO> AccountDTOs = new ArrayList<>();
+    private ArrayList<RoomDTO> nameofroom = new ArrayList<>();
+    private ArrayList<String> getroomname = new ArrayList<>();
     private StudynameRecyclerViewAdapter StudynameRecyclerViewAdapter;
     private TimelineBoardViewAdapter TimelineBoardViewAdapter;
+    private FirebaseDatabase mdatabase;
+    private FirebaseAuth mauth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.timeline_main);
+        mdatabase = FirebaseDatabase.getInstance();
+        mauth = FirebaseAuth.getInstance();
 
         toMypage = (ImageView) findViewById(R.id.toMypage);
 
@@ -45,8 +58,10 @@ public class TimelineActivity extends AppCompatActivity {
         });
 
         recycler_studyname = (RecyclerView) findViewById(R.id.recycler_studyname);
-        recycler_studyname.setLayoutManager(new LinearLayoutManager(this));
-        StudynameRecyclerViewAdapter = new StudynameRecyclerViewAdapter();
+        RecyclerView.LayoutManager horizontalLayoutManager = new LinearLayoutManager(this);
+        ((LinearLayoutManager)horizontalLayoutManager).setOrientation(LinearLayoutManager.HORIZONTAL);
+        recycler_studyname.setLayoutManager(horizontalLayoutManager);
+        StudynameRecyclerViewAdapter = new StudynameRecyclerViewAdapter(nameofroom);
         recycler_studyname.setAdapter(StudynameRecyclerViewAdapter);
 
         recycler_timelineBoard = (RecyclerView) findViewById(R.id.recycler_timelineBoard);
@@ -54,14 +69,64 @@ public class TimelineActivity extends AppCompatActivity {
         TimelineBoardViewAdapter = new TimelineBoardViewAdapter();
         recycler_timelineBoard.setAdapter(TimelineBoardViewAdapter);
 
+        setData();
+    }
+
+    private void setData(){
+        getroomname.clear();
+        String a = mauth.getCurrentUser().getUid();
+        mdatabase.getReference().child("users").child(a).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for(DataSnapshot snapshot : dataSnapshot.getChildren()){
+                    AccountDTO acc = snapshot.getValue(AccountDTO.class);
+                    for(int i = 0; i < acc.getRoomId().size(); i++) {
+                        getroomname.add(acc.getRoomId().get(i));
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+        setData1();
+    }
+
+    private void setData1(){
+        nameofroom.clear();
+        for(int i = 0; i < getroomname.size(); i++){
+            mdatabase.getReference().child("room").child(getroomname.get(i)).addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    for(DataSnapshot snapshot : dataSnapshot.getChildren()){
+                        RoomDTO roomm = snapshot.getValue(RoomDTO.class);
+                        nameofroom.add(roomm);
+                    }
+                    StudynameRecyclerViewAdapter.notifyDataSetChanged();
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                }
+            });
+        }
     }
 
     class StudynameRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {      //어느 스터디인지를 선택하는 부분의 recycler
 
+        private ArrayList<RoomDTO> Room;
+
+        public StudynameRecyclerViewAdapter(ArrayList<RoomDTO> items){
+            Room = items;
+        }
+
         @NonNull
         @Override
         public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-
             View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.timeline_cardview, viewGroup, false);
 
             return new StudynameViewHolder(view);
@@ -69,30 +134,24 @@ public class TimelineActivity extends AppCompatActivity {
         }
 
         @Override
-        public void onBindViewHolder(@NonNull RecyclerView.ViewHolder viewHolder, int i) {
-            for(int j = 0; j < AccountDTOs.get(i).mystudyRoom.size(); j++) {
-                ((StudynameViewHolder) viewHolder).studyname_title.setText(AccountDTOs.get(i).mystudyRoom.get(j));
-            }
+        public void onBindViewHolder(@NonNull final RecyclerView.ViewHolder viewHolder, final int i) {
+            ((StudynameViewHolder)viewHolder).studyname_title.setText(Room.get(i).getRoomName());
         }
 
         @Override
         public int getItemCount() {
-            return 0;
+            return Room.size();
         }
 
 
         private class StudynameViewHolder extends RecyclerView.ViewHolder{
-
-            CardView cardView_studyname;
             TextView studyname_title;
+            CardView cardView;
 
             public StudynameViewHolder(View itemView) {
                 super(itemView);
-                cardView_studyname = (CardView) findViewById(R.id.cardview_studyname);
-                studyname_title = (TextView) findViewById(R.id.studyname_title);
-
-                AccountDTO account = new AccountDTO();
-                account.getMystudyRoom();
+                studyname_title = (TextView) itemView.findViewById(R.id.studyname_title);
+                cardView = (CardView) itemView.findViewById(R.id.cardview_studyname);
 
             }
         }
@@ -139,7 +198,7 @@ public class TimelineActivity extends AppCompatActivity {
             public TimelineBoardViewHolder(@NonNull View itemView) {
                 super(itemView);
 
-                timeline_cardview_file = (CardView) findViewById(R.id.timeline_cardview_file);
+                timeline_cardview_file = (CardView) itemView.findViewById(R.id.timeline_cardview_file);
 
             }
         }
