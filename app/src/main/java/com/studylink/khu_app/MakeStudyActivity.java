@@ -6,6 +6,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -26,9 +27,7 @@ import java.util.List;
 
 public class MakeStudyActivity extends AppCompatActivity {
 
-    EditText editTextName;
-    EditText editFine;
-    EditText editTotalmember;
+    EditText editTextName, editAge, editGender, editFine, editTotalmember;
     public FirebaseAuth auth;
     public boolean check1 = false;
     public boolean check2 = false;
@@ -36,8 +35,7 @@ public class MakeStudyActivity extends AppCompatActivity {
     public boolean check4 = false;
     DatabaseReference databaseRoom;
     public List<String> dispoRoom = new ArrayList<>();
-    TextView btn1, btn2, btn3, btn4, btn5, btn6, btn7, btn8;
-    TextView next;
+    TextView textRegion, btn1, btn2, btn3, btn4, btn5, btn6, btn7, btn8, next;
     ArrayAdapter<CharSequence> adspin1, adspin2;
     String choice_do="";
     String choice_se="";
@@ -50,10 +48,24 @@ public class MakeStudyActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_makestudy);
 
-
-
        final Spinner s1 = (Spinner)findViewById(R.id.spinner1);
        final Spinner s2 =(Spinner)findViewById(R.id.spinner2);
+
+        editTextName = findViewById(R.id.roomName);
+        editAge = findViewById(R.id.editAge);
+        editGender = findViewById(R.id.editGender);
+        textRegion = findViewById(R.id.textRegion);
+        btn1 = findViewById(R.id.textView43); //외향적인
+        btn2 = findViewById(R.id.textView49); //내향적인
+        btn3 = findViewById(R.id.textView53); //직관적인
+        btn4 = findViewById(R.id.textView54); //현실적인
+        btn5 = findViewById(R.id.textView55); //이상적인
+        btn6 = findViewById(R.id.textView56); //원칙적인
+        btn7 = findViewById(R.id.textView57); //계획적인
+        btn8 = findViewById(R.id.textView58); //탐색적인
+        editFine = findViewById(R.id.fine);
+        editTotalmember= findViewById(R.id.totalmember);
+        next = findViewById(R.id.textView61);
 
        adspin1 = ArrayAdapter.createFromResource(this, R.array.classification1, android.R.layout.simple_spinner_dropdown_item);
        adspin1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -137,20 +149,6 @@ public class MakeStudyActivity extends AppCompatActivity {
         dispoRoom.add("b");
         dispoRoom.add("c");
         dispoRoom.add("d");
-
-        btn1 = findViewById(R.id.textView43); //외향적인
-        btn2 = findViewById(R.id.textView49); //내향적인
-        btn3 = findViewById(R.id.textView53); //직관적인
-        btn4 = findViewById(R.id.textView54); //현실적인
-        btn5 = findViewById(R.id.textView55); //이상적인
-        btn6 = findViewById(R.id.textView56); //원칙적인
-        btn7 = findViewById(R.id.textView57); //계획적인
-        btn8 = findViewById(R.id.textView58); //탐색적인
-        next = findViewById(R.id.textView61);
-
-        editTextName = (EditText) findViewById(R.id.roomName);
-        editFine =(EditText) findViewById(R.id.fine);
-        editTotalmember=(EditText) findViewById(R.id.totalmember);
 
         btn1.setClickable(true);
         btn1.setOnClickListener(new View.OnClickListener() {
@@ -237,35 +235,50 @@ public class MakeStudyActivity extends AppCompatActivity {
 
     @SuppressLint("NewApi")
     public void colorChange(TextView select, TextView non){
-        select.setBackground(getResources().getDrawable(R.drawable.red_border, null));
+        select.setBackground(getResources().getDrawable(R.drawable.blue_border, null));
         non.setBackground(getResources().getDrawable(R.drawable.gray_border, null));
-        select.setTextColor(Color.parseColor("#ff0930"));
+        select.setTextColor(Color.parseColor("#0065ff"));
         non.setTextColor(Color.parseColor("#707070"));
     }
 
     private void addRoom(){
-        // 방제목 입력 확인
         String name = editTextName.getText().toString();
+        String ageCheck = editAge.getText().toString();
+        String genderCheck = editGender.getText().toString();
+        String regionCheck = textRegion.getText().toString();
+        String fineCheck = editFine.getText().toString();
         String totalMember=editTotalmember.getText().toString();
+        // 방제목 입력 확인
         if(name.trim().length()>0){
             // 성향 입력 확인
-            if(check1 == true && check2 == true && check3 == true && check4 == true) {
+            if (check1 == true && check2 == true && check3 == true && check4 == true) {
+                // 나이 입력 확인
+                String age = (ageCheck.trim().length()>0) ? ageCheck : "나이 상관없음";
+                // 성별 입력 확인
+                String gender = (genderCheck.trim().length()>0) ? genderCheck : "성별 상관없음";
+                // 지역 입력 확인
+                String region = (regionCheck.trim().length()>0) ? regionCheck : "지역 상관없음";
                 // 벌금 입력 확인
-                String fineCheck = editFine.getText().toString();
-                Long fine = (fineCheck.trim().length()>0) ? Long.parseLong(fineCheck) : 0L;
-                Long totalmember = (totalMember.trim().length()>0) ? Long.parseLong(totalMember) : 6L;
+                Long fine = (fineCheck.trim().length() > 0) ? Long.parseLong(fineCheck) : 0L;
+                // 방 정원 입력 확인
+                Long totalmember = (totalMember.trim().length() > 0) ? Long.parseLong(totalMember) : 6L;
+
+                // 방 아이디 생성
                 String id = databaseRoom.push().getKey();
 
-                if(totalmember<=20) {
+                if (totalmember <= 20) {
                     RoomDTO roomDTO = new RoomDTO();
-                    roomDTO.setMember(1);
-                    roomDTO.setTotal_member(totalmember);
                     roomDTO.setId(id);
                     roomDTO.setSpinner1(choice_do);
                     roomDTO.setSpinner2(choice_se);
                     roomDTO.setRoomName(name);
-                    roomDTO.setFine(fine);
+                    roomDTO.setAge(age);
+                    roomDTO.setGender(gender);
+                    roomDTO.setRegion(region);
                     roomDTO.setRoomdisposition(dispoRoom);
+                    roomDTO.setFine(fine);
+                    roomDTO.setMember(1);
+                    roomDTO.setTotal_member(totalmember);
 
                     // 오늘 날짜 가져오기
                     Date date = new Date(System.currentTimeMillis());
@@ -277,12 +290,10 @@ public class MakeStudyActivity extends AppCompatActivity {
                     Intent intent = new Intent(MakeStudyActivity.this, MakeStudyFinActivity.class);
                     intent.putExtra("room", roomDTO);
                     startActivity(intent);
-                }
-                else{
+                } else {
                     Toast.makeText(this, "최대 정원은 20명입니다.", Toast.LENGTH_SHORT).show();
                 }
-            }
-            else{
+            } else {
                 Toast.makeText(this, "성향을 모두 선택해 주세요.", Toast.LENGTH_SHORT).show();
             }
         }else{

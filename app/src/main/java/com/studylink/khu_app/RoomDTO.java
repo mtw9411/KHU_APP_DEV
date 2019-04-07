@@ -12,7 +12,11 @@ public class RoomDTO implements Serializable {
     private String imageName;
     private String spinner1;
     private String spinner2;
-    private String content;
+    private String age;
+    private String gender;
+    private String region;
+    private String content1;
+    private String content2;
     private List<String> roomdisposition;
     private Long total_member;
     private int member;
@@ -26,12 +30,44 @@ public class RoomDTO implements Serializable {
         this.total_member = total_member;
     }
 
-    public String getContent() {
-        return content;
+    public String getAge() {
+        return age;
     }
 
-    public void setContent(String content) {
-        this.content = content;
+    public void setAge(String age) {
+        this.age = age;
+    }
+
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
+
+    public String getRegion() {
+        return region;
+    }
+
+    public void setRegion(String region) {
+        this.region = region;
+    }
+
+    public String getContent1() {
+        return content1;
+    }
+
+    public void setContent1(String content1) {
+        this.content1 = content1;
+    }
+
+    public String getContent2() {
+        return content2;
+    }
+
+    public void setContent2(String content2) {
+        this.content2 = content2;
     }
 
     public String getRoomName() {
