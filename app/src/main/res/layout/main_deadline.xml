@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="93dp"
+    android:layout_height="93dp"
+    android:layout_marginRight="10.5dp"
+    android:background="@drawable/blue_circle_border">
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/imageView_myStudy"
+        android:layout_width="83dp"
+        android:layout_height="83dp"
+        android:src="@drawable/study_test"
+        android:layout_centerInParent="true"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="23.1dp"
+        android:textSize="13.5sp"
+        android:textColor="#ffffff"
+        android:letterSpacing="-0.03"
+        android:lineSpacingExtra="6.5sp"
+        android:text="취업"
+        android:layout_centerHorizontal="true"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="41.2dp"
+        android:textSize="17sp"
+        android:textColor="#ffffff"
+        android:letterSpacing="-0.03"
+        android:lineSpacingExtra="8sp"
+        android:text="19 인적성"
+        android:layout_centerHorizontal="true"
+        />
+
+</RelativeLayout>

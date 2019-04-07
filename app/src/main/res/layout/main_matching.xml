@@ -89,7 +89,7 @@
             android:lineSpacingExtra="1.5sp"
             android:textColor="#1a1a1a"
             android:textSize="11sp"
-            android:text="0" />
+            android:text="1" />
 
         <TextView
             android:id="@+id/matching_totalMember"

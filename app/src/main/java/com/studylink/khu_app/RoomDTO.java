@@ -1,6 +1,7 @@
 package com.studylink.khu_app;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 
 public class RoomDTO implements Serializable {
@@ -15,6 +16,7 @@ public class RoomDTO implements Serializable {
     private List<String> roomdisposition;
     private Long total_member;
     private int member;
+    private Date time;
 
     public Long getTotal_member() {
         return total_member;
@@ -95,6 +97,15 @@ public class RoomDTO implements Serializable {
     public void setMember(int member) {
         this.member = member;
     }
+
+    public Date getTime() {
+        return time;
+    }
+
+    public void setTime(Date time) {
+        this.time = time;
+    }
+
 
 
 }

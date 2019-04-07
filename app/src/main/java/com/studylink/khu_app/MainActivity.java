@@ -29,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
     private FirebaseAuth auth;                                                                      //아이디, 비번 받아올 것
 
     private ImageView toMypage;
-    private TextView makeStudy, dateNow, myStudyNum;
+    private TextView makeStudy, myStudyNum;
     private RelativeLayout addStudy;
     private RecyclerView recyclerView_myStudy,recyclerView_matching;
     private ArrayList<RoomDTO>arrayList_myStudy = new ArrayList<>();
@@ -48,7 +48,6 @@ public class MainActivity extends AppCompatActivity {
 
         auth = FirebaseAuth.getInstance();
         toMypage = findViewById(R.id.toMypage);
-        dateNow = findViewById(R.id.dateNow);
         makeStudy = findViewById(R.id.makeStudy);
         myStudyNum = findViewById(R.id.myStudyNum);
         addStudy = findViewById(R.id.addStudy);
@@ -63,13 +62,6 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
-        // 오늘 날짜 가져오기
-        Date date = new Date(System.currentTimeMillis());
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy년 M월 d일");
-        String getTime = sdf.format(date);
-        dateNow.setText(getTime);
-
 
         // 스터디 만들기 버튼
         makeStudy.setClickable(true);

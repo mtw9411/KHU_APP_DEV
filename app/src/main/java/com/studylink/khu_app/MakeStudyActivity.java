@@ -19,7 +19,9 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class MakeStudyActivity extends AppCompatActivity {
@@ -281,6 +283,10 @@ public class MakeStudyActivity extends AppCompatActivity {
                     roomDTO.setRoomName(name);
                     roomDTO.setFine(fine);
                     roomDTO.setRoomdisposition(dispoRoom);
+
+                    // 오늘 날짜 가져오기
+                    Date date = new Date(System.currentTimeMillis());
+                    roomDTO.setTime(date);
 
                     databaseRoom.child(id).setValue(roomDTO);
                     Toast.makeText(this, "room added", Toast.LENGTH_LONG).show();
