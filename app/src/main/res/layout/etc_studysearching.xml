@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+<android.support.constraint.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="39.3dp">
+
+    <TextView
+        android:id="@+id/writing_title"
+        android:layout_width="0dp"
+        android:layout_height="52dp"
+        android:gravity="center"
+        android:lineSpacingExtra="6sp"
+        android:text="스터디"
+        android:textColor="#222222"
+        android:textSize="13sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#2f78db"
+        android:orientation="vertical"
+        app:layout_constraintTop_toBottomOf="@+id/writing_title">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="22dp"
+            android:layout_marginTop="25.5dp"
+            android:lineSpacingExtra="7.5sp"
+            android:text="스터디세션 검색"
+            android:textColor="#ffffff"
+            android:textSize="16sp" />
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginBottom="25dp">
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="35.5dp"
+                android:background="@drawable/white_back"
+                android:textSize="14sp"
+                android:textColor="#707070"
+                android:letterSpacing="-0.03"
+                android:lineSpacingExtra="6.5sp"/>
+
+            <ImageView
+                android:id="@+id/imageView21"
+                android:layout_width="45dp"
+                android:layout_height="35dp"
+                app:srcCompat="@mipmap/icon_14" />
+        </RelativeLayout>
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/textView62"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="35dp"
+        android:textSize="13sp"
+        android:textColor="#707070"
+        android:lineSpacingExtra="6sp"
+        android:text="'1달 스터디'"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout3" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="35dp"
+        android:textSize="13sp"
+        android:textColor="#707070"
+        android:lineSpacingExtra="6sp"
+        android:text=" 관련 스터디모임"
+        app:layout_constraintStart_toEndOf="@+id/textView62"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout3" />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recyclerView5"
+        android:layout_width="match_parent"
+        android:layout_height="261.5dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="43.5dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginRight="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView62" />
+
+    <TextView
+        android:id="@+id/textView67"
+        android:layout_width="match_parent"
+        android:layout_height="39.1dp"
+        android:background="@drawable/gray_border"
+        android:layout_marginStart="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="31dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginRight="20dp"
+        android:textSize="13sp"
+        android:textColor="#707070"
+        android:lineSpacingExtra="2.5sp"
+        android:text="더 보기"
+        android:gravity="center"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/recyclerView5" />
+
+</android.support.constraint.ConstraintLayout>
+</ScrollView>

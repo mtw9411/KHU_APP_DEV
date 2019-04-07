@@ -1,0 +1,427 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingBottom="25.4dp">
+
+        <TextView
+            android:id="@+id/textView22"
+            android:layout_width="0dp"
+            android:layout_height="52dp"
+            android:gravity="center"
+            android:lineSpacingExtra="6sp"
+            android:text="스터디 상세"
+            android:textColor="#222222"
+            android:textSize="13sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/imageView11"
+            android:layout_width="31dp"
+            android:layout_height="29dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="13dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@mipmap/icon_23" />
+>>>>>>> 6e459be9c1249d73749bf441f851c267916d9064
+
+        <TextView
+            android:id="@+id/textView23"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="83.5dp"
+            android:lineSpacingExtra="5.5sp"
+            android:text="조용한 성향이신 분들을 위한"
+            android:textColor="#E6222222"
+            android:textSize="11.5sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/textView22" />
+
+        <TextView
+            android:id="@+id/Detail_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="4dp"
+            android:lineSpacingExtra="7.5sp"
+            android:text="공기업 스터디"
+            android:textColor="#E6222222"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView23" />
+
+        <TextView
+            android:id="@+id/Detail_member"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="17.5dp"
+            android:layout_marginLeft="17.5dp"
+            android:layout_marginTop="6.5dp"
+            android:lineSpacingExtra="3.5sp"
+            android:text="0"
+            android:textColor="#222222"
+            android:textSize="13sp"
+            app:layout_constraintStart_toEndOf="@+id/Detail_title"
+            app:layout_constraintTop_toBottomOf="@+id/textView23" />
+
+        <TextView
+            android:id="@+id/Detail_totalMem"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:lineSpacingExtra="3.5sp"
+            android:text="6"
+            android:textColor="#222222"
+            android:textSize="11sp"
+            app:layout_constraintStart_toEndOf="@+id/Detail_member"
+            app:layout_constraintTop_toBottomOf="@+id/textView23" />
+
+        <LinearLayout
+            android:id="@+id/linearLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="18.5dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/Detail_title">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="8dp"
+                android:lineSpacingExtra="5sp"
+                android:text="경기도 수원"
+                android:textColor="#222222"
+                android:textSize="10.5sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="8dp"
+                android:text="|"
+                android:textColor="#222222"
+                android:textSize="10.5sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="8dp"
+                android:lineSpacingExtra="5sp"
+                android:text="30세 미만"
+                android:textColor="#222222"
+                android:textSize="10.5sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="8dp"
+                android:text="|"
+                android:textColor="#222222"
+                android:textSize="10.5sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:lineSpacingExtra="5sp"
+                android:text="성별 상관없음"
+                android:textColor="#222222"
+                android:textSize="10.5sp" />
+        </LinearLayout>
+
+        <android.support.constraint.ConstraintLayout
+            android:id="@+id/constraintLayout5"
+            android:layout_width="89.5dp"
+            android:layout_height="89.5dp"
+            android:layout_marginTop="80.9dp"
+            android:layout_marginEnd="20.1dp"
+            android:layout_marginRight="20.1dp"
+            android:background="@drawable/progress_bar"
+            app:layout_constraintEnd_toEndOf="@+id/textView22"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:id="@+id/num_2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="28dp"
+                android:lineSpacingExtra="5sp"
+                android:text="1"
+                android:textColor="#ff0930"
+                android:textSize="11.5sp"
+                app:layout_constraintHorizontal_chainStyle="packed"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toLeftOf="@+id/next_2"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/next_2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:lineSpacingExtra="5sp"
+                android:text="위"
+                android:textColor="#ff0930"
+                android:textSize="10sp"
+                app:layout_constraintLeft_toRightOf="@+id/num_2"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/textView19"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/num_2"
+                android:layout_marginTop="3dp"
+                android:layout_marginRight="5dp"
+                android:lineSpacingExtra="16sp"
+                android:text="매칭률"
+                android:textColor="#ff0930"
+                android:textSize="10.5sp"
+                app:layout_constraintHorizontal_chainStyle="packed"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toLeftOf="@+id/matching_rate"
+
+                app:layout_constraintTop_toBottomOf="@+id/num_2" />
+
+            <TextView
+                android:id="@+id/matching_rate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/num_2"
+                android:lineSpacingExtra="16sp"
+                android:text="90%"
+                android:textColor="#ff0930"
+                android:textSize="14sp"
+                app:layout_constraintLeft_toRightOf="@+id/textView19"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/num_2" />
+        </android.support.constraint.ConstraintLayout>
+
+        <RelativeLayout
+            android:id="@+id/Detail_entrance"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="21.5dp"
+            android:layout_marginLeft="21.5dp"
+            android:layout_marginTop="4dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout">
+        <TextView
+            android:id="@+id/textView28"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:lineSpacingExtra="6sp"
+            android:text="방 입장하기"
+            android:textColor="#222222"
+            android:textSize="12.5sp"
+            />
+
+        <ImageView
+            android:id="@+id/imageView16"
+            android:layout_width="20dp"
+            android:layout_height="19dp"
+            android:layout_toRightOf="@+id/textView28"
+            android:layout_marginLeft="3dp"
+            app:srcCompat="@mipmap/icon_15" />
+        </RelativeLayout>
+
+        <View
+            android:id="@+id/view2"
+            android:layout_width="match_parent"
+            android:layout_height="11dp"
+            android:layout_gravity="bottom"
+            android:layout_marginTop="17.5dp"
+            android:background="@drawable/shadow"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/Detail_entrance"></View>
+
+        <TextView
+            android:id="@+id/textView29"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="23.5dp"
+            android:lineSpacingExtra="6.5sp"
+            android:text="스터디 소개"
+            android:textColor="#E6222222"
+            android:textSize="14sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/view2" />
+
+        <ImageView
+            android:id="@+id/imageView17"
+            android:layout_width="33dp"
+            android:layout_height="32dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="17dp"
+            app:layout_constraintStart_toEndOf="@+id/textView29"
+            app:layout_constraintTop_toBottomOf="@+id/view2"
+            app:srcCompat="@mipmap/icon_27" />
+
+        <TextView
+            android:id="@+id/Detail_fine"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="23dp"
+            android:lineSpacingExtra="2.5sp"
+            android:text="5000 won"
+            android:textColor="#E62f78db"
+            android:textSize="12.5sp"
+            app:layout_constraintStart_toEndOf="@+id/imageView17"
+            app:layout_constraintTop_toBottomOf="@+id/view2" />
+
+        <TextView
+            android:id="@+id/Detail_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginRight="20dp"
+            android:letterSpacing="-0.03"
+            android:lineSpacingExtra="6sp"
+            android:text="공기업 스터디 열심히 하실 분을 모십니다!
+자소서 + 인적성 + 면접까지 서로 부족한 부분을 전체적으로 스터디 하실 분을 구합니다. 끝까지 열심히 하실 분은 모두 신청해주세요.
+장소는 수원역 근처입니다."
+            android:textColor="#707070"
+            android:textSize="12sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView29" />
+
+        <TextView
+            android:id="@+id/textView32"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="80dp"
+            android:lineSpacingExtra="6sp"
+            android:text="스터디 성향분석"
+            android:textColor="#222222"
+            android:textSize="12sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/Detail_content" />
+
+        <TextView
+            android:id="@+id/Detail_roomdipo1"
+            android:layout_width="65.5dp"
+            android:layout_height="26.7dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/main_detail"
+            android:gravity="center"
+            android:lineSpacingExtra="5.5sp"
+            android:text="외향적인"
+            android:textColor="#2f78db"
+            android:textSize="11.5sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView32" />
+
+        <TextView
+            android:id="@+id/Detail_roomdipo2"
+            android:layout_width="65.5dp"
+            android:layout_height="26.7dp"
+            android:layout_marginStart="6dp"
+            android:layout_marginLeft="6dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/main_detail"
+            android:gravity="center"
+            android:lineSpacingExtra="5.5sp"
+            android:text="직관적인"
+            android:textColor="#2f78db"
+            android:textSize="11.5sp"
+            app:layout_constraintStart_toEndOf="@+id/Detail_roomdipo1"
+            app:layout_constraintTop_toBottomOf="@+id/textView32" />
+
+        <TextView
+            android:id="@+id/Detail_roomdipo3"
+            android:layout_width="65.5dp"
+            android:layout_height="26.7dp"
+            android:layout_marginStart="6dp"
+            android:layout_marginLeft="6dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/main_detail"
+            android:gravity="center"
+            android:lineSpacingExtra="5.5sp"
+            android:text="원칙적인"
+            android:textColor="#2f78db"
+            android:textSize="11.5sp"
+            app:layout_constraintStart_toEndOf="@+id/Detail_roomdipo2"
+            app:layout_constraintTop_toBottomOf="@+id/textView32" />
+
+        <TextView
+            android:id="@+id/Detail_roomdipo4"
+            android:layout_width="65.5dp"
+            android:layout_height="26.7dp"
+            android:layout_marginStart="6dp"
+            android:layout_marginLeft="6dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/main_detail"
+            android:gravity="center"
+            android:lineSpacingExtra="5.5sp"
+            android:text="계획적인"
+            android:textColor="#2f78db"
+            android:textSize="11.5sp"
+            app:layout_constraintStart_toEndOf="@+id/Detail_roomdipo3"
+            app:layout_constraintTop_toBottomOf="@+id/textView32" />
+
+        <View
+            android:id="@+id/view"
+            android:layout_width="match_parent"
+            android:layout_height="0.1dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginRight="20dp"
+            android:background="#78222222"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/Detail_roomdipo1" />
+
+        <TextView
+            android:id="@+id/textView37"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="21dp"
+            android:layout_marginLeft="21dp"
+            android:layout_marginTop="15dp"
+            android:lineSpacingExtra="6.5sp"
+            android:text="비슷한 스터디"
+            android:textColor="#E6222222"
+            android:textSize="14sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/view" />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recyclerView"
+            android:layout_width="368dp"
+            android:layout_height="96dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="10dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView37" />
+
+    </android.support.constraint.ConstraintLayout>
+    </ScrollView>

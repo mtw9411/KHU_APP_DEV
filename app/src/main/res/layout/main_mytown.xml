@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="130dp"
+    android:layout_height="170.5dp"
+    android:layout_marginTop="10dp"
+    android:layout_marginLeft="10dp">
+
+    <ImageView
+        android:id="@+id/myTown_image"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:src="@drawable/study_test"
+    android:scaleType="center"/>
+    <TextView
+        android:id="@+id/textView18"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="101.7dp"
+        android:lineSpacingExtra="6.5sp"
+        android:text="공기업 취준생"
+        android:textColor="#ffffff"
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView20"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10.5dp"
+        android:layout_marginLeft="10.5dp"
+        android:lineSpacingExtra="5.5sp"
+        android:textColor="#47baf6"
+        android:textSize="11sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView18"
+        tools:text="수원시 영통동" />
+
+    <TextView
+        android:id="@+id/textView21"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10.5dp"
+        android:layout_marginLeft="10.5dp"
+        android:layout_marginTop="2dp"
+        android:lineSpacingExtra="5.5sp"
+        android:textColor="#ffffff"
+        android:textSize="11sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView20"
+        tools:text="공기업 스터디" />
+
+</android.support.constraint.ConstraintLayout>

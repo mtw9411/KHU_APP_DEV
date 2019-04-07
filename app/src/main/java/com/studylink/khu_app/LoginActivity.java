@@ -22,30 +22,59 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class LoginActivity extends AppCompatActivity {
 
     private static final int RC_SIGN_IN = 100;
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
-    private TextView signinStart;
+    private TextView signinStart, search_password_btn, search_id_btn;
     private TextView email_login_email;
     private TextView email_login_password;
     private TextView email_login_button;
-
+    private FirebaseUser mUser;
+    private FirebaseDatabase Database;
     private GoogleSignInClient mGoogleSignInClient;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        Intent intent = new Intent(this, LoadingActivity.class);
+        Intent intent = new Intent(LoginActivity.this, LoadingActivity.class);
         startActivity(intent);
+
+        mUser = FirebaseAuth.getInstance().getCurrentUser();
+        Database = FirebaseDatabase.getInstance();
         email_login_email = (TextView)findViewById(R.id.email_login_email);
         email_login_password = (TextView)findViewById(R.id.email_login_password);
         email_login_button = (TextView) findViewById(R.id.email_login_button);
 
+        search_id_btn = findViewById(R.id.search_id_btn);
+        search_password_btn = findViewById(R.id.search_password_btn);
         signinStart = (TextView)findViewById(R.id.signinStart);
+
+        search_id_btn.setClickable(true);
+        search_id_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(LoginActivity.this, IdSearchActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        search_password_btn.setClickable(true);
+        search_password_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(LoginActivity.this, PasswordSearchActivity.class);
+                startActivity(intent);
+            }
+        });
+
         signinStart.setClickable(true);
         signinStart.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -60,6 +89,7 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 loginUser(email_login_email.getText().toString(),email_login_password.getText().toString());
+
             }
         });
 
@@ -88,11 +118,11 @@ public class LoginActivity extends AppCompatActivity {
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
                 FirebaseUser user = firebaseAuth.getCurrentUser();
                 if (user != null) {
-                    // User is signed in
-                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);      //MainActivity 부분에 getApplicationContext()를 넣어도 됨
+                    Intent intent = new Intent (LoginActivity.this, MainActivity.class);
                     startActivity(intent);
                     finish();
-                } else {
+                }           // User is signed in
+                else {
                     // User is signed out
                 }
             }
@@ -143,7 +173,6 @@ public class LoginActivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             // Sign in success, update UI with the signed-in user's information
-                            Toast.makeText(LoginActivity.this, "Firebase아이디 생성이 완료되었습니다.", Toast.LENGTH_SHORT).show();
                         }
                     }
                 });

@@ -107,6 +107,7 @@
             android:layout_marginBottom="61.5dp">
 
             <TextView
+                android:id="@+id/search_id_btn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="12sp"
@@ -114,7 +115,6 @@
                 android:lineSpacingExtra="2.5sp"
                 android:text="아이디 찾기"
                 android:layout_marginRight="8dp"
-                android:clickable="true"
                 />
             <TextView
                 android:layout_width="wrap_content"
@@ -126,6 +126,7 @@
                 android:layout_marginRight="8dp"
                 />
             <TextView
+                android:id="@+id/search_password_btn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="12sp"
@@ -133,7 +134,6 @@
                 android:lineSpacingExtra="2.5sp"
                 android:text="비밀번호 찾기"
                 android:layout_marginRight="8dp"
-                android:clickable="true"
                 />
             <TextView
                 android:layout_width="wrap_content"

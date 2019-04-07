@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginRight="10.5dp">
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/imageView_myStudy"
+        android:layout_width="103dp"
+        android:layout_height="103dp"
+        android:src="@drawable/study_test"/>
+
+    <TextView
+        android:id="@+id/textView_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="10.5sp"
+        android:textColor="#ffffff"
+        android:lineSpacingExtra="5sp"
+        android:text="영어 회화 모여라"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="60dp"/>
+    <TextView
+        android:id="@+id/textView_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="10.5sp"
+        android:textColor="#ffffff"
+        android:lineSpacingExtra="5sp"
+        android:text="15분 전"
+        android:layout_below="@+id/textView_title"
+        android:layout_centerHorizontal="true"
+        />
+
+</RelativeLayout>

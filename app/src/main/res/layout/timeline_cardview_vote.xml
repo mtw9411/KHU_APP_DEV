@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/cardView"
+        android:layout_width="315dp"
+        android:layout_height="232dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/imageView12"
+            android:layout_width="43dp"
+            android:layout_height="43dp"
+            android:layout_marginLeft="12dp"
+            android:layout_marginTop="12dp"
+            android:outlineSpotShadowColor="#ffffff"
+            app:srcCompat="@color/colorLightBlue" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="68dp"
+            android:layout_marginTop="16sp"
+            android:lineSpacingExtra="2.5sp"
+            android:text="Zkqmmsl"
+            android:textColor="#707070"
+            android:textSize="13sp" />
+
+        <TextView
+            android:id="@+id/textView16"
+            android:layout_width="50dp"
+            android:layout_height="16dp"
+            android:layout_marginLeft="125dp"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/text_roundshape"
+            android:gravity="center"
+            android:lineSpacingExtra="4.5dp"
+            android:text="투표"
+            android:textColor="#ffffff"
+            android:textSize="10sp" />
+
+        <EditText
+            android:id="@+id/textView15"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="24dp"
+            android:layout_marginTop="82dp"
+            android:background="#ffffff"
+            android:lineSpacingExtra="6sp"
+            android:overScrollMode="always"
+            android:text="여러분~ 문제집 선택투표 부탁드려요~"
+            android:textColor="#707070"
+            android:textSize="12sp"
+
+            />
+
+        <android.support.v7.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:layout_marginLeft="24dp"
+            android:layout_marginTop="108dp"
+            android:layout_marginRight="24dp"
+            android:orientation="vertical" />
+
+        <TextView
+            android:id="@+id/textView12"
+            android:layout_width="290dp"
+            android:layout_height="1dp"
+            android:layout_marginLeft="12dp"
+            android:layout_marginTop="195dp"
+            android:background="#cccccc"
+            tools:layout_editor_absoluteX="110dp"
+            tools:layout_editor_absoluteY="368dp" />
+
+        <ImageView
+            android:id="@+id/vote_scrape"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginLeft="14dp"
+            android:layout_marginTop="195dp"
+            app:srcCompat="@mipmap/icon_7" />
+
+        <ImageView
+            android:id="@+id/imageView15"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginLeft="270dp"
+            android:layout_marginTop="195dp"
+            app:srcCompat="@mipmap/icon_11" />
+
+        <TextView
+            android:id="@+id/textview22"
+            android:layout_width="wrap_content"
+            android:layout_height="13dp"
+            android:layout_marginLeft="295dp"
+            android:layout_marginTop="203dp"
+            android:lineSpacingExtra="2sp"
+            android:text="10"
+            android:textColor="#2f78db"
+            android:textSize="10sp" />
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="135dp"
+            android:layout_marginTop="168dp"
+            android:lineSpacingExtra="3.5sp"
+            android:text="투표하기"
+            android:textColor="#0036b2"
+            android:textSize="13sp" />
+
+
+    </android.support.v7.widget.CardView>
+
+</android.support.constraint.ConstraintLayout>
