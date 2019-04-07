@@ -16,7 +16,7 @@
         android:textSize="13sp"
         android:textColor="#222222"
         android:lineSpacingExtra="6sp"
-        android:text="스터디 만들기"
+        android:text="SESSION 만들기"
         android:gravity="center"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -52,7 +52,7 @@
         android:layout_height="40dp"
         android:layout_marginStart="20dp"
         android:layout_marginLeft="20dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="5dp"
         app:cardCornerRadius="5dp"
         app:cardElevation="3dp"
         app:layout_constraintStart_toStartOf="parent"
@@ -68,11 +68,11 @@
     </android.support.v7.widget.CardView>
 
     <android.support.v7.widget.CardView
-        android:layout_width="178dp"
+        android:layout_width="186dp"
         android:layout_height="40dp"
         android:layout_marginStart="13dp"
         android:layout_marginLeft="13dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="5dp"
         app:cardCornerRadius="5dp"
         app:cardElevation="3dp"
         app:layout_constraintStart_toEndOf="@+id/cardView3"
@@ -91,7 +91,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         android:layout_marginLeft="20dp"
-        android:layout_marginTop="31dp"
+        android:layout_marginTop="19dp"
         android:textSize="14sp"
         android:textColor="#E6222222"
         android:lineSpacingExtra="6.5sp"
@@ -101,11 +101,11 @@
 
     <android.support.v7.widget.CardView
         android:id="@+id/cardView4"
-        android:layout_width="308dp"
+        android:layout_width="320dp"
         android:layout_height="40dp"
         android:layout_marginStart="20dp"
         android:layout_marginLeft="20dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="5dp"
         app:cardCornerRadius="5dp"
         app:cardElevation="3dp"
         app:layout_constraintStart_toStartOf="parent"
@@ -153,18 +153,143 @@
     </android.support.v7.widget.CardView>
 
     <TextView
+        android:id="@+id/textView91"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="19dp"
+        android:letterSpacing="-0.03"
+        android:lineSpacingExtra="6.5sp"
+        android:textColor="#E6222222"
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cardView4"
+        android:text="나이" />
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/cardView14"
+        android:layout_width="155dp"
+        android:layout_height="32dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="5dp"
+        app:cardCornerRadius="5dp"
+        app:cardElevation="3dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView91">
+
+        <EditText
+            android:id="@+id/editAge"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="14dp"
+            android:background="@null"
+            android:hint="20세 이상"
+            android:maxLength="8"
+            android:lineSpacingExtra="2.5sp"
+            android:textColorHint="#63707070"
+            android:textColor="#707070"
+            android:textSize="13sp" />
+
+    </android.support.v7.widget.CardView>
+
+    <TextView
+        android:id="@+id/textView92"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="140dp"
+        android:layout_marginLeft="140dp"
+        android:letterSpacing="-0.03"
+        android:lineSpacingExtra="6.5sp"
+        android:text="성별"
+        android:textColor="#E6222222"
+        android:textSize="14sp"
+        app:layout_constraintStart_toEndOf="@+id/textView91"
+        app:layout_constraintTop_toTopOf="@+id/textView91" />
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/cardView15"
+        android:layout_width="155dp"
+        android:layout_height="32dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="5dp"
+        app:cardCornerRadius="5dp"
+        app:cardElevation="3dp"
+        app:layout_constraintStart_toEndOf="@+id/cardView14"
+        app:layout_constraintTop_toBottomOf="@+id/textView92">
+
+        <EditText
+            android:id="@+id/editGender"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="14dp"
+            android:background="@null"
+            android:hint="성별 상관없음"
+            android:maxLength="8"
+            android:lineSpacingExtra="2.5sp"
+            android:textColorHint="#63707070"
+            android:textColor="#707070"
+            android:textSize="13sp" />
+
+    </android.support.v7.widget.CardView>
+
+    <TextView
+        android:id="@+id/textView93"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="19dp"
+        android:letterSpacing="-0.03"
+        android:lineSpacingExtra="6.5sp"
+        android:text="지역"
+        android:textColor="#E6222222"
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cardView14" />
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/cardView16"
+        android:layout_width="320dp"
+        android:layout_height="32dp"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginTop="5dp"
+        app:cardCornerRadius="5dp"
+        app:cardElevation="3dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView93">
+
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/icon_13"/>
+
+        <TextView
+            android:id="@+id/textRegion"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="30dp"
+            android:lineSpacingExtra="2.5sp"
+            android:textColor="#707070"
+            android:textSize="13sp" />
+
+    </android.support.v7.widget.CardView>
+
+    <TextView
         android:id="@+id/textView42"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         android:layout_marginLeft="20dp"
-        android:layout_marginTop="31dp"
+        android:layout_marginTop="19dp"
         android:textSize="14sp"
         android:textColor="#222222"
         android:lineSpacingExtra="6.5sp"
         android:text="성향 키워드 설정하기"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cardView4" />
+        app:layout_constraintTop_toBottomOf="@+id/cardView16" />
 
     <TextView
         android:id="@+id/textView43"
@@ -172,7 +297,7 @@
         android:layout_height="30dp"
         android:layout_marginStart="20dp"
         android:layout_marginLeft="20dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="5dp"
         android:textSize="13sp"
         android:textColor="#707070"
         android:lineSpacingExtra="6sp"
@@ -188,7 +313,7 @@
         android:layout_height="30dp"
         android:layout_marginStart="10dp"
         android:layout_marginLeft="10dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="5dp"
         android:background="@drawable/gray_border"
         android:gravity="center"
         android:lineSpacingExtra="6sp"
@@ -300,32 +425,31 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         android:layout_marginLeft="20dp"
-        android:layout_marginTop="31dp"
+        android:layout_marginTop="19dp"
         android:textSize="14sp"
-        android:textColor="#222222"
+        android:textColor="#E6222222"
         android:lineSpacingExtra="6.5sp"
         android:text="결석 및 과제 벌금"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView57" />
 
     <android.support.v7.widget.CardView
-        android:id="@+id/writing_cardview"
-        android:layout_width="320dp"
-        android:layout_height="40dp"
+        android:id="@+id/cardView17"
+        android:layout_width="155dp"
+        android:layout_height="32dp"
         android:layout_marginStart="20dp"
         android:layout_marginLeft="20dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="5dp"
         app:cardCornerRadius="5dp"
         app:cardElevation="3dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView59">
 
         <EditText
-
             android:id="@+id/fine"
             android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:layout_marginLeft="28dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="23dp"
             android:background="@null"
             android:hint="5,000"
             android:lineSpacingExtra="2.5sp"
@@ -335,40 +459,75 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_alignParentRight="true"
             android:layout_gravity="right"
-            android:layout_marginRight="33.5dp"
+            android:layout_marginRight="26dp"
             android:gravity="center"
             android:lineSpacingExtra="2.5sp"
             android:textColor="#75707070"
             android:textSize="13sp"
-            android:text="Won" />
+            android:text="원" />
     </android.support.v7.widget.CardView>
 
-    <EditText
-        android:id="@+id/totalmember"
-        android:layout_width="183dp"
-        android:layout_height="52dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="8dp"
-        android:hint="스터디정원"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/writing_cardview"
-        app:layout_constraintVertical_bias="0.882"
-        tools:layout_editor_absoluteX="0dp" />
+    <TextView
+        android:id="@+id/textView94"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="69dp"
+        android:layout_marginLeft="69dp"
+        android:lineSpacingExtra="6.5sp"
+        android:text="스터디 정원"
+        android:textColor="#E6222222"
+        android:textSize="14sp"
+        app:layout_constraintStart_toEndOf="@+id/textView59"
+        app:layout_constraintTop_toTopOf="@+id/textView59" />
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/cardView18"
+        android:layout_width="155dp"
+        android:layout_height="32dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginLeft="10dp"
+        app:cardCornerRadius="5dp"
+        app:cardElevation="3dp"
+        app:layout_constraintStart_toEndOf="@+id/cardView17"
+        app:layout_constraintTop_toTopOf="@+id/cardView17">
+
+        <EditText
+            android:id="@+id/totalmember"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="23dp"
+            android:background="@null"
+            android:hint="6"
+            android:lineSpacingExtra="2.5sp"
+            android:textColorHint="#63707070"
+            android:textSize="13sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="right"
+            android:layout_marginRight="26dp"
+            android:gravity="center"
+            android:lineSpacingExtra="2.5sp"
+            android:text="명"
+            android:textColor="#75707070"
+            android:textSize="13sp" />
+    </android.support.v7.widget.CardView>
 
     <TextView
         android:id="@+id/textView61"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_height="42dp"
         android:layout_marginTop="38dp"
+        android:gravity="center"
         android:textSize="14sp"
         android:textColor="#2f78db"
         android:lineSpacingExtra="6.5sp"
         android:text="다음"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/writing_cardview" />
+        app:layout_constraintTop_toBottomOf="@+id/cardView17" />
 
 </android.support.constraint.ConstraintLayout>
 </ScrollView>

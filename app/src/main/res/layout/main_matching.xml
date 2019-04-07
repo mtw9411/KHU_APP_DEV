@@ -89,7 +89,7 @@
             android:lineSpacingExtra="1.5sp"
             android:textColor="#1a1a1a"
             android:textSize="11sp"
-            android:text="0" />
+            android:text="1" />
 
         <TextView
             android:id="@+id/matching_totalMember"
@@ -109,6 +109,7 @@
             android:layout_marginTop="127.9dp">
 
             <TextView
+                android:id="@+id/matching_region"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="8dp"
@@ -126,6 +127,7 @@
                 android:textSize="10.5sp" />
 
             <TextView
+                android:id="@+id/matching_age"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="8dp"
@@ -143,6 +145,7 @@
                 android:textSize="10.5sp" />
 
             <TextView
+                android:id="@+id/matching_gender"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:lineSpacingExtra="5sp"
@@ -161,9 +164,10 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:lineSpacingExtra="5.5sp"
-                android:textColor="#ff0930"
                 android:textSize="11sp"
+                android:textColor="#b9b9b9"
+                android:letterSpacing="-0.03"
+                android:lineSpacingExtra="5.5sp"
                 android:text="자세히 보기" />
 
             <ImageView
@@ -184,9 +188,10 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:lineSpacingExtra="5.5sp"
-                android:textColor="#ff0930"
                 android:textSize="11sp"
+                android:textColor="#0065ff"
+                android:letterSpacing="-0.03"
+                android:lineSpacingExtra="5.5sp"
                 android:text="방 입장하기" />
 
             <ImageView

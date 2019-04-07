@@ -33,7 +33,7 @@ import java.util.Date;
 public class MakeStudyFinActivity extends AppCompatActivity {
 
     private ImageView changeBackImg,showBackImg;
-    private TextView makeStudyFin,studyIntro;
+    private TextView makeStudyFin,studyContent1, studyContent2;
     private DatabaseReference databaseRoom;
     private Uri filePath;
 
@@ -44,7 +44,8 @@ public class MakeStudyFinActivity extends AppCompatActivity {
         changeBackImg = findViewById(R.id.changeBackImg);
         showBackImg = findViewById(R.id.showBackImg);
         makeStudyFin = findViewById(R.id.makeStudyFin);
-        studyIntro =findViewById(R.id.studyIntro);
+        studyContent1 = findViewById(R.id.studyContent1);
+        studyContent2 =findViewById(R.id.studyContent2);
 
         Intent intent = getIntent();
         final RoomDTO room = (RoomDTO) intent.getExtras().getSerializable("room");
@@ -94,11 +95,22 @@ public class MakeStudyFinActivity extends AppCompatActivity {
         databaseRoom= FirebaseDatabase.getInstance().getReference("room");
         final RoomDTO roomFin = room;
 
-        String contentCheck = studyIntro.getText().toString();
+        String contentCheck1 = studyContent1.getText().toString();
+        String contentCheck2 = studyContent2.getText().toString();
         //업로드할 내용이 있으면 수행
-        if (contentCheck.trim().length()>0) {
-            roomFin.setContent(contentCheck);
+        if (contentCheck1.trim().length()>0){
+            roomFin.setContent1(contentCheck1);
         }
+        else {
+            roomFin.setContent1("스터디 열심히 하실 분을 모십니다!");
+        }
+        if (contentCheck2.trim().length()>0) {
+            roomFin.setContent2(contentCheck2);
+        }
+        else{
+            roomFin.setContent2("스터디 열심히 하실 분을 모십니다!");
+        }
+
         //업로드할 이미지가 있으면 수행
         if (filePath != null) {
             //업로드 진행 Dialog 보이기

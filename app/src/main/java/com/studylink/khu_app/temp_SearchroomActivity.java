@@ -88,7 +88,7 @@ public class temp_SearchroomActivity extends AppCompatActivity {
                         intent.putExtra("fine",roomList.get(position).getFine());
                         intent.putExtra("dispor",str1);
                         intent.putExtra("spinner2",roomList.get(position).getSpinner2());
-                        intent.putExtra("content",roomList.get(position).getContent());
+                        intent.putExtra("content",roomList.get(position).getContent2());
                         intent.putExtra("id",roomList.get(position).getId());
 
                         startActivity(intent);

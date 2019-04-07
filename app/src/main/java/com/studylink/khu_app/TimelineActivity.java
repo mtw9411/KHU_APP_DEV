@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -70,6 +71,7 @@ public class TimelineActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
         recycler_studyname = (RecyclerView) findViewById(R.id.recycler_studyname);
         RecyclerView.LayoutManager horizontalLayoutManager = new LinearLayoutManager(this);
         ((LinearLayoutManager)horizontalLayoutManager).setOrientation(LinearLayoutManager.HORIZONTAL);
@@ -80,6 +82,7 @@ public class TimelineActivity extends AppCompatActivity {
         setData();
 
         StudynameAdapter.notifyDataSetChanged();
+//        setNamerecycler();
 
 //        recycler_timelineBoard = (RecyclerView) findViewById(R.id.recycler_timelineBoard);
 //        recycler_timelineBoard.setLayoutManager(new LinearLayoutManager(this));
@@ -91,8 +94,6 @@ public class TimelineActivity extends AppCompatActivity {
                 new BottomNavigationView.OnNavigationItemSelectedListener() {
                     @Override
                     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-
-
                         // 어떤 메뉴 아이템이 터치되었는지 확인합니다.
                         switch (item.getItemId()) {
 
@@ -138,6 +139,7 @@ public class TimelineActivity extends AppCompatActivity {
 
             }
         });
+
         setData1();
     }
 
@@ -146,8 +148,18 @@ public class TimelineActivity extends AppCompatActivity {
             mdatabase.getReference().child("room").child(getroomname.get(i)).addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                    RoomDTO roomm = dataSnapshot.getValue(RoomDTO.class);
-                    nameofroom.add(roomm);
+                    int i=0;
+                    RoomDTO roomm;
+                    for(DataSnapshot data : dataSnapshot.getChildren()) {
+                        roomm = data.getValue(RoomDTO.class);
+                        if (i<getroomname.size()){
+                            if(getroomname.get(i).equals(roomm.getId())){
+                                nameofroom.add(roomm);
+                                StudynameAdapter.notifyDataSetChanged();
+                            }
+                        }
+                        i++;
+                    }
                 }
 
                 @Override

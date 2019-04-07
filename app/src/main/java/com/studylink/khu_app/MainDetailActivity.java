@@ -23,7 +23,9 @@ import java.util.Map;
 
 public class MainDetailActivity extends AppCompatActivity {
 
-    TextView Detail_title, Detail_member, Detail_totalMem, Detail_fine, Detail_content, Detail_roomdipo1, Detail_roomdipo2, Detail_roomdipo3, Detail_roomdipo4;
+    TextView Detail_title, Detail_member, Detail_totalMem, Detail_fine, Detail_content1, Detail_content2,
+            Detail_roomdipo1, Detail_roomdipo2, Detail_roomdipo3, Detail_roomdipo4,
+            Detail_region, Detail_age, Detail_gender;
     RelativeLayout Detail_entrance;
     private List<String> roomList = new ArrayList<>();
 
@@ -39,9 +41,13 @@ public class MainDetailActivity extends AppCompatActivity {
         Detail_title = findViewById(R.id.Detail_title);
         Detail_member = findViewById(R.id.Detail_member);
         Detail_totalMem = findViewById(R.id.Detail_totalMem);
+        Detail_region = findViewById(R.id.Detail_region);
+        Detail_age = findViewById(R.id.Detail_age);
+        Detail_gender = findViewById(R.id.Detail_gender);
         Detail_entrance = findViewById(R.id.Detail_entrance);
         Detail_fine = findViewById(R.id.Detail_fine);
-        Detail_content = findViewById(R.id.Detail_content);
+        Detail_content1 = findViewById(R.id.Detail_content1);
+        Detail_content2 = findViewById(R.id.Detail_content2);
         Detail_roomdipo1 = findViewById(R.id.Detail_roomdipo1);
         Detail_roomdipo2 = findViewById(R.id.Detail_roomdipo2);
         Detail_roomdipo3 = findViewById(R.id.Detail_roomdipo3);
@@ -50,8 +56,12 @@ public class MainDetailActivity extends AppCompatActivity {
         Detail_title.setText(roomDTO.getRoomName());
         Detail_member.setText(String.valueOf(roomDTO.getMember()));
         Detail_totalMem.setText("/" + roomDTO.getTotal_member().toString());
+        Detail_region.setText(roomDTO.getRegion());
+        Detail_age.setText(roomDTO.getAge());
+        Detail_gender.setText(roomDTO.getGender());
         Detail_fine.setText(roomDTO.getFine().toString());
-        Detail_content.setText(roomDTO.getContent());
+        Detail_content1.setText(roomDTO.getContent1());
+        Detail_content2.setText(roomDTO.getContent2());
         Detail_roomdipo1.setText(roomDTO.getRoomdisposition().get(0));
         Detail_roomdipo2.setText(roomDTO.getRoomdisposition().get(1));
         Detail_roomdipo3.setText(roomDTO.getRoomdisposition().get(2));

@@ -2,6 +2,7 @@
 <ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -71,7 +72,7 @@
             android:layout_marginLeft="17.5dp"
             android:layout_marginTop="6.5dp"
             android:lineSpacingExtra="3.5sp"
-            android:text="0"
+            android:text="1"
             android:textColor="#222222"
             android:textSize="13sp"
             app:layout_constraintStart_toEndOf="@+id/Detail_title"
@@ -100,6 +101,7 @@
             app:layout_constraintTop_toBottomOf="@+id/Detail_title">
 
             <TextView
+                android:id="@+id/Detail_region"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="8dp"
@@ -117,6 +119,7 @@
                 android:textSize="10.5sp" />
 
             <TextView
+                android:id="@+id/Detail_age"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="8dp"
@@ -134,6 +137,7 @@
                 android:textSize="10.5sp" />
 
             <TextView
+                android:id="@+id/Detail_gender"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:lineSpacingExtra="5sp"
@@ -150,6 +154,7 @@
             android:layout_marginEnd="20.1dp"
             android:layout_marginRight="20.1dp"
             android:background="@drawable/progress_bar"
+            android:elevation="6dp"
             app:layout_constraintEnd_toEndOf="@+id/textView22"
             app:layout_constraintTop_toTopOf="parent">
 
@@ -160,7 +165,7 @@
                 android:layout_marginTop="28dp"
                 android:lineSpacingExtra="5sp"
                 android:text="1"
-                android:textColor="#ff0930"
+                android:textColor="#0065ff"
                 android:textSize="11.5sp"
                 app:layout_constraintHorizontal_chainStyle="packed"
                 app:layout_constraintLeft_toLeftOf="parent"
@@ -174,7 +179,7 @@
                 android:layout_marginTop="30dp"
                 android:lineSpacingExtra="5sp"
                 android:text="위"
-                android:textColor="#ff0930"
+                android:textColor="#0065ff"
                 android:textSize="10sp"
                 app:layout_constraintLeft_toRightOf="@+id/num_2"
                 app:layout_constraintRight_toRightOf="parent"
@@ -189,7 +194,7 @@
                 android:layout_marginRight="5dp"
                 android:lineSpacingExtra="16sp"
                 android:text="매칭률"
-                android:textColor="#ff0930"
+                android:textColor="#0065ff"
                 android:textSize="10.5sp"
                 app:layout_constraintHorizontal_chainStyle="packed"
                 app:layout_constraintLeft_toLeftOf="parent"
@@ -204,7 +209,7 @@
                 android:layout_below="@+id/num_2"
                 android:lineSpacingExtra="16sp"
                 android:text="90%"
-                android:textColor="#ff0930"
+                android:textColor="#0065ff"
                 android:textSize="14sp"
                 app:layout_constraintLeft_toRightOf="@+id/textView19"
                 app:layout_constraintRight_toRightOf="parent"
@@ -213,42 +218,37 @@
 
         <RelativeLayout
             android:id="@+id/Detail_entrance"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="21.5dp"
-            android:layout_marginLeft="21.5dp"
-            android:layout_marginTop="4dp"
+            android:layout_width="match_parent"
+            android:layout_height="43dp"
+            android:layout_marginTop="40dp"
+            android:background="#4c81f8"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/linearLayout">
-        <TextView
-            android:id="@+id/textView28"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:lineSpacingExtra="6sp"
-            android:text="방 입장하기"
-            android:textColor="#222222"
-            android:textSize="12.5sp"
-            />
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_centerInParent="true">
+                <TextView
+                    android:id="@+id/textView28"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="방 입장하기"
+                    android:textSize="17.5sp"
+                    android:textColor="#ffffff"
+                    android:letterSpacing="-0.03"
+                    android:lineSpacingExtra="8.5sp"
+                    />
 
-        <ImageView
-            android:id="@+id/imageView16"
-            android:layout_width="20dp"
-            android:layout_height="19dp"
-            android:layout_toRightOf="@+id/textView28"
-            android:layout_marginLeft="3dp"
-            app:srcCompat="@mipmap/icon_15" />
+                <ImageView
+                    android:id="@+id/imageView16"
+                    android:layout_width="30dp"
+                    android:layout_height="27dp"
+                    android:layout_toRightOf="@+id/textView28"
+                    android:layout_marginLeft="3dp"
+                    app:srcCompat="@mipmap/icon_15" />
+            </LinearLayout>
         </RelativeLayout>
-
-        <View
-            android:id="@+id/view2"
-            android:layout_width="match_parent"
-            android:layout_height="11dp"
-            android:layout_gravity="bottom"
-            android:layout_marginTop="17.5dp"
-            android:background="@drawable/shadow"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/Detail_entrance"></View>
 
         <TextView
             android:id="@+id/textView29"
@@ -262,7 +262,7 @@
             android:textColor="#E6222222"
             android:textSize="14sp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/view2" />
+            app:layout_constraintTop_toBottomOf="@+id/Detail_entrance" />
 
         <ImageView
             android:id="@+id/imageView17"
@@ -272,7 +272,7 @@
             android:layout_marginLeft="16dp"
             android:layout_marginTop="17dp"
             app:layout_constraintStart_toEndOf="@+id/textView29"
-            app:layout_constraintTop_toBottomOf="@+id/view2"
+            app:layout_constraintTop_toBottomOf="@+id/Detail_entrance"
             app:srcCompat="@mipmap/icon_27" />
 
         <TextView
@@ -285,27 +285,52 @@
             android:textColor="#E62f78db"
             android:textSize="12.5sp"
             app:layout_constraintStart_toEndOf="@+id/imageView17"
-            app:layout_constraintTop_toBottomOf="@+id/view2" />
+            app:layout_constraintTop_toBottomOf="@+id/Detail_entrance" />
 
         <TextView
-            android:id="@+id/Detail_content"
+            android:id="@+id/textView11"
+            android:layout_width="3.5dp"
+            android:layout_height="13dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="25dp"
+            android:background="#2f78db"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView29" />
+
+        <TextView
+            android:id="@+id/Detail_content1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="24.5dp"
+            android:letterSpacing="-0.03"
+            android:lineSpacingExtra="6sp"
+            android:text="공기업 스터디 열심히 하실 분을 모십니다!"
+            android:textColor="#707070"
+            android:textSize="12sp"
+            app:layout_constraintStart_toEndOf="@+id/textView11"
+            app:layout_constraintTop_toBottomOf="@+id/textView29" />
+
+        <TextView
+            android:id="@+id/Detail_content2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
             android:layout_marginLeft="20dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="8.5dp"
             android:layout_marginEnd="20dp"
             android:layout_marginRight="20dp"
             android:letterSpacing="-0.03"
             android:lineSpacingExtra="6sp"
-            android:text="공기업 스터디 열심히 하실 분을 모십니다!
-자소서 + 인적성 + 면접까지 서로 부족한 부분을 전체적으로 스터디 하실 분을 구합니다. 끝까지 열심히 하실 분은 모두 신청해주세요.
+            android:text="자소서 + 인적성 + 면접까지 서로 부족한 부분을 전체적으로 스터디 하실 분을 구합니다. 끝까지 열심히 하실 분은 모두 신청해주세요.
 장소는 수원역 근처입니다."
             android:textColor="#707070"
             android:textSize="12sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView29" />
+            app:layout_constraintTop_toBottomOf="@+id/Detail_content1" />
 
         <TextView
             android:id="@+id/textView32"
@@ -319,7 +344,7 @@
             android:textColor="#222222"
             android:textSize="12sp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/Detail_content" />
+            app:layout_constraintTop_toBottomOf="@+id/Detail_content2" />
 
         <TextView
             android:id="@+id/Detail_roomdipo1"
@@ -405,7 +430,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="21dp"
             android:layout_marginLeft="21dp"
-            android:layout_marginTop="15dp"
+            android:layout_marginTop="35dp"
             android:lineSpacingExtra="6.5sp"
             android:text="비슷한 스터디"
             android:textColor="#E6222222"

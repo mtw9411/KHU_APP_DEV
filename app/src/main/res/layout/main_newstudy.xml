@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+    <android.support.v7.widget.CardView
+        android:layout_width="320dp"
+        android:layout_height="50dp"
+        app:cardCornerRadius="7dp"
+        app:cardElevation="3dp"
+        android:layout_marginBottom="10dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/newStudy_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10.5dp"
+                android:layout_marginTop="6.8dp"
+                android:textSize="14sp"
+                android:textColor="#222222"
+                android:letterSpacing="-0.03"
+                android:lineSpacingExtra="6.5sp"
+                android:text="4월 대기업 인정성"
+                />
+
+            <TextView
+                android:id="@+id/newStudy_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8.5dp"
+                android:layout_marginTop="8.8dp"
+                android:textSize="11sp"
+                android:textColor="#222222"
+                android:letterSpacing="-0.03"
+                android:lineSpacingExtra="5.5sp"
+                android:text="방금"
+                android:layout_toRightOf="@+id/newStudy_title"
+                />
+
+            <TextView
+                android:id="@+id/newStudy_go"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="21.5dp"
+                android:layout_marginTop="6.8dp"
+                android:textSize="10.5sp"
+                android:textColor="#b9b9b9"
+                android:letterSpacing="-0.03"
+                android:lineSpacingExtra="5sp"
+                android:text="자세히 보기"
+                />
+
+            <TextView
+                android:id="@+id/newStudy_region"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/newStudy_title"
+                android:layout_marginTop="1.5dp"
+                android:layout_marginLeft="10.5dp"
+                android:textSize="11sp"
+                android:textColor="#b9b9b9"
+                android:letterSpacing="-0.03"
+                android:lineSpacingExtra="5.5sp"
+                android:text="수원시 영통동"
+                />
+        </RelativeLayout>
+
+    </android.support.v7.widget.CardView>
+</RelativeLayout>

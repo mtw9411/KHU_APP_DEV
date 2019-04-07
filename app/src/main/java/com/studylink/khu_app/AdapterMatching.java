@@ -36,7 +36,7 @@ public class AdapterMatching extends RecyclerView.Adapter<AdapterMatching.MyView
 
     // 아이템 뷰에서 아이디 찾기
     public static class MyViewHolder extends RecyclerView.ViewHolder {
-        public TextView matching_title,matching_member,matching_totalMember;
+        public TextView matching_title,matching_member,matching_totalMember,matching_region,matching_age,matching_gender;
         public ImageView imageView_matching;
         public LinearLayout btn_detail, btn_entrance;
         public View root;
@@ -46,6 +46,9 @@ public class AdapterMatching extends RecyclerView.Adapter<AdapterMatching.MyView
             matching_title = v.findViewById(R.id.matching_title);
             matching_member = v.findViewById(R.id.matching_member);
             matching_totalMember = v.findViewById(R.id.matching_totalMember);
+            matching_region = v.findViewById(R.id.matching_region);
+            matching_age = v.findViewById(R.id.matching_age);
+            matching_gender = v.findViewById(R.id.matching_gender);
             imageView_matching = v.findViewById(R.id.imageView_matching);
             btn_detail = v.findViewById(R.id.btn_detail);
             btn_entrance = v.findViewById(R.id.btn_entrance);
@@ -90,6 +93,10 @@ public class AdapterMatching extends RecyclerView.Adapter<AdapterMatching.MyView
         // 인원 수 설정
         holder.matching_member.setText(String.valueOf(room.getMember()));
         holder.matching_totalMember.setText("/" + room.getTotal_member().toString());
+        // 지역, 나이, 성별 설정
+        holder.matching_region.setText(room.getRegion());
+        holder.matching_age.setText(room.getAge());
+        holder.matching_gender.setText(room.getGender());
 
         // 태그 설정
         holder.btn_detail.setTag(position);
