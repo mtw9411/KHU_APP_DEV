@@ -2,11 +2,15 @@ package com.studylink.khu_app;
 
 import android.content.Intent;
 import android.support.annotation.NonNull;
+import android.support.design.internal.BottomNavigationItemView;
+import android.support.design.internal.BottomNavigationMenu;
+import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -38,6 +42,7 @@ public class MainActivity extends AppCompatActivity {
     private AdapterMatching matching_Adapter;
     private List<String> roomList = new ArrayList<>();
     private AccountDTO currentUser;
+    private MenuItem prevBottomNavigation;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -222,10 +227,10 @@ public class MainActivity extends AppCompatActivity {
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                     RoomDTO roomDTO = snapshot.getValue(RoomDTO.class);
                     // 참여한 방이 있으면
-                    if(currentUser.getRoomId() != null){
+                    if (currentUser.getRoomId() != null) {
                         // room의 id가 유저가 참여한 방과 같으면
-                        for(int i=0; i<currentUser.getRoomId().size(); i++){
-                            if(roomDTO.getId().equals(currentUser.getRoomId().get(i))){
+                        for (int i = 0; i < currentUser.getRoomId().size(); i++) {
+                            if (roomDTO.getId().equals(currentUser.getRoomId().get(i))) {
                                 myStudy_Adapter.addRoom(roomDTO);
                                 break;
                             }
@@ -235,12 +240,47 @@ public class MainActivity extends AppCompatActivity {
                 }
                 myStudyNum.setText("+" + myStudy_Adapter.getItemCount());
             }
+
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
             }
         });
 
-    }
+        BottomNavigationView bottomNavigationview = (BottomNavigationView) findViewById(R.id.bottomnavigationview_main);
+        bottomNavigationview.setOnNavigationItemSelectedListener(
+                new BottomNavigationView.OnNavigationItemSelectedListener() {
+                    @Override
+                    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
 
+
+                        // 어떤 메뉴 아이템이 터치되었는지 확인합니다.
+                        switch (item.getItemId()) {
+
+                            case R.id.menuitem_bottombar_home:
+
+                                return true;
+
+                            case R.id.menuitem_bottombar_session:
+                                Intent intent1 = new Intent(MainActivity.this, TimelineActivity.class);
+                                startActivity(intent1);
+
+                                return true;
+
+                            case R.id.menuitem_bottombar_alarm:
+                                Intent intent2 = new Intent(MainActivity.this, AlarmActivity.class);
+                                startActivity(intent2);
+
+                                return true;
+
+                            case R.id.menuitem_bottombar_mys:
+                                Intent intent3 = new Intent(MainActivity.this, Mypage_main.class);
+                                startActivity(intent3);
+
+                                return true;
+                        }
+                        return false;
+                    }
+                });
+    }
 }
 

@@ -152,14 +152,25 @@
             <FrameLayout
                 android:id="@+id/main_frame"
                 android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:layout_marginTop="250dp"
-                app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_height="351dp"
+                android:layout_marginTop="270dp"
+                android:layout_marginBottom="8dp"
+                app:layout_constraintBottom_toTopOf="@+id/bottomNavigationView"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
 
             </FrameLayout>
+
+            <android.support.design.widget.BottomNavigationView
+                android:id="@+id/bottomNavigationView_mys"
+                android:layout_width="0dp"
+                android:layout_height="70dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:menu="@menu/bottombar_menu"
+                />
         </android.support.constraint.ConstraintLayout>
 
     <TextView

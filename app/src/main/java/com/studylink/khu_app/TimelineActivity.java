@@ -5,12 +5,14 @@ import android.content.Intent;
 import android.graphics.drawable.GradientDrawable;
 import android.media.Image;
 import android.support.annotation.NonNull;
+import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -72,31 +74,63 @@ public class TimelineActivity extends AppCompatActivity {
         RecyclerView.LayoutManager horizontalLayoutManager = new LinearLayoutManager(this);
         ((LinearLayoutManager)horizontalLayoutManager).setOrientation(LinearLayoutManager.HORIZONTAL);
         recycler_studyname.setLayoutManager(horizontalLayoutManager);
+        StudynameAdapter = new StudynameRecyclerViewAdapter(nameofroom);
+        recycler_studyname.setAdapter(StudynameAdapter);
 
-        setNamerecycler();
+        setData();
+
+        StudynameAdapter.notifyDataSetChanged();
 
 //        recycler_timelineBoard = (RecyclerView) findViewById(R.id.recycler_timelineBoard);
 //        recycler_timelineBoard.setLayoutManager(new LinearLayoutManager(this));
 //        TimelineBoardViewAdapter = new TimelineBoardViewAdapter();
 //        recycler_timelineBoard.setAdapter(TimelineBoardViewAdapter);
+
+        BottomNavigationView bottomNavigationview = (BottomNavigationView) findViewById(R.id.bottomnavigationview_timeline);
+        bottomNavigationview.setOnNavigationItemSelectedListener(
+                new BottomNavigationView.OnNavigationItemSelectedListener() {
+                    @Override
+                    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+
+
+                        // 어떤 메뉴 아이템이 터치되었는지 확인합니다.
+                        switch (item.getItemId()) {
+
+                            case R.id.menuitem_bottombar_home:
+                                Intent intent1 = new Intent(TimelineActivity.this, MainActivity.class);
+                                startActivity(intent1);
+                                return true;
+
+                            case R.id.menuitem_bottombar_session:
+
+                                return true;
+
+                            case R.id.menuitem_bottombar_alarm:
+                                Intent intent2 = new Intent(TimelineActivity.this, AlarmActivity.class);
+                                startActivity(intent2);
+
+                                return true;
+
+                            case R.id.menuitem_bottombar_mys:
+                                Intent intent3 = new Intent(TimelineActivity.this, Mypage_main.class);
+                                startActivity(intent3);
+
+                                return true;
+                        }
+                        return false;
+                    }
+                });
     }
 
-    private void setNamerecycler(){
-        setData();
-
-        StudynameAdapter = new StudynameRecyclerViewAdapter(nameofroom);
-        recycler_studyname.setAdapter(StudynameAdapter);
-
-    }
 
     private void setData(){
         String a = mauth.getCurrentUser().getUid();
         mdatabase.getReference().child("users").child(a).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                    AccountDTO acc = dataSnapshot.getValue(AccountDTO.class);
-                    for(int i = 0; i < acc.getRoomId().size(); i++) {
-                        getroomname.add(acc.getRoomId().get(i));
+                AccountDTO acc = dataSnapshot.getValue(AccountDTO.class);
+                for(int i = 0; i < acc.getRoomId().size(); i++) {
+                    getroomname.add(acc.getRoomId().get(i));
                 }
             }
             @Override
@@ -108,20 +142,20 @@ public class TimelineActivity extends AppCompatActivity {
     }
 
     private void setData1(){
-        for(int i = 0; i < getroomname.size(); i++){
-            mdatabase.getReference().child("room").child(getroomname.get(i)).addListenerForSingleValueEvent(new ValueEventListener() {
+        for(int i = 0; i < getroomname.size(); i++) {
+            mdatabase.getReference().child("room").child(getroomname.get(i)).addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                     RoomDTO roomm = dataSnapshot.getValue(RoomDTO.class);
                     nameofroom.add(roomm);
                 }
+
                 @Override
                 public void onCancelled(@NonNull DatabaseError databaseError) {
 
                 }
             });
         }
-        StudynameAdapter.notifyDataSetChanged();
     }
 
     class StudynameRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {      //어느 스터디인지를 선택하는 부분의 recycler

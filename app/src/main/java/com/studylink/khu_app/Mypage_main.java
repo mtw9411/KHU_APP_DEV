@@ -3,6 +3,7 @@ package com.studylink.khu_app;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.media.Image;
+import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -10,6 +11,7 @@ import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -122,6 +124,42 @@ public class Mypage_main extends AppCompatActivity{
             }
         });
         onFragmentChanged(0);
+
+        final BottomNavigationView bottomNavigationview = (BottomNavigationView) findViewById(R.id.bottomNavigationView_mys);
+        bottomNavigationview.setOnNavigationItemSelectedListener(
+                new BottomNavigationView.OnNavigationItemSelectedListener() {
+                    @Override
+                    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+
+
+                        // 어떤 메뉴 아이템이 터치되었는지 확인합니다.
+                        switch (item.getItemId()) {
+
+                            case R.id.menuitem_bottombar_home:
+                                Intent intent1 = new Intent(Mypage_main.this, MainActivity.class);
+                                startActivity(intent1);
+
+                                return true;
+
+                            case R.id.menuitem_bottombar_session:
+                                Intent intent2 = new Intent(Mypage_main.this, TimelineActivity.class);
+                                startActivity(intent2);
+
+                                return true;
+
+                            case R.id.menuitem_bottombar_alarm:
+                                Intent intent3 = new Intent(Mypage_main.this, AlarmActivity.class);
+                                startActivity(intent3);
+
+                                return true;
+
+                            case R.id.menuitem_bottombar_mys:
+
+                                return true;
+                        }
+                        return false;
+                    }
+                });
     }
 
     public void onFragmentChanged(int index){
