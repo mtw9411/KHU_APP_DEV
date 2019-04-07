@@ -69,13 +69,9 @@ public class MakeStudyActivity extends AppCompatActivity {
                     adspin2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                     s2.setAdapter(adspin2);
                     s2.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-
                         @Override
                         public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                             choice_se = adspin2.getItem(i).toString();
-
-
-
                         }
 
                         @Override
@@ -89,11 +85,9 @@ public class MakeStudyActivity extends AppCompatActivity {
                     adspin2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                     s2.setAdapter(adspin2);
                     s2.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-
                         @Override
                         public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                             choice_se = adspin2.getItem(i).toString();
-
                         }
 
                         @Override
@@ -101,53 +95,42 @@ public class MakeStudyActivity extends AppCompatActivity {
                         }
                     });
                 }
-
                 else if (adspin1.getItem(i).equals("공무원")) {
                     choice_do = "공무원";
                     adspin2 = ArrayAdapter.createFromResource(MakeStudyActivity.this, R.array.classification2_official, android.R.layout.simple_spinner_dropdown_item);
                     adspin2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                     s2.setAdapter(adspin2);
                     s2.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-
                         @Override
                         public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                             choice_se = adspin2.getItem(i).toString();
-
                         }
-
                         @Override
                         public void onNothingSelected(AdapterView<?> adapterView) {
                         }
                     });
                 }
-
                 else if (adspin1.getItem(i).equals("기타")) {
                     choice_do = "기타";
                     adspin2 = ArrayAdapter.createFromResource(MakeStudyActivity.this, R.array.classification2_etc, android.R.layout.simple_spinner_dropdown_item);
                     adspin2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                     s2.setAdapter(adspin2);
                     s2.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-
                         @Override
                         public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                             choice_se = adspin2.getItem(i).toString();
-
                         }
-
                         @Override
                         public void onNothingSelected(AdapterView<?> adapterView) {
                         }
                     });
                 }
             }
-
-
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
 
             }
         });
-
 
         databaseRoom= FirebaseDatabase.getInstance().getReference("room");
         dispoRoom.add("a");

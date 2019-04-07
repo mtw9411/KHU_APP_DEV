@@ -54,6 +54,7 @@ public class MainActivity extends AppCompatActivity {
         recyclerView_myStudy = findViewById(R.id.recyclerView_myStudy);
         recyclerView_matching = findViewById(R.id.recyclerView_matching);
 
+
         toMypage.setClickable(true);
         toMypage.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -99,7 +100,7 @@ public class MainActivity extends AppCompatActivity {
                 if (obj != null) {
                     int position = (int) obj;
                     Intent intent = new Intent(MainActivity.this, TimelineActivity.class);
-                    intent.putExtra("Timeline", myStudy_Adapter.getRoom(position));
+                    intent.putExtra("Timeline", myStudy_Adapter.getRoom(position));         //누른 스터디방의 이름
                     startActivity(intent);
                 }
             }
@@ -151,41 +152,52 @@ public class MainActivity extends AppCompatActivity {
                     final RoomDTO selectRoom = matching_Adapter.getRoom(position);
 
                     // 현재 유저에 클릭한 방 아이디 저장
-                    // 참여한 스터디가 1개라도 있으면
-                    if(currentUser.getRoomId() != null){
-                        boolean check = true;
-                        // 같은 스터디인지 확인
-                        for(int i = 0; i<currentUser.getRoomId().size(); i++){
-                            // 중복된 스터디이면
-                            if (currentUser.getRoomId().get(i).equals(selectRoom.getId())){
-                                check = false;
-                                break;
+                    dr.addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                            AccountDTO currentUser = dataSnapshot.getValue(AccountDTO.class);
+                            // 참여한 스터디가 1개라도 있으면
+                            if (currentUser.getRoomId() != null) {
+                                boolean check = true;
+                                // 같은 스터디인지 확인
+                                for (int i = 0; i < currentUser.getRoomId().size(); i++) {
+                                    // 중복된 스터디이면
+                                    if (currentUser.getRoomId().get(i).equals(selectRoom.getId())) {
+                                        check = false;
+                                        break;
+                                    }
+                                }
+                                // 중복된 스터디가 없으면
+                                if (check) {
+                                    currentUser.getRoomId().add(selectRoom.getId());
+                                    dr.setValue(currentUser);
+
+                                    Intent intent = new Intent(MainActivity.this, TimelineActivity.class);
+                                    intent.putExtra("Timeline", selectRoom);                //roomDTO 넘어옴
+                                    startActivity(intent);
+                                }
+                                // 중복된 스터디가 있으면
+                                else {
+                                    Toast.makeText(MainActivity.this, "이미 참여한 스터디입니다.", Toast.LENGTH_SHORT).show();
+                                }
+                            }
+                            // 참여한 스터디가 없으면
+                            else {
+                                roomList.add(selectRoom.getId());
+                                currentUser.setRoomId(roomList);
+                                dr.setValue(currentUser);
+
+                                Intent intent = new Intent(MainActivity.this, TimelineActivity.class);
+                                intent.putExtra("Timeline", selectRoom);
+                                startActivity(intent);
                             }
                         }
-                        // 중복된 스터디가 없으면
-                        if(check){
-                            currentUser.getRoomId().add(selectRoom.getId());
-                            dr.setValue(currentUser);
 
-                            Intent intent = new Intent(MainActivity.this, TimelineActivity.class);
-                            intent.putExtra("Timeline", selectRoom);
-                            startActivity(intent);
-                        }
-                        // 중복된 스터디가 있으면
-                        else{
-                            Toast.makeText(MainActivity.this, "이미 참여한 스터디입니다.", Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                    // 참여한 스터디가 없으면
-                    else{
-                        roomList.add(selectRoom.getId());
-                        currentUser.setRoomId(roomList);
-                        dr.setValue(currentUser);
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError databaseError) {
 
-                        Intent intent = new Intent(MainActivity.this, TimelineActivity.class);
-                        intent.putExtra("Timeline", selectRoom);
-                        startActivity(intent);
-                    }
+                        }
+                    });
                 }
             }
         });

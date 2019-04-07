@@ -9,7 +9,7 @@
     android:paddingBottom="39.3dp">
 
     <TextView
-        android:id="@+id/textView63"
+        android:id="@+id/writing_title"
         android:layout_width="0dp"
         android:layout_height="52dp"
         android:gravity="center"
@@ -27,7 +27,7 @@
         android:layout_height="wrap_content"
         android:background="#2f78db"
         android:orientation="vertical"
-        app:layout_constraintTop_toBottomOf="@+id/textView63">
+        app:layout_constraintTop_toBottomOf="@+id/writing_title">
 
         <TextView
             android:layout_width="wrap_content"

@@ -34,24 +34,24 @@
         app:srcCompat="@mipmap/icon_23" />
 
     <android.support.v7.widget.CardView
-        android:id="@+id/cardView5"
-        android:layout_width="0dp"
+        android:id="@+id/writing_cardview"
+        android:layout_width="375dp"
         android:layout_height="210dp"
         android:layout_marginStart="20dp"
         android:layout_marginLeft="20dp"
         android:layout_marginTop="60dp"
         android:layout_marginEnd="20dp"
         android:layout_marginRight="20dp"
-        android:layout_marginBottom="250dp"
+        android:layout_marginBottom="8dp"
         app:cardCornerRadius="8dp"
         app:cardElevation="4dp"
-        app:layout_constraintBottom_toTopOf="@+id/textView62"
+        app:layout_constraintBottom_toTopOf="@+id/recycler_picture"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView44">
 
         <EditText
-            android:id="@+id/textView63"
+            android:id="@+id/writing_title"
             android:layout_width="match_parent"
             android:layout_height="45dp"
             android:hint="제목"
@@ -60,7 +60,7 @@
             android:textSize="11sp" />
 
         <EditText
-            android:id="@+id/editText3"
+            android:id="@+id/writing_content"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="45dp"
@@ -73,16 +73,17 @@
             android:textSize="11sp" />
 
         <ImageView
-            android:id="@+id/imageView18"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_marginLeft="310dp"
-            android:layout_marginTop="175dp"
-            app:srcCompat="@mipmap/icon_11" />
+            android:id="@+id/writing_picture"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginLeft="320dp"
+            android:layout_marginTop="160dp"
+            app:srcCompat="@mipmap/icon_30" />
+
     </android.support.v7.widget.CardView>
 
     <TextView
-        android:id="@+id/textView61"
+        android:id="@+id/writing_complete"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:gravity="center"
@@ -100,6 +101,19 @@
         android:layout_height="7dp"
         android:layout_marginBottom="50dp"
         android:background="@drawable/shadow_bottom"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recycler_picture"
+        android:layout_width="0dp"
+        android:layout_height="100dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginBottom="210dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

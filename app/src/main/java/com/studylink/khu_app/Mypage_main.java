@@ -2,6 +2,10 @@ package com.studylink.khu_app;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.media.Image;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -20,11 +24,20 @@ import com.google.firebase.database.ValueEventListener;
 
 public class Mypage_main extends AppCompatActivity{
 
-    private ImageView mypage_schedule, mypage_store, mypage_editProfile;
+    private ImageView mypage_schedule;
+    private ImageView mypage_store;
+    private TextView mypage_Logout;
+    private FirebaseAuth auth;
+    private Mypage_schedule_fragment scheduleFragment;
+    private Mypage_store_fragment storeFragment;
+    private FragmentManager fm;
+    private FragmentTransaction ft;
+    private ImageView back_btn;
+
+    private ImageView mypage_editProfile;
     private ViewGroup mypage_schedulelayout;
     private ViewGroup mypage_storelayout;
-    private TextView mypage_Logout, mypage_myName;
-    private FirebaseAuth auth;
+    private TextView mypage_myName;
     private int layoutIndex = 0;
     private DatabaseReference dr;
 
@@ -33,6 +46,17 @@ public class Mypage_main extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mypage_main);
         auth = FirebaseAuth.getInstance();
+        fm = getSupportFragmentManager();
+        ft = fm.beginTransaction();
+
+
+        mypage_Logout = (TextView) findViewById(R.id.mypage_Logout);
+        mypage_schedule = (ImageView) findViewById(R.id.mypage_schedule);
+        mypage_store = (ImageView) findViewById(R.id.mypage_store);
+        back_btn = (ImageView) findViewById(R.id.back_btn);
+
+        scheduleFragment = new Mypage_schedule_fragment();
+        storeFragment = new Mypage_store_fragment();
         dr = FirebaseDatabase.getInstance().getReference().child("users").child(auth.getCurrentUser().getUid());
 
         mypage_Logout = findViewById(R.id.mypage_Logout);
@@ -69,7 +93,7 @@ public class Mypage_main extends AppCompatActivity{
         mypage_schedule.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                viewChange1();
+                onFragmentChanged(0);
             }
         });
 
@@ -77,7 +101,7 @@ public class Mypage_main extends AppCompatActivity{
         mypage_store.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                viewChange2();
+                onFragmentChanged(1);
             }
         });
 
@@ -88,24 +112,26 @@ public class Mypage_main extends AppCompatActivity{
                 showMessage();
             }
         });
+
+        back_btn.setClickable(true);
+        back_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Mypage_main.this, MainActivity.class);
+                startActivity(intent);
+            }
+        });
+        onFragmentChanged(0);
     }
 
-    private void viewChange1(){
-        if(layoutIndex == 1){
-            mypage_schedulelayout.setVisibility(View.VISIBLE);
-            mypage_storelayout.setVisibility(View.INVISIBLE);
-
-            layoutIndex = 0;
+    public void onFragmentChanged(int index){
+        if(index == 0){
+            getSupportFragmentManager().beginTransaction().replace(R.id.main_frame, scheduleFragment).commit();
+        } else if (index == 1){
+            getSupportFragmentManager().beginTransaction().replace(R.id.main_frame, storeFragment).commit();
         }
     }
-    private void viewChange2(){
-        if(layoutIndex == 0){
-            mypage_schedulelayout.setVisibility(View.INVISIBLE);
-            mypage_storelayout.setVisibility(View.VISIBLE);
 
-            layoutIndex = 1;
-        }
-    }
 
     private void showMessage(){
         AlertDialog.Builder builder = new AlertDialog.Builder(this);

@@ -6,7 +6,8 @@
     android:layout_height="match_parent"
     android:isScrollContainer="true"
     android:scrollbars="vertical"
-    tools:context=".Mypage_main">
+    tools:context=".Mypage_main"
+    android:id="@+id/container">
 
     <TextView
         android:id="@+id/textView22"
@@ -22,7 +23,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
-        android:id="@+id/imageView11"
+        android:id="@+id/back_btn"
         android:layout_width="31dp"
         android:layout_height="29dp"
         android:layout_marginLeft="10dp"
@@ -140,89 +141,7 @@
         app:layout_constraintStart_toStartOf="@+id/mypage_store"
         app:layout_constraintTop_toTopOf="@+id/mypage_store" />
 
-    <FrameLayout
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginTop="16dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/mypage_schedule">
-        <ScrollView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
 
-            <android.support.constraint.ConstraintLayout
-                android:id="@+id/mypage_schedulelayout"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical"
-                android:scrollbars="vertical"
-                android:verticalScrollbarPosition="defaultPosition">
-
-                <TextView
-                    android:id="@+id/textView84"
-                    android:layout_width="match_parent"
-                    android:layout_height="30dp"
-                    android:background="@drawable/timeline_gradient3"
-                    android:gravity="center"
-                    android:text="21일 (목) 공기업 스터디"
-                    android:textColor="#ffffff"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:id="@+id/textView85"
-                    android:layout_width="match_parent"
-                    android:layout_height="7dp"
-                    android:background="@drawable/timeline_gradient2"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.0"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/materialCalendarView"
-                    tools:layout_editor_absoluteY="354dp" />
-
-                <TextView
-                    android:id="@+id/textView86"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginTop="40dp"
-                    android:text="다음 스터디"
-                    android:textColor="#222222"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textView85" />
-
-                <android.support.v7.widget.RecyclerView
-                    android:layout_width="match_parent"
-                    android:layout_height="100dp"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginEnd="20dp"
-                    android:layout_marginRight="20dp"
-                    android:layout_marginBottom="80dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.0"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textView86"
-                    app:layout_constraintVertical_bias="1.0" />
-
-                <com.prolificinteractive.materialcalendarview.MaterialCalendarView
-                    android:id="@+id/materialCalendarView"
-                    android:layout_width="match_parent"
-                    android:layout_height="300dp"
-                    android:padding="0dp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.0"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textView84">
-
-                </com.prolificinteractive.materialcalendarview.MaterialCalendarView>
-
-            </android.support.constraint.ConstraintLayout>
-        </ScrollView>
 
         <android.support.constraint.ConstraintLayout
             android:id="@+id/mypage_storelayout"
@@ -230,29 +149,18 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/textView87"
-                android:layout_width="match_parent"
-                android:layout_height="30dp"
-                android:background="@drawable/timeline_gradient3"
-                android:gravity="center"
-                android:text="내가 저장한 게시물"
-                android:textColor="#ffffff"
-                android:textStyle="bold" />
-
-            <android.support.v7.widget.RecyclerView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginTop="40dp"
+            <FrameLayout
+                android:id="@+id/main_frame"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginTop="250dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView87">
+                app:layout_constraintTop_toTopOf="parent">
 
-            </android.support.v7.widget.RecyclerView>
-
+            </FrameLayout>
         </android.support.constraint.ConstraintLayout>
-    </FrameLayout>
 
     <TextView
         android:id="@+id/mypage_Logout"

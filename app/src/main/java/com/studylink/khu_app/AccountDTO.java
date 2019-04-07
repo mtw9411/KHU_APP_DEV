@@ -50,6 +50,14 @@ public class AccountDTO implements Serializable {
         this.disposition = disposition;
     }
 
+    public List<String> getMystudyRoom() {
+        return  mystudyRoom;
+    }
+
+    public void setMystudyRoom(List<String> mystudyRoom) {
+        this.mystudyRoom = mystudyRoom;
+    }
+
     public List<String> getRoomId() {
         return roomId;
     }
