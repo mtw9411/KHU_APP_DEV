@@ -141,38 +141,17 @@
         app:layout_constraintStart_toStartOf="@+id/mypage_store"
         app:layout_constraintTop_toTopOf="@+id/mypage_store" />
 
+    <FrameLayout
+        android:id="@+id/main_frame"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView79">
 
-
-        <android.support.constraint.ConstraintLayout
-            android:id="@+id/mypage_storelayout"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
-
-            <FrameLayout
-                android:id="@+id/main_frame"
-                android:layout_width="0dp"
-                android:layout_height="351dp"
-                android:layout_marginTop="270dp"
-                android:layout_marginBottom="8dp"
-                app:layout_constraintBottom_toTopOf="@+id/bottomNavigationView"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
-
-            </FrameLayout>
-
-            <android.support.design.widget.BottomNavigationView
-                android:id="@+id/bottomNavigationView_mys"
-                android:layout_width="0dp"
-                android:layout_height="70dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:menu="@menu/bottombar_menu"
-                />
-        </android.support.constraint.ConstraintLayout>
-
+    </FrameLayout>
     <TextView
         android:id="@+id/mypage_Logout"
         android:layout_width="wrap_content"

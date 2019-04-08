@@ -2,16 +2,20 @@ package com.studylink.khu_app;
 
 import android.content.Intent;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.design.internal.BottomNavigationItemView;
 import android.support.design.internal.BottomNavigationMenu;
 import android.support.design.widget.BottomNavigationView;
+import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -29,7 +33,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends Fragment {
     private FirebaseAuth auth;                                                                      //아이디, 비번 받아올 것
 
     private ImageView toMypage;
@@ -42,29 +46,31 @@ public class MainActivity extends AppCompatActivity {
     private AdapterMatching matching_Adapter;
     private List<String> roomList = new ArrayList<>();
     private AccountDTO currentUser;
-    private MenuItem prevBottomNavigation;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        Intent intent = new Intent(this, LoadingActivity.class);
-        startActivity(intent);
+    }
+
+    @Nullable
+    @Override
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        ViewGroup view = (ViewGroup) inflater.inflate(R.layout.activity_main, container, false);
 
         auth = FirebaseAuth.getInstance();
-        toMypage = findViewById(R.id.toMypage);
-        makeStudy = findViewById(R.id.makeStudy);
-        myStudyNum = findViewById(R.id.myStudyNum);
-        addStudy = findViewById(R.id.addStudy);
-        recyclerView_myStudy = findViewById(R.id.recyclerView_myStudy);
-        recyclerView_matching = findViewById(R.id.recyclerView_matching);
+        toMypage = view.findViewById(R.id.toMypage);
+        makeStudy = view.findViewById(R.id.makeStudy);
+        myStudyNum = view.findViewById(R.id.myStudyNum);
+        addStudy = view.findViewById(R.id.addStudy);
+        recyclerView_myStudy = view.findViewById(R.id.recyclerView_myStudy);
+        recyclerView_matching = view.findViewById(R.id.recyclerView_matching);
 
 
         toMypage.setClickable(true);
         toMypage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, Mypage_main.class);
+                Intent intent = new Intent(getActivity(), Mypage_main.class);
                 startActivity(intent);
             }
         });
@@ -74,7 +80,7 @@ public class MainActivity extends AppCompatActivity {
         makeStudy.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, MakeStudyActivity.class);
+                Intent intent = new Intent(getActivity(), MakeStudyActivity.class);
                 startActivity(intent);
             }
         });
@@ -84,7 +90,7 @@ public class MainActivity extends AppCompatActivity {
         addStudy.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, StudySearchActivity.class);
+                Intent intent = new Intent(getActivity(), StudySearchActivity.class);
                 startActivity(intent);
             }
         });
@@ -92,7 +98,7 @@ public class MainActivity extends AppCompatActivity {
 
 // "내가 참여중인 방" RecyclerView 구현
         // 레이아웃 종류 정의
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
         ((LinearLayoutManager) layoutManager).setOrientation(LinearLayoutManager.HORIZONTAL);
         recyclerView_myStudy.setLayoutManager(layoutManager);
 
@@ -104,7 +110,7 @@ public class MainActivity extends AppCompatActivity {
                 Object obj = v.getTag();
                 if (obj != null) {
                     int position = (int) obj;
-                    Intent intent = new Intent(MainActivity.this, TimelineActivity.class);
+                    Intent intent = new Intent(getActivity(), TimelineActivity.class);
                     intent.putExtra("Timeline", myStudy_Adapter.getRoom(position));         //누른 스터디방의 이름
                     startActivity(intent);
                 }
@@ -114,7 +120,7 @@ public class MainActivity extends AppCompatActivity {
 
 // "스터디 매칭" RecyclerView 구현
         // 레이아웃 종류 정의
-        RecyclerView.LayoutManager layoutManager2 = new LinearLayoutManager(this);
+        RecyclerView.LayoutManager layoutManager2 = new LinearLayoutManager(getContext());
         ((LinearLayoutManager) layoutManager2).setOrientation(LinearLayoutManager.HORIZONTAL);
         recyclerView_matching.setLayoutManager(layoutManager2);
 
@@ -142,7 +148,7 @@ public class MainActivity extends AppCompatActivity {
                 Object obj = v.getTag();
                 if (obj != null) {
                     int position = (int) obj;
-                    Intent intent = new Intent(MainActivity.this, MainDetailActivity.class);
+                    Intent intent = new Intent(getActivity(), MainDetailActivity.class);
                     intent.putExtra("roomDetail", matching_Adapter.getRoom(position));
                     startActivity(intent);
                 }
@@ -177,13 +183,13 @@ public class MainActivity extends AppCompatActivity {
                                     currentUser.getRoomId().add(selectRoom.getId());
                                     dr.setValue(currentUser);
 
-                                    Intent intent = new Intent(MainActivity.this, TimelineActivity.class);
+                                    Intent intent = new Intent(getActivity(), TimelineActivity.class);
                                     intent.putExtra("Timeline", selectRoom);                //roomDTO 넘어옴
                                     startActivity(intent);
                                 }
                                 // 중복된 스터디가 있으면
                                 else {
-                                    Toast.makeText(MainActivity.this, "이미 참여한 스터디입니다.", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(getActivity(), "이미 참여한 스터디입니다.", Toast.LENGTH_SHORT).show();
                                 }
                             }
                             // 참여한 스터디가 없으면
@@ -192,7 +198,7 @@ public class MainActivity extends AppCompatActivity {
                                 currentUser.setRoomId(roomList);
                                 dr.setValue(currentUser);
 
-                                Intent intent = new Intent(MainActivity.this, TimelineActivity.class);
+                                Intent intent = new Intent(getActivity(), TimelineActivity.class);
                                 intent.putExtra("Timeline", selectRoom);
                                 startActivity(intent);
                             }
@@ -237,42 +243,7 @@ public class MainActivity extends AppCompatActivity {
             public void onCancelled(@NonNull DatabaseError databaseError) {
             }
         });
-
-        BottomNavigationView bottomNavigationview = (BottomNavigationView) findViewById(R.id.bottomnavigationview_main);
-        bottomNavigationview.setOnNavigationItemSelectedListener(
-                new BottomNavigationView.OnNavigationItemSelectedListener() {
-                    @Override
-                    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-
-
-                        // 어떤 메뉴 아이템이 터치되었는지 확인합니다.
-                        switch (item.getItemId()) {
-
-                            case R.id.menuitem_bottombar_home:
-
-                                return true;
-
-                            case R.id.menuitem_bottombar_session:
-                                Intent intent1 = new Intent(MainActivity.this, TimelineActivity.class);
-                                startActivity(intent1);
-
-                                return true;
-
-                            case R.id.menuitem_bottombar_alarm:
-                                Intent intent2 = new Intent(MainActivity.this, AlarmActivity.class);
-                                startActivity(intent2);
-
-                                return true;
-
-                            case R.id.menuitem_bottombar_mys:
-                                Intent intent3 = new Intent(MainActivity.this, Mypage_main.class);
-                                startActivity(intent3);
-
-                                return true;
-                        }
-                        return false;
-                    }
-                });
+        return view;
     }
 }
 
