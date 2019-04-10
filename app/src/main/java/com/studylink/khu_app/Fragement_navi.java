@@ -17,12 +17,11 @@ public class Fragement_navi extends AppCompatActivity {
 
     private FragmentManager fragmentManager;
     private FragmentTransaction fragmentTransaction;
-    private MainActivity main_fragment;
-    private TimelineActivity timeline_fragment;
-    private AlarmActivity alarm_fragment;
-    private Mypage_main mypage_fragment;
+    private MainActivity main_fragment = new MainActivity();
+    private TimelineActivity timeline_fragment = new TimelineActivity();
+    private AlarmActivity alarm_fragment = new AlarmActivity();
+    private Mypage_main mypage_fragment = new Mypage_main();
     private  BottomNavigationView bottomNavigationview;
-    private int i;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,10 +33,10 @@ public class Fragement_navi extends AppCompatActivity {
         fragmentManager = getSupportFragmentManager();
         fragmentTransaction = fragmentManager.beginTransaction();
 
-        main_fragment = new MainActivity();
-        timeline_fragment = new TimelineActivity();
-        alarm_fragment = new AlarmActivity();
-        mypage_fragment = new Mypage_main();
+//        main_fragment = new MainActivity();
+//        timeline_fragment = new TimelineActivity();
+//        alarm_fragment = new AlarmActivity();
+//        mypage_fragment = new Mypage_main();
 
         bottomNavigationview = (BottomNavigationView) findViewById(R.id.bottomNavigationView_navi);
         bottomNavigationview.setOnNavigationItemSelectedListener(
@@ -71,7 +70,7 @@ public class Fragement_navi extends AppCompatActivity {
                     }
                 });
         setFrag(0);
-        itemCheck();
+   //     itemCheck();
     }
 
     public void setFrag(int n){    //프래그먼트를 교체하는 작업을 하는 메소드를 만들었습니다
@@ -80,44 +79,47 @@ public class Fragement_navi extends AppCompatActivity {
         switch (n){
             case 0:
                 fragmentTransaction.setCustomAnimations(R.animator.fade_in, R.animator.fade_out, R.animator.fade_in, R.animator.fade_out)
-                        .replace(R.id.Frame_navi, main_fragment);  //replace의 매개변수는 (프래그먼트를 담을 영역 id, 프래그먼트 객체) 입니다.
-                fragmentTransaction.commit();
+                        .replace(R.id.Frame_navi, main_fragment).commit();  //replace의 매개변수는 (프래그먼트를 담을 영역 id, 프래그먼트 객체) 입니다.
+
                 break;
             case 1:
                 fragmentTransaction.setCustomAnimations(R.animator.fade_in, R.animator.fade_out, R.animator.fade_in, R.animator.fade_out)
                         .replace(R.id.Frame_navi, timeline_fragment);  //replace의 매개변수는 (프래그먼트를 담을 영역 id, 프래그먼트 객체) 입니다.
                 fragmentTransaction.commit();
+                fragmentTransaction.addToBackStack(null);
                 break;
             case 2:
                 fragmentTransaction.setCustomAnimations(R.animator.fade_in, R.animator.fade_out, R.animator.fade_in, R.animator.fade_out)
                         .replace(R.id.Frame_navi, alarm_fragment);  //replace의 매개변수는 (프래그먼트를 담을 영역 id, 프래그먼트 객체) 입니다.
                 fragmentTransaction.commit();
+                fragmentTransaction.addToBackStack(null);
                 break;
             case 3:
                 fragmentTransaction.setCustomAnimations(R.animator.fade_in, R.animator.fade_out, R.animator.fade_in, R.animator.fade_out)
                         .replace(R.id.Frame_navi,mypage_fragment);
                 fragmentTransaction.commit();
+                fragmentTransaction.addToBackStack(null);
                 break;
         }
     }
 
-    public void itemCheck(){
-//        Fragment fragment = fragmentManager.findFragmentById(R.id.Frame_navi);
-        BottomNavigationView bottomNaviview = (BottomNavigationView) findViewById(R.id.bottomNavigationView_navi);
-
-        for (Fragment currentFragment: getSupportFragmentManager().getFragments()) {
-            if (currentFragment.isVisible()) {
-                //할일
-                if(currentFragment == main_fragment){
-                    bottomNaviview.getMenu().getItem(0).setChecked(true);
-                } else if (currentFragment == timeline_fragment){
-                    bottomNaviview.getMenu().getItem(1).setChecked(true);
-                } else if (currentFragment == alarm_fragment){
-                    bottomNaviview.getMenu().getItem(2).setChecked(true);
-                } else if (currentFragment == mypage_fragment){
-                    bottomNaviview.getMenu().getItem(3).setChecked(true);
-                }
-            }
-        }
-    }
+//    public void itemCheck(){
+////        Fragment fragment = fragmentManager.findFragmentById(R.id.Frame_navi);
+//        BottomNavigationView bottomNaviview = (BottomNavigationView) findViewById(R.id.bottomNavigationView_navi);
+//
+//        for (Fragment currentFragment: getSupportFragmentManager().getFragments()) {
+//            if (currentFragment.isVisible()) {
+//                //할일
+//                if(currentFragment == main_fragment){
+//                    bottomNaviview.getMenu().getItem(0).setChecked(true);
+//                } else if (currentFragment == timeline_fragment){
+//                    bottomNaviview.getMenu().getItem(1).setChecked(true);
+//                } else if (currentFragment == alarm_fragment){
+//                    bottomNaviview.getMenu().getItem(2).setChecked(true);
+//                } else if (currentFragment == mypage_fragment){
+//                    bottomNaviview.getMenu().getItem(3).setChecked(true);
+//                }
+//            }
+//        }
+//    }
 }

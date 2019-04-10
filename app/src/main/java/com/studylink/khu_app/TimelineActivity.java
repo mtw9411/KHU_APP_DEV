@@ -1,6 +1,7 @@
 package com.studylink.khu_app;
 
 import android.accounts.Account;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.drawable.GradientDrawable;
 import android.media.Image;
@@ -18,6 +19,7 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -36,6 +38,7 @@ import java.util.List;
 
 public class TimelineActivity extends Fragment {
 
+    private TextView write_content;
     private ImageView toMypage;
     private ImageView toMainpage;
     private RecyclerView recycler_studyname;
@@ -46,15 +49,18 @@ public class TimelineActivity extends Fragment {
 //    private TimelineBoardViewAdapter TimelineBoardViewAdapter;
     private FirebaseDatabase mdatabase;
     private FirebaseAuth mauth;
+    private int i = 0;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+
     }
 
     @Nullable
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @android.support.annotation.Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
         ViewGroup view = (ViewGroup) inflater.inflate(R.layout.timeline_main, container, false);
         mdatabase = FirebaseDatabase.getInstance();
@@ -62,6 +68,14 @@ public class TimelineActivity extends Fragment {
 
         toMypage = (ImageView) view.findViewById(R.id.toMypage);
         toMainpage = (ImageView) view.findViewById(R.id.toMainpage);
+        write_content = (TextView) view.findViewById(R.id.write_content);
+        write_content.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), Timeline_writing.class);
+                startActivity(intent);
+            }
+        });
 
         toMypage.setClickable(true);
         toMainpage.setClickable(true);
@@ -101,25 +115,28 @@ public class TimelineActivity extends Fragment {
 
 
     private void setData(){
-        String a = mauth.getCurrentUser().getUid();
-        mdatabase.getReference().child("users").child(a).addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                AccountDTO acc = dataSnapshot.getValue(AccountDTO.class);
-                for(int i = 0; i < acc.getRoomId().size(); i++) {
-                    getroomname.add(acc.getRoomId().get(i));
+        if(i == 0){
+            String a = mauth.getCurrentUser().getUid();
+            mdatabase.getReference().child("users").child(a).addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    AccountDTO acc = dataSnapshot.getValue(AccountDTO.class);
+                    for(int i = 0; i < acc.getRoomId().size(); i++) {
+                        getroomname.add(acc.getRoomId().get(i));
+                    }
                 }
-            }
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
 
-            }
-        });
-        setData1();
+                }
+            });
+            setData1();
+            i++;
+        }
     }
 
     private void setData1(){
-            mdatabase.getReference().child("room").addValueEventListener(new ValueEventListener() {
+            mdatabase.getReference().child("room").addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                     int j = 0;
