@@ -5,13 +5,29 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
+    <TextView
+        android:id="@+id/textView84"
+        android:layout_width="0dp"
+        android:layout_height="30dp"
+        android:background="@drawable/timeline_gradient3"
+        android:gravity="center"
+        android:text="21일 (목) 공기업 스터디"
+        android:textColor="#ffffff"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="MissingConstraints" />
+
     <ScrollView
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toBottomOf="@+id/textView84"
+        app:layout_constraintVertical_bias="0.806">
 
         <android.support.constraint.ConstraintLayout
             android:id="@+id/mypage_schedulelayout"
@@ -20,17 +36,6 @@
             android:orientation="vertical"
             android:scrollbars="vertical"
             android:verticalScrollbarPosition="defaultPosition">
-
-            <TextView
-                android:id="@+id/textView84"
-                android:layout_width="match_parent"
-                android:layout_height="30dp"
-                android:background="@drawable/timeline_gradient3"
-                android:gravity="center"
-                android:text="21일 (목) 공기업 스터디"
-                android:textColor="#ffffff"
-                android:textStyle="bold"
-                tools:ignore="MissingConstraints" />
 
             <TextView
                 android:id="@+id/textView85"
@@ -69,10 +74,9 @@
                 android:id="@+id/materialCalendarView"
                 android:layout_width="match_parent"
                 android:layout_height="347dp"
-                android:layout_marginTop="8dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView84">
+                app:layout_constraintTop_toTopOf="parent">
 
             </com.prolificinteractive.materialcalendarview.MaterialCalendarView>
         </android.support.constraint.ConstraintLayout>

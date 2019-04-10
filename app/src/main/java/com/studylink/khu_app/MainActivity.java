@@ -2,12 +2,22 @@ package com.studylink.khu_app;
 
 import android.content.Intent;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+import android.support.design.internal.BottomNavigationItemView;
+import android.support.design.internal.BottomNavigationMenu;
+import android.support.design.widget.BottomNavigationView;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -25,7 +35,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends Fragment {
     private FirebaseAuth auth;                                                                      //아이디, 비번 받아올 것
 
     private ImageView toMypage;
@@ -45,24 +55,23 @@ public class MainActivity extends AppCompatActivity {
     private List<String> roomList = new ArrayList<>();
     private AccountDTO currentUser;
     private DatabaseReference database = FirebaseDatabase.getInstance().getReference();
+    private FragmentManager fm;
+    private FragmentTransaction ft;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        Intent intent = new Intent(this, LoadingActivity.class);
-        startActivity(intent);
+    }
+
+    @Nullable
+    @Override
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        ViewGroup view = (ViewGroup) inflater.inflate(R.layout.activity_main, container, false);
+
+        fm = getFragmentManager();
+        ft = fm.beginTransaction();
 
         auth = FirebaseAuth.getInstance();
-        toMypage = findViewById(R.id.toMypage);
-        makeStudy = findViewById(R.id.makeStudy);
-        myStudyNum = findViewById(R.id.myStudyNum);
-        addStudy = findViewById(R.id.addStudy);
-        recyclerView_myStudy = findViewById(R.id.recyclerView_myStudy);
-        recyclerView_matching = findViewById(R.id.recyclerView_matching);
-        recyclerView_myTown = findViewById(R.id.recyclerView_myTown);
-        recyclerView_deadline = findViewById(R.id.recyclerView_deadline);
-        recyclerView_newStudy = findViewById(R.id.recyclerView_newStudy);
 
         // 방 정보
         final DatabaseReference myRef = database.child("room");
@@ -82,13 +91,22 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        toMypage = view.findViewById(R.id.toMypage);
+        makeStudy = view.findViewById(R.id.makeStudy);
+        myStudyNum = view.findViewById(R.id.myStudyNum);
+        addStudy = view.findViewById(R.id.addStudy);
+        recyclerView_myStudy = view.findViewById(R.id.recyclerView_myStudy);
+        recyclerView_matching = view.findViewById(R.id.recyclerView_matching);
+        recyclerView_myTown = view.findViewById(R.id.recyclerView_myTown);
+        recyclerView_deadline = view.findViewById(R.id.recyclerView_deadline);
+        recyclerView_newStudy = view.findViewById(R.id.recyclerView_newStudy);
 
         toMypage.setClickable(true);
         toMypage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, Mypage_main.class);
-                startActivity(intent);
+                Fragment fragment = new Mypage_main();
+                ft.replace(R.id.Frame_navi, fragment).commit();
             }
         });
 
@@ -97,7 +115,7 @@ public class MainActivity extends AppCompatActivity {
         makeStudy.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, MakeStudyActivity.class);
+                Intent intent = new Intent(getActivity(), MakeStudyActivity.class);
                 startActivity(intent);
             }
         });
@@ -107,7 +125,7 @@ public class MainActivity extends AppCompatActivity {
         addStudy.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, StudySearchActivity.class);
+                Intent intent = new Intent(getActivity(), StudySearchActivity.class);
                 startActivity(intent);
             }
         });
@@ -115,7 +133,7 @@ public class MainActivity extends AppCompatActivity {
 
 // "내가 참여중인 방" RecyclerView 구현
         // 레이아웃 종류 정의
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
         ((LinearLayoutManager) layoutManager).setOrientation(LinearLayoutManager.HORIZONTAL);
         recyclerView_myStudy.setLayoutManager(layoutManager);
 
@@ -127,9 +145,12 @@ public class MainActivity extends AppCompatActivity {
                 Object obj = v.getTag();
                 if (obj != null) {
                     int position = (int) obj;
-                    Intent intent = new Intent(MainActivity.this, TimelineActivity.class);
-                    intent.putExtra("Timeline", myStudy_Adapter.getRoom(position));         //누른 스터디방의 이름
-                    startActivity(intent);
+                    Fragment fragment = new TimelineActivity();
+                    Bundle bundle = new Bundle();
+                    bundle.putSerializable("Timeline", myStudy_Adapter.getRoom(position));
+                    fragment.setArguments(bundle);
+
+                    ft.replace(R.id.Frame_navi, fragment).commit();
                 }
             }
         });
@@ -137,7 +158,7 @@ public class MainActivity extends AppCompatActivity {
 
 // "스터디 매칭" RecyclerView 구현
         // 레이아웃 종류 정의
-        RecyclerView.LayoutManager layoutManager2 = new LinearLayoutManager(this);
+        RecyclerView.LayoutManager layoutManager2 = new LinearLayoutManager(getContext());
         ((LinearLayoutManager) layoutManager2).setOrientation(LinearLayoutManager.HORIZONTAL);
         recyclerView_matching.setLayoutManager(layoutManager2);
 
@@ -149,7 +170,7 @@ public class MainActivity extends AppCompatActivity {
                 Object obj = v.getTag();
                 if (obj != null) {
                     int position = (int) obj;
-                    Intent intent = new Intent(MainActivity.this, MainDetailActivity.class);
+                    Intent intent = new Intent(getActivity(), MainDetailActivity.class);
                     intent.putExtra("roomDetail", matching_Adapter.getRoom(position));
                     startActivity(intent);
                 }
@@ -164,7 +185,7 @@ public class MainActivity extends AppCompatActivity {
                     RoomDTO selectRoom = matching_Adapter.getRoom(position);
                     // 가입한 스터디방이 3개이면
                     if (currentUser.getRoomId().size() == 3){
-                        Toast.makeText(MainActivity.this, "3개 이상의 스터디를 가입할 수 없습니다.", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getContext(), "3개 이상의 스터디를 가입할 수 없습니다.", Toast.LENGTH_SHORT).show();
                     }
                     else{
                         // 참여한 스터디가 1개라도 있으면
@@ -186,14 +207,19 @@ public class MainActivity extends AppCompatActivity {
                                 // 방의 멤버수 증가
                                 selectRoom.setMember(selectRoom.getMember() + 1);
                                 myRef.child(selectRoom.getId()).setValue(selectRoom);
+//                                Intent intent = new Intent(MainActivity.this, TimelineActivity.class);
+//                                intent.putExtra("Timeline", selectRoom);                //roomDTO 넘어옴
+//                                startActivity(intent);
+                                Fragment fragment = new TimelineActivity();
+                                Bundle bundle = new Bundle();
+                                bundle.putSerializable("Timeline", selectRoom);
+                                fragment.setArguments(bundle);
 
-                                Intent intent = new Intent(MainActivity.this, TimelineActivity.class);
-                                intent.putExtra("Timeline", selectRoom);                //roomDTO 넘어옴
-                                startActivity(intent);
+                                ft.replace(R.id.Frame_navi, fragment).commit();
                             }
                             // 중복된 스터디가 있으면
                             else {
-                                Toast.makeText(MainActivity.this, "이미 참여한 스터디입니다.", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getContext(), "이미 참여한 스터디입니다.", Toast.LENGTH_SHORT).show();
                             }
                         }
                         // 참여한 스터디가 없으면
@@ -202,9 +228,15 @@ public class MainActivity extends AppCompatActivity {
                             currentUser.setRoomId(roomList);
                             dr.setValue(currentUser);
 
-                            Intent intent = new Intent(MainActivity.this, TimelineActivity.class);
-                            intent.putExtra("Timeline", selectRoom);
-                            startActivity(intent);
+                            Fragment fragment = new TimelineActivity();
+                            Bundle bundle = new Bundle();
+                            bundle.putSerializable("Timeline", selectRoom);
+                            fragment.setArguments(bundle);
+
+                            ft.replace(R.id.Frame_navi, fragment).commit();
+//                            Intent intent = new Intent(getContext(), TimelineActivity.class);
+//                            intent.putExtra("Timeline", selectRoom);
+//                            startActivity(intent);
                         }
                     }
                 }
@@ -214,7 +246,7 @@ public class MainActivity extends AppCompatActivity {
 
 // "우리동네 스터디" RecyclerView 구현
         // 레이아웃 종류 정의
-        RecyclerView.LayoutManager layoutManager3 = new LinearLayoutManager(this);
+        RecyclerView.LayoutManager layoutManager3 = new LinearLayoutManager(getContext());
         ((LinearLayoutManager) layoutManager3).setOrientation(LinearLayoutManager.HORIZONTAL);
         recyclerView_myTown.setLayoutManager(layoutManager3);
 
@@ -226,7 +258,8 @@ public class MainActivity extends AppCompatActivity {
                 Object obj = v.getTag();
                 if (obj != null) {
                     int position = (int) obj;
-                    Intent intent = new Intent(MainActivity.this, MainDetailActivity.class);
+
+                    Intent intent = new Intent(getContext(), MainDetailActivity.class);
                     intent.putExtra("roomDetail", myTown_Adapter.getRoom(position));         //누른 스터디방의 이름
                     startActivity(intent);
                 }
@@ -236,7 +269,7 @@ public class MainActivity extends AppCompatActivity {
 
 // "마감 스터디" RecyclerView 구현
         // 레이아웃 종류 정의
-        RecyclerView.LayoutManager layoutManager4 = new LinearLayoutManager(this);
+        RecyclerView.LayoutManager layoutManager4 = new LinearLayoutManager(getContext());
         ((LinearLayoutManager) layoutManager4).setOrientation(LinearLayoutManager.HORIZONTAL);
         recyclerView_deadline.setLayoutManager(layoutManager4);
 
@@ -248,7 +281,7 @@ public class MainActivity extends AppCompatActivity {
                 Object obj = v.getTag();
                 if (obj != null) {
                     int position = (int) obj;
-                    Intent intent = new Intent(MainActivity.this, MainDetailActivity.class);
+                    Intent intent = new Intent(getContext(), MainDetailActivity.class);
                     intent.putExtra("roomDetail", deadline_Adapter.getRoom(position));         //누른 스터디방의 이름
                     startActivity(intent);
                 }
@@ -258,7 +291,7 @@ public class MainActivity extends AppCompatActivity {
 
 // "새 스터디" RecyclerView 구현
         // 레이아웃 종류 정의
-        RecyclerView.LayoutManager layoutManager5 = new LinearLayoutManager(this);
+        RecyclerView.LayoutManager layoutManager5 = new LinearLayoutManager(getContext());
         recyclerView_newStudy.setLayoutManager(layoutManager5);
 
         // 어댑터 연결
@@ -269,7 +302,7 @@ public class MainActivity extends AppCompatActivity {
                 Object obj = v.getTag();
                 if (obj != null) {
                     int position = (int) obj;
-                    Intent intent = new Intent(MainActivity.this, MainDetailActivity.class);
+                    Intent intent = new Intent(getContext(), MainDetailActivity.class);
                     intent.putExtra("roomDetail", newStudy_Adapter.getRoom(position));         //누른 스터디방의 이름
                     startActivity(intent);
                 }
@@ -286,10 +319,10 @@ public class MainActivity extends AppCompatActivity {
                     RoomDTO roomDTO = snapshot.getValue(RoomDTO.class);
 
                     // 참여한 방이 있으면
-                    if(currentUser.getRoomId() != null){
+                    if (currentUser.getRoomId() != null) {
                         // room의 id가 유저가 참여한 방과 같으면
-                        for(int i=0; i<currentUser.getRoomId().size(); i++){
-                            if(roomDTO.getId().equals(currentUser.getRoomId().get(i))){
+                        for (int i = 0; i < currentUser.getRoomId().size(); i++) {
+                            if (roomDTO.getId().equals(currentUser.getRoomId().get(i))) {
                                 myStudy_Adapter.addRoom(roomDTO);
                                 break;
                             }
@@ -317,12 +350,12 @@ public class MainActivity extends AppCompatActivity {
                 }
                 myStudyNum.setText("+" + myStudy_Adapter.getItemCount());
             }
+
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
             }
         });
-
+        return view;
     }
-
 }
 

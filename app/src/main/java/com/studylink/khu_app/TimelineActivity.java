@@ -5,6 +5,9 @@ import android.content.Intent;
 import android.graphics.drawable.GradientDrawable;
 import android.media.Image;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+import android.support.design.widget.BottomNavigationView;
+import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.CardView;
@@ -12,6 +15,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -30,7 +34,7 @@ import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TimelineActivity extends AppCompatActivity {
+public class TimelineActivity extends Fragment {
 
     private ImageView toMypage;
     private ImageView toMainpage;
@@ -44,54 +48,57 @@ public class TimelineActivity extends AppCompatActivity {
     private FirebaseAuth mauth;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.timeline_main);
+    }
+
+    @Nullable
+    @Override
+    public View onCreateView(@NonNull LayoutInflater inflater, @android.support.annotation.Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+
+        ViewGroup view = (ViewGroup) inflater.inflate(R.layout.timeline_main, container, false);
         mdatabase = FirebaseDatabase.getInstance();
         mauth = FirebaseAuth.getInstance();
 
-        toMypage = (ImageView) findViewById(R.id.toMypage);
-        toMainpage = (ImageView) findViewById(R.id.toMainpage);
+        toMypage = (ImageView) view.findViewById(R.id.toMypage);
+        toMainpage = (ImageView) view.findViewById(R.id.toMainpage);
 
         toMypage.setClickable(true);
         toMainpage.setClickable(true);
         toMypage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(TimelineActivity.this, Mypage_main.class);
+                Intent intent = new Intent(getActivity(), Mypage_main.class);
                 startActivity(intent);
             }
         });
         toMainpage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(TimelineActivity.this, MainActivity.class);
+                Intent intent = new Intent(getActivity(), MainActivity.class);
                 startActivity(intent);
             }
         });
 
-        recycler_studyname = (RecyclerView) findViewById(R.id.recycler_studyname);
-        RecyclerView.LayoutManager horizontalLayoutManager = new LinearLayoutManager(this);
+        recycler_studyname = (RecyclerView) view.findViewById(R.id.recycler_studyname);
+        RecyclerView.LayoutManager horizontalLayoutManager = new LinearLayoutManager(getContext());
         ((LinearLayoutManager)horizontalLayoutManager).setOrientation(LinearLayoutManager.HORIZONTAL);
         recycler_studyname.setLayoutManager(horizontalLayoutManager);
-
         StudynameAdapter = new StudynameRecyclerViewAdapter(nameofroom);
         recycler_studyname.setAdapter(StudynameAdapter);
 
         setData();
 
-
-//        setNamerecycler();
+        StudynameAdapter.notifyDataSetChanged();
 
 //        recycler_timelineBoard = (RecyclerView) findViewById(R.id.recycler_timelineBoard);
 //        recycler_timelineBoard.setLayoutManager(new LinearLayoutManager(this));
 //        TimelineBoardViewAdapter = new TimelineBoardViewAdapter();
 //        recycler_timelineBoard.setAdapter(TimelineBoardViewAdapter);
+
+        return view;
     }
 
-    private void setNamerecycler(){
-
-    }
 
     private void setData(){
         String a = mauth.getCurrentUser().getUid();
@@ -108,38 +115,33 @@ public class TimelineActivity extends AppCompatActivity {
 
             }
         });
-
         setData1();
     }
 
     private void setData1(){
-            mdatabase.getReference().child("room").addListenerForSingleValueEvent(new ValueEventListener() {
+            mdatabase.getReference().child("room").addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                    int i=0;
+                    int j = 0;
                     RoomDTO roomm;
-                    for(DataSnapshot data : dataSnapshot.getChildren()) {
+                    for (DataSnapshot data : dataSnapshot.getChildren()) {
                         roomm = data.getValue(RoomDTO.class);
-                        if (i<getroomname.size()){
-                            if(getroomname.get(i).equals(roomm.getId())){
+                        if (j < getroomname.size()) {
+                            if (getroomname.get(j).equals(roomm.getId())) {
                                 nameofroom.add(roomm);
                                 StudynameAdapter.notifyDataSetChanged();
+                                j++;
                             }
                         }
-                        i++;
                     }
                 }
+
                 @Override
                 public void onCancelled(@NonNull DatabaseError databaseError) {
 
                 }
             });
-    }
-
-
-
-
-
+        }
 
 
     class StudynameRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {      //어느 스터디인지를 선택하는 부분의 recycler

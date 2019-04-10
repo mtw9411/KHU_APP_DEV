@@ -4,14 +4,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:isScrollContainer="true"
-    android:overScrollMode="ifContentScrolls"
-    android:scrollbars="vertical"
-    tools:context=".TimelineActivity">
+    tools:context=".TimelineActivity"
+    android:orientation="vertical"
+    android:isScrollContainer="true">
 
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent"
+        android:isScrollContainer="true"
+        >
 
 
         <TextView
@@ -235,5 +236,4 @@
 
 
     </android.support.constraint.ConstraintLayout>
-
 </ScrollView>
