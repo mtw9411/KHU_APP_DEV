@@ -7,6 +7,8 @@ import android.support.design.internal.BottomNavigationItemView;
 import android.support.design.internal.BottomNavigationMenu;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -46,6 +48,8 @@ public class MainActivity extends Fragment {
     private AdapterMatching matching_Adapter;
     private List<String> roomList = new ArrayList<>();
     private AccountDTO currentUser;
+    private FragmentManager fm;
+    private FragmentTransaction ft;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -56,6 +60,9 @@ public class MainActivity extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         ViewGroup view = (ViewGroup) inflater.inflate(R.layout.activity_main, container, false);
+
+        fm = getFragmentManager();
+        ft = fm.beginTransaction();
 
         auth = FirebaseAuth.getInstance();
         toMypage = view.findViewById(R.id.toMypage);
@@ -70,8 +77,8 @@ public class MainActivity extends Fragment {
         toMypage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), Mypage_main.class);
-                startActivity(intent);
+                Fragment fragment = new Mypage_main();
+                ft.replace(R.id.Frame_navi, fragment).commit();
             }
         });
 
@@ -110,9 +117,11 @@ public class MainActivity extends Fragment {
                 Object obj = v.getTag();
                 if (obj != null) {
                     int position = (int) obj;
-                    Intent intent = new Intent(getActivity(), TimelineActivity.class);
-                    intent.putExtra("Timeline", myStudy_Adapter.getRoom(position));         //누른 스터디방의 이름
-                    startActivity(intent);
+                    Fragment fragment = new TimelineActivity();
+                    ft.replace(R.id.Frame_navi, fragment).commit();
+//                    Intent intent = new Intent();
+//                    intent.putExtra("Timeline", myStudy_Adapter.getRoom(position));         //누른 스터디방의 이름
+//                    startActivity(intent);
                 }
             }
         });
@@ -183,9 +192,12 @@ public class MainActivity extends Fragment {
                                     currentUser.getRoomId().add(selectRoom.getId());
                                     dr.setValue(currentUser);
 
-                                    Intent intent = new Intent(getActivity(), TimelineActivity.class);
-                                    intent.putExtra("Timeline", selectRoom);                //roomDTO 넘어옴
-                                    startActivity(intent);
+                                    Fragment fragment = new TimelineActivity();
+                                    ft.replace(R.id.Frame_navi, fragment).commit();
+
+//                                    Intent intent = new Intent();
+//                                    intent.putExtra("Timeline", selectRoom);                //roomDTO 넘어옴
+//                                    startActivity(intent);
                                 }
                                 // 중복된 스터디가 있으면
                                 else {
@@ -198,9 +210,12 @@ public class MainActivity extends Fragment {
                                 currentUser.setRoomId(roomList);
                                 dr.setValue(currentUser);
 
-                                Intent intent = new Intent(getActivity(), TimelineActivity.class);
-                                intent.putExtra("Timeline", selectRoom);
-                                startActivity(intent);
+                                Fragment fragment = new TimelineActivity();
+                                ft.replace(R.id.Frame_navi, fragment).commit();
+
+//                                Intent intent = new Intent();
+//                                intent.putExtra("Timeline", selectRoom);
+//                                startActivity(intent);
                             }
                         }
 

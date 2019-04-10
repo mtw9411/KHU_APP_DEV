@@ -102,7 +102,7 @@ public class Mypage_main extends Fragment{
         mypage_schedule.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                onFragmentChanged(0);
+                setFrag(0);
             }
         });
 
@@ -110,7 +110,7 @@ public class Mypage_main extends Fragment{
         mypage_store.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                onFragmentChanged(1);
+                setFrag(1);
             }
         });
 
@@ -130,18 +130,25 @@ public class Mypage_main extends Fragment{
                 startActivity(intent);
             }
         });
-        onFragmentChanged(0);
+        setFrag(0);
         return view;
     }
 
-    public void onFragmentChanged(int index){
-        if(index == 0){
-            getFragmentManager().beginTransaction().replace(R.id.main_frame, scheduleFragment).commit();
-        } else if (index == 1){
-            getFragmentManager().beginTransaction().replace(R.id.main_frame, storeFragment).commit();
+    public void setFrag(int n){    //프래그먼트를 교체하는 작업을 하는 메소드를 만들었습니다
+        fm = getFragmentManager();
+        ft = fm.beginTransaction();
+        switch (n){
+            case 0:
+                ft.setCustomAnimations(R.animator.enter_from_left, R.animator.exit_to_right, R.animator.enter_from_right, R.animator.exit_to_left)
+                        .replace(R.id.main_frame, scheduleFragment).commit();
+                break;
+
+            case 1:
+                ft.setCustomAnimations(R.animator.enter_from_right, R.animator.exit_to_left, R.animator.enter_from_left, R.animator.exit_to_right)
+                        .replace(R.id.main_frame, storeFragment).commit();
+                break;
         }
     }
-
 
     private void showMessage(){
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
