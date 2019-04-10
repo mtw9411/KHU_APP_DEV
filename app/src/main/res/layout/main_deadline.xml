@@ -3,17 +3,18 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="93dp"
     android:layout_height="93dp"
-    android:layout_marginRight="10.5dp"
+    android:layout_marginRight="12dp"
     android:background="@drawable/blue_circle_border">
 
     <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/imageView_myStudy"
+        android:id="@+id/deadline_image"
         android:layout_width="83dp"
         android:layout_height="83dp"
         android:src="@drawable/study_test"
         android:layout_centerInParent="true"/>
 
     <TextView
+        android:id="@+id/deadline_category"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="23.1dp"
@@ -25,6 +26,7 @@
         android:layout_centerHorizontal="true"
         />
     <TextView
+        android:id="@+id/deadline_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="41.2dp"

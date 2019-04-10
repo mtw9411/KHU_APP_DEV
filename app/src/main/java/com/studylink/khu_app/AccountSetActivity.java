@@ -35,7 +35,7 @@ public class AccountSetActivity extends AppCompatActivity {
     private TextView account_set_next;
     private EditText account_username;
     private EditText account_userbirth;
-    private TextView account_useraddress;
+    private TextView account_userregion;
     private String sex_check = "false";
 
 
@@ -50,7 +50,7 @@ public class AccountSetActivity extends AppCompatActivity {
         FirebaseDatabase = FirebaseDatabase.getInstance();
         account_username = (EditText) findViewById(R.id.account_username);
         account_userbirth = (EditText) findViewById(R.id.account_userbirth);
-        account_useraddress = (TextView) findViewById(R.id.account_useraddress);
+        account_userregion = (TextView) findViewById(R.id.account_userregion);
 
         gender_male = findViewById(R.id.gender_male);
         gender_female = findViewById(R.id.gender_female);
@@ -79,8 +79,6 @@ public class AccountSetActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 databaseAccountset();
-                Intent intent = new Intent (AccountSetActivity.this, AccountFinActivity.class);
-                startActivity(intent);
             }
         });
     }
@@ -96,14 +94,41 @@ public class AccountSetActivity extends AppCompatActivity {
     public void databaseAccountset(){                                                               //데이터를 파이어베이스에 올림
         AccountDTO Accountset = new AccountDTO();
 
-        String uid = auth.getCurrentUser().getUid();
-        Accountset.username = account_username.getText().toString();
-        Accountset.userbirth = account_userbirth.getText().toString();
-        Accountset.usersex = sex_check;
-//        Accountset.registcheck = "true";
+        String name = account_username.getText().toString();
+        String birth = account_userbirth.getText().toString();
+        String region = account_userregion.getText().toString();
 
-        FirebaseDatabase.getReference().child("users").child(uid).setValue(Accountset);
-        Toast.makeText(this, "성공", Toast.LENGTH_SHORT).show();
+//        Accountset.registcheck = "true";
+        if(name.trim().length()>0){
+            if (birth.trim().length()>0){
+                if (!sex_check.equals("false")){
+                    Accountset.setUsername(name);
+                    Accountset.setUserbirth(birth);
+                    Accountset.setUsersex(sex_check);
+                    if (region.trim().length()>0){
+                        Accountset.setUserregion(region);
+                    }
+                    else{
+                        Accountset.setUserregion("지역 상관없음");
+                    }
+                    String uid = auth.getCurrentUser().getUid();
+                    FirebaseDatabase.getReference().child("users").child(uid).setValue(Accountset);
+                    Toast.makeText(this, "성공", Toast.LENGTH_SHORT).show();
+
+                    Intent intent = new Intent (AccountSetActivity.this, AccountFinActivity.class);
+                    startActivity(intent);
+                }
+                else{
+                    Toast.makeText(this, "성별을 입력해 주세요.", Toast.LENGTH_SHORT).show();
+                }
+            }
+            else{
+                Toast.makeText(this, "생년월일을 입력해 주세요.", Toast.LENGTH_SHORT).show();
+            }
+        }
+        else{
+            Toast.makeText(this, "이름을 입력해 주세요.", Toast.LENGTH_SHORT).show();
+        }
     }
 
 

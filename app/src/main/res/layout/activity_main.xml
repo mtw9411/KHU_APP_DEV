@@ -176,9 +176,9 @@
             android:textSize="11sp" />
 
         <android.support.v7.widget.RecyclerView
-            android:id="@+id/recyclerView3"
+            android:id="@+id/recyclerView_myTown"
             android:layout_width="match_parent"
-            android:layout_height="135dp"
+            android:layout_height="138dp"
             android:layout_marginTop="47.5dp"
             android:scrollbars="horizontal">
 
@@ -215,7 +215,7 @@
             android:text="+1명 남음" />
 
         <android.support.v7.widget.RecyclerView
-            android:id="@+id/recyclerView4"
+            android:id="@+id/recyclerView_deadline"
             android:layout_width="match_parent"
             android:layout_height="93dp"
             android:layout_marginTop="47.3dp"
@@ -253,7 +253,7 @@
             android:text="Today" />
 
         <android.support.v7.widget.RecyclerView
-            android:id="@+id/recyclerView5"
+            android:id="@+id/recyclerView_newStudy"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginRight="21dp"

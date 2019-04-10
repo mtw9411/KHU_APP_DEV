@@ -12,6 +12,7 @@ public class AccountDTO implements Serializable {
     public String username;
     public String userbirth;
     public String usersex;
+    public String userregion;
     public List<String> disposition;
     public List<String> mystudyRoom;
     private List<String> roomId;
@@ -40,6 +41,14 @@ public class AccountDTO implements Serializable {
 
     public void setUsersex(String usersex) {
         this.usersex = usersex;
+    }
+
+    public String getUserregion() {
+        return userregion;
+    }
+
+    public void setUserregion(String userregion) {
+        this.userregion = userregion;
     }
 
     public List<String> getDisposition() {
