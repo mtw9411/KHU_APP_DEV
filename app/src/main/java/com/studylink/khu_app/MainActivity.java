@@ -57,6 +57,7 @@ public class MainActivity extends Fragment {
     private DatabaseReference database = FirebaseDatabase.getInstance().getReference();
     private FragmentManager fm;
     private FragmentTransaction ft;
+    private int i = 0;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -67,6 +68,16 @@ public class MainActivity extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         ViewGroup view = (ViewGroup) inflater.inflate(R.layout.activity_main, container, false);
+
+        toMypage = view.findViewById(R.id.toMypage);
+        makeStudy = view.findViewById(R.id.makeStudy);
+        myStudyNum = view.findViewById(R.id.myStudyNum);
+        addStudy = view.findViewById(R.id.addStudy);
+        recyclerView_myStudy = view.findViewById(R.id.recyclerView_myStudy);
+        recyclerView_matching = view.findViewById(R.id.recyclerView_matching);
+        recyclerView_myTown = view.findViewById(R.id.recyclerView_myTown);
+        recyclerView_deadline = view.findViewById(R.id.recyclerView_deadline);
+        recyclerView_newStudy = view.findViewById(R.id.recyclerView_newStudy);
 
         fm = getFragmentManager();
         ft = fm.beginTransaction();
@@ -83,6 +94,7 @@ public class MainActivity extends Fragment {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 currentUser = dataSnapshot.getValue(AccountDTO.class);
+                myStudyNum.setText("+" + currentUser.getRoomId().size());
             }
 
             @Override
@@ -90,16 +102,6 @@ public class MainActivity extends Fragment {
 
             }
         });
-
-        toMypage = view.findViewById(R.id.toMypage);
-        makeStudy = view.findViewById(R.id.makeStudy);
-        myStudyNum = view.findViewById(R.id.myStudyNum);
-        addStudy = view.findViewById(R.id.addStudy);
-        recyclerView_myStudy = view.findViewById(R.id.recyclerView_myStudy);
-        recyclerView_matching = view.findViewById(R.id.recyclerView_matching);
-        recyclerView_myTown = view.findViewById(R.id.recyclerView_myTown);
-        recyclerView_deadline = view.findViewById(R.id.recyclerView_deadline);
-        recyclerView_newStudy = view.findViewById(R.id.recyclerView_newStudy);
 
         toMypage.setClickable(true);
         toMypage.setOnClickListener(new View.OnClickListener() {
@@ -129,7 +131,6 @@ public class MainActivity extends Fragment {
                 startActivity(intent);
             }
         });
-
 
 // "내가 참여중인 방" RecyclerView 구현
         // 레이아웃 종류 정의
@@ -312,49 +313,52 @@ public class MainActivity extends Fragment {
 
 
 // firebase에 저장된 room 데이터 가져오기
-        myRef.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                    RoomDTO roomDTO = snapshot.getValue(RoomDTO.class);
+        if(i == 0) {
+            myRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                        RoomDTO roomDTO = snapshot.getValue(RoomDTO.class);
 
-                    // 참여한 방이 있으면
-                    if (currentUser.getRoomId() != null) {
-                        // room의 id가 유저가 참여한 방과 같으면
-                        for (int i = 0; i < currentUser.getRoomId().size(); i++) {
-                            if (roomDTO.getId().equals(currentUser.getRoomId().get(i))) {
-                                myStudy_Adapter.addRoom(roomDTO);
-                                break;
+                        // 참여한 방이 있으면
+                        if (currentUser.getRoomId() != null) {
+                            // room의 id가 유저가 참여한 방과 같으면
+                            for (int i = 0; i < currentUser.getRoomId().size(); i++) {
+                                if (roomDTO.getId().equals(currentUser.getRoomId().get(i))) {
+                                    myStudy_Adapter.addRoom(roomDTO);
+                                    break;
+                                }
                             }
                         }
+
+                        // 방의 인원수가 남아 있으면
+                        if (roomDTO.getMember() < roomDTO.getTotal_member()) {
+                            matching_Adapter.addRoom(roomDTO);
+                        }
+
+                        // 지역이 같은 곳만
+                        if (roomDTO.getRegion().equals(currentUser.getUserregion())) {
+                            myTown_Adapter.addRoom(roomDTO);
+                        }
+
+                        // 인원이 한명 남은 방만
+                        if (roomDTO.getTotal_member() - roomDTO.getMember() == 1) {
+                            deadline_Adapter.addRoom(roomDTO);
+                        }
+
+                        // 오늘 생성된 방만
+                        if ((System.currentTimeMillis() - roomDTO.getTime().getTime()) / (24 * 60 * 60 * 1000) == 0) {
+                            newStudy_Adapter.addRoom(roomDTO);
+                        }
                     }
-
-                    // 방의 인원수가 남아 있으면
-                    if (roomDTO.getMember() < roomDTO.getTotal_member()){
-                        matching_Adapter.addRoom(roomDTO);
-                    }
-
-                    // 지역이 같은 곳만
-                    if (roomDTO.getRegion().equals(currentUser.getUserregion())){
-                        myTown_Adapter.addRoom(roomDTO);
-                    }
-
-                    // 인원이 한명 남은 방만
-                    if (roomDTO.getTotal_member()-roomDTO.getMember() == 1){
-                        deadline_Adapter.addRoom(roomDTO);
-                    }
-
-                    // 최근 생성된 방중 상위 5개만 - 조건 추가해야함
-                    newStudy_Adapter.addRoom(roomDTO);
-
                 }
-                myStudyNum.setText("+" + myStudy_Adapter.getItemCount());
-            }
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+                }
+            });
+            i++;
+        }
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-            }
-        });
         return view;
     }
 }
