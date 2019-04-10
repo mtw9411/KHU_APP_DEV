@@ -23,11 +23,12 @@ import java.util.Map;
 
 public class MainDetailActivity extends AppCompatActivity {
 
-    TextView Detail_title, Detail_member, Detail_totalMem, Detail_fine, Detail_content1, Detail_content2,
-            Detail_roomdipo1, Detail_roomdipo2, Detail_roomdipo3, Detail_roomdipo4,
-            Detail_region, Detail_age, Detail_gender;
-    RelativeLayout Detail_entrance;
+    private TextView Detail_title, Detail_member, Detail_totalMem, Detail_fine, Detail_content1, Detail_content2,
+                    Detail_roomdipo1, Detail_roomdipo2, Detail_roomdipo3, Detail_roomdipo4,
+                    Detail_region, Detail_age, Detail_gender;
+    private RelativeLayout Detail_entrance;
     private List<String> roomList = new ArrayList<>();
+    private DatabaseReference database = FirebaseDatabase.getInstance().getReference();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,8 +68,10 @@ public class MainDetailActivity extends AppCompatActivity {
         Detail_roomdipo3.setText(roomDTO.getRoomdisposition().get(2));
         Detail_roomdipo4.setText(roomDTO.getRoomdisposition().get(3));
 
+
+
         String current_user = FirebaseAuth.getInstance().getCurrentUser().getUid();
-        final DatabaseReference dr = FirebaseDatabase.getInstance().getReference().child("users").child(current_user);
+        final DatabaseReference dr = database.child("users").child(current_user);
 
         Detail_entrance.setClickable(true);
         Detail_entrance.setOnClickListener(new View.OnClickListener() {
@@ -78,39 +81,47 @@ public class MainDetailActivity extends AppCompatActivity {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                         AccountDTO currentUser = dataSnapshot.getValue(AccountDTO.class);
-                        // 참여한 스터디가 1개라도 있으면
-                        if(currentUser.getRoomId() != null){
-                            boolean check = true;
-                            // 같은 스터디인지 확인
-                            for(int i = 0; i<currentUser.getRoomId().size(); i++){
-                                // 중복된 스터디이면
-                                if (currentUser.getRoomId().get(i).equals(roomDTO.getId())){
-                                    check = false;
-                                    break;
+                        // 가입한 스터디방이 3개이면
+                        if (currentUser.getRoomId().size() == 3){
+                            Toast.makeText(MainDetailActivity.this, "3개 이상의 스터디를 가입할 수 없습니다.", Toast.LENGTH_SHORT).show();
+                        }
+                        else{
+                            // 참여한 스터디가 1개라도 있으면
+                            if(currentUser.getRoomId() != null){
+                                boolean check = true;
+                                // 같은 스터디인지 확인
+                                for(int i = 0; i<currentUser.getRoomId().size(); i++){
+                                    // 중복된 스터디이면
+                                    if (currentUser.getRoomId().get(i).equals(roomDTO.getId())){
+                                        check = false;
+                                        break;
+                                    }
+                                }
+                                // 중복된 스터디가 없으면
+                                if(check){
+                                    currentUser.getRoomId().add(roomDTO.getId());
+                                    dr.setValue(currentUser);
+                                    roomDTO.setMember(roomDTO.getMember()+1);
+                                    database.child("room").child(roomDTO.getId()).setValue(roomDTO);
+
+                                    Intent intent = new Intent(MainDetailActivity.this, TimelineActivity.class);
+                                    startActivity(intent);
+                                }
+                                // 중복된 스터디가 있으면
+                                else{
+                                    Toast.makeText(MainDetailActivity.this, "이미 참여한 스터디입니다.", Toast.LENGTH_SHORT).show();
                                 }
                             }
-                            // 중복된 스터디가 없으면
-                            if(check){
-                                currentUser.getRoomId().add(roomDTO.getId());
+                            // 참여한 스터디가 없으면
+                            else{
+                                roomList.add(roomDTO.getId());
+                                currentUser.setRoomId(roomList);
                                 dr.setValue(currentUser);
 
                                 Intent intent = new Intent(MainDetailActivity.this, TimelineActivity.class);
+                                intent.putExtra("Timeline", roomDTO);
                                 startActivity(intent);
                             }
-                            // 중복된 스터디가 있으면
-                            else{
-                                Toast.makeText(MainDetailActivity.this, "이미 참여한 스터디입니다.", Toast.LENGTH_SHORT).show();
-                            }
-                        }
-                        // 참여한 스터디가 없으면
-                        else{
-                            roomList.add(roomDTO.getId());
-                            currentUser.setRoomId(roomList);
-                            dr.setValue(currentUser);
-
-                            Intent intent = new Intent(MainDetailActivity.this, TimelineActivity.class);
-                            intent.putExtra("Timeline", roomDTO);
-                            startActivity(intent);
                         }
                     }
 

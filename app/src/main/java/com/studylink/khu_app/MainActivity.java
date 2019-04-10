@@ -41,15 +41,23 @@ public class MainActivity extends Fragment {
     private ImageView toMypage;
     private TextView makeStudy, myStudyNum;
     private RelativeLayout addStudy;
-    private RecyclerView recyclerView_myStudy,recyclerView_matching;
+    private RecyclerView recyclerView_myStudy,recyclerView_matching, recyclerView_myTown, recyclerView_deadline, recyclerView_newStudy;
     private ArrayList<RoomDTO>arrayList_myStudy = new ArrayList<>();
     private ArrayList<RoomDTO>arrayList_matching = new ArrayList<>();
+    private ArrayList<RoomDTO>arrayList_myTown = new ArrayList<>();
+    private ArrayList<RoomDTO>arrayList_deadline = new ArrayList<>();
+    private ArrayList<RoomDTO>arrayList_newStudy = new ArrayList<>();
     private AdapterMyStudy myStudy_Adapter;
     private AdapterMatching matching_Adapter;
+    private AdapterMyTown myTown_Adapter;
+    private AdapterDeadline deadline_Adapter;
+    private AdapterNewStudy newStudy_Adapter;
     private List<String> roomList = new ArrayList<>();
     private AccountDTO currentUser;
+    private DatabaseReference database = FirebaseDatabase.getInstance().getReference();
     private FragmentManager fm;
     private FragmentTransaction ft;
+    private int i = 0;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -61,17 +69,39 @@ public class MainActivity extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         ViewGroup view = (ViewGroup) inflater.inflate(R.layout.activity_main, container, false);
 
-        fm = getFragmentManager();
-        ft = fm.beginTransaction();
-
-        auth = FirebaseAuth.getInstance();
         toMypage = view.findViewById(R.id.toMypage);
         makeStudy = view.findViewById(R.id.makeStudy);
         myStudyNum = view.findViewById(R.id.myStudyNum);
         addStudy = view.findViewById(R.id.addStudy);
         recyclerView_myStudy = view.findViewById(R.id.recyclerView_myStudy);
         recyclerView_matching = view.findViewById(R.id.recyclerView_matching);
+        recyclerView_myTown = view.findViewById(R.id.recyclerView_myTown);
+        recyclerView_deadline = view.findViewById(R.id.recyclerView_deadline);
+        recyclerView_newStudy = view.findViewById(R.id.recyclerView_newStudy);
 
+        fm = getFragmentManager();
+        ft = fm.beginTransaction();
+
+        auth = FirebaseAuth.getInstance();
+
+        // 방 정보
+        final DatabaseReference myRef = database.child("room");
+
+        // 현재 유저
+        String current_user = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        final DatabaseReference dr = database.child("users").child(current_user);
+        dr.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                currentUser = dataSnapshot.getValue(AccountDTO.class);
+                myStudyNum.setText("+" + currentUser.getRoomId().size());
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
 
         toMypage.setClickable(true);
         toMypage.setOnClickListener(new View.OnClickListener() {
@@ -102,7 +132,6 @@ public class MainActivity extends Fragment {
             }
         });
 
-
 // "내가 참여중인 방" RecyclerView 구현
         // 레이아웃 종류 정의
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
@@ -118,10 +147,11 @@ public class MainActivity extends Fragment {
                 if (obj != null) {
                     int position = (int) obj;
                     Fragment fragment = new TimelineActivity();
+                    Bundle bundle = new Bundle();
+                    bundle.putSerializable("Timeline", myStudy_Adapter.getRoom(position));
+                    fragment.setArguments(bundle);
+
                     ft.replace(R.id.Frame_navi, fragment).commit();
-//                    Intent intent = new Intent();
-//                    intent.putExtra("Timeline", myStudy_Adapter.getRoom(position));         //누른 스터디방의 이름
-//                    startActivity(intent);
                 }
             }
         });
@@ -132,22 +162,6 @@ public class MainActivity extends Fragment {
         RecyclerView.LayoutManager layoutManager2 = new LinearLayoutManager(getContext());
         ((LinearLayoutManager) layoutManager2).setOrientation(LinearLayoutManager.HORIZONTAL);
         recyclerView_matching.setLayoutManager(layoutManager2);
-
-        // 현재 유저
-        String current_user = FirebaseAuth.getInstance().getCurrentUser().getUid();
-        final DatabaseReference dr = FirebaseDatabase.getInstance().getReference().child("users").child(current_user);
-
-        dr.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                currentUser = dataSnapshot.getValue(AccountDTO.class);
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
 
         // 어댑터 연결
         matching_Adapter = new AdapterMatching(arrayList_matching, new View.OnClickListener() {
@@ -164,100 +178,187 @@ public class MainActivity extends Fragment {
             }
         }, new View.OnClickListener() {
             @Override
-            // "방 입장하기" 클릭 이벤트
+            // "방 입장하기" 클릭 이벤트 - 현재 유저에 클릭한 방 아이디 저장
             public void onClick(View v) {
                 Object obj = v.getTag();
                 if (obj != null) {
                     int position = (int) obj;
-                    final RoomDTO selectRoom = matching_Adapter.getRoom(position);
-
-                    // 현재 유저에 클릭한 방 아이디 저장
-                    dr.addListenerForSingleValueEvent(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                            AccountDTO currentUser = dataSnapshot.getValue(AccountDTO.class);
-                            // 참여한 스터디가 1개라도 있으면
-                            if (currentUser.getRoomId() != null) {
-                                boolean check = true;
-                                // 같은 스터디인지 확인
-                                for (int i = 0; i < currentUser.getRoomId().size(); i++) {
-                                    // 중복된 스터디이면
-                                    if (currentUser.getRoomId().get(i).equals(selectRoom.getId())) {
-                                        check = false;
-                                        break;
-                                    }
-                                }
-                                // 중복된 스터디가 없으면
-                                if (check) {
-                                    currentUser.getRoomId().add(selectRoom.getId());
-                                    dr.setValue(currentUser);
-
-                                    Fragment fragment = new TimelineActivity();
-                                    ft.replace(R.id.Frame_navi, fragment).commit();
-
-//                                    Intent intent = new Intent();
-//                                    intent.putExtra("Timeline", selectRoom);                //roomDTO 넘어옴
-//                                    startActivity(intent);
-                                }
-                                // 중복된 스터디가 있으면
-                                else {
-                                    Toast.makeText(getActivity(), "이미 참여한 스터디입니다.", Toast.LENGTH_SHORT).show();
+                    RoomDTO selectRoom = matching_Adapter.getRoom(position);
+                    // 가입한 스터디방이 3개이면
+                    if (currentUser.getRoomId().size() == 3){
+                        Toast.makeText(getContext(), "3개 이상의 스터디를 가입할 수 없습니다.", Toast.LENGTH_SHORT).show();
+                    }
+                    else{
+                        // 참여한 스터디가 1개라도 있으면
+                        if (currentUser.getRoomId() != null) {
+                            boolean check = true;
+                            // 같은 스터디인지 확인
+                            for (int i = 0; i < currentUser.getRoomId().size(); i++) {
+                                // 중복된 스터디이면
+                                if (currentUser.getRoomId().get(i).equals(selectRoom.getId())) {
+                                    check = false;
+                                    break;
                                 }
                             }
-                            // 참여한 스터디가 없으면
-                            else {
-                                roomList.add(selectRoom.getId());
-                                currentUser.setRoomId(roomList);
+                            // 중복된 스터디가 없으면
+                            if (check) {
+                                // 현재 유저에 방 추가
+                                currentUser.getRoomId().add(selectRoom.getId());
                                 dr.setValue(currentUser);
-
-                                Fragment fragment = new TimelineActivity();
-                                ft.replace(R.id.Frame_navi, fragment).commit();
-
-//                                Intent intent = new Intent();
-//                                intent.putExtra("Timeline", selectRoom);
+                                // 방의 멤버수 증가
+                                selectRoom.setMember(selectRoom.getMember() + 1);
+                                myRef.child(selectRoom.getId()).setValue(selectRoom);
+//                                Intent intent = new Intent(MainActivity.this, TimelineActivity.class);
+//                                intent.putExtra("Timeline", selectRoom);                //roomDTO 넘어옴
 //                                startActivity(intent);
+                                Fragment fragment = new TimelineActivity();
+                                Bundle bundle = new Bundle();
+                                bundle.putSerializable("Timeline", selectRoom);
+                                fragment.setArguments(bundle);
+
+                                ft.replace(R.id.Frame_navi, fragment).commit();
+                            }
+                            // 중복된 스터디가 있으면
+                            else {
+                                Toast.makeText(getContext(), "이미 참여한 스터디입니다.", Toast.LENGTH_SHORT).show();
                             }
                         }
+                        // 참여한 스터디가 없으면
+                        else {
+                            roomList.add(selectRoom.getId());
+                            currentUser.setRoomId(roomList);
+                            dr.setValue(currentUser);
 
-                        @Override
-                        public void onCancelled(@NonNull DatabaseError databaseError) {
+                            Fragment fragment = new TimelineActivity();
+                            Bundle bundle = new Bundle();
+                            bundle.putSerializable("Timeline", selectRoom);
+                            fragment.setArguments(bundle);
 
+                            ft.replace(R.id.Frame_navi, fragment).commit();
+//                            Intent intent = new Intent(getContext(), TimelineActivity.class);
+//                            intent.putExtra("Timeline", selectRoom);
+//                            startActivity(intent);
                         }
-                    });
+                    }
                 }
             }
         });
         recyclerView_matching.setAdapter(matching_Adapter);
 
+// "우리동네 스터디" RecyclerView 구현
+        // 레이아웃 종류 정의
+        RecyclerView.LayoutManager layoutManager3 = new LinearLayoutManager(getContext());
+        ((LinearLayoutManager) layoutManager3).setOrientation(LinearLayoutManager.HORIZONTAL);
+        recyclerView_myTown.setLayoutManager(layoutManager3);
 
-// firebase에 저장된 데이터 가져오기
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference myRef = database.getReference().child("room");
-
-        myRef.addListenerForSingleValueEvent(new ValueEventListener() {
+        // 어댑터 연결
+        myTown_Adapter = new AdapterMyTown(arrayList_myTown, new View.OnClickListener() {
             @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                    RoomDTO roomDTO = snapshot.getValue(RoomDTO.class);
-                    // 참여한 방이 있으면
-                    if (currentUser.getRoomId() != null) {
-                        // room의 id가 유저가 참여한 방과 같으면
-                        for (int i = 0; i < currentUser.getRoomId().size(); i++) {
-                            if (roomDTO.getId().equals(currentUser.getRoomId().get(i))) {
-                                myStudy_Adapter.addRoom(roomDTO);
-                                break;
-                            }
-                        }
-                    }
-                    matching_Adapter.addRoom(roomDTO);
+            // "우리동네 스터디" 클릭 이벤트
+            public void onClick(View v) {
+                Object obj = v.getTag();
+                if (obj != null) {
+                    int position = (int) obj;
+
+                    Intent intent = new Intent(getContext(), MainDetailActivity.class);
+                    intent.putExtra("roomDetail", myTown_Adapter.getRoom(position));         //누른 스터디방의 이름
+                    startActivity(intent);
                 }
-                myStudyNum.setText("+" + myStudy_Adapter.getItemCount());
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
             }
         });
+        recyclerView_myTown.setAdapter(myTown_Adapter);
+
+// "마감 스터디" RecyclerView 구현
+        // 레이아웃 종류 정의
+        RecyclerView.LayoutManager layoutManager4 = new LinearLayoutManager(getContext());
+        ((LinearLayoutManager) layoutManager4).setOrientation(LinearLayoutManager.HORIZONTAL);
+        recyclerView_deadline.setLayoutManager(layoutManager4);
+
+        // 어댑터 연결
+        deadline_Adapter = new AdapterDeadline(arrayList_deadline, new View.OnClickListener() {
+            @Override
+            // "마감 스터디" 클릭 이벤트
+            public void onClick(View v) {
+                Object obj = v.getTag();
+                if (obj != null) {
+                    int position = (int) obj;
+                    Intent intent = new Intent(getContext(), MainDetailActivity.class);
+                    intent.putExtra("roomDetail", deadline_Adapter.getRoom(position));         //누른 스터디방의 이름
+                    startActivity(intent);
+                }
+            }
+        });
+        recyclerView_deadline.setAdapter(deadline_Adapter);
+
+// "새 스터디" RecyclerView 구현
+        // 레이아웃 종류 정의
+        RecyclerView.LayoutManager layoutManager5 = new LinearLayoutManager(getContext());
+        recyclerView_newStudy.setLayoutManager(layoutManager5);
+
+        // 어댑터 연결
+        newStudy_Adapter = new AdapterNewStudy(arrayList_newStudy, new View.OnClickListener() {
+            @Override
+            // "새 스터디" 클릭 이벤트
+            public void onClick(View v) {
+                Object obj = v.getTag();
+                if (obj != null) {
+                    int position = (int) obj;
+                    Intent intent = new Intent(getContext(), MainDetailActivity.class);
+                    intent.putExtra("roomDetail", newStudy_Adapter.getRoom(position));         //누른 스터디방의 이름
+                    startActivity(intent);
+                }
+            }
+        });
+        recyclerView_newStudy.setAdapter(newStudy_Adapter);
+
+
+// firebase에 저장된 room 데이터 가져오기
+        if(i == 0) {
+            myRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                        RoomDTO roomDTO = snapshot.getValue(RoomDTO.class);
+
+                        // 참여한 방이 있으면
+                        if (currentUser.getRoomId() != null) {
+                            // room의 id가 유저가 참여한 방과 같으면
+                            for (int i = 0; i < currentUser.getRoomId().size(); i++) {
+                                if (roomDTO.getId().equals(currentUser.getRoomId().get(i))) {
+                                    myStudy_Adapter.addRoom(roomDTO);
+                                    break;
+                                }
+                            }
+                        }
+
+                        // 방의 인원수가 남아 있으면
+                        if (roomDTO.getMember() < roomDTO.getTotal_member()) {
+                            matching_Adapter.addRoom(roomDTO);
+                        }
+
+                        // 지역이 같은 곳만
+                        if (roomDTO.getRegion().equals(currentUser.getUserregion())) {
+                            myTown_Adapter.addRoom(roomDTO);
+                        }
+
+                        // 인원이 한명 남은 방만
+                        if (roomDTO.getTotal_member() - roomDTO.getMember() == 1) {
+                            deadline_Adapter.addRoom(roomDTO);
+                        }
+
+                        // 오늘 생성된 방만
+                        if ((System.currentTimeMillis() - roomDTO.getTime().getTime()) / (24 * 60 * 60 * 1000) == 0) {
+                            newStudy_Adapter.addRoom(roomDTO);
+                        }
+                    }
+                }
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+                }
+            });
+            i++;
+        }
+
         return view;
     }
 }

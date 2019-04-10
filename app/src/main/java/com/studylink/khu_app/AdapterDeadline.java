@@ -1,7 +1,6 @@
 package com.studylink.khu_app;
 
 
-import android.content.Intent;
 import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -9,7 +8,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -22,13 +20,13 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class AdapterMyStudy extends RecyclerView.Adapter<AdapterMyStudy.MyViewHolder> {
+public class AdapterDeadline extends RecyclerView.Adapter<AdapterDeadline.MyViewHolder> {
 
     private ArrayList<RoomDTO> arrayList;
     private static View.OnClickListener onClickListener;
 
 
-    public AdapterMyStudy(ArrayList<RoomDTO> items, View.OnClickListener onClick){
+    public AdapterDeadline(ArrayList<RoomDTO> items, View.OnClickListener onClick){
         arrayList = items;
         onClickListener = onClick;
     }
@@ -39,26 +37,26 @@ public class AdapterMyStudy extends RecyclerView.Adapter<AdapterMyStudy.MyViewHo
 
     // 아이템 뷰에서 아이디 찾기
     public static class MyViewHolder extends RecyclerView.ViewHolder {
-        public TextView textView_title, textView_time;
-        public ImageView imageView_myStudy;
+        public TextView deadline_category, deadline_title;
+        public ImageView deadline_image;
         public View root;
         public MyViewHolder(View v) {
             super(v);
             root = v;
-            textView_title = v.findViewById(R.id.textView_title);
-            imageView_myStudy = v.findViewById(R.id.imageView_myStudy);
-            textView_time = v.findViewById(R.id.textView_time);
+            deadline_category = v.findViewById(R.id.deadline_category);
+            deadline_title = v.findViewById(R.id.deadline_title);
+            deadline_image = v.findViewById(R.id.deadline_image);
 
-            imageView_myStudy.setClickable(true);
-            imageView_myStudy.setEnabled(true);
-            imageView_myStudy.setOnClickListener(onClickListener);
+            deadline_image.setClickable(true);
+            deadline_image.setEnabled(true);
+            deadline_image.setOnClickListener(onClickListener);
         }
     }
 
     // 내가 참여중인 스터디 방 아이템뷰 연결
     @Override
-    public AdapterMyStudy.MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.main_mystudy, parent, false);
+    public AdapterDeadline.MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.main_deadline, parent, false);
         MyViewHolder vh = new MyViewHolder(v);
         return vh;
     }
@@ -75,18 +73,18 @@ public class AdapterMyStudy extends RecyclerView.Adapter<AdapterMyStudy.MyViewHo
             storageRef.child(fileName).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                 @Override
                 public void onSuccess(Uri uri) {
-                    holder.imageView_myStudy.setImageURI(uri);
-                    Glide.with(holder.root).load(uri.toString()).into(holder.imageView_myStudy);
+                    holder.deadline_image.setImageURI(uri);
+                    Glide.with(holder.root).load(uri.toString()).into(holder.deadline_image);
                 }
             });
         }
 
         // 텍스트 설정
-        holder.textView_title.setText(room.getRoomName());
+        holder.deadline_category.setText(room.getSpinner1());
+        holder.deadline_title.setText(room.getRoomName());
 
         // 태그 설정
-        holder.imageView_myStudy.setTag(position);
-
+        holder.deadline_image.setTag(position);
     }
 
 

@@ -128,8 +128,8 @@
                 android:text="장소"
                 android:textSize="10sp" />
 
-            <EditText
-                android:id="@+id/editText"
+            <TextView
+                android:id="@+id/write_content"
                 android:layout_width="315dp"
                 android:layout_height="49dp"
                 android:layout_marginTop="57dp"
@@ -137,6 +137,7 @@
                 android:ems="10"
                 android:hint="새로운 소식을 남겨보세요"
                 android:inputType="textPersonName"
+                android:gravity="fill"
                 android:isScrollContainer="true"
                 android:lineSpacingExtra="3.5sp"
                 android:paddingLeft="12dp"

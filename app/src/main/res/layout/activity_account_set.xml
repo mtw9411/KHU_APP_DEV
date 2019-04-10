@@ -151,7 +151,7 @@
         android:weightSum="10">
 
         <TextView
-            android:id="@+id/account_useraddress"
+            android:id="@+id/account_userregion"
             android:layout_width="match_parent"
             android:layout_height="38dp"
             android:layout_weight="9"

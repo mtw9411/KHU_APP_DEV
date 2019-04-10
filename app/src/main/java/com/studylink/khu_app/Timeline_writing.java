@@ -1,6 +1,8 @@
 package com.studylink.khu_app;
 
 import android.Manifest;
+import android.app.ProgressDialog;
+import android.content.ClipData;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
@@ -30,15 +32,20 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
 import java.io.File;
 import java.io.InputStream;
 import java.lang.reflect.Array;
+import java.net.URI;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class Timeline_writing extends AppCompatActivity {
@@ -53,10 +60,16 @@ public class Timeline_writing extends AppCompatActivity {
     private ImageView upload_image;
     private ImageView delete_picture;
     private String imagePath;
-    private ArrayList<MyData> mDataset;
+    private ArrayList<Uri> mDataset = new ArrayList<>();
     private FirebaseStorage storage;
     private FirebaseAuth auth;
     private FirebaseDatabase database;
+    private DatabaseReference dataref;
+    private ArrayList<Uri> uriArrayList = new ArrayList<>();
+    private ArrayList<String> upfilename = new ArrayList<>();
+    private RoomUploadDTO roomUploadDTO;
+    private boolean check_title = false;
+    private boolean check_content = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,10 +79,13 @@ public class Timeline_writing extends AppCompatActivity {
         storage = FirebaseStorage.getInstance();
         auth = FirebaseAuth.getInstance();
         database = FirebaseDatabase.getInstance();
+        dataref = database.getReference();
 
         writing_recycler = findViewById(R.id.recycler_picture);
-        writing_recycler.setLayoutManager(new LinearLayoutManager(this));
-        WritingAdapter = new WritingRecyclerViewAdapter();
+        RecyclerView.LayoutManager horizontalLayoutManager = new LinearLayoutManager(this);
+        ((LinearLayoutManager)horizontalLayoutManager).setOrientation(LinearLayoutManager.HORIZONTAL);
+        writing_recycler.setLayoutManager(horizontalLayoutManager);
+        WritingAdapter = new WritingRecyclerViewAdapter(mDataset);
         writing_recycler.setAdapter(WritingAdapter);
 
         upload_image = (ImageView) findViewById(R.id.upload_imageview);
@@ -87,19 +103,22 @@ public class Timeline_writing extends AppCompatActivity {
                 intent.setAction(Intent.ACTION_GET_CONTENT);
                 intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
 
-                startActivityForResult(intent, GALLERY_CODE);
+                startActivityForResult(Intent.createChooser(intent, "Select Picture"), GALLERY_CODE);
             }
         });
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {                                       //version 몇 이상부터 작동하기
             requestPermissions(new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 0);
         }
 
+        roomUploadDTO = new RoomUploadDTO();
+
         complete_btn = (TextView) findViewById(R.id.writing_complete);
         complete_btn.setClickable(true);
         complete_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                upload(imagePath);
+                uploadFile(roomUploadDTO);
+                Toast.makeText(Timeline_writing.this, "업로드 완료", Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -110,42 +129,27 @@ public class Timeline_writing extends AppCompatActivity {
         if (requestCode == GALLERY_CODE) {
             // Make sure the request was successful
             if (resultCode == RESULT_OK) {
-                try {
-                    // 선택한 이미지에서 비트맵 생성
-                    InputStream in = getContentResolver().openInputStream(data.getData());
-                    Bitmap img = BitmapFactory.decodeStream(in);
-                    in.close();
-                    // 이미지 표시
-                    upload_image.setImageBitmap(img);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-                imagePath = getPath(data.getData());
-
+                    ClipData clipData = data.getClipData();
+                    if(clipData != null){
+                        for(int i = 0; i < clipData.getItemCount(); i++){
+                            uriArrayList.add(clipData.getItemAt(i).getUri());
+                            mDataset.add(clipData.getItemAt(i).getUri());
+                        }
+                        WritingAdapter.notifyDataSetChanged();
+                    }
+                    Toast.makeText(this, "이미지 추가 완료", Toast.LENGTH_SHORT).show();
             }
         }
     }
 
-//        if(requestCode == GALLERY_CODE){
-//            imagePath = getPath(data.getData());
-//
-//            File f = new File (imagePath);
-//            upload_image.setImageURI(Uri.fromFile(f));                                                 //경로의 파일을 이미지뷰에 올리기
-//        }
-
-    public String getPath(Uri uri) {                                 //경로 코드
-        String[] proj = {MediaStore.Images.Media.DATA};
-        CursorLoader cursorLoader = new CursorLoader(this, uri, proj, null, null, null);
-
-        Cursor cursor = cursorLoader.loadInBackground();
-        int index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
-
-        cursor.moveToFirst();
-
-        return cursor.getString(index);
-    }
 
     class WritingRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+
+        private ArrayList<Uri> bit;
+
+        public WritingRecyclerViewAdapter(ArrayList<Uri> bitmaps){
+            bit = bitmaps;
+        }
 
         @NonNull
         @Override
@@ -157,12 +161,12 @@ public class Timeline_writing extends AppCompatActivity {
 
         @Override
         public void onBindViewHolder(@NonNull RecyclerView.ViewHolder viewHolder, int i) {
-            ((WritingViewHolder) viewHolder).upload_image.setImageResource(mDataset.get(i).img);
+            ((WritingViewHolder) viewHolder).upload_image.setImageURI(bit.get(i));
         }
 
         @Override
         public int getItemCount() {
-            return 0;
+            return bit.size();
         }
 
         private class WritingViewHolder extends RecyclerView.ViewHolder {
@@ -171,70 +175,43 @@ public class Timeline_writing extends AppCompatActivity {
 
             public WritingViewHolder(View view) {
                 super(view);
-                upload_image = findViewById(R.id.upload_imageview);
-                delete_picture = findViewById(R.id.delete_picture);
+                upload_image = view.findViewById(R.id.upload_imageview);
+                delete_picture = view.findViewById(R.id.delete_picture);
 
             }
         }
     }
 
-    private void upload(String uri) {
-        String mauth = auth.getCurrentUser().getUid();
-        final RoomDTO roomDTOs = new RoomDTO();
-        final StorageReference storageRef = storage.getReferenceFromUrl("gs://studylink-ec173.appspot.com");
+    //데이터 업로드
+    private void uploadFile(RoomUploadDTO roomUpload) {
+        dataref= FirebaseDatabase.getInstance().getReference("RoomUpload");
 
-        final Uri file = Uri.fromFile(new File(uri));                                                     //파일이 업로드 되는 경우
-        final StorageReference riversRef = storageRef.child("images/" + roomDTOs.getRoomName() + mauth + file.getLastPathSegment());
-        final UploadTask uploadTask = riversRef.putFile(file);
-
-// Register observers to listen for when the download is done or if it fails
-        uploadTask.addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception exception) {
-                // Handle unsuccessful uploads
-            }
-        }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-            @Override
-            public void onSuccess(final UploadTask.TaskSnapshot taskSnapshot) {                           //파일이 업로드 되었을 때 또 다른 이벤트 발생
-                // taskSnapshot.getMetadata() contains file metadata such as size, content-type, etc.
-                // ...
-                Task<Uri> urlTask = uploadTask.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
-                    @Override
-                    public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
-                        if (!task.isSuccessful()) {
-                            throw task.getException();
-                        }
-                        // Continue with the task to get the download URL
-                        return riversRef.getDownloadUrl();
-                    }
-                }).addOnCompleteListener(new OnCompleteListener<Uri>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Uri> task) {
-                        if (task.isSuccessful()) {
-                            Uri downloadUrl = task.getResult();
-
-                            TimelineWritingDTO writingDTO = new TimelineWritingDTO();
-                            writingDTO.setTitle(writing_title.getText().toString());
-                            writingDTO.setDescription(writing_content.getText().toString());
-                            writingDTO.setUid(auth.getCurrentUser().getUid());
-                            writingDTO.setUserId(auth.getCurrentUser().getEmail());
-                            writingDTO.setImageName(file.getLastPathSegment());
-                            writingDTO.setImageUrl(downloadUrl.toString());
-
-                            database.getReference().child(roomDTOs.getRoomName()).child("roomcontent").setValue(writingDTO);
-                            Toast.makeText(Timeline_writing.this, "업로드 성공", Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                });
-            }
-        });
-    }
-
-    class MyData {
-        public int img;
-
-        public MyData(int img) {
-            this.img = img;
+        String contentCheck1 = writing_title.getText().toString();
+        String contentCheck2 = writing_content.getText().toString();
+        //업로드할 내용이 있으면 수행
+        if (contentCheck1.trim().length()>0){
+            roomUpload.setTitle(contentCheck1);
+            check_title = true;
         }
+        if (contentCheck2.trim().length()>0) {
+            roomUpload.setWriting_content(contentCheck2);
+            check_content = true;
+        }
+        //업로드할 이미지가 있으면 수행
+        if (uriArrayList.size() != 0) {
+            //Unique한 파일명을 만들자.
+            for(int i = 0; i < uriArrayList.size(); i++) {
+                upfilename.add(uriArrayList.get(i).toString() +".jpeg");
+            }
+            //storage 주소와 폴더 파일명을 지정해 준다.
+            StorageReference storageRef = storage.getReferenceFromUrl("gs://studylink-ec173.appspot.com").child("images/" + roomUpload.getTitle() + upfilename.get(0));
+            for(int j = 0; j < uriArrayList.size(); j++) {
+                storageRef.putFile(uriArrayList.get(j));
+
+            }
+            roomUpload.setFilename(upfilename);
+        }
+
+        dataref.child(roomUpload.getTitle()).setValue(roomUpload);
     }
 }
