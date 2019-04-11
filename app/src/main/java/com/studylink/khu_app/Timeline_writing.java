@@ -10,9 +10,11 @@ import android.graphics.BitmapFactory;
 import android.media.Image;
 import android.net.Uri;
 import android.os.Build;
+import android.os.Parcelable;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
 import android.support.v4.content.CursorLoader;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -32,8 +34,11 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
@@ -65,21 +70,27 @@ public class Timeline_writing extends AppCompatActivity {
     private FirebaseAuth auth;
     private FirebaseDatabase database;
     private DatabaseReference dataref;
-    private ArrayList<Uri> uriArrayList = new ArrayList<>();
     private ArrayList<String> upfilename = new ArrayList<>();
     private RoomUploadDTO roomUploadDTO;
+    private String currentuser;
+    private String roomkey = "0";
+    private String currentRoomid;
     private boolean check_title = false;
     private boolean check_content = false;
+    private String contentCheck1;
+    private String contentCheck2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_timeline_writing);
+        roomUploadDTO = new RoomUploadDTO();
 
         storage = FirebaseStorage.getInstance();
         auth = FirebaseAuth.getInstance();
         database = FirebaseDatabase.getInstance();
-        dataref = database.getReference();
+        currentuser = auth.getCurrentUser().getUid();
+
 
         writing_recycler = findViewById(R.id.recycler_picture);
         RecyclerView.LayoutManager horizontalLayoutManager = new LinearLayoutManager(this);
@@ -110,7 +121,21 @@ public class Timeline_writing extends AppCompatActivity {
             requestPermissions(new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 0);
         }
 
-        roomUploadDTO = new RoomUploadDTO();
+        database.getReference().child("users").child(currentuser).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                AccountDTO acc = dataSnapshot.getValue(AccountDTO.class);
+                roomUploadDTO.setUploadername(acc.getUsername());
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+        Intent intent2 = getIntent();
+        currentRoomid = intent2.getStringExtra("currentRoomid");
 
         complete_btn = (TextView) findViewById(R.id.writing_complete);
         complete_btn.setClickable(true);
@@ -118,7 +143,15 @@ public class Timeline_writing extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 uploadFile(roomUploadDTO);
+                Fragment fragment = new TimelineActivity();
+                Bundle bundle = new Bundle();
+                bundle.putParcelableArrayList("imageData", mDataset);
+                bundle.putString("roomkey", roomkey);
+                fragment.setArguments(bundle);
+
+                Intent intent = new Intent(Timeline_writing.this, Fragement_navi.class);
                 Toast.makeText(Timeline_writing.this, "업로드 완료", Toast.LENGTH_SHORT).show();
+                startActivity(intent);
             }
         });
     }
@@ -132,7 +165,6 @@ public class Timeline_writing extends AppCompatActivity {
                     ClipData clipData = data.getClipData();
                     if(clipData != null){
                         for(int i = 0; i < clipData.getItemCount(); i++){
-                            uriArrayList.add(clipData.getItemAt(i).getUri());
                             mDataset.add(clipData.getItemAt(i).getUri());
                         }
                         WritingAdapter.notifyDataSetChanged();
@@ -183,11 +215,13 @@ public class Timeline_writing extends AppCompatActivity {
     }
 
     //데이터 업로드
-    private void uploadFile(RoomUploadDTO roomUpload) {
-        dataref= FirebaseDatabase.getInstance().getReference("RoomUpload");
+    private void uploadFile(RoomUploadDTO roomUploa) {
+        dataref= database.getReference("RoomUpload");
 
-        String contentCheck1 = writing_title.getText().toString();
-        String contentCheck2 = writing_content.getText().toString();
+        RoomUploadDTO roomUpload = roomUploa;
+
+        contentCheck1 = writing_title.getText().toString();
+        contentCheck2 = writing_content.getText().toString();
         //업로드할 내용이 있으면 수행
         if (contentCheck1.trim().length()>0){
             roomUpload.setTitle(contentCheck1);
@@ -198,20 +232,21 @@ public class Timeline_writing extends AppCompatActivity {
             check_content = true;
         }
         //업로드할 이미지가 있으면 수행
-        if (uriArrayList.size() != 0) {
+        if (mDataset.size() != 0) {
             //Unique한 파일명을 만들자.
-            for(int i = 0; i < uriArrayList.size(); i++) {
-                upfilename.add(uriArrayList.get(i).toString() +".jpeg");
+            for(int i = 0; i < mDataset.size(); i++) {
+                SimpleDateFormat formatter = new SimpleDateFormat("yyyyMMdd_HH:mm:ss");
+                Date now = new Date();
+                upfilename.add(formatter.format(now) + i +".jpeg");
             }
             //storage 주소와 폴더 파일명을 지정해 준다.
-            StorageReference storageRef = storage.getReferenceFromUrl("gs://studylink-ec173.appspot.com").child("images/" + roomUpload.getTitle() + upfilename.get(0));
-            for(int j = 0; j < uriArrayList.size(); j++) {
-                storageRef.putFile(uriArrayList.get(j));
-
+            for(int j = 0; j < mDataset.size(); j++) {
+                StorageReference storageRef = storage.getReferenceFromUrl("gs://studylink-ec173.appspot.com").child("images/" + currentRoomid + "/" + upfilename.get(j));
+                storageRef.putFile(mDataset.get(j));
             }
             roomUpload.setFilename(upfilename);
         }
 
-        dataref.child(roomUpload.getTitle()).setValue(roomUpload);
+        dataref.child(currentRoomid).child(contentCheck1).setValue(roomUpload);
     }
 }
