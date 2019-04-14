@@ -14,7 +14,6 @@ public class AccountDTO implements Serializable {
     public String usersex;
     public String userregion;
     public List<String> disposition;
-    public List<String> mystudyRoom;
     private List<String> roomId;
 //    public String registcheck = "false";
 
@@ -57,14 +56,6 @@ public class AccountDTO implements Serializable {
 
     public void setDisposition(List<String> disposition) {
         this.disposition = disposition;
-    }
-
-    public List<String> getMystudyRoom() {
-        return  mystudyRoom;
-    }
-
-    public void setMystudyRoom(List<String> mystudyRoom) {
-        this.mystudyRoom = mystudyRoom;
     }
 
     public List<String> getRoomId() {

@@ -8,6 +8,7 @@ public class RoomUploadDTO implements Serializable {
 
     private String title;
     private String writing_content;
+    private String uploadername;
     private List<String> filename;
     private Date time;
     private String userId;
@@ -26,6 +27,14 @@ public class RoomUploadDTO implements Serializable {
 
     public void setWriting_content(String writing_content) {
         this.writing_content = writing_content;
+    }
+
+    public String getUploadername() {
+        return uploadername;
+    }
+
+    public void setUploadername(String uploadername) {
+        this.uploadername = uploadername;
     }
 
     public List<String> getFilename() {
