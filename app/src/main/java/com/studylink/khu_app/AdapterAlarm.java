@@ -3,6 +3,7 @@ package com.studylink.khu_app;
 import android.support.constraint.ConstraintLayout;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,6 +19,7 @@ public class AdapterAlarm extends RecyclerView.Adapter<AdapterAlarm.MyViewHolder
 
     private ArrayList<RoomUploadDTO> arrayList;
     private static View.OnClickListener onClickListener;
+    private String currentUser;
 
     public AdapterAlarm(ArrayList<RoomUploadDTO> items, View.OnClickListener onClick){
         arrayList = items;
@@ -60,8 +62,16 @@ public class AdapterAlarm extends RecyclerView.Adapter<AdapterAlarm.MyViewHolder
         RoomUploadDTO room = arrayList.get(position);
 
         // 텍스트 설정
-        holder.alarm_title.setText(room.getTitle());
-        holder.alarm_content.setText(room.getWriting_content());
+        holder.alarm_title.setText("'" + room.getCategory() + "' 스터디 새로운 " + room.getTextType());
+        if(room.getTextType().equals("소식")){
+            holder.alarm_content.setText(currentUser+"님, '"+room.getCategory()+"' 스터디에 새로운 글이 게시되었습니다. 지금 확인해 보세요!");
+        }
+        else{
+            holder.alarm_content.setText(currentUser+"님, '"+room.getCategory()+"' 스터디에 새로운 투표가 시작되었습니다. 지금 바로 투표해주세요!");
+        }
+
+        // 이미지 설정
+        holder.alarm_image.setImageResource(R.drawable.study_test);
 
         // 시간 설정
         SimpleDateFormat dateFormat = new SimpleDateFormat("M월d일 HH시mm분");
@@ -80,7 +90,7 @@ public class AdapterAlarm extends RecyclerView.Adapter<AdapterAlarm.MyViewHolder
             minute = Math.abs(minute);
             if (day == 0){
                 if(hour == 0){
-                    if(minute < 10){
+                    if(minute < 1){
                         holder.alarm_time.setText("방금");
                     }
                     else if(minute < 60){
@@ -113,10 +123,10 @@ public class AdapterAlarm extends RecyclerView.Adapter<AdapterAlarm.MyViewHolder
     }
 
     public void addRoom(RoomUploadDTO room){
-        arrayList.add(room);
+        arrayList.add(0, room);
         notifyItemInserted(arrayList.size()-1);
     }
-    public RoomUploadDTO getRoom(int position){
-        return arrayList.get(position);
+    public void setUser(String user){
+        currentUser = user;
     }
 }

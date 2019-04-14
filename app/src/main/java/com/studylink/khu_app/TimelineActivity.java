@@ -76,7 +76,6 @@ public class TimelineActivity extends Fragment {
         mauth = FirebaseAuth.getInstance();
         currentUser = mauth.getCurrentUser().getUid();
 
-
         toMypage = (ImageView) view.findViewById(R.id.toMypage);
         toMainpage = (ImageView) view.findViewById(R.id.toMainpage);
 
@@ -86,6 +85,10 @@ public class TimelineActivity extends Fragment {
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(), Timeline_writing.class);
                 intent.putExtra("currentRoomid", currentRoomuid);
+                if(nameofroom != null){
+                    // 수정해야함#########################################################################################
+                    intent.putExtra("currentRoomCategory", nameofroom.get(0).getSpinner1());
+                }
                 startActivity(intent);
             }
         });
@@ -108,9 +111,11 @@ public class TimelineActivity extends Fragment {
         });
 
         recycler_studyname = (RecyclerView) view.findViewById(R.id.recycler_studyname);
+
         RecyclerView.LayoutManager horizontalLayoutManager = new LinearLayoutManager(getContext());
         ((LinearLayoutManager)horizontalLayoutManager).setOrientation(LinearLayoutManager.HORIZONTAL);
         recycler_studyname.setLayoutManager(horizontalLayoutManager);
+
         StudynameAdapter = new StudynameRecyclerViewAdapter(nameofroom);
         recycler_studyname.setAdapter(StudynameAdapter);
 
@@ -122,10 +127,13 @@ public class TimelineActivity extends Fragment {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 AccountDTO acc = dataSnapshot.getValue(AccountDTO.class);
-                currentRoomuid = acc.getRoomId().get(0);
-                setTimelineData();
+                if(acc.getRoomId()!=null){
+                    // 수정해야함###############################################################################
+                    currentRoomuid = acc.getRoomId().get(0);
+                    setTimelineData();
 
-                timelineBoardViewAdapter.notifyDataSetChanged();
+                    timelineBoardViewAdapter.notifyDataSetChanged();
+                }
             }
 
             @Override
@@ -136,6 +144,7 @@ public class TimelineActivity extends Fragment {
 
         recycler_timelineBoard = (RecyclerView) view.findViewById(R.id.recycler_timelineBoard);
         recycler_timelineBoard.setLayoutManager(new LinearLayoutManager(getContext()));
+
         timelineBoardViewAdapter = new TimelineBoardViewAdapter(groupUri, uploadDTOArrayList);
         recycler_timelineBoard.setAdapter(timelineBoardViewAdapter);
 
@@ -176,16 +185,17 @@ public class TimelineActivity extends Fragment {
 //    }
 
     private void setTimelineData() {
-
         dataref.child("RoomUpload").child(currentRoomuid).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 RoomUploadDTO uploadDTO;
-                for (DataSnapshot data : dataSnapshot.getChildren()) {
-                    uploadDTO = data.getValue(RoomUploadDTO.class);
-                    uploadDTOArrayList.add(uploadDTO);
+                if (dataSnapshot != null){
+                    for (DataSnapshot data : dataSnapshot.getChildren()) {
+                        uploadDTO = data.getValue(RoomUploadDTO.class);
+                        uploadDTOArrayList.add(0, uploadDTO);
+                    }
+                    timelineBoardViewAdapter.notifyDataSetChanged();
                 }
-                timelineBoardViewAdapter.notifyDataSetChanged();
             }
 
             @Override
@@ -199,7 +209,7 @@ public class TimelineActivity extends Fragment {
 //
 
     private void setData(){
-        mdatabase.getReference().child("users").child(currentUser).addListenerForSingleValueEvent(new ValueEventListener() {
+        dataref.child("users").child(currentUser).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 AccountDTO acc = dataSnapshot.getValue(AccountDTO.class);
@@ -218,7 +228,7 @@ public class TimelineActivity extends Fragment {
     }
 
     private void setData1(){
-        mdatabase.getReference().child("room").addListenerForSingleValueEvent(new ValueEventListener() {
+        dataref.child("room").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 int j = 0;
@@ -260,6 +270,26 @@ public class TimelineActivity extends Fragment {
             if (size1 > 0) {
                 for (int i = 0; i < size1; i++) {
                     getroomname.remove(0);
+                }
+            }
+        }
+
+
+        if(uploadDTOArrayList != null){
+            int size = uploadDTOArrayList.size();
+            if (size > 0) {
+                for (int i = 0; i < size; i++) {
+                    uploadDTOArrayList.remove(0);
+                }
+                timelineBoardViewAdapter.notifyItemRangeRemoved(0, size);
+            }
+
+            if (groupUri != null){
+                int size1 = groupUri.size();
+                if (size1 > 0) {
+                    for (int i = 0; i < size1; i++) {
+                        groupUri.remove(0);
+                    }
                 }
             }
         }
@@ -308,6 +338,8 @@ public class TimelineActivity extends Fragment {
             }
         }
     }
+
+
 
     class TimelineBoardViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{           //Timeline에 올라가는 컨텐츠의 recycler
 

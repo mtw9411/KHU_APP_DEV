@@ -9,10 +9,18 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
@@ -21,16 +29,64 @@ public class AlarmActivity extends Fragment {
     private RecyclerView recycler_alarm;
     private ArrayList<RoomUploadDTO> arrayList_alarm = new ArrayList<>();
     private AdapterAlarm alarm_Adapter;
+    private DatabaseReference databaseReference;
+    private FirebaseAuth mAuth;
+    private AccountDTO currentUser;
+    private RoomUploadDTO roomUploadDTO;
+    private String RoomId;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        databaseReference = FirebaseDatabase.getInstance().getReference();
+
+        // 현재 유저
+        String uid = mAuth.getInstance().getCurrentUser().getUid();
+        databaseReference.child("users").child(uid).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                currentUser = dataSnapshot.getValue(AccountDTO.class);
+                if(currentUser.getRoomId()!=null){
+                    // 유저가 참여한 방 id - 수정해야함###########################################################################3
+                    RoomId = currentUser.getRoomId().get(0);
+                    setData();
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+    }
+
+    public void setData(){
+        // 현재 유저 이름
+        alarm_Adapter.setUser(currentUser.getUsername());
+        // 내가 참여한 스터디방과 같은 방
+        databaseReference.child("RoomUpload").child(RoomId).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                // 글 하나하나
+                for(DataSnapshot snapshot : dataSnapshot.getChildren()){
+                    roomUploadDTO = snapshot.getValue(RoomUploadDTO.class);
+                    alarm_Adapter.addRoom(roomUploadDTO);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
     }
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @android.support.annotation.Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         ViewGroup view = (ViewGroup) inflater.inflate(R.layout.activity_alarm, container, false);
+        recycler_alarm = view.findViewById(R.id.recycler_alarm);
 
 // "알림창" RecyclerView 구현
         // 레이아웃 종류 정의
@@ -52,7 +108,6 @@ public class AlarmActivity extends Fragment {
             }
         });
         recycler_alarm.setAdapter(alarm_Adapter);
-
 
         return view;
 

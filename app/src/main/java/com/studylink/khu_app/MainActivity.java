@@ -87,7 +87,7 @@ public class MainActivity extends Fragment {
         final DatabaseReference myRef = database.child("room");
 
         // 현재 유저
-        String current_user = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        String current_user = auth.getCurrentUser().getUid();
         final DatabaseReference dr = database.child("users").child(current_user);
         dr.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override

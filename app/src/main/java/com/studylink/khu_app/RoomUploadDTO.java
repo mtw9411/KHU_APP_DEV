@@ -11,7 +11,8 @@ public class RoomUploadDTO implements Serializable {
     private String uploadername;
     private List<String> filename;
     private Date time;
-    private String userId;
+    private String category;
+    private String textType;
 
     public String getTitle() {
         return title;
@@ -53,12 +54,21 @@ public class RoomUploadDTO implements Serializable {
         this.time = time;
     }
 
-    public String getUserId() {
-        return userId;
+    public String getCategory() {
+        return category;
     }
 
-    public void setUserId(String userId) {
-        this.userId = userId;
+    public void setCategory(String category) {
+        this.category = category;
     }
+
+    public String getTextType() {
+        return textType;
+    }
+
+    public void setTextType(String textType) {
+        this.textType = textType;
+    }
+
 
 }
