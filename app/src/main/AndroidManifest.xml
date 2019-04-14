@@ -13,7 +13,6 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".Fragement_navi"></activity>
-        <activity android:name=".MainActivity"></activity>
         <activity
             android:name=".LoadingActivity"
             android:theme="@style/NoTitleBar" />
@@ -28,7 +27,6 @@
         <activity android:name=".PasswordResetFinActivity" />
         <activity android:name=".AccountSetActivity" />
         <activity android:name=".AccountFinActivity" />
-        <activity android:name=".TimelineActivity" />
         <activity android:name=".LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -47,8 +45,6 @@
         <activity android:name=".absent_registrate" />
         <activity android:name=".Timeline_writing" />
         <activity android:name=".VoteMain" />
-        <activity android:name=".AlarmActivity" />
-        <activity android:name=".Mypage_main"></activity>
         <activity android:name=".MypageEditActivity" />
     </application>
 

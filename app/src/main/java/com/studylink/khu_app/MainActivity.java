@@ -57,7 +57,6 @@ public class MainActivity extends Fragment {
     private DatabaseReference database = FirebaseDatabase.getInstance().getReference();
     private FragmentManager fm;
     private FragmentTransaction ft;
-    private int i = 0;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -94,7 +93,10 @@ public class MainActivity extends Fragment {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 currentUser = dataSnapshot.getValue(AccountDTO.class);
-                myStudyNum.setText("+" + currentUser.getRoomId().size());
+                if(currentUser.getRoomId() != null){
+                    myStudyNum.setText("+" + currentUser.getRoomId().size());
+                    Log.d("#################", Integer.toString(currentUser.getRoomId().size()));
+                }
             }
 
             @Override
@@ -184,13 +186,13 @@ public class MainActivity extends Fragment {
                 if (obj != null) {
                     int position = (int) obj;
                     RoomDTO selectRoom = matching_Adapter.getRoom(position);
-                    // 가입한 스터디방이 3개이면
-                    if (currentUser.getRoomId().size() == 3){
-                        Toast.makeText(getContext(), "3개 이상의 스터디를 가입할 수 없습니다.", Toast.LENGTH_SHORT).show();
-                    }
-                    else{
-                        // 참여한 스터디가 1개라도 있으면
-                        if (currentUser.getRoomId() != null) {
+                    // 참여한 스터디가 1개라도 있으면
+                    if (currentUser.getRoomId() != null) {
+                        // 가입한 스터디방이 3개이면
+                        if (currentUser.getRoomId().size() == 3){
+                            Toast.makeText(getContext(), "3개 이상의 스터디를 가입할 수 없습니다.", Toast.LENGTH_SHORT).show();
+                        }
+                        else{
                             boolean check = true;
                             // 같은 스터디인지 확인
                             for (int i = 0; i < currentUser.getRoomId().size(); i++) {
@@ -223,22 +225,22 @@ public class MainActivity extends Fragment {
                                 Toast.makeText(getContext(), "이미 참여한 스터디입니다.", Toast.LENGTH_SHORT).show();
                             }
                         }
-                        // 참여한 스터디가 없으면
-                        else {
-                            roomList.add(selectRoom.getId());
-                            currentUser.setRoomId(roomList);
-                            dr.setValue(currentUser);
+                    }
+                    // 참여한 스터디가 없으면
+                    else {
+                        roomList.add(selectRoom.getId());
+                        currentUser.setRoomId(roomList);
+                        dr.setValue(currentUser);
 
-                            Fragment fragment = new TimelineActivity();
-                            Bundle bundle = new Bundle();
-                            bundle.putSerializable("Timeline", selectRoom);
-                            fragment.setArguments(bundle);
+                        Fragment fragment = new TimelineActivity();
+                        Bundle bundle = new Bundle();
+                        bundle.putSerializable("Timeline", selectRoom);
+                        fragment.setArguments(bundle);
 
-                            ft.replace(R.id.Frame_navi, fragment).commit();
+                        ft.replace(R.id.Frame_navi, fragment).commit();
 //                            Intent intent = new Intent(getContext(), TimelineActivity.class);
 //                            intent.putExtra("Timeline", selectRoom);
 //                            startActivity(intent);
-                        }
                     }
                 }
             }
@@ -313,28 +315,26 @@ public class MainActivity extends Fragment {
 
 
 // firebase에 저장된 room 데이터 가져오기
-        if(i == 0) {
-            myRef.addListenerForSingleValueEvent(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                    for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                        RoomDTO roomDTO = snapshot.getValue(RoomDTO.class);
+        myRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                    RoomDTO roomDTO = snapshot.getValue(RoomDTO.class);
 
-                        // 참여한 방이 있으면
-                        if (currentUser.getRoomId() != null) {
-                            // room의 id가 유저가 참여한 방과 같으면
-                            for (int i = 0; i < currentUser.getRoomId().size(); i++) {
-                                if (roomDTO.getId().equals(currentUser.getRoomId().get(i))) {
-                                    myStudy_Adapter.addRoom(roomDTO);
-                                    break;
-                                }
+                    // 참여한 방이 있으면
+                    if (currentUser.getRoomId() != null) {
+                        // room의 id가 유저가 참여한 방과 같으면
+                        for (int i = 0; i < currentUser.getRoomId().size(); i++) {
+                            if (roomDTO.getId().equals(currentUser.getRoomId().get(i))) {
+                                myStudy_Adapter.addRoom(roomDTO);
+                                break;
                             }
                         }
+                    }
 
-                        // 방의 인원수가 남아 있으면
-                        if (roomDTO.getMember() < roomDTO.getTotal_member()) {
-                            matching_Adapter.addRoom(roomDTO);
-                        }
+                    // 방의 인원수가 남아 있으면
+                    if (roomDTO.getMember() < roomDTO.getTotal_member()) {
+                        matching_Adapter.addRoom(roomDTO);
 
                         // 지역이 같은 곳만
                         if (roomDTO.getRegion().equals(currentUser.getUserregion())) {
@@ -352,14 +352,53 @@ public class MainActivity extends Fragment {
                         }
                     }
                 }
-                @Override
-                public void onCancelled(@NonNull DatabaseError databaseError) {
-                }
-            });
-            i++;
-        }
-
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+            }
+        });
         return view;
+    }
+
+    @Override
+    public void onPause(){
+        super.onPause();
+
+        int size1 = arrayList_myStudy.size();
+        int size2 = arrayList_matching.size();
+        int size3 = arrayList_myTown.size();
+        int size4 = arrayList_deadline.size();
+        int size5 = arrayList_newStudy.size();
+        if (size1 > 0) {
+            for (int i = 0; i < size1; i++) {
+                arrayList_myStudy.remove(0);
+            }
+            myStudy_Adapter.notifyItemRangeRemoved(0, size1);
+        }
+        if (size2 > 0) {
+            for (int i = 0; i < size2; i++) {
+                arrayList_matching.remove(0);
+            }
+            matching_Adapter.notifyItemRangeRemoved(0, size2);
+        }
+        if (size3 > 0) {
+            for (int i = 0; i < size3; i++) {
+                arrayList_myTown.remove(0);
+            }
+            myTown_Adapter.notifyItemRangeRemoved(0, size3);
+        }
+        if (size4 > 0) {
+            for (int i = 0; i < size4; i++) {
+                arrayList_deadline.remove(0);
+            }
+            deadline_Adapter.notifyItemRangeRemoved(0, size4);
+        }
+        if (size5 > 0) {
+            for (int i = 0; i < size5; i++) {
+                arrayList_newStudy.remove(0);
+            }
+            newStudy_Adapter.notifyItemRangeRemoved(0, size5);
+        }
     }
 }
 

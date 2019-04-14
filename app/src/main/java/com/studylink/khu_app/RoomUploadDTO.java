@@ -1,12 +1,16 @@
 package com.studylink.khu_app;
 
+import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 
-public class RoomUploadDTO {
+public class RoomUploadDTO implements Serializable {
 
     private String title;
     private String writing_content;
     private List<String> filename;
+    private Date time;
+    private String userId;
 
     public String getTitle() {
         return title;
@@ -31,4 +35,21 @@ public class RoomUploadDTO {
     public void setFilename(List<String> filename) {
         this.filename = filename;
     }
+
+    public Date getTime() {
+        return time;
+    }
+
+    public void setTime(Date time) {
+        this.time = time;
+    }
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
+
 }

@@ -1,5 +1,6 @@
 package com.studylink.khu_app;
 
+import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.design.internal.BottomNavigationItemView;
@@ -29,6 +30,9 @@ public class Fragement_navi extends AppCompatActivity {
         setContentView(R.layout.activity_fragement_navi);
         Intent intent = new Intent(this, LoadingActivity.class);
         startActivity(intent);
+
+        Bundle bundle = getIntent().getExtras();
+        int frag_num = (Integer) bundle.get("frag_num");
 
         fragmentManager = getSupportFragmentManager();
         fragmentTransaction = fragmentManager.beginTransaction();
@@ -69,7 +73,7 @@ public class Fragement_navi extends AppCompatActivity {
                         return false;
                     }
                 });
-        setFrag(0);
+        setFrag(frag_num);
    //     itemCheck();
     }
 

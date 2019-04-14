@@ -119,6 +119,7 @@ public class LoginActivity extends AppCompatActivity {
                 FirebaseUser user = firebaseAuth.getCurrentUser();
                 if (user != null) {
                     Intent intent = new Intent (LoginActivity.this, Fragement_navi.class);
+                    intent.putExtra("frag_num", 0);
                     startActivity(intent);
                     finish();
                 }           // User is signed in

@@ -16,10 +16,10 @@ import java.util.Date;
 
 public class AdapterAlarm extends RecyclerView.Adapter<AdapterAlarm.MyViewHolder> {
 
-    private ArrayList<RoomDTO> arrayList;
+    private ArrayList<RoomUploadDTO> arrayList;
     private static View.OnClickListener onClickListener;
 
-    public AdapterAlarm(ArrayList<RoomDTO> items, View.OnClickListener onClick){
+    public AdapterAlarm(ArrayList<RoomUploadDTO> items, View.OnClickListener onClick){
         arrayList = items;
         onClickListener = onClick;
     }
@@ -57,14 +57,15 @@ public class AdapterAlarm extends RecyclerView.Adapter<AdapterAlarm.MyViewHolder
     // 아이템 뷰에 데이터 넣기
     @Override
     public void onBindViewHolder(final MyViewHolder holder, int position) {
-        RoomDTO room = arrayList.get(position);
+        RoomUploadDTO room = arrayList.get(position);
 
         // 텍스트 설정
-        holder.alarm_title.setText(room.getRoomName());
-        holder.alarm_content.setText(room.getRegion());
+        holder.alarm_title.setText(room.getTitle());
+        holder.alarm_content.setText(room.getWriting_content());
 
         // 시간 설정
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy년MM월dd일 HH시mm분");
+        SimpleDateFormat dateFormat = new SimpleDateFormat("M월d일 HH시mm분");
+        SimpleDateFormat dateFormat1 = new SimpleDateFormat("M월 d일");
         String nowDate = dateFormat.format(new Date());
         String roomDate = dateFormat.format(room.getTime());
         try {
@@ -94,7 +95,7 @@ public class AdapterAlarm extends RecyclerView.Adapter<AdapterAlarm.MyViewHolder
                 }
             }
             else{
-                holder.alarm_time.setText(day + "일 전");
+                holder.alarm_time.setText(dateFormat1.parse(roomDate).toString());
             }
         } catch (ParseException e) {
             e.printStackTrace();
@@ -111,11 +112,11 @@ public class AdapterAlarm extends RecyclerView.Adapter<AdapterAlarm.MyViewHolder
         return arrayList.size();
     }
 
-    public void addRoom(RoomDTO room){
+    public void addRoom(RoomUploadDTO room){
         arrayList.add(room);
         notifyItemInserted(arrayList.size()-1);
     }
-    public RoomDTO getRoom(int position){
+    public RoomUploadDTO getRoom(int position){
         return arrayList.get(position);
     }
 }
