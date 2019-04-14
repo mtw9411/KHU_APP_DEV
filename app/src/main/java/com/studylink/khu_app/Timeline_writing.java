@@ -74,7 +74,7 @@ public class Timeline_writing extends AppCompatActivity {
     private RoomUploadDTO roomUploadDTO;
     private String currentuser;
     private String roomkey = "0";
-    private String currentRoomid;
+    private String currentRoomid, currentRoomCategory;
     private boolean check_title = false;
     private boolean check_content = false;
     private String contentCheck1;
@@ -136,6 +136,7 @@ public class Timeline_writing extends AppCompatActivity {
 
         Intent intent2 = getIntent();
         currentRoomid = intent2.getStringExtra("currentRoomid");
+        currentRoomCategory = intent2.getStringExtra("currentRoomCategory");
 
         complete_btn = (TextView) findViewById(R.id.writing_complete);
         complete_btn.setClickable(true);
@@ -151,6 +152,7 @@ public class Timeline_writing extends AppCompatActivity {
                 fragment.setArguments(bundle);
 
                 Intent intent = new Intent(Timeline_writing.this, Fragement_navi.class);
+                intent.putExtra("frag_num", 1);
                 Toast.makeText(Timeline_writing.this, "업로드 완료", Toast.LENGTH_SHORT).show();
                 startActivity(intent);
             }
@@ -224,14 +226,22 @@ public class Timeline_writing extends AppCompatActivity {
         contentCheck1 = writing_title.getText().toString();
         contentCheck2 = writing_content.getText().toString();
         //업로드할 내용이 있으면 수행
+        // 스터디 카테고리
+        roomUpload.setCategory(currentRoomCategory);
+        // 글 종류
+        roomUpload.setTextType("소식");
+        // 제목
         if (contentCheck1.trim().length()>0){
             roomUpload.setTitle(contentCheck1);
             check_title = true;
         }
+        //내용
         if (contentCheck2.trim().length()>0) {
             roomUpload.setWriting_content(contentCheck2);
             check_content = true;
         }
+        //업로드 시간
+        roomUpload.setTime(new Date());
         //업로드할 이미지가 있으면 수행
         if (mDataset.size() != 0) {
             //Unique한 파일명을 만들자.

@@ -4,6 +4,7 @@ import android.net.Uri;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class RoomUploadDTO implements Serializable {
@@ -13,6 +14,9 @@ public class RoomUploadDTO implements Serializable {
     private String uploadername;
     private List<String> filename;
     private ArrayList<Uri> imageuri;
+    private Date time;
+    private String category;
+    private String textType;
 
     public String getTitle() {
         return title;
@@ -52,5 +56,29 @@ public class RoomUploadDTO implements Serializable {
 
     public ArrayList<Uri> getImageuri() {
         return imageuri;
+    }
+
+    public Date getTime() {
+        return time;
+    }
+
+    public void setTime(Date time) {
+        this.time = time;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
+    public String getTextType() {
+        return textType;
+    }
+
+    public void setTextType(String textType) {
+        this.textType = textType;
     }
 }

@@ -3,6 +3,7 @@ package com.studylink.khu_app;
 import android.support.constraint.ConstraintLayout;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,10 +17,11 @@ import java.util.Date;
 
 public class AdapterAlarm extends RecyclerView.Adapter<AdapterAlarm.MyViewHolder> {
 
-    private ArrayList<RoomDTO> arrayList;
+    private ArrayList<RoomUploadDTO> arrayList;
     private static View.OnClickListener onClickListener;
+    private String currentUser;
 
-    public AdapterAlarm(ArrayList<RoomDTO> items, View.OnClickListener onClick){
+    public AdapterAlarm(ArrayList<RoomUploadDTO> items, View.OnClickListener onClick){
         arrayList = items;
         onClickListener = onClick;
     }
@@ -57,14 +59,23 @@ public class AdapterAlarm extends RecyclerView.Adapter<AdapterAlarm.MyViewHolder
     // 아이템 뷰에 데이터 넣기
     @Override
     public void onBindViewHolder(final MyViewHolder holder, int position) {
-        RoomDTO room = arrayList.get(position);
+        RoomUploadDTO room = arrayList.get(position);
 
         // 텍스트 설정
-        holder.alarm_title.setText(room.getRoomName());
-        holder.alarm_content.setText(room.getRegion());
+        holder.alarm_title.setText("'" + room.getCategory() + "' 스터디 새로운 " + room.getTextType());
+        if(room.getTextType().equals("소식")){
+            holder.alarm_content.setText(currentUser+"님, '"+room.getCategory()+"' 스터디에 새로운 글이 게시되었습니다. 지금 확인해 보세요!");
+        }
+        else{
+            holder.alarm_content.setText(currentUser+"님, '"+room.getCategory()+"' 스터디에 새로운 투표가 시작되었습니다. 지금 바로 투표해주세요!");
+        }
+
+        // 이미지 설정
+        holder.alarm_image.setImageResource(R.drawable.study_test);
 
         // 시간 설정
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy년MM월dd일 HH시mm분");
+        SimpleDateFormat dateFormat = new SimpleDateFormat("M월d일 HH시mm분");
+        SimpleDateFormat dateFormat1 = new SimpleDateFormat("M월 d일");
         String nowDate = dateFormat.format(new Date());
         String roomDate = dateFormat.format(room.getTime());
         try {
@@ -79,7 +90,7 @@ public class AdapterAlarm extends RecyclerView.Adapter<AdapterAlarm.MyViewHolder
             minute = Math.abs(minute);
             if (day == 0){
                 if(hour == 0){
-                    if(minute < 10){
+                    if(minute < 1){
                         holder.alarm_time.setText("방금");
                     }
                     else if(minute < 60){
@@ -94,7 +105,7 @@ public class AdapterAlarm extends RecyclerView.Adapter<AdapterAlarm.MyViewHolder
                 }
             }
             else{
-                holder.alarm_time.setText(day + "일 전");
+                holder.alarm_time.setText(dateFormat1.parse(roomDate).toString());
             }
         } catch (ParseException e) {
             e.printStackTrace();
@@ -111,11 +122,11 @@ public class AdapterAlarm extends RecyclerView.Adapter<AdapterAlarm.MyViewHolder
         return arrayList.size();
     }
 
-    public void addRoom(RoomDTO room){
-        arrayList.add(room);
+    public void addRoom(RoomUploadDTO room){
+        arrayList.add(0, room);
         notifyItemInserted(arrayList.size()-1);
     }
-    public RoomDTO getRoom(int position){
-        return arrayList.get(position);
+    public void setUser(String user){
+        currentUser = user;
     }
 }

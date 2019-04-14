@@ -87,7 +87,6 @@ public class TimelineActivity extends Fragment {
         currentUser = mauth.getCurrentUser().getUid();
         storage = FirebaseStorage.getInstance();
 
-
         toMypage = (ImageView) view.findViewById(R.id.toMypage);
         toMainpage = (ImageView) view.findViewById(R.id.toMainpage);
 
@@ -97,6 +96,10 @@ public class TimelineActivity extends Fragment {
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(), Timeline_writing.class);
                 intent.putExtra("currentRoomid", currentRoomuid);
+                if(nameofroom != null){
+                    // 수정해야함#########################################################################################
+                    intent.putExtra("currentRoomCategory", nameofroom.get(0).getSpinner1());
+                }
                 startActivity(intent);
             }
         });
@@ -119,9 +122,11 @@ public class TimelineActivity extends Fragment {
         });
 
         recycler_studyname = (RecyclerView) view.findViewById(R.id.recycler_studyname);
+
         RecyclerView.LayoutManager horizontalLayoutManager = new LinearLayoutManager(getContext());
         ((LinearLayoutManager)horizontalLayoutManager).setOrientation(LinearLayoutManager.HORIZONTAL);
         recycler_studyname.setLayoutManager(horizontalLayoutManager);
+
         StudynameAdapter = new StudynameRecyclerViewAdapter(nameofroom);
         recycler_studyname.setAdapter(StudynameAdapter);
 
@@ -133,10 +138,13 @@ public class TimelineActivity extends Fragment {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 AccountDTO acc = dataSnapshot.getValue(AccountDTO.class);
-                currentRoomuid = acc.getRoomId().get(0);
-                setTimelineData();
+                if(acc.getRoomId()!=null){
+                    // 수정해야함###############################################################################
+                    currentRoomuid = acc.getRoomId().get(0);
+                    setTimelineData();
 
-                timelineBoardViewAdapter.notifyDataSetChanged();
+                    timelineBoardViewAdapter.notifyDataSetChanged();
+                }
             }
 
             @Override
@@ -147,6 +155,7 @@ public class TimelineActivity extends Fragment {
 
         recycler_timelineBoard = (RecyclerView) view.findViewById(R.id.recycler_timelineBoard);
         recycler_timelineBoard.setLayoutManager(new LinearLayoutManager(getContext()));
+
         timelineBoardViewAdapter = new TimelineBoardViewAdapter(groupUri, uploadDTOArrayList);
         recycler_timelineBoard.setAdapter(timelineBoardViewAdapter);
 
@@ -188,23 +197,26 @@ public class TimelineActivity extends Fragment {
 
     private void setTimelineData() {
         if(k == 0){
-            dataref.child("RoomUpload").child(currentRoomuid).addListenerForSingleValueEvent(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                    RoomUploadDTO uploadDTO;
+        dataref.child("RoomUpload").child(currentRoomuid).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                RoomUploadDTO uploadDTO;
+                if (dataSnapshot != null){
                     for (DataSnapshot data : dataSnapshot.getChildren()) {
                         uploadDTO = data.getValue(RoomUploadDTO.class);
-                        uploadDTOArrayList.add(uploadDTO);
+                        uploadDTOArrayList.add(0, uploadDTO);
                     }
                     timelineBoardViewAdapter.notifyDataSetChanged();
                 }
+            }
 
-                @Override
-                public void onCancelled(@NonNull DatabaseError databaseError) {
+            @Override
 
-                }
-            });
-            k++;
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+        k++;
         }
     }
 
@@ -212,34 +224,33 @@ public class TimelineActivity extends Fragment {
 //
 
     private void setData(){
-        if(i == 0){
-            String a = mauth.getCurrentUser().getUid();
-            mdatabase.getReference().child("users").child(a).addListenerForSingleValueEvent(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                    AccountDTO acc = dataSnapshot.getValue(AccountDTO.class);
+        dataref.child("users").child(currentUser).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                AccountDTO acc = dataSnapshot.getValue(AccountDTO.class);
+                if(acc.getRoomId()!=null){
                     for(int i = 0; i < acc.getRoomId().size(); i++) {
                         getroomname.add(acc.getRoomId().get(i));
                     }
                 }
-                @Override
-                public void onCancelled(@NonNull DatabaseError databaseError) {
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
 
-                }
-            });
-            setData1();
-            i++;
-        }
+            }
+        });
+        setData1();
     }
 
     private void setData1(){
-            mdatabase.getReference().child("room").addListenerForSingleValueEvent(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                    int j = 0;
-                    RoomDTO roomm;
-                    for (DataSnapshot data : dataSnapshot.getChildren()) {
-                        roomm = data.getValue(RoomDTO.class);
+        dataref.child("room").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                int j = 0;
+                RoomDTO roomm;
+                for (DataSnapshot data : dataSnapshot.getChildren()) {
+                    roomm = data.getValue(RoomDTO.class);
+                    if (getroomname != null){
                         if (j < getroomname.size()) {
                             if (getroomname.get(j).equals(roomm.getId())) {
                                 nameofroom.add(roomm);
@@ -249,13 +260,55 @@ public class TimelineActivity extends Fragment {
                         }
                     }
                 }
+            }
 
-                @Override
-                public void onCancelled(@NonNull DatabaseError databaseError) {
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
 
+            }
+        });
+    }
+
+    @Override
+    public void onPause(){
+        super.onPause();
+
+        if(nameofroom != null & getroomname != null){
+            int size = nameofroom.size();
+            int size1 = getroomname.size();
+            if (size > 0) {
+                for (int i = 0; i < size; i++) {
+                    nameofroom.remove(0);
                 }
-            });
+                StudynameAdapter.notifyItemRangeRemoved(0, size);
+            }
+            if (size1 > 0) {
+                for (int i = 0; i < size1; i++) {
+                    getroomname.remove(0);
+                }
+            }
         }
+
+
+        if(uploadDTOArrayList != null){
+            int size = uploadDTOArrayList.size();
+            if (size > 0) {
+                for (int i = 0; i < size; i++) {
+                    uploadDTOArrayList.remove(0);
+                }
+                timelineBoardViewAdapter.notifyItemRangeRemoved(0, size);
+            }
+
+            if (groupUri != null){
+                int size1 = groupUri.size();
+                if (size1 > 0) {
+                    for (int i = 0; i < size1; i++) {
+                        groupUri.remove(0);
+                    }
+                }
+            }
+        }
+    }
 
 
     class StudynameRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {      //어느 스터디인지를 선택하는 부분의 recycler
@@ -300,6 +353,8 @@ public class TimelineActivity extends Fragment {
             }
         }
     }
+
+
 
     class TimelineBoardViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{           //Timeline에 올라가는 컨텐츠의 recycler
 

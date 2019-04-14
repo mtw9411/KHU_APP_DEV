@@ -1,5 +1,6 @@
 package com.studylink.khu_app;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -68,8 +69,6 @@ public class MainDetailActivity extends AppCompatActivity {
         Detail_roomdipo3.setText(roomDTO.getRoomdisposition().get(2));
         Detail_roomdipo4.setText(roomDTO.getRoomdisposition().get(3));
 
-
-
         String current_user = FirebaseAuth.getInstance().getCurrentUser().getUid();
         final DatabaseReference dr = database.child("users").child(current_user);
 
@@ -81,13 +80,13 @@ public class MainDetailActivity extends AppCompatActivity {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                         AccountDTO currentUser = dataSnapshot.getValue(AccountDTO.class);
-                        // 가입한 스터디방이 3개이면
-                        if (currentUser.getRoomId().size() == 3){
-                            Toast.makeText(MainDetailActivity.this, "3개 이상의 스터디를 가입할 수 없습니다.", Toast.LENGTH_SHORT).show();
-                        }
-                        else{
-                            // 참여한 스터디가 1개라도 있으면
-                            if(currentUser.getRoomId() != null){
+                        // 참여한 스터디가 1개라도 있으면
+                        if(currentUser.getRoomId() != null){
+                            // 가입한 스터디방이 3개이면
+                            if (currentUser.getRoomId().size() == 3){
+                                Toast.makeText(MainDetailActivity.this, "3개 이상의 스터디를 가입할 수 없습니다.", Toast.LENGTH_SHORT).show();
+                            }
+                            else{
                                 boolean check = true;
                                 // 같은 스터디인지 확인
                                 for(int i = 0; i<currentUser.getRoomId().size(); i++){
@@ -104,7 +103,8 @@ public class MainDetailActivity extends AppCompatActivity {
                                     roomDTO.setMember(roomDTO.getMember()+1);
                                     database.child("room").child(roomDTO.getId()).setValue(roomDTO);
 
-                                    Intent intent = new Intent(MainDetailActivity.this, TimelineActivity.class);
+                                    Intent intent = new Intent(MainDetailActivity.this, Fragement_navi.class);
+                                    intent.putExtra("frag_num", 1);
                                     startActivity(intent);
                                 }
                                 // 중복된 스터디가 있으면
@@ -112,16 +112,16 @@ public class MainDetailActivity extends AppCompatActivity {
                                     Toast.makeText(MainDetailActivity.this, "이미 참여한 스터디입니다.", Toast.LENGTH_SHORT).show();
                                 }
                             }
-                            // 참여한 스터디가 없으면
-                            else{
-                                roomList.add(roomDTO.getId());
-                                currentUser.setRoomId(roomList);
-                                dr.setValue(currentUser);
+                        }
+                        // 참여한 스터디가 없으면
+                        else{
+                            roomList.add(roomDTO.getId());
+                            currentUser.setRoomId(roomList);
+                            dr.setValue(currentUser);
 
-                                Intent intent = new Intent(MainDetailActivity.this, TimelineActivity.class);
-                                intent.putExtra("Timeline", roomDTO);
-                                startActivity(intent);
-                            }
+                            Intent intent = new Intent(MainDetailActivity.this, Fragement_navi.class);
+                            intent.putExtra("frag_num", 1);
+                            startActivity(intent);
                         }
                     }
 
@@ -133,4 +133,5 @@ public class MainDetailActivity extends AppCompatActivity {
             }
         });
     }
+
 }
