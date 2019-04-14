@@ -25,12 +25,18 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 import org.w3c.dom.Text;
 
@@ -41,6 +47,7 @@ import java.util.List;
 public class TimelineActivity extends Fragment {
 
     private TextView write_content;
+    private String write_title;
     private ImageView toMypage;
     private ImageView toMainpage;
     private RecyclerView recycler_studyname;
@@ -53,10 +60,12 @@ public class TimelineActivity extends Fragment {
     private FirebaseDatabase mdatabase;
     private DatabaseReference dataref;
     private FirebaseAuth mauth;
+    private FirebaseStorage storage;
     private String currentUser;
     private ArrayList<RoomUploadDTO> uploadDTOArrayList = new ArrayList<>();
     private ArrayList<Uri> imageUri = new ArrayList<>();
     private int i = 0;
+    private int k = 0;
     private String currentRoomuid;
     private String roomkey;
 
@@ -76,6 +85,7 @@ public class TimelineActivity extends Fragment {
         dataref = mdatabase.getReference();
         mauth = FirebaseAuth.getInstance();
         currentUser = mauth.getCurrentUser().getUid();
+        storage = FirebaseStorage.getInstance();
 
 
         toMypage = (ImageView) view.findViewById(R.id.toMypage);
@@ -154,7 +164,7 @@ public class TimelineActivity extends Fragment {
             Bundle bundle = getArguments();
             imageUri = bundle.getParcelableArrayList("ImageData");
             roomkey = bundle.getString("roomkey");
-            groupUri.add(imageUri);
+            write_title = bundle.getString("puttitle");
             timelineBoardViewAdapter.notifyDataSetChanged();
         }
     }
@@ -177,23 +187,25 @@ public class TimelineActivity extends Fragment {
 //    }
 
     private void setTimelineData() {
-
-        dataref.child("RoomUpload").child(currentRoomuid).addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                RoomUploadDTO uploadDTO;
-                for (DataSnapshot data : dataSnapshot.getChildren()) {
-                    uploadDTO = data.getValue(RoomUploadDTO.class);
-                    uploadDTOArrayList.add(uploadDTO);
+        if(k == 0){
+            dataref.child("RoomUpload").child(currentRoomuid).addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    RoomUploadDTO uploadDTO;
+                    for (DataSnapshot data : dataSnapshot.getChildren()) {
+                        uploadDTO = data.getValue(RoomUploadDTO.class);
+                        uploadDTOArrayList.add(uploadDTO);
+                    }
+                    timelineBoardViewAdapter.notifyDataSetChanged();
                 }
-                timelineBoardViewAdapter.notifyDataSetChanged();
-            }
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
 
-            }
-        });
+                }
+            });
+            k++;
+        }
     }
 
 
@@ -355,18 +367,13 @@ public class TimelineActivity extends Fragment {
 
             TextView file_username;
             TextView file_contentText;
-            ImageView imagefile1;
-            ImageView imagefile2;
-            ImageView imagefile3;
+            RecyclerView recyclerView;
 
             public FileViewHolder(@NonNull View itemView) {
                 super(itemView);
                 file_username = itemView.findViewById(R.id.file_username);
                 file_contentText = itemView.findViewById(R.id.file_contentText);
-                imagefile1 = itemView.findViewById(R.id.fileimage1);
-                imagefile2 = itemView.findViewById(R.id.fileimage2);
-                imagefile3 = itemView.findViewById(R.id.fileimage3);
-
+                recyclerView = itemView.findViewById(R.id.image_recycler);
 
             }
         }

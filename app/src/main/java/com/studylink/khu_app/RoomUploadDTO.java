@@ -1,6 +1,9 @@
 package com.studylink.khu_app;
 
+import android.net.Uri;
+
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 public class RoomUploadDTO implements Serializable {
@@ -9,6 +12,7 @@ public class RoomUploadDTO implements Serializable {
     private String writing_content;
     private String uploadername;
     private List<String> filename;
+    private ArrayList<Uri> imageuri;
 
     public String getTitle() {
         return title;
@@ -40,5 +44,13 @@ public class RoomUploadDTO implements Serializable {
 
     public void setFilename(List<String> filename) {
         this.filename = filename;
+    }
+
+    public void setImageuri(ArrayList<Uri> imageuri) {
+        this.imageuri = imageuri;
+    }
+
+    public ArrayList<Uri> getImageuri() {
+        return imageuri;
     }
 }

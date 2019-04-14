@@ -64,7 +64,7 @@ public class Timeline_writing extends AppCompatActivity {
     private ImageView writing_picture;
     private ImageView upload_image;
     private ImageView delete_picture;
-    private String imagePath;
+    private String write_title;
     private ArrayList<Uri> mDataset = new ArrayList<>();
     private FirebaseStorage storage;
     private FirebaseAuth auth;
@@ -147,6 +147,7 @@ public class Timeline_writing extends AppCompatActivity {
                 Bundle bundle = new Bundle();
                 bundle.putParcelableArrayList("imageData", mDataset);
                 bundle.putString("roomkey", roomkey);
+                bundle.putString("puttitle", writing_title.getText().toString());
                 fragment.setArguments(bundle);
 
                 Intent intent = new Intent(Timeline_writing.this, Fragement_navi.class);
@@ -175,7 +176,7 @@ public class Timeline_writing extends AppCompatActivity {
     }
 
 
-    class WritingRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+    static class WritingRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
         private ArrayList<Uri> bit;
 
@@ -241,12 +242,11 @@ public class Timeline_writing extends AppCompatActivity {
             }
             //storage 주소와 폴더 파일명을 지정해 준다.
             for(int j = 0; j < mDataset.size(); j++) {
-                StorageReference storageRef = storage.getReferenceFromUrl("gs://studylink-ec173.appspot.com").child("images/" + currentRoomid + "/" + upfilename.get(j));
+                StorageReference storageRef = storage.getReferenceFromUrl("gs://studylink-ec173.appspot.com").child("images/" + currentRoomid + "/" + contentCheck1 + "/" + upfilename.get(j));
                 storageRef.putFile(mDataset.get(j));
             }
             roomUpload.setFilename(upfilename);
         }
-
         dataref.child(currentRoomid).child(contentCheck1).setValue(roomUpload);
     }
 }

@@ -82,36 +82,18 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/file_imageview" />
 
-            <ImageView
-                android:id="@+id/fileimage1"
-                android:layout_width="70dp"
-                android:layout_height="70dp"
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/image_recycler"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
                 android:layout_marginStart="32dp"
                 android:layout_marginLeft="32dp"
-                android:layout_marginTop="40dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="32dp"
+                android:layout_marginRight="32dp"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/file_contentText"
-                app:srcCompat="@android:color/background_light" />
-
-            <ImageView
-                android:id="@+id/fileimage2"
-                android:layout_width="70dp"
-                android:layout_height="70dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginLeft="8dp"
-                app:layout_constraintStart_toEndOf="@+id/fileimage1"
-                app:layout_constraintTop_toTopOf="@+id/fileimage1"
-                app:srcCompat="@android:color/background_light" />
-
-            <ImageView
-                android:id="@+id/fileimage3"
-                android:layout_width="70dp"
-                android:layout_height="70dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginLeft="8dp"
-                app:layout_constraintStart_toEndOf="@+id/fileimage2"
-                app:layout_constraintTop_toTopOf="@+id/fileimage2"
-                app:srcCompat="@android:color/background_light" />
+                app:layout_constraintTop_toBottomOf="@+id/file_contentText" />
 
             <TextView
                 android:id="@+id/textView12"
@@ -119,7 +101,7 @@
                 android:layout_height="1dp"
                 android:layout_marginStart="8dp"
                 android:layout_marginLeft="8dp"
-                android:layout_marginTop="40dp"
+                android:layout_marginTop="16dp"
                 android:layout_marginEnd="8dp"
                 android:layout_marginRight="8dp"
                 android:layout_marginBottom="48dp"
@@ -127,7 +109,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/fileimage3" />
+                app:layout_constraintTop_toBottomOf="@+id/image_recycler" />
 
             <ImageView
                 android:id="@+id/file_scrap"
