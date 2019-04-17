@@ -4,24 +4,25 @@
 
     <item
         android:id="@+id/menuitem_bottombar_home"
-        android:icon="@mipmap/icon_4"
+        android:icon="@mipmap/navi_home2"
         android:title="HOME"
-        app:showAsAction="ifRoom"/>
+        app:showAsAction="ifRoom" />
 
     <item
         android:id="@+id/menuitem_bottombar_session"
-        android:icon="@mipmap/icon_8"
+        android:icon="@mipmap/navi_timeline1"
         android:title="SESSION"
-        app:showAsAction="ifRoom"/>
+        app:showAsAction="ifRoom"
+        />
 
     <item
         android:id="@+id/menuitem_bottombar_alarm"
-        android:icon="@mipmap/icon_18"
+        android:icon="@mipmap/navi_alarm1"
         android:title="ALARM"
         app:showAsAction="ifRoom"/>
     <item
         android:id="@+id/menuitem_bottombar_mys"
-        android:icon="@mipmap/icon_5"
+        android:icon="@mipmap/navi_myroom1"
         android:title="My S"
         app:showAsAction="ifRoom"
         />

@@ -45,6 +45,7 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
 import java.io.File;
+import java.io.IOException;
 import java.io.InputStream;
 import java.lang.reflect.Array;
 import java.net.URI;
@@ -64,8 +65,10 @@ public class Timeline_writing extends AppCompatActivity {
     private ImageView writing_picture;
     private ImageView upload_image;
     private ImageView delete_picture;
-    private String imagePath;
+    private ArrayList<String> filetitle = new ArrayList<>();
     private ArrayList<Uri> mDataset = new ArrayList<>();
+    private ArrayList<String> mDatasetString = new ArrayList<>();
+    private List<Bitmap> mDatasetBitmap;
     private FirebaseStorage storage;
     private FirebaseAuth auth;
     private FirebaseDatabase database;
@@ -100,7 +103,6 @@ public class Timeline_writing extends AppCompatActivity {
         writing_recycler.setAdapter(WritingAdapter);
 
         upload_image = (ImageView) findViewById(R.id.upload_imageview);
-        delete_picture = (ImageView) findViewById(R.id.delete_picture);
         writing_title = (EditText) findViewById(R.id.writing_title);
         writing_content = (EditText) findViewById(R.id.writing_content);
         writing_picture = (ImageView) findViewById(R.id.writing_picture);
@@ -148,6 +150,7 @@ public class Timeline_writing extends AppCompatActivity {
                 Bundle bundle = new Bundle();
                 bundle.putParcelableArrayList("imageData", mDataset);
                 bundle.putString("roomkey", roomkey);
+                bundle.putString("puttitle", writing_title.getText().toString());
                 fragment.setArguments(bundle);
 
                 Intent intent = new Intent(Timeline_writing.this, Fragement_navi.class);
@@ -168,6 +171,7 @@ public class Timeline_writing extends AppCompatActivity {
                     if(clipData != null){
                         for(int i = 0; i < clipData.getItemCount(); i++){
                             mDataset.add(clipData.getItemAt(i).getUri());
+                            mDatasetString.add(clipData.getItemAt(i).getUri().toString());
                         }
                         WritingAdapter.notifyDataSetChanged();
                     }
@@ -176,8 +180,17 @@ public class Timeline_writing extends AppCompatActivity {
         }
     }
 
+    public void toBitmap() {
+        for (int i = 0; i < mDataset.size(); i++) {
+            try {
+                mDatasetBitmap.add(MediaStore.Images.Media.getBitmap(getContentResolver(), mDataset.get(i)));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
 
-    class WritingRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+    static class WritingRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
         private ArrayList<Uri> bit;
 
@@ -210,7 +223,6 @@ public class Timeline_writing extends AppCompatActivity {
             public WritingViewHolder(View view) {
                 super(view);
                 upload_image = view.findViewById(R.id.upload_imageview);
-                delete_picture = view.findViewById(R.id.delete_picture);
 
             }
         }
@@ -251,12 +263,13 @@ public class Timeline_writing extends AppCompatActivity {
             }
             //storage 주소와 폴더 파일명을 지정해 준다.
             for(int j = 0; j < mDataset.size(); j++) {
-                StorageReference storageRef = storage.getReferenceFromUrl("gs://studylink-ec173.appspot.com").child("images/" + currentRoomid + "/" + upfilename.get(j));
+                StorageReference storageRef = storage.getReferenceFromUrl("gs://studylink-ec173.appspot.com").child("images/" + currentRoomid + "/" + contentCheck1 + "/" + upfilename.get(j));
                 storageRef.putFile(mDataset.get(j));
+                filetitle.add(upfilename.get(j));
             }
+            roomUpload.setFiletitle(filetitle);
             roomUpload.setFilename(upfilename);
         }
-
         dataref.child(currentRoomid).child(contentCheck1).setValue(roomUpload);
     }
 }

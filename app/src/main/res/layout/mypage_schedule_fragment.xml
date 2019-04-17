@@ -1,18 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:layout_height="wrap_content">
 
     <TextView
         android:id="@+id/textView84"
         android:layout_width="0dp"
-        android:layout_height="30dp"
-        android:background="@drawable/timeline_gradient3"
-        android:gravity="center"
-        android:text="21일 (목) 공기업 스터디"
-        android:textColor="#ffffff"
+        android:layout_height="50dp"
+        android:background="#ffffff"
+        android:gravity="center_vertical"
+        android:paddingLeft="20dp"
+        android:text="일정"
+        android:textColor="#222222"
+        android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -21,13 +23,12 @@
 
     <ScrollView
         android:layout_width="0dp"
-        android:layout_height="0dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_height="wrap_content"
+        android:background="#f4f7fc"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView84"
-        app:layout_constraintVertical_bias="0.806">
+        app:layout_constraintTop_toBottomOf="@+id/textView84">
 
         <android.support.constraint.ConstraintLayout
             android:id="@+id/mypage_schedulelayout"
@@ -41,7 +42,6 @@
                 android:id="@+id/textView85"
                 android:layout_width="0dp"
                 android:layout_height="7dp"
-                android:layout_marginTop="8dp"
                 android:background="@drawable/timeline_gradient2"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
@@ -74,6 +74,7 @@
                 android:id="@+id/materialCalendarView"
                 android:layout_width="match_parent"
                 android:layout_height="347dp"
+                android:background="#ffffff"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">

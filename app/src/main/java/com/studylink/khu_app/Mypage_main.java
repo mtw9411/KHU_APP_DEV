@@ -36,7 +36,8 @@ public class Mypage_main extends Fragment{
     private Mypage_store_fragment storeFragment;
     private android.support.v4.app.FragmentManager fm;
     private FragmentTransaction ft;
-    private ImageView back_btn;
+    private TextView icontext1;
+    private TextView icontext2;
 
     private ImageView mypage_editProfile;
     private ViewGroup mypage_schedulelayout;
@@ -58,11 +59,13 @@ public class Mypage_main extends Fragment{
         fm = getFragmentManager();
         ft = fm.beginTransaction();
 
+        icontext1 = view.findViewById(R.id.iconText1);
+        icontext2 = view.findViewById(R.id.iconText2);
+
 
         mypage_Logout = (TextView) view.findViewById(R.id.mypage_Logout);
         mypage_schedule = (ImageView) view.findViewById(R.id.mypage_schedule);
         mypage_store = (ImageView) view.findViewById(R.id.mypage_store);
-        back_btn = (ImageView) view.findViewById(R.id.back_btn);
 
         scheduleFragment = new Mypage_schedule_fragment();
         storeFragment = new Mypage_store_fragment();
@@ -103,6 +106,10 @@ public class Mypage_main extends Fragment{
             @Override
             public void onClick(View v) {
                 setFrag(0);
+                mypage_schedule.setBackground(getResources().getDrawable(R.drawable.mypage_icon_after));
+                mypage_store.setBackground(getResources().getDrawable(R.drawable.mypage_icon_before));
+                icontext1.setTextColor(getResources().getColor(R.color.mypageTextselected));
+                icontext2.setTextColor(getResources().getColor(R.color.mypageTextunSelected));
             }
         });
 
@@ -111,6 +118,10 @@ public class Mypage_main extends Fragment{
             @Override
             public void onClick(View v) {
                 setFrag(1);
+                mypage_schedule.setBackground(getResources().getDrawable(R.drawable.mypage_icon_before));
+                mypage_store.setBackground(getResources().getDrawable(R.drawable.mypage_icon_after));
+                icontext1.setTextColor(getResources().getColor(R.color.mypageTextunSelected));
+                icontext2.setTextColor(getResources().getColor(R.color.mypageTextselected));
             }
         });
 
@@ -122,14 +133,6 @@ public class Mypage_main extends Fragment{
             }
         });
 
-        back_btn.setClickable(true);
-        back_btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), MainActivity.class);
-                startActivity(intent);
-            }
-        });
         setFrag(0);
         return view;
     }

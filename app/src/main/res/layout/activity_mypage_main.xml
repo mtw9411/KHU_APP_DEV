@@ -7,7 +7,8 @@
     android:isScrollContainer="true"
     android:scrollbars="vertical"
     tools:context=".Mypage_main"
-    android:id="@+id/container">
+    android:id="@+id/container"
+    android:background="#ffffff">
 
     <TextView
         android:id="@+id/textView22"
@@ -15,43 +16,38 @@
         android:layout_height="52dp"
         android:gravity="center"
         android:lineSpacingExtra="6sp"
-        android:text="마이 페이지"
+        android:text="My Room"
         android:textColor="#222222"
         android:textSize="13sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <ImageView
-        android:id="@+id/back_btn"
-        android:layout_width="31dp"
-        android:layout_height="29dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="13dp"
-        app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@mipmap/icon_23" />
+        android:background="#09000000"/>
 
     <ImageView
         android:id="@+id/mypage_editProfile"
-        android:layout_width="100dp"
-        android:layout_height="wrap_content"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginRight="32dp"
+        app:layout_constraintBottom_toBottomOf="@+id/textView78"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView22"
+        app:layout_constraintTop_toTopOf="@+id/mypage_myName"
         app:srcCompat="@mipmap/icon_34" />
 
     <TextView
         android:id="@+id/mypage_myName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
+        android:layout_marginStart="25dp"
+        android:layout_marginLeft="25dp"
+        android:layout_marginTop="25dp"
         android:text="지영님,"
         android:textColor="#707070"
         android:textSize="15sp"
-        app:layout_constraintEnd_toEndOf="@+id/mypage_editProfile"
-        app:layout_constraintStart_toStartOf="@+id/mypage_editProfile"
-        app:layout_constraintTop_toBottomOf="@+id/mypage_editProfile" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView22" />
 
     <TextView
         android:id="@+id/textView78"
@@ -61,39 +57,42 @@
         android:text="일정을 추가하고 관리하세요."
         android:textColor="#707070"
         android:textSize="11sp"
-        app:layout_constraintEnd_toEndOf="@+id/mypage_myName"
         app:layout_constraintStart_toStartOf="@+id/mypage_myName"
         app:layout_constraintTop_toBottomOf="@+id/mypage_myName" />
 
     <ImageView
         android:id="@+id/mypage_schedule"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:layout_marginStart="80dp"
-        android:layout_marginLeft="80dp"
-        android:layout_marginTop="5dp"
+        android:layout_width="160dp"
+        android:layout_height="70dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="30dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView78"
-        app:srcCompat="@mipmap/icon_19" />
+        app:srcCompat="@mipmap/icon_19"
+        android:background="@drawable/mypage_icon_after"/>
 
     <ImageView
         android:id="@+id/mypage_store"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:layout_marginTop="5dp"
-        android:layout_marginEnd="80dp"
-        android:layout_marginRight="80dp"
+        android:layout_width="160dp"
+        android:layout_height="70dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginEnd="30dp"
+        android:layout_marginRight="30dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView78"
-        app:srcCompat="@mipmap/icon_18" />
+        app:srcCompat="@mipmap/icon_18"
+        android:background="@drawable/mypage_icon_before"/>
 
     <TextView
-        android:id="@+id/textView79"
+        android:id="@+id/iconText1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="55dp"
         android:text="일정관리"
-        android:textColor="#5b6eff"
+        android:textColor="#70222222"
         android:textSize="11sp"
         app:layout_constraintEnd_toEndOf="@+id/mypage_schedule"
         app:layout_constraintHorizontal_bias="0.4"
@@ -101,12 +100,12 @@
         app:layout_constraintTop_toTopOf="@+id/mypage_schedule" />
 
     <TextView
-        android:id="@+id/textView80"
+        android:id="@+id/iconText2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="55dp"
         android:text="저장소식"
-        android:textColor="#8c47ff"
+        android:textColor="#70222222"
         android:textSize="11sp"
         app:layout_constraintEnd_toEndOf="@+id/mypage_store"
         app:layout_constraintStart_toStartOf="@+id/mypage_store"
@@ -116,9 +115,9 @@
         android:id="@+id/textView81"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="30dp"
+        android:layout_marginStart="23dp"
+        android:layout_marginLeft="23dp"
+        android:layout_marginTop="36dp"
         android:text="+1"
         android:textColor="#5b6eff"
         android:textSize="11sp"
@@ -131,15 +130,18 @@
         android:id="@+id/textView82"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="36dp"
-        android:layout_marginLeft="36dp"
-        android:layout_marginTop="22dp"
+        android:layout_marginStart="28dp"
+        android:layout_marginLeft="28dp"
+        android:layout_marginTop="26dp"
         android:text="+2"
         android:textColor="#8c47ff"
         android:textSize="11sp"
         android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@+id/mypage_store"
         app:layout_constraintStart_toStartOf="@+id/mypage_store"
         app:layout_constraintTop_toTopOf="@+id/mypage_store" />
+
+
 
     <FrameLayout
         android:id="@+id/main_frame"
@@ -149,7 +151,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView79">
+        app:layout_constraintTop_toBottomOf="@+id/iconText1">
 
     </FrameLayout>
     <TextView

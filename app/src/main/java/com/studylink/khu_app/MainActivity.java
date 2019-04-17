@@ -40,7 +40,6 @@ import java.util.List;
 public class MainActivity extends Fragment {
     private FirebaseAuth auth;                                                                      //아이디, 비번 받아올 것
 
-    private ImageView toMypage;
     private TextView makeStudy, myStudyNum;
     private RelativeLayout addStudy;
     private RecyclerView recyclerView_myStudy,recyclerView_matching, recyclerView_myTown, recyclerView_deadline, recyclerView_newStudy;
@@ -70,7 +69,6 @@ public class MainActivity extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         ViewGroup view = (ViewGroup) inflater.inflate(R.layout.activity_main, container, false);
 
-        toMypage = view.findViewById(R.id.toMypage);
         makeStudy = view.findViewById(R.id.makeStudy);
         myStudyNum = view.findViewById(R.id.myStudyNum);
         addStudy = view.findViewById(R.id.addStudy);
@@ -110,15 +108,6 @@ public class MainActivity extends Fragment {
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
 
-            }
-        });
-
-        toMypage.setClickable(true);
-        toMypage.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Fragment fragment = new Mypage_main();
-                ft.replace(R.id.Frame_navi, fragment).commit();
             }
         });
 
