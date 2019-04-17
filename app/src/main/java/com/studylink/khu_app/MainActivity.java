@@ -32,6 +32,8 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
@@ -83,6 +85,13 @@ public class MainActivity extends Fragment {
 
         auth = FirebaseAuth.getInstance();
 
+        // array 초기화
+        arrayList_myStudy.clear();
+        arrayList_matching.clear();
+        arrayList_myTown.clear();
+        arrayList_deadline.clear();
+        arrayList_newStudy.clear();
+
         // 방 정보
         final DatabaseReference myRef = database.child("room");
 
@@ -95,7 +104,6 @@ public class MainActivity extends Fragment {
                 currentUser = dataSnapshot.getValue(AccountDTO.class);
                 if(currentUser.getRoomId() != null){
                     myStudyNum.setText("+" + currentUser.getRoomId().size());
-                    Log.d("#################", Integer.toString(currentUser.getRoomId().size()));
                 }
             }
 
@@ -136,8 +144,8 @@ public class MainActivity extends Fragment {
 
 // "내가 참여중인 방" RecyclerView 구현
         // 레이아웃 종류 정의
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
-        ((LinearLayoutManager) layoutManager).setOrientation(LinearLayoutManager.HORIZONTAL);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
+        layoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
         recyclerView_myStudy.setLayoutManager(layoutManager);
 
         // 어댑터 연결
@@ -161,8 +169,8 @@ public class MainActivity extends Fragment {
 
 // "스터디 매칭" RecyclerView 구현
         // 레이아웃 종류 정의
-        RecyclerView.LayoutManager layoutManager2 = new LinearLayoutManager(getContext());
-        ((LinearLayoutManager) layoutManager2).setOrientation(LinearLayoutManager.HORIZONTAL);
+        LinearLayoutManager layoutManager2 = new LinearLayoutManager(getContext());
+        layoutManager2.setOrientation(LinearLayoutManager.HORIZONTAL);
         recyclerView_matching.setLayoutManager(layoutManager2);
 
         // 어댑터 연결
@@ -249,8 +257,8 @@ public class MainActivity extends Fragment {
 
 // "우리동네 스터디" RecyclerView 구현
         // 레이아웃 종류 정의
-        RecyclerView.LayoutManager layoutManager3 = new LinearLayoutManager(getContext());
-        ((LinearLayoutManager) layoutManager3).setOrientation(LinearLayoutManager.HORIZONTAL);
+        LinearLayoutManager layoutManager3 = new LinearLayoutManager(getContext());
+        layoutManager3.setOrientation(LinearLayoutManager.HORIZONTAL);
         recyclerView_myTown.setLayoutManager(layoutManager3);
 
         // 어댑터 연결
@@ -272,8 +280,8 @@ public class MainActivity extends Fragment {
 
 // "마감 스터디" RecyclerView 구현
         // 레이아웃 종류 정의
-        RecyclerView.LayoutManager layoutManager4 = new LinearLayoutManager(getContext());
-        ((LinearLayoutManager) layoutManager4).setOrientation(LinearLayoutManager.HORIZONTAL);
+        LinearLayoutManager layoutManager4 = new LinearLayoutManager(getContext());
+        layoutManager4.setOrientation(LinearLayoutManager.HORIZONTAL);
         recyclerView_deadline.setLayoutManager(layoutManager4);
 
         // 어댑터 연결
@@ -294,7 +302,9 @@ public class MainActivity extends Fragment {
 
 // "새 스터디" RecyclerView 구현
         // 레이아웃 종류 정의
-        RecyclerView.LayoutManager layoutManager5 = new LinearLayoutManager(getContext());
+        LinearLayoutManager layoutManager5 = new LinearLayoutManager(getContext());
+        layoutManager5.setReverseLayout(true);
+        layoutManager5.setStackFromEnd(true);
         recyclerView_newStudy.setLayoutManager(layoutManager5);
 
         // 어댑터 연결
@@ -358,47 +368,6 @@ public class MainActivity extends Fragment {
             }
         });
         return view;
-    }
-
-    @Override
-    public void onPause(){
-        super.onPause();
-
-        int size1 = arrayList_myStudy.size();
-        int size2 = arrayList_matching.size();
-        int size3 = arrayList_myTown.size();
-        int size4 = arrayList_deadline.size();
-        int size5 = arrayList_newStudy.size();
-        if (size1 > 0) {
-            for (int i = 0; i < size1; i++) {
-                arrayList_myStudy.remove(0);
-            }
-            myStudy_Adapter.notifyItemRangeRemoved(0, size1);
-        }
-        if (size2 > 0) {
-            for (int i = 0; i < size2; i++) {
-                arrayList_matching.remove(0);
-            }
-            matching_Adapter.notifyItemRangeRemoved(0, size2);
-        }
-        if (size3 > 0) {
-            for (int i = 0; i < size3; i++) {
-                arrayList_myTown.remove(0);
-            }
-            myTown_Adapter.notifyItemRangeRemoved(0, size3);
-        }
-        if (size4 > 0) {
-            for (int i = 0; i < size4; i++) {
-                arrayList_deadline.remove(0);
-            }
-            deadline_Adapter.notifyItemRangeRemoved(0, size4);
-        }
-        if (size5 > 0) {
-            for (int i = 0; i < size5; i++) {
-                arrayList_newStudy.remove(0);
-            }
-            newStudy_Adapter.notifyItemRangeRemoved(0, size5);
-        }
     }
 }
 

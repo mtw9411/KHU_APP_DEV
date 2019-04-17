@@ -37,7 +37,7 @@ public class AdapterMatching extends RecyclerView.Adapter<AdapterMatching.MyView
     // 아이템 뷰에서 아이디 찾기
     public static class MyViewHolder extends RecyclerView.ViewHolder {
         public TextView matching_title,matching_member,matching_totalMember,matching_region,matching_age,matching_gender;
-        public ImageView imageView_matching;
+        public ImageView imageView_matching, img_ribbon;
         public LinearLayout btn_detail, btn_entrance;
         public View root;
         public MyViewHolder(View v) {
@@ -50,6 +50,7 @@ public class AdapterMatching extends RecyclerView.Adapter<AdapterMatching.MyView
             matching_age = v.findViewById(R.id.matching_age);
             matching_gender = v.findViewById(R.id.matching_gender);
             imageView_matching = v.findViewById(R.id.imageView_matching);
+            img_ribbon = v.findViewById(R.id.img_ribbon);
             btn_detail = v.findViewById(R.id.btn_detail);
             btn_entrance = v.findViewById(R.id.btn_entrance);
 

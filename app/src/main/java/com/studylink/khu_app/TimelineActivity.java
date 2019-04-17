@@ -62,8 +62,6 @@ public class TimelineActivity extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-
     }
 
     @Nullable
@@ -78,6 +76,12 @@ public class TimelineActivity extends Fragment {
 
         toMypage = (ImageView) view.findViewById(R.id.toMypage);
         toMainpage = (ImageView) view.findViewById(R.id.toMainpage);
+
+        nameofroom.clear();
+        getroomname.clear();
+        uploadDTOArrayList.clear();
+        groupUri.clear();
+
 
         write_content = (TextView) view.findViewById(R.id.write_content);
         write_content.setOnClickListener(new View.OnClickListener() {
@@ -254,46 +258,7 @@ public class TimelineActivity extends Fragment {
         });
     }
 
-    @Override
-    public void onPause(){
-        super.onPause();
 
-        if(nameofroom != null & getroomname != null){
-            int size = nameofroom.size();
-            int size1 = getroomname.size();
-            if (size > 0) {
-                for (int i = 0; i < size; i++) {
-                    nameofroom.remove(0);
-                }
-                StudynameAdapter.notifyItemRangeRemoved(0, size);
-            }
-            if (size1 > 0) {
-                for (int i = 0; i < size1; i++) {
-                    getroomname.remove(0);
-                }
-            }
-        }
-
-
-        if(uploadDTOArrayList != null){
-            int size = uploadDTOArrayList.size();
-            if (size > 0) {
-                for (int i = 0; i < size; i++) {
-                    uploadDTOArrayList.remove(0);
-                }
-                timelineBoardViewAdapter.notifyItemRangeRemoved(0, size);
-            }
-
-            if (groupUri != null){
-                int size1 = groupUri.size();
-                if (size1 > 0) {
-                    for (int i = 0; i < size1; i++) {
-                        groupUri.remove(0);
-                    }
-                }
-            }
-        }
-    }
 
 
     class StudynameRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {      //어느 스터디인지를 선택하는 부분의 recycler
