@@ -4,6 +4,7 @@ package com.studylink.khu_app;
 import android.content.Intent;
 import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -77,11 +78,10 @@ public class AdapterMatching extends RecyclerView.Adapter<AdapterMatching.MyView
     @Override
     public void onBindViewHolder(final MyViewHolder holder, int position) {
         RoomDTO room = arrayList.get(position);
-
         // 이미지 설정
         if(room.getimageName() != null) {
             String fileName = room.getimageName();
-            storageRef.child(fileName).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+            storageRef.child(room.getRoomName()+ fileName).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                 @Override
                 public void onSuccess(Uri uri) {
                     holder.imageView_matching.setImageURI(uri);
