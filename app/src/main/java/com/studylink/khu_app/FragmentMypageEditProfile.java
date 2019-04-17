@@ -1,12 +1,17 @@
 package com.studylink.khu_app;
 
+import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.Fragment;
+import android.app.ProgressDialog;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.CardView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,21 +20,36 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.OnProgressListener;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
+
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+import static android.app.Activity.RESULT_OK;
 
 public class FragmentMypageEditProfile extends Fragment {
 
+    private static final int GALLERY_CODE1 = 10;
     ImageView profileImg;
     EditText mypageEdit_name, mypageEdit_birth;
     TextView mypageEdit_female, mypageEdit_male;
     CardView mypageEdit_finish, mypageEdit_address;
     private MypageEditPopupActivity popUp;
     private int check = 0;
+    private Uri uri;
+    private FirebaseAuth auth;
 
     public FragmentMypageEditProfile(){
     }
@@ -40,6 +60,7 @@ public class FragmentMypageEditProfile extends Fragment {
 
         final Bundle bundle = this.getArguments();
 
+        auth = FirebaseAuth.getInstance();
         mypageEdit_name = view.findViewById(R.id.mypageEdit_name);
         profileImg = view.findViewById(R.id.profileImg);
         mypageEdit_birth = view.findViewById(R.id.mypageEdit_birth);
@@ -126,16 +147,55 @@ public class FragmentMypageEditProfile extends Fragment {
                 Toast.makeText(getActivity(), "수정 완료", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(getActivity(), Mypage_main.class);
                 startActivity(intent);
+                
+                uploadimage();
+            }
+        });
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {                                       //version 몇 이상부터 작동하기
+            requestPermissions(new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 0);
+        }
+
+        profileImg.setClickable(true);
+        profileImg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Intent.ACTION_PICK);
+                intent.setType(MediaStore.Images.Media.CONTENT_TYPE);
+                intent.setAction(Intent.ACTION_GET_CONTENT);
+
+                startActivityForResult(Intent.createChooser(intent, "Select Picture"), GALLERY_CODE1);
             }
         });
 
         return view;
     }
 
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == GALLERY_CODE1 && resultCode == RESULT_OK && data != null && data.getData() != null) {
+            uri = data.getData();
+            profileImg.setImageURI(uri);
+        }
+    }
+
     @SuppressLint("NewApi")
     public void colorChange(TextView select, TextView non){
         select.setBackground(getResources().getDrawable(R.drawable.pink_border, null));
         non.setBackground(null);
+    }
+
+    private void uploadimage() {
+            //storage
+            FirebaseStorage storage = FirebaseStorage.getInstance();
+
+            //Unique한 파일명을 만들자.
+            String filename = auth.getCurrentUser().getUid() + ".jpeg";
+            //storage 주소와 폴더 파일명을 지정해 준다.
+            StorageReference storageRef = storage.getReferenceFromUrl("gs://studylink-ec173.appspot.com").child("images/" + auth.getCurrentUser().getUid() + "/" + filename);
+            storageRef.putFile(uri);
     }
 
 }

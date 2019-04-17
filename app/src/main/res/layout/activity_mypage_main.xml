@@ -167,5 +167,16 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_marginStart="45dp"
+        android:layout_marginLeft="45dp"
+        android:layout_marginBottom="45dp"
+        android:src="@mipmap/baseline_settings_black_48"
+        app:layout_constraintBottom_toBottomOf="@+id/mypage_editProfile"
+        app:layout_constraintStart_toStartOf="@+id/mypage_editProfile" />
+
 
 </android.support.constraint.ConstraintLayout>

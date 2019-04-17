@@ -3,11 +3,12 @@ package com.studylink.khu_app;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -19,8 +20,6 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import java.io.Serializable;
-
 public class MypageEditActivity extends AppCompatActivity {
 
     TextView mypageEdit_editProfile, mypageEdit_editProfileBar, mypageEdit_editDispo, mypageEdit_editDispoBar;
@@ -29,10 +28,13 @@ public class MypageEditActivity extends AppCompatActivity {
     private Fragment fragment, fragment2;
     private FragmentManager fm = getFragmentManager();
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.mypage_edit);
+
+        fragment2 = new FragmentMypageEditDispo();
 
         final FirebaseAuth auth = FirebaseAuth.getInstance();
         DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("users").child(auth.getUid());
@@ -68,7 +70,7 @@ public class MypageEditActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 colorChange(mypageEdit_editProfile,mypageEdit_editProfileBar,mypageEdit_editDispo,mypageEdit_editDispoBar);
-                check = 1;
+                check = 0;
                 switchFragment(check);
             }
         });
@@ -77,10 +79,11 @@ public class MypageEditActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 colorChange(mypageEdit_editDispo,mypageEdit_editDispoBar,mypageEdit_editProfile,mypageEdit_editProfileBar);
-                check = 0;
+                check = 1;
                 switchFragment(check);
             }
         });
+        switchFragment(check);
 
     }
 
@@ -92,19 +95,16 @@ public class MypageEditActivity extends AppCompatActivity {
     }
 
     public void switchFragment(int i){
-        if(i == 1){
-            fm.beginTransaction().show(fragment).commit();
-            fm.beginTransaction().hide(fragment2).commit();
-        }
-        else{
-            if(fragment2 == null){
-                fragment2 = new FragmentMypageEditDispo();
-                fm.beginTransaction().add(R.id.mypageEdit_fragment, fragment2).commit();
-            }
+        switch (i) {
+            case 0:
+                fm.beginTransaction().setCustomAnimations(R.animator.enter_from_left, R.animator.exit_to_right, R.animator.enter_from_right, R.animator.exit_to_left)
+                        .replace(R.id.mypageEdit_fragment, fragment).commit();
+                break;
+            case 1:
+                fm.beginTransaction().setCustomAnimations(R.animator.enter_from_right, R.animator.exit_to_left, R.animator.enter_from_left, R.animator.exit_to_right)
+                        .replace(R.id.mypageEdit_fragment, fragment2).commit();
+                break;
 
-            fm.beginTransaction().hide(fragment).commit();
-            fm.beginTransaction().show(fragment2).commit();
         }
-
     }
 }

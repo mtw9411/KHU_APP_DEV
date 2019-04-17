@@ -64,11 +64,9 @@ public class Timeline_writing extends AppCompatActivity {
     private EditText writing_content;
     private ImageView writing_picture;
     private ImageView upload_image;
-    private ImageView delete_picture;
     private ArrayList<String> filetitle = new ArrayList<>();
     private ArrayList<Uri> mDataset = new ArrayList<>();
     private ArrayList<String> mDatasetString = new ArrayList<>();
-    private List<Bitmap> mDatasetBitmap;
     private FirebaseStorage storage;
     private FirebaseAuth auth;
     private FirebaseDatabase database;
@@ -176,16 +174,6 @@ public class Timeline_writing extends AppCompatActivity {
                         WritingAdapter.notifyDataSetChanged();
                     }
                     Toast.makeText(this, "이미지 추가 완료", Toast.LENGTH_SHORT).show();
-            }
-        }
-    }
-
-    public void toBitmap() {
-        for (int i = 0; i < mDataset.size(); i++) {
-            try {
-                mDatasetBitmap.add(MediaStore.Images.Media.getBitmap(getContentResolver(), mDataset.get(i)));
-            } catch (IOException e) {
-                e.printStackTrace();
             }
         }
     }
