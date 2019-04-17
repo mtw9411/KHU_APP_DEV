@@ -1,5 +1,6 @@
 package com.studylink.khu_app;
 
+import android.graphics.Bitmap;
 import android.net.Uri;
 
 import java.io.Serializable;
@@ -13,7 +14,7 @@ public class RoomUploadDTO implements Serializable {
     private String writing_content;
     private String uploadername;
     private List<String> filename;
-    private ArrayList<Uri> imageuri;
+    private ArrayList<String> filetitle;
     private Date time;
     private String category;
     private String textType;
@@ -50,12 +51,12 @@ public class RoomUploadDTO implements Serializable {
         this.filename = filename;
     }
 
-    public void setImageuri(ArrayList<Uri> imageuri) {
-        this.imageuri = imageuri;
+    public void setFiletitle(ArrayList<String> filetitle) {
+        this.filetitle = filetitle;
     }
 
-    public ArrayList<Uri> getImageuri() {
-        return imageuri;
+    public ArrayList<String> getFiletitle() {
+        return filetitle;
     }
 
     public Date getTime() {

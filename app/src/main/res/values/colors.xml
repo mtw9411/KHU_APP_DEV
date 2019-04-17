@@ -9,4 +9,7 @@
     <color name="colorGray">#66707070</color>
     <color name="colorLightGray">#e4e4e4</color>
     <color name="localBluecolor">#0065ff</color>
+    <color name="mypageTextselected">#0065ff</color>
+    <color name="mypageTextunSelected">#70222222</color>
+
 </resources>

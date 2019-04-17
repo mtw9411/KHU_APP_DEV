@@ -35,13 +35,17 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.MutableData;
+import com.google.firebase.database.Transaction;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageException;
 import com.google.firebase.storage.StorageReference;
 
 import org.w3c.dom.Text;
 
 import java.lang.reflect.Array;
+import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -49,17 +53,17 @@ public class TimelineActivity extends Fragment {
 
     private TextView write_content;
     private String write_title;
-    private ImageView toMypage;
-    private ImageView toMainpage;
     private RecyclerView recycler_studyname;
     private RecyclerView recycler_timelineBoard;
     private ArrayList<RoomDTO> nameofroom = new ArrayList<>();
     private ArrayList<String> getroomname = new ArrayList<>();
-    private ArrayList<ArrayList<Uri>> groupUri = new ArrayList<ArrayList<Uri>>();
+    private ArrayList<ArrayList<Uri>> groupUri = new ArrayList<>();
     private StudynameRecyclerViewAdapter StudynameAdapter;
     private TimelineBoardViewAdapter timelineBoardViewAdapter;
+    private PictureRecyclerViewAdapter pictureRecyclerViewAdapter;
     private FirebaseDatabase mdatabase;
     private DatabaseReference dataref;
+    private StorageReference storageReference;
     private FirebaseAuth mauth;
     private FirebaseStorage storage;
     private String currentUser;
@@ -87,9 +91,7 @@ public class TimelineActivity extends Fragment {
         mauth = FirebaseAuth.getInstance();
         currentUser = mauth.getCurrentUser().getUid();
         storage = FirebaseStorage.getInstance();
-
-        toMypage = (ImageView) view.findViewById(R.id.toMypage);
-        toMainpage = (ImageView) view.findViewById(R.id.toMainpage);
+        storageReference = storage.getReferenceFromUrl("gs://studylink-ec173.appspot.com").child("images/");
 
         write_content = (TextView) view.findViewById(R.id.write_content);
         write_content.setOnClickListener(new View.OnClickListener() {
@@ -108,22 +110,6 @@ public class TimelineActivity extends Fragment {
             }
         });
 
-        toMypage.setClickable(true);
-        toMainpage.setClickable(true);
-        toMypage.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), Mypage_main.class);
-                startActivity(intent);
-            }
-        });
-        toMainpage.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), MainActivity.class);
-                startActivity(intent);
-            }
-        });
 
         recycler_studyname = (RecyclerView) view.findViewById(R.id.recycler_studyname);
 
@@ -160,7 +146,7 @@ public class TimelineActivity extends Fragment {
         recycler_timelineBoard = (RecyclerView) view.findViewById(R.id.recycler_timelineBoard);
         recycler_timelineBoard.setLayoutManager(new LinearLayoutManager(getContext()));
 
-        timelineBoardViewAdapter = new TimelineBoardViewAdapter(groupUri, uploadDTOArrayList);
+        timelineBoardViewAdapter = new TimelineBoardViewAdapter(uploadDTOArrayList);
         recycler_timelineBoard.setAdapter(timelineBoardViewAdapter);
 
         getbundle();
@@ -375,8 +361,7 @@ public class TimelineActivity extends Fragment {
         private ArrayList<ArrayList<Uri>> uriArrayList;
         private ArrayList<RoomUploadDTO> dtoArrayList;
 
-        public TimelineBoardViewAdapter (ArrayList<ArrayList<Uri>> uris, ArrayList<RoomUploadDTO> uploadDTOArrayList){
-            uriArrayList = uris;
+        public TimelineBoardViewAdapter (ArrayList<RoomUploadDTO> uploadDTOArrayList){
             dtoArrayList = uploadDTOArrayList;
         }
 
@@ -399,28 +384,20 @@ public class TimelineActivity extends Fragment {
         }
         @Override
         public void onBindViewHolder(@NonNull RecyclerView.ViewHolder viewHolder, int position) {
-//                if(uriArrayList.get(i).size() == 1) {
-//                    ((FileViewHolder) viewHolder).imagefile1.setImageURI(uriArrayList.get(position).get(0));
-//                } else if (uriArrayList.get(i).size() == 2){
-//                    ((FileViewHolder) viewHolder).imagefile1.setImageURI(uriArrayList.get(position).get(0));
-//                    ((FileViewHolder) viewHolder).imagefile2.setImageURI(uriArrayList.get(position).get(1));
-//                } else if (uriArrayList.get(i).size() >= 3) {
-//                    ((FileViewHolder) viewHolder).imagefile1.setImageURI(uriArrayList.get(position).get(0));
-//                    ((FileViewHolder) viewHolder).imagefile2.setImageURI(uriArrayList.get(position).get(1));
-//                    ((FileViewHolder) viewHolder).imagefile3.setImageURI(uriArrayList.get(position).get(2));
-//                } else if(uriArrayList.get(i).size() == 0){
-//                ((FileViewHolder)viewHolder).imagefile1.setImageResource(0);
-//                ((FileViewHolder)viewHolder).imagefile2.setImageResource(0);
-//                ((FileViewHolder)viewHolder).imagefile3.setImageResource(0);
-//                }
-                ((FileViewHolder)viewHolder).file_username.setText(dtoArrayList.get(position).getUploadername());
-                ((FileViewHolder)viewHolder).file_contentText.setText(dtoArrayList.get(position).getTitle());
+            ((FileViewHolder)viewHolder).file_username.setText(dtoArrayList.get(position).getUploadername());
+            ((FileViewHolder)viewHolder).file_contentText.setText(dtoArrayList.get(position).getTitle());
             ((FileViewHolder)viewHolder).file_scrap.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
 
                 }
             });
+            RecyclerView.LayoutManager horizontalLayoutManager = new LinearLayoutManager(getContext());
+            ((LinearLayoutManager)horizontalLayoutManager).setOrientation(LinearLayoutManager.HORIZONTAL);
+            ((FileViewHolder)viewHolder).recyclerView.setLayoutManager(horizontalLayoutManager);
+            pictureRecyclerViewAdapter = new PictureRecyclerViewAdapter(dtoArrayList.get(position));
+            ((FileViewHolder)viewHolder).recyclerView.setAdapter(pictureRecyclerViewAdapter);
+            pictureRecyclerViewAdapter.notifyDataSetChanged();
         }
 
         private void scrap(int position){
@@ -462,5 +439,64 @@ public class TimelineActivity extends Fragment {
             }
         }
     }
+
+
+
+
+    class PictureRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{           //연결부분
+
+        private RoomUploadDTO uploadDTOS;
+
+        public PictureRecyclerViewAdapter(RoomUploadDTO array){
+            uploadDTOS = array;
+        }
+
+        @NonNull
+        @Override
+        public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+            View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.timeline_writing_recycler_picture, viewGroup, false);
+
+            return new CustomViewHolder(view);
+        }
+
+        @Override
+        public void onBindViewHolder(@NonNull final RecyclerView.ViewHolder viewHolder, final int position) {
+            if(uploadDTOS.getFiletitle() != null) {
+                for (int i = 0; i < uploadDTOS.getFiletitle().size(); i++) {
+                    storageReference.child(currentRoomuid + "/" + uploadDTOS.getTitle() + "/" + uploadDTOS.getFiletitle().get(position))
+                            .getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                        @Override
+                        public void onSuccess(Uri uri) {
+                            ((CustomViewHolder) viewHolder).upload_imageview.setImageURI(uri);
+                            Glide.with(((CustomViewHolder) viewHolder).root).load(uri.toString()).into(((CustomViewHolder) viewHolder).upload_imageview);
+                        }
+                    });
+                }
+            }
+        }
+
+        @Override
+        public int getItemCount() {
+            return uploadDTOS.getFiletitle().size();
+        }
+
+
+
+        private class CustomViewHolder extends RecyclerView.ViewHolder {
+
+            ImageView upload_imageview;
+            public View root;
+
+
+
+            public CustomViewHolder(View view) {
+                super(view);
+                root = view;
+                upload_imageview = view.findViewById(R.id.upload_imageview);
+            }
+        }
+    }
+
+
 }
 

@@ -22,7 +22,9 @@ public class Fragement_navi extends AppCompatActivity {
     private TimelineActivity timeline_fragment = new TimelineActivity();
     private AlarmActivity alarm_fragment = new AlarmActivity();
     private Mypage_main mypage_fragment = new Mypage_main();
-    private  BottomNavigationView bottomNavigationview;
+    private BottomNavigationView bottomNavigationview;
+    private int frag_num = 0;
+    private Fragment currentfrag;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,7 +34,7 @@ public class Fragement_navi extends AppCompatActivity {
         startActivity(intent);
 
         Bundle bundle = getIntent().getExtras();
-        int frag_num = (Integer) bundle.get("frag_num");
+//        frag_num = (Integer) bundle.get("frag_num");
 
         fragmentManager = getSupportFragmentManager();
         fragmentTransaction = fragmentManager.beginTransaction();
@@ -73,9 +75,23 @@ public class Fragement_navi extends AppCompatActivity {
                         return false;
                     }
                 });
-        setFrag(frag_num);
-   //     itemCheck();
+        setFrag(0);
+//      setCurrentFrag()
+//      itemCheck();
     }
+
+//    public void setCurrentFrag(){
+//        currentfrag = fragmentManager.findFragmentById(R.id.Frame_navi);
+//        if(main_fragment.isVisible()){
+//            setFrag(0);
+//        } else if(timeline_fragment.isVisible()){
+//            setFrag(1);
+//        } else if (alarm_fragment.isVisible()){
+//            setFrag(2);
+//        } else if (mypage_fragment.isVisible()){
+//            setFrag(3);
+//        }
+//    }
 
     public void setFrag(int n){    //프래그먼트를 교체하는 작업을 하는 메소드를 만들었습니다
         fragmentManager = getSupportFragmentManager();

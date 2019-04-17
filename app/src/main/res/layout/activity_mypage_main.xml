@@ -25,16 +25,6 @@
         android:background="#09000000"/>
 
     <ImageView
-        android:id="@+id/back_btn"
-        android:layout_width="31dp"
-        android:layout_height="29dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="13dp"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@mipmap/icon_23" />
-
-    <ImageView
         android:id="@+id/mypage_editProfile"
         android:layout_width="70dp"
         android:layout_height="70dp"
@@ -95,14 +85,14 @@
         android:background="@drawable/mypage_icon_before"/>
 
     <TextView
-        android:id="@+id/textView79"
+        android:id="@+id/iconText1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         android:layout_marginLeft="20dp"
         android:layout_marginTop="55dp"
         android:text="일정관리"
-        android:textColor="#5b6eff"
+        android:textColor="#70222222"
         android:textSize="11sp"
         app:layout_constraintEnd_toEndOf="@+id/mypage_schedule"
         app:layout_constraintHorizontal_bias="0.4"
@@ -110,12 +100,12 @@
         app:layout_constraintTop_toTopOf="@+id/mypage_schedule" />
 
     <TextView
-        android:id="@+id/textView80"
+        android:id="@+id/iconText2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="55dp"
         android:text="저장소식"
-        android:textColor="#8c47ff"
+        android:textColor="#70222222"
         android:textSize="11sp"
         app:layout_constraintEnd_toEndOf="@+id/mypage_store"
         app:layout_constraintStart_toStartOf="@+id/mypage_store"
@@ -151,6 +141,8 @@
         app:layout_constraintStart_toStartOf="@+id/mypage_store"
         app:layout_constraintTop_toTopOf="@+id/mypage_store" />
 
+
+
     <FrameLayout
         android:id="@+id/main_frame"
         android:layout_width="0dp"
@@ -159,7 +151,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView79">
+        app:layout_constraintTop_toBottomOf="@+id/iconText1">
 
     </FrameLayout>
     <TextView
