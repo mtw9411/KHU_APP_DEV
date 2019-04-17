@@ -84,7 +84,6 @@ public class Fragement_navi extends AppCompatActivity {
             case 0:
                 fragmentTransaction.setCustomAnimations(R.animator.fade_in, R.animator.fade_out, R.animator.fade_in, R.animator.fade_out)
                         .replace(R.id.Frame_navi, main_fragment).commit();  //replace의 매개변수는 (프래그먼트를 담을 영역 id, 프래그먼트 객체) 입니다.
-
                 break;
             case 1:
                 fragmentTransaction.setCustomAnimations(R.animator.fade_in, R.animator.fade_out, R.animator.fade_in, R.animator.fade_out)

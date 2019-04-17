@@ -8,4 +8,5 @@
     <color name="colorBlue">#4a81ff</color>
     <color name="colorGray">#66707070</color>
     <color name="colorLightGray">#e4e4e4</color>
+    <color name="localBluecolor">#0065ff</color>
 </resources>

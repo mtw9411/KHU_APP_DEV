@@ -27,5 +27,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:menu="@menu/bottombar_menu"
         app:layout_behavior="tech.thdev.app.view.BottomNavigationBehavior"
+        app:itemIconTint="@drawable/navi_home"
+        app:itemTextColor="#2f78db"
         />
 </android.support.constraint.ConstraintLayout>

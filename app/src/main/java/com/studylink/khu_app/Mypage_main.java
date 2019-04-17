@@ -103,6 +103,8 @@ public class Mypage_main extends Fragment{
             @Override
             public void onClick(View v) {
                 setFrag(0);
+                mypage_schedule.setBackground(getResources().getDrawable(R.drawable.mypage_icon_after));
+                mypage_store.setBackground(getResources().getDrawable(R.drawable.mypage_icon_before));
             }
         });
 
@@ -111,6 +113,8 @@ public class Mypage_main extends Fragment{
             @Override
             public void onClick(View v) {
                 setFrag(1);
+                mypage_schedule.setBackground(getResources().getDrawable(R.drawable.mypage_icon_before));
+                mypage_store.setBackground(getResources().getDrawable(R.drawable.mypage_icon_after));
             }
         });
 

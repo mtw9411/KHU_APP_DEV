@@ -1,6 +1,7 @@
 package com.studylink.khu_app;
 
 import android.accounts.Account;
+import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.drawable.GradientDrawable;
@@ -68,11 +69,11 @@ public class TimelineActivity extends Fragment {
     private int k = 0;
     private String currentRoomuid;
     private String roomkey;
+    private int selectedPostion = 0;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
 
     }
 
@@ -101,6 +102,9 @@ public class TimelineActivity extends Fragment {
                     intent.putExtra("currentRoomCategory", nameofroom.get(0).getSpinner1());
                 }
                 startActivity(intent);
+                Fragement_navi navi = new Fragement_navi();
+                navi.finish();
+
             }
         });
 
@@ -196,29 +200,25 @@ public class TimelineActivity extends Fragment {
 //    }
 
     private void setTimelineData() {
-        if(k == 0){
-        dataref.child("RoomUpload").child(currentRoomuid).addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                RoomUploadDTO uploadDTO;
-                if (dataSnapshot != null){
-                    for (DataSnapshot data : dataSnapshot.getChildren()) {
-                        uploadDTO = data.getValue(RoomUploadDTO.class);
-                        uploadDTOArrayList.add(0, uploadDTO);
+            uploadDTOArrayList.clear();
+            dataref.child("RoomUpload").child(currentRoomuid).addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    RoomUploadDTO uploadDTO;
+                    if (dataSnapshot != null){
+                        for (DataSnapshot data : dataSnapshot.getChildren()) {
+                            uploadDTO = data.getValue(RoomUploadDTO.class);
+                            uploadDTOArrayList.add(0, uploadDTO);
+                        }
+                        timelineBoardViewAdapter.notifyDataSetChanged();
                     }
-                    timelineBoardViewAdapter.notifyDataSetChanged();
                 }
-            }
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
 
-            @Override
-
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
-        k++;
+                }
+            });
         }
-    }
 
 
 //
@@ -330,10 +330,21 @@ public class TimelineActivity extends Fragment {
         @Override
         public void onBindViewHolder(@NonNull final RecyclerView.ViewHolder viewHolder, final int position) {
             ((StudynameViewHolder)viewHolder).studyname_title.setText(Room.get(position).getRoomName());
+            if(selectedPostion == position){
+                ((StudynameViewHolder) viewHolder).studyname_title.setBackground(getResources().getDrawable(R.drawable.timeline_studyname_cardview));
+                ((StudynameViewHolder)viewHolder).studyname_title.setTextColor(getResources().getColor(R.color.localBluecolor));
+            } else{
+                ((StudynameViewHolder) viewHolder).studyname_title.setBackground(getResources().getDrawable(R.drawable.timeline_studyname_default));
+                ((StudynameViewHolder)viewHolder).studyname_title.setTextColor(getResources().getColor(R.color.colorWhite));
+            }
+
             ((StudynameViewHolder) viewHolder).studyname_title.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     currentRoomuid = Room.get(position).getId();
+                    selectedPostion = position;
+                    setTimelineData();
+                    notifyDataSetChanged();
                 }
             });
         }
@@ -404,6 +415,16 @@ public class TimelineActivity extends Fragment {
 //                }
                 ((FileViewHolder)viewHolder).file_username.setText(dtoArrayList.get(position).getUploadername());
                 ((FileViewHolder)viewHolder).file_contentText.setText(dtoArrayList.get(position).getTitle());
+            ((FileViewHolder)viewHolder).file_scrap.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                }
+            });
+        }
+
+        private void scrap(int position){
+
         }
 
         @Override
@@ -423,13 +444,14 @@ public class TimelineActivity extends Fragment {
             TextView file_username;
             TextView file_contentText;
             RecyclerView recyclerView;
+            ImageView file_scrap;
 
             public FileViewHolder(@NonNull View itemView) {
                 super(itemView);
                 file_username = itemView.findViewById(R.id.file_username);
                 file_contentText = itemView.findViewById(R.id.file_contentText);
                 recyclerView = itemView.findViewById(R.id.image_recycler);
-
+                file_scrap = itemView.findViewById(R.id.file_scrap);
             }
         }
 
