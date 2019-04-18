@@ -5,6 +5,8 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -70,7 +72,9 @@ public class AlarmActivity extends Fragment {
 
 // "알림창" RecyclerView 구현
         // 레이아웃 종류 정의
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
+        LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
+        layoutManager.setReverseLayout(true);
+        layoutManager.setStackFromEnd(true);
         recycler_alarm.setLayoutManager(layoutManager);
 
         // 어댑터 연결
@@ -80,10 +84,13 @@ public class AlarmActivity extends Fragment {
             public void onClick(View v) {
                 Object obj = v.getTag();
                 if (obj != null) {
-//                    int position = (int) obj;
-//                    Intent intent = new Intent(getContext(), TimelineActivity.class);
-//                    intent.putExtra("Timeline", )
+                    int position = (int) obj;
+                    Fragment fragment = new TimelineActivity();
+                    Bundle bundle = new Bundle();
+                    bundle.putInt("myRoomNum", position);
+                    fragment.setArguments(bundle);
 
+                    getFragmentManager().beginTransaction().replace(R.id.Frame_navi, fragment).commit();
                 }
             }
         });

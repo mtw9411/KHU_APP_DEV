@@ -27,7 +27,6 @@ public class AdapterMyStudy extends RecyclerView.Adapter<AdapterMyStudy.MyViewHo
     private ArrayList<RoomDTO> arrayList;
     private static View.OnClickListener onClickListener;
 
-
     public AdapterMyStudy(ArrayList<RoomDTO> items, View.OnClickListener onClick){
         arrayList = items;
         onClickListener = onClick;
@@ -72,7 +71,7 @@ public class AdapterMyStudy extends RecyclerView.Adapter<AdapterMyStudy.MyViewHo
         // 이미지 설정
         if(room.getimageName() != null) {
             String fileName = room.getimageName();
-            storageRef.child(fileName).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+            storageRef.child(room.getRoomName() + fileName).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                 @Override
                 public void onSuccess(Uri uri) {
                     holder.imageView_myStudy.setImageURI(uri);

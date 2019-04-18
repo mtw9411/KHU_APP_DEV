@@ -34,7 +34,7 @@ public class Fragement_navi extends AppCompatActivity {
         startActivity(intent);
 
         Bundle bundle = getIntent().getExtras();
-//        frag_num = (Integer) bundle.get("frag_num");
+        frag_num = (Integer) bundle.get("frag_num");
 
         fragmentManager = getSupportFragmentManager();
         fragmentTransaction = fragmentManager.beginTransaction();

@@ -10,6 +10,7 @@
     >
 
     <android.support.constraint.ConstraintLayout
+        android:id="@+id/timelineLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:isScrollContainer="true"
@@ -206,7 +207,7 @@
             </android.support.constraint.ConstraintLayout>
 
             <TextView
-                android:id="@+id/textView9"
+                android:id="@+id/timeline_studyName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
@@ -220,7 +221,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/constraintLayout" />
 
             <TextView
-                android:id="@+id/textView10"
+                android:id="@+id/toStudyDetail"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="156dp"
@@ -229,21 +230,21 @@
                 android:text="스터디 상세정보"
                 android:textColor="#707070"
                 android:textSize="11sp"
-                app:layout_constraintBottom_toBottomOf="@+id/textView9"
-                app:layout_constraintStart_toEndOf="@+id/textView9"
-                app:layout_constraintTop_toTopOf="@+id/textView9"
+                app:layout_constraintBottom_toBottomOf="@+id/timeline_studyName"
+                app:layout_constraintStart_toEndOf="@+id/timeline_studyName"
+                app:layout_constraintTop_toTopOf="@+id/timeline_studyName"
                 app:layout_constraintVertical_bias="1.0" />
 
             <ImageView
                 android:id="@+id/imageView7"
                 android:layout_width="12dp"
                 android:layout_height="20dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginLeft="10dp"
+                android:layout_marginStart="5dp"
+                android:layout_marginLeft="5dp"
                 android:rotation="180"
-                app:layout_constraintBottom_toBottomOf="@+id/textView10"
-                app:layout_constraintStart_toEndOf="@+id/textView10"
-                app:layout_constraintTop_toTopOf="@+id/textView10"
+                app:layout_constraintBottom_toBottomOf="@+id/toStudyDetail"
+                app:layout_constraintStart_toEndOf="@+id/toStudyDetail"
+                app:layout_constraintTop_toTopOf="@+id/toStudyDetail"
                 app:srcCompat="@mipmap/icon_23" />
 
             <android.support.v7.widget.RecyclerView
@@ -258,7 +259,7 @@
                 android:isScrollContainer="false"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView9" />
+                app:layout_constraintTop_toBottomOf="@+id/timeline_studyName" />
         </android.support.constraint.ConstraintLayout>
 
 

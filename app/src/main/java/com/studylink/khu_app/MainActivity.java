@@ -147,7 +147,7 @@ public class MainActivity extends Fragment {
                     int position = (int) obj;
                     Fragment fragment = new TimelineActivity();
                     Bundle bundle = new Bundle();
-                    bundle.putSerializable("Timeline", myStudy_Adapter.getRoom(position));
+                    bundle.putInt("myRoomNum", position);
                     fragment.setArguments(bundle);
 
                     ft.replace(R.id.Frame_navi, fragment).commit();

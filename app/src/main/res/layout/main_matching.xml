@@ -77,7 +77,7 @@
             android:layout_width="match_parent"
             android:layout_height="98.1dp"
             android:scaleType="centerCrop"
-            app:srcCompat="@drawable/study_test" />
+            android:src="@drawable/study_test" />
 
         <TextView
             android:id="@+id/matching_title"

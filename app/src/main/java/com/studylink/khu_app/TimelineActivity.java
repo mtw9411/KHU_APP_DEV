@@ -9,6 +9,7 @@ import android.media.Image;
 import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.constraint.ConstraintLayout;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
@@ -76,6 +77,7 @@ public class TimelineActivity extends Fragment {
     private String currentRoomuid;
     private String roomkey;
     private int selectedPostion = 0;
+    private ViewGroup view;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -86,7 +88,7 @@ public class TimelineActivity extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
-        ViewGroup view = (ViewGroup) inflater.inflate(R.layout.timeline_main, container, false);
+        view = (ViewGroup) inflater.inflate(R.layout.timeline_main, container, false);
         mdatabase = FirebaseDatabase.getInstance();
         dataref = mdatabase.getReference();
         mauth = FirebaseAuth.getInstance();
@@ -99,16 +101,16 @@ public class TimelineActivity extends Fragment {
         uploadDTOArrayList.clear();
         groupUri.clear();
 
+        getbundle();
 
-        write_content = (TextView) view.findViewById(R.id.write_content);
+        write_content = view.findViewById(R.id.write_content);
         write_content.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(), Timeline_writing.class);
                 intent.putExtra("currentRoomid", currentRoomuid);
                 if(nameofroom != null){
-                    // 수정해야함#########################################################################################
-                    intent.putExtra("currentRoomCategory", nameofroom.get(0).getSpinner1());
+                    intent.putExtra("currentRoomCategory", nameofroom.get(selectedPostion).getSpinner1());
                 }
                 startActivity(intent);
                 Fragement_navi navi = new Fragement_navi();
@@ -118,7 +120,7 @@ public class TimelineActivity extends Fragment {
         });
 
 
-        recycler_studyname = (RecyclerView) view.findViewById(R.id.recycler_studyname);
+        recycler_studyname = view.findViewById(R.id.recycler_studyname);
 
         RecyclerView.LayoutManager horizontalLayoutManager = new LinearLayoutManager(getContext());
         ((LinearLayoutManager)horizontalLayoutManager).setOrientation(LinearLayoutManager.HORIZONTAL);
@@ -136,8 +138,7 @@ public class TimelineActivity extends Fragment {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 AccountDTO acc = dataSnapshot.getValue(AccountDTO.class);
                 if(acc.getRoomId()!=null){
-                    // 수정해야함###############################################################################
-                    currentRoomuid = acc.getRoomId().get(0);
+                    currentRoomuid = acc.getRoomId().get(selectedPostion);
                     setTimelineData();
 
                     timelineBoardViewAdapter.notifyDataSetChanged();
@@ -150,13 +151,13 @@ public class TimelineActivity extends Fragment {
             }
         });
 
-        recycler_timelineBoard = (RecyclerView) view.findViewById(R.id.recycler_timelineBoard);
-        recycler_timelineBoard.setLayoutManager(new LinearLayoutManager(getContext()));
+        recycler_timelineBoard = view.findViewById(R.id.recycler_timelineBoard);
+
+        LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
+        recycler_timelineBoard.setLayoutManager(layoutManager);
 
         timelineBoardViewAdapter = new TimelineBoardViewAdapter(uploadDTOArrayList);
         recycler_timelineBoard.setAdapter(timelineBoardViewAdapter);
-
-        getbundle();
 
         timelineBoardViewAdapter.notifyDataSetChanged();
 
@@ -166,12 +167,13 @@ public class TimelineActivity extends Fragment {
     }
 
     private void getbundle(){
-        if(getArguments()!=null){
+        if(getArguments() != null){
             Bundle bundle = getArguments();
-            imageUri = bundle.getParcelableArrayList("ImageData");
-            roomkey = bundle.getString("roomkey");
-            write_title = bundle.getString("puttitle");
-            timelineBoardViewAdapter.notifyDataSetChanged();
+            selectedPostion = bundle.getInt("myRoomNum");
+//            imageUri = bundle.getParcelableArrayList("ImageData");
+//            roomkey = bundle.getString("roomkey");
+//            write_title = bundle.getString("puttitle");
+//            timelineBoardViewAdapter.notifyDataSetChanged();
         }
     }
 
@@ -201,7 +203,7 @@ public class TimelineActivity extends Fragment {
                     if (dataSnapshot != null){
                         for (DataSnapshot data : dataSnapshot.getChildren()) {
                             uploadDTO = data.getValue(RoomUploadDTO.class);
-                            uploadDTOArrayList.add(0, uploadDTO);
+                            uploadDTOArrayList.add(uploadDTO);
                         }
                         timelineBoardViewAdapter.notifyDataSetChanged();
                     }
@@ -283,8 +285,9 @@ public class TimelineActivity extends Fragment {
 
         @Override
         public void onBindViewHolder(@NonNull final RecyclerView.ViewHolder viewHolder, final int position) {
-            ((StudynameViewHolder)viewHolder).studyname_title.setText(Room.get(position).getRoomName());
+            ((StudynameViewHolder)viewHolder).studyname_title.setText(Room.get(position).getSpinner1());
             if(selectedPostion == position){
+                ((StudynameViewHolder)viewHolder).timeline_studyName.setText(Room.get(position).getSpinner1()+" 스터디");
                 ((StudynameViewHolder) viewHolder).studyname_title.setBackground(getResources().getDrawable(R.drawable.timeline_studyname_cardview));
                 ((StudynameViewHolder)viewHolder).studyname_title.setTextColor(getResources().getColor(R.color.localBluecolor));
             } else{
@@ -292,13 +295,22 @@ public class TimelineActivity extends Fragment {
                 ((StudynameViewHolder)viewHolder).studyname_title.setTextColor(getResources().getColor(R.color.colorWhite));
             }
 
+            ((StudynameViewHolder)viewHolder).toStudyDetail.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    // 고치기##########################################################################################
+//                    Intent intent = new Intent(getActivity(), StudydetailActivity.class);
+//                    startActivity(intent);
+                }
+            });
+
             ((StudynameViewHolder) viewHolder).studyname_title.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    currentRoomuid = Room.get(position).getId();
-                    selectedPostion = position;
-                    setTimelineData();
-                    notifyDataSetChanged();
+                currentRoomuid = Room.get(position).getId();
+                selectedPostion = position;
+                setTimelineData();
+                notifyDataSetChanged();
                 }
             });
         }
@@ -310,11 +322,13 @@ public class TimelineActivity extends Fragment {
 
         private class StudynameViewHolder extends RecyclerView.ViewHolder{
 
-            TextView studyname_title;
+            TextView studyname_title, timeline_studyName, toStudyDetail;
 
             public StudynameViewHolder(View itemView) {
                 super(itemView);
-                studyname_title = (TextView) itemView.findViewById(R.id.studyname_title);
+                studyname_title = itemView.findViewById(R.id.studyname_title);
+                timeline_studyName = view.findViewById(R.id.timeline_studyName);
+                toStudyDetail = view.findViewById(R.id.toStudyDetail);
             }
         }
     }
