@@ -30,7 +30,6 @@ public class AlarmActivity extends Fragment {
     private ArrayList<RoomUploadDTO> arrayList_alarm = new ArrayList<>();
     private AdapterAlarm alarm_Adapter;
     private DatabaseReference databaseReference;
-    private FirebaseAuth mAuth;
     private AccountDTO currentUser;
     private RoomUploadDTO roomUploadDTO;
     private String RoomId;
@@ -40,9 +39,18 @@ public class AlarmActivity extends Fragment {
         super.onCreate(savedInstanceState);
 
         databaseReference = FirebaseDatabase.getInstance().getReference();
+    }
+
+    @Nullable
+    @Override
+    public View onCreateView(@NonNull LayoutInflater inflater, @android.support.annotation.Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        ViewGroup view = (ViewGroup) inflater.inflate(R.layout.activity_alarm, container, false);
+        recycler_alarm = view.findViewById(R.id.recycler_alarm);
+
+        arrayList_alarm.clear();
 
         // 현재 유저
-        String uid = mAuth.getInstance().getCurrentUser().getUid();
+        String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
         databaseReference.child("users").child(uid).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -59,34 +67,6 @@ public class AlarmActivity extends Fragment {
 
             }
         });
-    }
-
-    public void setData(){
-        // 현재 유저 이름
-        alarm_Adapter.setUser(currentUser.getUsername());
-        // 내가 참여한 스터디방과 같은 방
-        databaseReference.child("RoomUpload").child(RoomId).addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                // 글 하나하나
-                for(DataSnapshot snapshot : dataSnapshot.getChildren()){
-                    roomUploadDTO = snapshot.getValue(RoomUploadDTO.class);
-                    alarm_Adapter.addRoom(roomUploadDTO);
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
-    }
-
-    @Nullable
-    @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @android.support.annotation.Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        ViewGroup view = (ViewGroup) inflater.inflate(R.layout.activity_alarm, container, false);
-        recycler_alarm = view.findViewById(R.id.recycler_alarm);
 
 // "알림창" RecyclerView 구현
         // 레이아웃 종류 정의
@@ -111,5 +91,26 @@ public class AlarmActivity extends Fragment {
 
         return view;
 
+    }
+
+    public void setData(){
+        // 현재 유저 이름
+        alarm_Adapter.setUser(currentUser.getUsername());
+        // 내가 참여한 스터디방과 같은 방
+        databaseReference.child("RoomUpload").child(RoomId).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                // 글 하나하나
+                for(DataSnapshot snapshot : dataSnapshot.getChildren()){
+                    roomUploadDTO = snapshot.getValue(RoomUploadDTO.class);
+                    alarm_Adapter.addRoom(roomUploadDTO);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
     }
 }

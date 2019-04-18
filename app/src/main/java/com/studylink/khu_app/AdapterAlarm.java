@@ -74,41 +74,35 @@ public class AdapterAlarm extends RecyclerView.Adapter<AdapterAlarm.MyViewHolder
         holder.alarm_image.setImageResource(R.drawable.study_test);
 
         // 시간 설정
-        SimpleDateFormat dateFormat = new SimpleDateFormat("M월d일 HH시mm분");
-        SimpleDateFormat dateFormat1 = new SimpleDateFormat("M월 d일");
-        String nowDate = dateFormat.format(new Date());
-        String roomDate = dateFormat.format(room.getTime());
-        try {
-            Date startDate = dateFormat.parse(nowDate);
-            Date endDate = dateFormat.parse(roomDate);
-            long calDate = endDate.getTime() - startDate.getTime();
-            long day = calDate/(24*60*60*1000);
-            long hour = calDate/(60*60*1000);
-            long minute = calDate/(60*1000);
-            day = Math.abs(day);
-            hour = Math.abs(hour);
-            minute = Math.abs(minute);
-            if (day == 0){
-                if(hour == 0){
-                    if(minute < 1){
-                        holder.alarm_time.setText("방금");
-                    }
-                    else if(minute < 60){
-                        holder.alarm_time.setText(minute + "분 전");
-                    }
-                    else{
-                        holder.alarm_time.setText("이건 보일리가 없음");
-                    }
+        SimpleDateFormat dateFormat = new SimpleDateFormat("M월 d일");
+        Date nowDate = new Date();          // 현재 시간
+        Date uploadDate = room.getTime();   // 글 생성 날짜
+
+        long calDate = nowDate.getTime() - uploadDate.getTime();
+        long day = calDate/(24*60*60*1000);
+        long hour = calDate/(60*60*1000);
+        long minute = calDate/(60*1000);
+        day = Math.abs(day);
+        hour = Math.abs(hour);
+        minute = Math.abs(minute);
+        if (day == 0){
+            if(hour == 0){
+                if(minute < 1){
+                    holder.alarm_time.setText("방금");
+                }
+                else if(minute < 60){
+                    holder.alarm_time.setText(minute + "분 전");
                 }
                 else{
-                    holder.alarm_time.setText(hour + "시간 전");
+                    holder.alarm_time.setText("이건 보일리가 없음");
                 }
             }
             else{
-                holder.alarm_time.setText(dateFormat1.parse(roomDate).toString());
+                holder.alarm_time.setText(hour + "시간 전");
             }
-        } catch (ParseException e) {
-            e.printStackTrace();
+        }
+        else{
+            holder.alarm_time.setText(dateFormat.format(uploadDate));
         }
 
         // 태그 설정

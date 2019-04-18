@@ -4,6 +4,7 @@ package com.studylink.khu_app;
 import android.content.Intent;
 import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -37,7 +38,7 @@ public class AdapterMatching extends RecyclerView.Adapter<AdapterMatching.MyView
     // 아이템 뷰에서 아이디 찾기
     public static class MyViewHolder extends RecyclerView.ViewHolder {
         public TextView matching_title,matching_member,matching_totalMember,matching_region,matching_age,matching_gender;
-        public ImageView imageView_matching;
+        public ImageView imageView_matching, img_ribbon;
         public LinearLayout btn_detail, btn_entrance;
         public View root;
         public MyViewHolder(View v) {
@@ -50,6 +51,7 @@ public class AdapterMatching extends RecyclerView.Adapter<AdapterMatching.MyView
             matching_age = v.findViewById(R.id.matching_age);
             matching_gender = v.findViewById(R.id.matching_gender);
             imageView_matching = v.findViewById(R.id.imageView_matching);
+            img_ribbon = v.findViewById(R.id.img_ribbon);
             btn_detail = v.findViewById(R.id.btn_detail);
             btn_entrance = v.findViewById(R.id.btn_entrance);
 
@@ -76,11 +78,10 @@ public class AdapterMatching extends RecyclerView.Adapter<AdapterMatching.MyView
     @Override
     public void onBindViewHolder(final MyViewHolder holder, int position) {
         RoomDTO room = arrayList.get(position);
-
         // 이미지 설정
         if(room.getimageName() != null) {
             String fileName = room.getimageName();
-            storageRef.child(fileName).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+            storageRef.child(room.getRoomName()+ fileName).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                 @Override
                 public void onSuccess(Uri uri) {
                     holder.imageView_matching.setImageURI(uri);

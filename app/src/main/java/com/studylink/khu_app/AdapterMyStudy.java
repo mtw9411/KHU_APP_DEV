@@ -84,6 +84,9 @@ public class AdapterMyStudy extends RecyclerView.Adapter<AdapterMyStudy.MyViewHo
         // 텍스트 설정
         holder.textView_title.setText(room.getRoomName());
 
+        // 최근 대화 설정
+        holder.textView_time.setText(" 대화");
+
         // 태그 설정
         holder.imageView_myStudy.setTag(position);
 
