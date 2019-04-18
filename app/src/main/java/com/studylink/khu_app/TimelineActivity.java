@@ -47,7 +47,9 @@ import org.w3c.dom.Text;
 
 import java.lang.reflect.Array;
 import java.net.URI;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class TimelineActivity extends Fragment {
@@ -133,8 +135,10 @@ public class TimelineActivity extends Fragment {
 
         recycler_studyname = view.findViewById(R.id.recycler_studyname);
 
-        RecyclerView.LayoutManager horizontalLayoutManager = new LinearLayoutManager(getContext());
-        ((LinearLayoutManager)horizontalLayoutManager).setOrientation(LinearLayoutManager.HORIZONTAL);
+        LinearLayoutManager horizontalLayoutManager = new LinearLayoutManager(getContext());
+        horizontalLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
+        horizontalLayoutManager.setReverseLayout(true);
+        horizontalLayoutManager.setStackFromEnd(true);
         recycler_studyname.setLayoutManager(horizontalLayoutManager);
 
         StudynameAdapter = new StudynameRecyclerViewAdapter(nameofroom);
@@ -227,7 +231,7 @@ public class TimelineActivity extends Fragment {
         }
 
 
-//
+
 
     private void setData(){
         dataref.child("users").child(currentUser).addListenerForSingleValueEvent(new ValueEventListener() {
@@ -275,48 +279,6 @@ public class TimelineActivity extends Fragment {
         });
     }
 
-    @Override
-    public void onPause(){
-        super.onPause();
-
-        if(nameofroom != null & getroomname != null){
-            int size = nameofroom.size();
-            int size1 = getroomname.size();
-            if (size > 0) {
-                for (int i = 0; i < size; i++) {
-                    nameofroom.remove(0);
-                }
-                StudynameAdapter.notifyItemRangeRemoved(0, size);
-            }
-            if (size1 > 0) {
-                for (int i = 0; i < size1; i++) {
-                    getroomname.remove(0);
-                }
-            }
-        }
-
-
-        if(uploadDTOArrayList != null){
-            int size = uploadDTOArrayList.size();
-            if (size > 0) {
-                for (int i = 0; i < size; i++) {
-                    uploadDTOArrayList.remove(0);
-                }
-                timelineBoardViewAdapter.notifyItemRangeRemoved(0, size);
-            }
-
-            if (groupUri != null){
-                int size1 = groupUri.size();
-                if (size1 > 0) {
-                    for (int i = 0; i < size1; i++) {
-                        groupUri.remove(0);
-                    }
-                }
-            }
-        }
-    }
-
-
     class StudynameRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {      //어느 스터디인지를 선택하는 부분의 recycler
 
         private ArrayList<RoomDTO> Room;
@@ -348,9 +310,9 @@ public class TimelineActivity extends Fragment {
             ((StudynameViewHolder)viewHolder).toStudyDetail.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    // 고치기##########################################################################################
-//                    Intent intent = new Intent(getActivity(), StudydetailActivity.class);
-//                    startActivity(intent);
+                    Intent intent = new Intent(getActivity(), StudydetailActivity.class);
+                    intent.putExtra("roomDetail", Room.get(selectedPostion));
+                    startActivity(intent);
                 }
             });
 
@@ -418,6 +380,39 @@ public class TimelineActivity extends Fragment {
         public void onBindViewHolder(@NonNull RecyclerView.ViewHolder viewHolder, int position) {
             ((FileViewHolder)viewHolder).file_username.setText(dtoArrayList.get(position).getUploadername());
             ((FileViewHolder)viewHolder).file_contentText.setText(dtoArrayList.get(position).getTitle());
+
+            SimpleDateFormat dateFormat = new SimpleDateFormat("M월 d일");
+            Date nowDate = new Date();          // 현재 시간
+            Date uploadDate = dtoArrayList.get(position).getTime();   // 글 생성 날짜
+
+            long calDate = nowDate.getTime() - uploadDate.getTime();
+            long day = calDate/(24*60*60*1000);
+            long hour = calDate/(60*60*1000);
+            long minute = calDate/(60*1000);
+            day = Math.abs(day);
+            hour = Math.abs(hour);
+            minute = Math.abs(minute);
+            if (day == 0){
+                if(hour == 0){
+                    if(minute < 1){
+                        ((FileViewHolder)viewHolder).file_time.setText("방금");
+                    }
+                    else if(minute < 60){
+                        ((FileViewHolder)viewHolder).file_time.setText(minute + "분 전");
+                    }
+                    else{
+                        ((FileViewHolder)viewHolder).file_time.setText("안보임");
+                    }
+                }
+                else{
+                    ((FileViewHolder)viewHolder).file_time.setText(hour + "시간 전");
+                }
+            }
+            else{
+                ((FileViewHolder)viewHolder).file_time.setText(dateFormat.format(uploadDate));
+            }
+
+
             ((FileViewHolder)viewHolder).file_scrap.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -450,7 +445,7 @@ public class TimelineActivity extends Fragment {
 
         private class FileViewHolder extends RecyclerView.ViewHolder{
 
-            TextView file_username;
+            TextView file_username, file_time;
             TextView file_contentText;
             RecyclerView recyclerView;
             ImageView file_scrap;
@@ -458,6 +453,7 @@ public class TimelineActivity extends Fragment {
             public FileViewHolder(@NonNull View itemView) {
                 super(itemView);
                 file_username = itemView.findViewById(R.id.file_username);
+                file_time = itemView.findViewById(R.id.file_time);
                 file_contentText = itemView.findViewById(R.id.file_contentText);
                 recyclerView = itemView.findViewById(R.id.image_recycler);
                 file_scrap = itemView.findViewById(R.id.file_scrap);

@@ -22,6 +22,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -42,8 +43,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class Mypage_main extends Fragment{
 
-    private ImageView mypage_schedule;
-    private ImageView mypage_store;
+    private RelativeLayout mypage_schedule, mypage_store;
     private TextView mypage_Logout;
     private FirebaseAuth auth;
     private Mypage_schedule_fragment scheduleFragment;
@@ -53,7 +53,7 @@ public class Mypage_main extends Fragment{
     private TextView icontext1;
     private TextView icontext2;
 
-    private ImageView test1;
+    private ImageView test1, myPage_img1, myPage_img2;
 
     private ImageView mypage_editProfile;
     private ViewGroup mypage_schedulelayout;
@@ -81,11 +81,12 @@ public class Mypage_main extends Fragment{
 
         icontext1 = view.findViewById(R.id.iconText1);
         icontext2 = view.findViewById(R.id.iconText2);
-
+        myPage_img1 = view.findViewById(R.id.myPage_img1);
+        myPage_img2 = view.findViewById(R.id.myPage_img2);
 
         mypage_Logout = (TextView) view.findViewById(R.id.mypage_Logout);
-        mypage_schedule = (ImageView) view.findViewById(R.id.mypage_schedule);
-        mypage_store = (ImageView) view.findViewById(R.id.mypage_store);
+        mypage_schedule = view.findViewById(R.id.mypage_schedule);
+        mypage_store = view.findViewById(R.id.mypage_store);
 
         scheduleFragment = new Mypage_schedule_fragment();
         storeFragment = new Mypage_store_fragment();
@@ -128,6 +129,8 @@ public class Mypage_main extends Fragment{
                 setFrag(0);
                 mypage_schedule.setBackground(getResources().getDrawable(R.drawable.mypage_icon_after));
                 mypage_store.setBackground(getResources().getDrawable(R.drawable.mypage_icon_before));
+                myPage_img1.setImageResource(R.mipmap.icon_19);
+                myPage_img2.setImageResource(R.mipmap.icon_18);
                 icontext1.setTextColor(getResources().getColor(R.color.mypageTextselected));
                 icontext2.setTextColor(getResources().getColor(R.color.mypageTextunSelected));
             }
@@ -140,6 +143,8 @@ public class Mypage_main extends Fragment{
                 setFrag(1);
                 mypage_schedule.setBackground(getResources().getDrawable(R.drawable.mypage_icon_before));
                 mypage_store.setBackground(getResources().getDrawable(R.drawable.mypage_icon_after));
+                myPage_img1.setImageResource(R.mipmap.icon_41);
+                myPage_img2.setImageResource(R.mipmap.icon_42);
                 icontext1.setTextColor(getResources().getColor(R.color.mypageTextunSelected));
                 icontext2.setTextColor(getResources().getColor(R.color.mypageTextselected));
             }

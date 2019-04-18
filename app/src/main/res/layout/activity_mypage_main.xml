@@ -16,7 +16,7 @@
         android:layout_height="52dp"
         android:gravity="center"
         android:lineSpacingExtra="6sp"
-        android:text="My Room"
+        android:text="MY ROOM"
         android:textColor="#222222"
         android:textSize="13sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -60,88 +60,87 @@
         app:layout_constraintStart_toStartOf="@+id/mypage_myName"
         app:layout_constraintTop_toBottomOf="@+id/mypage_myName" />
 
-    <ImageView
-        android:id="@+id/mypage_schedule"
-        android:layout_width="160dp"
-        android:layout_height="70dp"
-        android:layout_marginStart="30dp"
-        android:layout_marginLeft="30dp"
-        android:layout_marginTop="30dp"
-        app:layout_constraintStart_toStartOf="parent"
+    <LinearLayout
+        android:id="@+id/myPageLinearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:weightSum="1"
         app:layout_constraintTop_toBottomOf="@+id/textView78"
-        app:srcCompat="@mipmap/icon_19"
-        android:background="@drawable/mypage_icon_after"/>
-
-    <ImageView
-        android:id="@+id/mypage_store"
-        android:layout_width="160dp"
-        android:layout_height="70dp"
         android:layout_marginTop="30dp"
-        android:layout_marginEnd="30dp"
-        android:layout_marginRight="30dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView78"
-        app:srcCompat="@mipmap/icon_18"
-        android:background="@drawable/mypage_icon_before"/>
+        android:layout_marginHorizontal="20dp">
+        <RelativeLayout
+            android:id="@+id/mypage_schedule"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:layout_weight="0.5"
+            android:background="@drawable/mypage_icon_after">
+            <ImageView
+                android:id="@+id/myPage_img1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:src="@mipmap/icon_19"/>
 
-    <TextView
-        android:id="@+id/iconText1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="55dp"
-        android:text="일정관리"
-        android:textColor="#70222222"
-        android:textSize="11sp"
-        app:layout_constraintEnd_toEndOf="@+id/mypage_schedule"
-        app:layout_constraintHorizontal_bias="0.4"
-        app:layout_constraintStart_toStartOf="@+id/mypage_schedule"
-        app:layout_constraintTop_toTopOf="@+id/mypage_schedule" />
+            <TextView
+                android:id="@+id/iconText1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="일정관리"
+                android:textColor="#70222222"
+                android:textSize="11sp"
+                android:layout_centerHorizontal="true"
+                android:layout_alignParentBottom="true"/>
 
-    <TextView
-        android:id="@+id/iconText2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="55dp"
-        android:text="저장소식"
-        android:textColor="#70222222"
-        android:textSize="11sp"
-        app:layout_constraintEnd_toEndOf="@+id/mypage_store"
-        app:layout_constraintStart_toStartOf="@+id/mypage_store"
-        app:layout_constraintTop_toTopOf="@+id/mypage_store" />
+            <TextView
+                android:id="@+id/textView81"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="+1"
+                android:textColor="#5b6eff"
+                android:textSize="11sp"
+                android:textStyle="bold"
+                android:layout_above="@+id/iconText1"
+                android:layout_marginLeft="95dp"
+                android:layout_marginBottom="4dp"/>
+        </RelativeLayout>
 
-    <TextView
-        android:id="@+id/textView81"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="23dp"
-        android:layout_marginLeft="23dp"
-        android:layout_marginTop="36dp"
-        android:text="+1"
-        android:textColor="#5b6eff"
-        android:textSize="11sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="@+id/mypage_schedule"
-        app:layout_constraintStart_toStartOf="@+id/mypage_schedule"
-        app:layout_constraintTop_toTopOf="@+id/mypage_schedule" />
+        <RelativeLayout
+            android:id="@+id/mypage_store"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:layout_weight="0.5"
+            android:background="@drawable/mypage_icon_before">
 
-    <TextView
-        android:id="@+id/textView82"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="28dp"
-        android:layout_marginLeft="28dp"
-        android:layout_marginTop="26dp"
-        android:text="+2"
-        android:textColor="#8c47ff"
-        android:textSize="11sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="@+id/mypage_store"
-        app:layout_constraintStart_toStartOf="@+id/mypage_store"
-        app:layout_constraintTop_toTopOf="@+id/mypage_store" />
+            <ImageView
+                android:id="@+id/myPage_img2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:src="@mipmap/icon_18" />
 
+            <TextView
+                android:id="@+id/iconText2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="저장소식"
+                android:textColor="#70222222"
+                android:textSize="11sp"
+                android:layout_centerHorizontal="true"
+                android:layout_alignParentBottom="true"/>
 
+            <TextView
+                android:id="@+id/textView82"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="+2"
+                android:textColor="#70222222"
+                android:textSize="11sp"
+                android:textStyle="bold"
+                android:layout_above="@+id/iconText2"
+                android:layout_marginLeft="97dp"
+                android:layout_marginBottom="13dp"/>
+        </RelativeLayout>
+    </LinearLayout>
 
     <FrameLayout
         android:id="@+id/main_frame"
@@ -151,7 +150,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/iconText1">
+        app:layout_constraintTop_toBottomOf="@+id/myPageLinearLayout">
 
     </FrameLayout>
     <TextView

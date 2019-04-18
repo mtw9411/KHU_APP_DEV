@@ -106,7 +106,7 @@ public class AdapterAlarm extends RecyclerView.Adapter<AdapterAlarm.MyViewHolder
         }
 
         // 태그 설정
-        holder.constraintLayout_alarm.setTag(position);
+        holder.constraintLayout_alarm.setTag(0);
 
     }
 

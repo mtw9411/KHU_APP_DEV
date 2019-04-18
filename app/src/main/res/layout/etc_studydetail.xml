@@ -14,7 +14,7 @@
         android:layout_marginRight="40dp"
         android:gravity="center"
         android:lineSpacingExtra="6sp"
-        android:text="스터디 상세"
+        android:text="STUDY 상세"
         android:textColor="#222222"
         android:textSize="13sp"
         android:textStyle="bold"
@@ -75,7 +75,7 @@
         app:layout_constraintTop_toTopOf="@+id/textView17" />
 
     <TextView
-        android:id="@+id/textView19"
+        android:id="@+id/studyDetail_region"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="27dp"
@@ -94,12 +94,12 @@
         android:text="|"
         android:textColor="#2f78db"
         android:textSize="11sp"
-        app:layout_constraintBottom_toBottomOf="@+id/textView19"
-        app:layout_constraintStart_toEndOf="@+id/textView19"
-        app:layout_constraintTop_toTopOf="@+id/textView19" />
+        app:layout_constraintBottom_toBottomOf="@+id/studyDetail_region"
+        app:layout_constraintStart_toEndOf="@+id/studyDetail_region"
+        app:layout_constraintTop_toTopOf="@+id/studyDetail_region" />
 
     <TextView
-        android:id="@+id/textView21"
+        android:id="@+id/studyDetail_age"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="12dp"
@@ -120,12 +120,12 @@
         android:text="|"
         android:textColor="#2f78db"
         android:textSize="11sp"
-        app:layout_constraintBottom_toBottomOf="@+id/textView21"
-        app:layout_constraintStart_toEndOf="@+id/textView21"
-        app:layout_constraintTop_toTopOf="@+id/textView21" />
+        app:layout_constraintBottom_toBottomOf="@+id/studyDetail_age"
+        app:layout_constraintStart_toEndOf="@+id/studyDetail_age"
+        app:layout_constraintTop_toTopOf="@+id/studyDetail_age" />
 
     <TextView
-        android:id="@+id/textView23"
+        android:id="@+id/studyDetail_gender"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="12dp"
@@ -133,24 +133,22 @@
         android:text="성별 상관없음"
         android:textColor="#2f78db"
         android:textSize="11sp"
-        app:layout_constraintBottom_toBottomOf="@+id/textView22"
         app:layout_constraintStart_toEndOf="@+id/textView22"
         app:layout_constraintTop_toTopOf="@+id/textView22" />
 
     <TextView
         android:id="@+id/textView24"
         android:layout_width="0dp"
-        android:layout_height="5sp"
+        android:layout_height="5dp"
         android:layout_marginStart="0dp"
         android:layout_marginLeft="0dp"
         android:layout_marginTop="14dp"
         android:layout_marginEnd="0dp"
         android:layout_marginRight="0dp"
-        android:background="@drawable/timeline_gradient2"
-        android:elevation="20dp"
+        android:background="#f0f4fa"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView21" />
+        app:layout_constraintTop_toBottomOf="@+id/studyDetail_age" />
 
     <ScrollView
         android:id="@+id/scrollView3"
@@ -192,7 +190,7 @@
                 app:layout_constraintBottom_toBottomOf="@+id/textView31"
                 app:layout_constraintStart_toEndOf="@+id/textView31"
                 app:layout_constraintTop_toTopOf="@+id/textView31"
-                app:srcCompat="@mipmap/icon_16" />
+                app:srcCompat="@mipmap/icon_27" />
 
             <TextView
                 android:id="@+id/textView32"
@@ -208,12 +206,38 @@
                 app:layout_constraintTop_toTopOf="@+id/back_btn" />
 
             <TextView
+                android:id="@+id/textView95"
+                android:layout_width="3.5dp"
+                android:layout_height="13dp"
+                android:layout_marginStart="25dp"
+                android:layout_marginLeft="25dp"
+                android:layout_marginTop="24dp"
+                android:background="#2f78db"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView31" />
+
+            <TextView
+                android:id="@+id/studyDetail_contentTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginTop="22dp"
+                android:letterSpacing="-0.03"
+                android:lineSpacingExtra="6sp"
+                android:text="공기업 스터디 열심히 하실 분을 모십니다!"
+                android:textColor="#707070"
+                android:textSize="12sp"
+                app:layout_constraintStart_toEndOf="@+id/textView95"
+                app:layout_constraintTop_toBottomOf="@+id/textView31" />
+
+            <TextView
                 android:id="@+id/textView33"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="30dp"
+                android:layout_marginStart="25dp"
+                android:layout_marginLeft="25dp"
+                android:layout_marginTop="9dp"
                 android:layout_marginEnd="20dp"
                 android:layout_marginRight="20dp"
                 android:layout_marginBottom="30dp"
@@ -225,7 +249,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView31" />
+                app:layout_constraintTop_toBottomOf="@+id/studyDetail_contentTitle" />
         </android.support.constraint.ConstraintLayout>
     </ScrollView>
 
@@ -237,7 +261,7 @@
         android:layout_marginLeft="24dp"
         android:layout_marginEnd="24dp"
         android:layout_marginRight="24dp"
-        android:layout_marginBottom="30dp"
+        android:layout_marginBottom="20dp"
         android:background="#cccccc"
         app:layout_constraintBottom_toTopOf="@+id/textView26"
         app:layout_constraintEnd_toEndOf="parent"
@@ -265,11 +289,12 @@
         android:layout_marginStart="30dp"
         android:layout_marginLeft="30dp"
         android:layout_marginBottom="53dp"
-        android:background="@drawable/text_roundshape"
+        android:background="@drawable/main_detail"
         android:lineSpacingExtra="5.5sp"
-        android:padding="5dp"
+        android:paddingHorizontal="12dp"
+        android:paddingVertical="5dp"
         android:text=""
-        android:textColor="#ffffff"
+        android:textColor="#2f78db"
         android:textSize="11.5sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
@@ -280,11 +305,12 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="18dp"
         android:layout_marginLeft="18dp"
-        android:background="@drawable/text_roundshape"
+        android:background="@drawable/main_detail"
         android:lineSpacingExtra="5.5sp"
-        android:padding="5dp"
+        android:paddingHorizontal="12dp"
+        android:paddingVertical="5dp"
         android:text=""
-        android:textColor="#ffffff"
+        android:textColor="#2f78db"
         android:textSize="11.5sp"
         app:layout_constraintBottom_toBottomOf="@+id/textView27"
         app:layout_constraintStart_toEndOf="@+id/textView27"
@@ -296,11 +322,12 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="18dp"
         android:layout_marginLeft="18dp"
-        android:background="@drawable/text_roundshape"
+        android:background="@drawable/main_detail"
         android:lineSpacingExtra="5.5sp"
-        android:padding="5dp"
+        android:paddingHorizontal="12dp"
+        android:paddingVertical="5dp"
         android:text=""
-        android:textColor="#ffffff"
+        android:textColor="#2f78db"
         android:textSize="11.5sp"
         app:layout_constraintBottom_toBottomOf="@+id/textView28"
         app:layout_constraintStart_toEndOf="@+id/textView28"
@@ -312,33 +339,16 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="18dp"
         android:layout_marginLeft="18dp"
-        android:background="@drawable/text_roundshape"
+        android:background="@drawable/main_detail"
         android:lineSpacingExtra="5.5sp"
-        android:padding="5dp"
+        android:paddingHorizontal="12dp"
+        android:paddingVertical="5dp"
         android:text=""
-        android:textColor="#ffffff"
+        android:textColor="#2f78db"
         android:textSize="11.5sp"
         app:layout_constraintBottom_toBottomOf="@+id/textView29"
         app:layout_constraintStart_toEndOf="@+id/textView29"
         app:layout_constraintTop_toTopOf="@+id/textView29" />
-
-    <Button
-        android:id="@+id/Enter"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginBottom="8dp"
-        android:text="참가하기"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.333"
-        app:layout_constraintStart_toEndOf="@+id/textView30"
-        app:layout_constraintTop_toBottomOf="@+id/textView25"
-        app:layout_constraintVertical_bias="0.62" />
 
 
 </android.support.constraint.ConstraintLayout>

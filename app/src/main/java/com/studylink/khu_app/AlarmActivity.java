@@ -58,9 +58,11 @@ public class AlarmActivity extends Fragment {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 currentUser = dataSnapshot.getValue(AccountDTO.class);
                 if(currentUser.getRoomId()!=null){
-                    // 유저가 참여한 방 id - 수정해야함###########################################################################3
-                    RoomId = currentUser.getRoomId().get(0);
-                    setData();
+                    for(int i=0; i<currentUser.getRoomId().size(); i++){
+                        // 유저가 참여한 방 id - 수정해야함###########################################################################3
+                        RoomId = currentUser.getRoomId().get(i);
+                        setData();
+                    }
                 }
             }
 
@@ -87,6 +89,7 @@ public class AlarmActivity extends Fragment {
                     int position = (int) obj;
                     Fragment fragment = new TimelineActivity();
                     Bundle bundle = new Bundle();
+
                     bundle.putInt("myRoomNum", position);
                     fragment.setArguments(bundle);
 
@@ -104,7 +107,7 @@ public class AlarmActivity extends Fragment {
         // 현재 유저 이름
         alarm_Adapter.setUser(currentUser.getUsername());
         // 내가 참여한 스터디방과 같은 방
-        databaseReference.child("RoomUpload").child(RoomId).addListenerForSingleValueEvent(new ValueEventListener() {
+        databaseReference.child("RoomUpload").child(RoomId).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 // 글 하나하나

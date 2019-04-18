@@ -135,6 +135,8 @@ public class MainActivity extends Fragment {
         // 레이아웃 종류 정의
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
         layoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
+        layoutManager.setReverseLayout(true);
+        layoutManager.setStackFromEnd(true);
         recyclerView_myStudy.setLayoutManager(layoutManager);
 
         // 어댑터 연결
