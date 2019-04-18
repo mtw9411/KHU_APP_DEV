@@ -2,13 +2,18 @@ package com.studylink.khu_app;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.media.Image;
+import android.net.Uri;
 import android.support.annotation.Nullable;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.annotation.NonNull;
+import android.support.v4.graphics.drawable.RoundedBitmapDrawable;
+import android.support.v4.graphics.drawable.RoundedBitmapDrawableFactory;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -19,12 +24,21 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.GlideContext;
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
+import com.bumptech.glide.request.target.BitmapImageViewTarget;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class Mypage_main extends Fragment{
 
@@ -39,12 +53,16 @@ public class Mypage_main extends Fragment{
     private TextView icontext1;
     private TextView icontext2;
 
+    private ImageView test1;
+
     private ImageView mypage_editProfile;
     private ViewGroup mypage_schedulelayout;
     private ViewGroup mypage_storelayout;
     private TextView mypage_myName;
     private int layoutIndex = 0;
     private DatabaseReference dr;
+    private StorageReference storageReference;
+    private FirebaseStorage storage;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -58,6 +76,8 @@ public class Mypage_main extends Fragment{
         auth = FirebaseAuth.getInstance();
         fm = getFragmentManager();
         ft = fm.beginTransaction();
+        storage = FirebaseStorage.getInstance();
+        storageReference = storage.getReferenceFromUrl("gs://studylink-ec173.appspot.com").child("images/");
 
         icontext1 = view.findViewById(R.id.iconText1);
         icontext2 = view.findViewById(R.id.iconText2);
@@ -134,6 +154,8 @@ public class Mypage_main extends Fragment{
         });
 
         setFrag(0);
+        setprofile();
+
         return view;
     }
 
@@ -176,5 +198,23 @@ public class Mypage_main extends Fragment{
         });
         AlertDialog dialog = builder.create();
         dialog.show();
+    }
+
+    private void setprofile(){
+//        if(getArguments() != null) {
+//            byte[] byteArray = getArguments().getByteArray("imagebyte");
+//            Bitmap bmp = BitmapFactory.decodeByteArray(byteArray, 0, byteArray.length);
+//            mypage_editProfile.setImageBitmap(bmp);
+//        }
+
+
+        storageReference.child(auth.getCurrentUser().getUid() + "/" + auth.getCurrentUser().getUid() + ".jpeg").getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+            @Override
+            public void onSuccess(Uri uri) {
+                mypage_editProfile.setImageURI(uri);
+                Glide.with(getActivity()).load(uri).centerCrop().transition(DrawableTransitionOptions.withCrossFade()).into(mypage_editProfile);
+
+            }
+        });
     }
 }

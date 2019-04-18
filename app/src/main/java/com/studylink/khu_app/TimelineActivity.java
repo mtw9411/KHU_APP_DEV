@@ -47,14 +47,13 @@ import org.w3c.dom.Text;
 
 import java.lang.reflect.Array;
 import java.net.URI;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 public class TimelineActivity extends Fragment {
 
     private TextView write_content;
+    private ImageView image_vote;
     private String write_title;
     private RecyclerView recycler_studyname;
     private RecyclerView recycler_timelineBoard;
@@ -82,6 +81,7 @@ public class TimelineActivity extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
     }
 
     @Nullable
@@ -104,6 +104,7 @@ public class TimelineActivity extends Fragment {
         getbundle();
 
         write_content = view.findViewById(R.id.write_content);
+
         write_content.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -116,6 +117,16 @@ public class TimelineActivity extends Fragment {
                 Fragement_navi navi = new Fragement_navi();
                 navi.finish();
 
+            }
+        });
+
+        image_vote = view.findViewById(R.id.image_vote);
+        image_vote.setClickable(true);
+        image_vote.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), VoteMain.class);
+                startActivity(intent);
             }
         });
 
@@ -264,7 +275,46 @@ public class TimelineActivity extends Fragment {
         });
     }
 
+    @Override
+    public void onPause(){
+        super.onPause();
 
+        if(nameofroom != null & getroomname != null){
+            int size = nameofroom.size();
+            int size1 = getroomname.size();
+            if (size > 0) {
+                for (int i = 0; i < size; i++) {
+                    nameofroom.remove(0);
+                }
+                StudynameAdapter.notifyItemRangeRemoved(0, size);
+            }
+            if (size1 > 0) {
+                for (int i = 0; i < size1; i++) {
+                    getroomname.remove(0);
+                }
+            }
+        }
+
+
+        if(uploadDTOArrayList != null){
+            int size = uploadDTOArrayList.size();
+            if (size > 0) {
+                for (int i = 0; i < size; i++) {
+                    uploadDTOArrayList.remove(0);
+                }
+                timelineBoardViewAdapter.notifyItemRangeRemoved(0, size);
+            }
+
+            if (groupUri != null){
+                int size1 = groupUri.size();
+                if (size1 > 0) {
+                    for (int i = 0; i < size1; i++) {
+                        groupUri.remove(0);
+                    }
+                }
+            }
+        }
+    }
 
 
     class StudynameRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {      //어느 스터디인지를 선택하는 부분의 recycler
@@ -368,38 +418,6 @@ public class TimelineActivity extends Fragment {
         public void onBindViewHolder(@NonNull RecyclerView.ViewHolder viewHolder, int position) {
             ((FileViewHolder)viewHolder).file_username.setText(dtoArrayList.get(position).getUploadername());
             ((FileViewHolder)viewHolder).file_contentText.setText(dtoArrayList.get(position).getTitle());
-
-            SimpleDateFormat dateFormat = new SimpleDateFormat("M월 d일");
-            Date nowDate = new Date();          // 현재 시간
-            Date uploadDate = dtoArrayList.get(position).getTime();   // 글 생성 날짜
-
-            long calDate = nowDate.getTime() - uploadDate.getTime();
-            long day = calDate/(24*60*60*1000);
-            long hour = calDate/(60*60*1000);
-            long minute = calDate/(60*1000);
-            day = Math.abs(day);
-            hour = Math.abs(hour);
-            minute = Math.abs(minute);
-            if (day == 0){
-                if(hour == 0){
-                    if(minute < 1){
-                        ((FileViewHolder)viewHolder).file_time.setText("방금");
-                    }
-                    else if(minute < 60){
-                        ((FileViewHolder)viewHolder).file_time.setText(minute + "분 전");
-                    }
-                    else{
-                        ((FileViewHolder)viewHolder).file_time.setText("안보임");
-                    }
-                }
-                else{
-                    ((FileViewHolder)viewHolder).file_time.setText(hour + "시간 전");
-                }
-            }
-            else{
-                ((FileViewHolder)viewHolder).file_time.setText(dateFormat.format(uploadDate));
-            }
-
             ((FileViewHolder)viewHolder).file_scrap.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -432,7 +450,7 @@ public class TimelineActivity extends Fragment {
 
         private class FileViewHolder extends RecyclerView.ViewHolder{
 
-            TextView file_username, file_time;
+            TextView file_username;
             TextView file_contentText;
             RecyclerView recyclerView;
             ImageView file_scrap;
@@ -440,7 +458,6 @@ public class TimelineActivity extends Fragment {
             public FileViewHolder(@NonNull View itemView) {
                 super(itemView);
                 file_username = itemView.findViewById(R.id.file_username);
-                file_time = itemView.findViewById(R.id.file_time);
                 file_contentText = itemView.findViewById(R.id.file_contentText);
                 recyclerView = itemView.findViewById(R.id.image_recycler);
                 file_scrap = itemView.findViewById(R.id.file_scrap);
@@ -484,6 +501,7 @@ public class TimelineActivity extends Fragment {
                         public void onSuccess(Uri uri) {
                             ((CustomViewHolder) viewHolder).upload_imageview.setImageURI(uri);
                             Glide.with(((CustomViewHolder) viewHolder).root).load(uri.toString()).into(((CustomViewHolder) viewHolder).upload_imageview);
+//                            ((CustomViewHolder)viewHolder).upload_imageview.setImageMatrix();
                         }
                     });
                 }
@@ -492,12 +510,14 @@ public class TimelineActivity extends Fragment {
 
         @Override
         public int getItemCount() {
-            if (uploadDTOS.getFiletitle() != null){
-                return uploadDTOS.getFiletitle().size();
+            int size;
+            if(uploadDTOS.getFiletitle() != null){
+                size = uploadDTOS.getFiletitle().size();
+            } else {
+                size = 0;
             }
-            else{
-                return 0;
-            }
+
+            return size;
         }
 
 

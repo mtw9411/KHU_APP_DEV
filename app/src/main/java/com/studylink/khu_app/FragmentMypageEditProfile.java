@@ -6,6 +6,7 @@ import android.app.Fragment;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -33,7 +34,9 @@ import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -50,6 +53,7 @@ public class FragmentMypageEditProfile extends Fragment {
     private int check = 0;
     private Uri uri;
     private FirebaseAuth auth;
+    private Bitmap mbitmap;
 
     public FragmentMypageEditProfile(){
     }
@@ -145,10 +149,20 @@ public class FragmentMypageEditProfile extends Fragment {
                 });
 
                 Toast.makeText(getActivity(), "수정 완료", Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(getActivity(), Mypage_main.class);
+                Intent intent = new Intent(getActivity(), Fragement_navi.class);
                 startActivity(intent);
-                
+
+//                android.support.v4.app.Fragment fragment = new Mypage_main();
+//                Bundle bundle = new Bundle();
+//                ByteArrayOutputStream stream = new ByteArrayOutputStream();
+//                mbitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
+//                byte[] byteArray = stream.toByteArray();
+//                bundle.putByteArray("imagebyte", byteArray);
+//
+//                fragment.setArguments(bundle);
+
                 uploadimage();
+
             }
         });
 
@@ -174,10 +188,23 @@ public class FragmentMypageEditProfile extends Fragment {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-
         if (requestCode == GALLERY_CODE1 && resultCode == RESULT_OK && data != null && data.getData() != null) {
             uri = data.getData();
-            profileImg.setImageURI(uri);
+        }
+
+        if (requestCode == GALLERY_CODE1) {
+            // Make sure the request was successful
+            if (resultCode == RESULT_OK) {
+                try {
+                    // 선택한 이미지에서 비트맵 생성
+                    InputStream in = getActivity().getContentResolver().openInputStream(data.getData());
+                    mbitmap = BitmapFactory.decodeStream(in);
+                    in.close();
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
         }
     }
 

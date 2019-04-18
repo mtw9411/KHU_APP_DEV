@@ -34,7 +34,7 @@
         app:layout_constraintBottom_toBottomOf="@+id/textView78"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/mypage_myName"
-        app:srcCompat="@mipmap/icon_34" />
+        android:src="@mipmap/icon_34" />
 
     <TextView
         android:id="@+id/mypage_myName"
@@ -171,9 +171,9 @@
         android:id="@+id/imageView2"
         android:layout_width="20dp"
         android:layout_height="20dp"
-        android:layout_marginStart="45dp"
-        android:layout_marginLeft="45dp"
-        android:layout_marginBottom="45dp"
+        android:layout_marginStart="60dp"
+        android:layout_marginLeft="60dp"
+        android:layout_marginBottom="60dp"
         android:src="@mipmap/baseline_settings_black_48"
         app:layout_constraintBottom_toBottomOf="@+id/mypage_editProfile"
         app:layout_constraintStart_toStartOf="@+id/mypage_editProfile" />

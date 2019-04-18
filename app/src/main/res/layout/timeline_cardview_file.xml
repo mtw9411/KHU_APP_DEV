@@ -151,7 +151,7 @@
                 android:layout_marginRight="20dp"
                 android:layout_marginBottom="18dp"
                 android:lineSpacingExtra="2sp"
-                android:text="10"
+                android:text="0"
                 android:textColor="#2f78db"
                 android:textSize="10sp"
                 app:layout_constraintBottom_toBottomOf="parent"
