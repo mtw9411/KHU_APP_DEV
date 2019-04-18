@@ -46,6 +46,7 @@
         <activity android:name=".Timeline_writing" />
         <activity android:name=".VoteMain" />
         <activity android:name=".MypageEditActivity" />
+        <activity android:name=".Etc_schedule" />
     </application>
 
 </manifest>

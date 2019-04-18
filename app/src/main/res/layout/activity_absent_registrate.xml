@@ -16,14 +16,14 @@
         android:lineSpacingExtra="6sp"
         android:textColor="#222222"
         android:textSize="13sp"
-        app:layout_constraintBottom_toBottomOf="@+id/imageView13"
+        app:layout_constraintBottom_toBottomOf="@+id/back_topage"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/imageView13"
-        app:layout_constraintTop_toTopOf="@+id/imageView13"
+        app:layout_constraintStart_toEndOf="@+id/back_topage"
+        app:layout_constraintTop_toTopOf="@+id/back_topage"
         android:text="공기업 스터디 결석신청" />
 
     <ImageView
-        android:id="@+id/imageView13"
+        android:id="@+id/back_topage"
         android:layout_width="24dp"
         android:layout_height="32dp"
         android:layout_marginStart="20dp"
@@ -44,7 +44,7 @@
         android:textColor="#222222"
         android:textSize="14sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView13"
+        app:layout_constraintTop_toBottomOf="@+id/back_topage"
         android:text="날짜 선택" />
 
     <Spinner

@@ -80,6 +80,7 @@ public class Timeline_writing extends AppCompatActivity {
     private boolean check_content = false;
     private String contentCheck1;
     private String contentCheck2;
+    private ImageView back_btn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -91,6 +92,15 @@ public class Timeline_writing extends AppCompatActivity {
         auth = FirebaseAuth.getInstance();
         database = FirebaseDatabase.getInstance();
         currentuser = auth.getCurrentUser().getUid();
+
+        back_btn = findViewById(R.id.back_topage);
+        back_btn.setClickable(true);
+        back_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
 
 
         writing_recycler = findViewById(R.id.recycler_picture);
@@ -260,4 +270,5 @@ public class Timeline_writing extends AppCompatActivity {
         }
         dataref.child(currentRoomid).child(contentCheck1).setValue(roomUpload);
     }
+
 }

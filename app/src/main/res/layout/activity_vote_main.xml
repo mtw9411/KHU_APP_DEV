@@ -10,18 +10,16 @@
     <TextView
         android:id="@+id/textView44"
         android:layout_width="0dp"
-        android:layout_height="17dp"
-        android:layout_marginEnd="40dp"
-        android:layout_marginRight="40dp"
+        android:layout_height="50dp"
         android:gravity="center"
         android:lineSpacingExtra="6sp"
         android:text="투표"
         android:textColor="#222222"
         android:textSize="13sp"
-        app:layout_constraintBottom_toBottomOf="@+id/imageView13"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/imageView13"
-        app:layout_constraintTop_toTopOf="@+id/imageView13" />
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
         android:id="@+id/back_btn"
@@ -37,15 +35,15 @@
     <android.support.v7.widget.CardView
         android:id="@+id/cardView6"
         android:layout_width="0dp"
-        android:layout_height="85dp"
+        android:layout_height="89dp"
         android:layout_marginLeft="20dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="50dp"
         android:layout_marginRight="20dp"
         app:cardCornerRadius="8dp"
         app:cardElevation="4dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView13">
+        app:layout_constraintTop_toBottomOf="@id/textView44">
 
         <EditText
             android:id="@+id/editText4"
@@ -198,5 +196,13 @@
         app:layout_constraintStart_toEndOf="@+id/textView72"
         app:layout_constraintTop_toTopOf="@+id/textView72"
         app:srcCompat="@mipmap/check_btn" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        tools:layout_editor_absoluteX="167dp"
+        tools:layout_editor_absoluteY="453dp" />
 
 </android.support.constraint.ConstraintLayout>

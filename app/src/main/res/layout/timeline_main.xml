@@ -44,7 +44,7 @@
             app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
         <TextView
-            android:id="@+id/textView4"
+            android:id="@+id/to_absent_check"
             android:layout_width="match_parent"
             android:layout_height="40.5dp"
             android:background="#4c81f8"
@@ -63,15 +63,15 @@
             android:layout_height="30dp"
             android:layout_marginStart="136dp"
             android:layout_marginLeft="136dp"
-            app:layout_constraintBottom_toBottomOf="@+id/textView4"
-            app:layout_constraintStart_toStartOf="@+id/textView4"
-            app:layout_constraintTop_toTopOf="@+id/textView4"
+            app:layout_constraintBottom_toBottomOf="@+id/to_absent_check"
+            app:layout_constraintStart_toStartOf="@+id/to_absent_check"
+            app:layout_constraintTop_toTopOf="@+id/to_absent_check"
             app:srcCompat="@mipmap/icon_9" />
 
         <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@+id/textView4"
+            app:layout_constraintTop_toBottomOf="@+id/to_absent_check"
             android:background="#f4f7fc"
             android:paddingBottom="183dp">
 

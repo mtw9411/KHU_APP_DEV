@@ -2,6 +2,7 @@ package com.studylink.khu_app;
 
 import android.accounts.Account;
 import android.app.Activity;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.drawable.GradientDrawable;
@@ -52,6 +53,7 @@ import java.util.List;
 public class TimelineActivity extends Fragment {
 
     private TextView write_content;
+    private TextView to_absent_check;
     private ImageView image_vote;
     private String write_title;
     private RecyclerView recycler_studyname;
@@ -102,7 +104,7 @@ public class TimelineActivity extends Fragment {
                 intent.putExtra("currentRoomid", currentRoomuid);
                 if(nameofroom != null){
                     // 수정해야함#########################################################################################
-                    intent.putExtra("currentRoomCategory", nameofroom.get(0).getSpinner1());
+                    intent.putExtra("currentRoomCategory", nameofroom.get(0));
                 }
                 startActivity(intent);
                 Fragement_navi navi = new Fragement_navi();
@@ -121,6 +123,15 @@ public class TimelineActivity extends Fragment {
             }
         });
 
+        to_absent_check = view.findViewById(R.id.to_absent_check);
+        to_absent_check.setClickable(true);
+        to_absent_check.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), Etc_schedule.class);
+                startActivity(intent);
+            }
+        });
 
         recycler_studyname = (RecyclerView) view.findViewById(R.id.recycler_studyname);
 
@@ -451,9 +462,6 @@ public class TimelineActivity extends Fragment {
         }
     }
 
-
-
-
     class PictureRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{           //연결부분
 
         private RoomUploadDTO uploadDTOS;
@@ -480,7 +488,6 @@ public class TimelineActivity extends Fragment {
                         public void onSuccess(Uri uri) {
                             ((CustomViewHolder) viewHolder).upload_imageview.setImageURI(uri);
                             Glide.with(((CustomViewHolder) viewHolder).root).load(uri.toString()).into(((CustomViewHolder) viewHolder).upload_imageview);
-                            ((CustomViewHolder)viewHolder).upload_imageview.setImageMatrix();
                         }
                     });
                 }
@@ -499,14 +506,9 @@ public class TimelineActivity extends Fragment {
             return size;
         }
 
-
-
         private class CustomViewHolder extends RecyclerView.ViewHolder {
-
             ImageView upload_imageview;
             public View root;
-
-
 
             public CustomViewHolder(View view) {
                 super(view);
@@ -515,7 +517,6 @@ public class TimelineActivity extends Fragment {
             }
         }
     }
-
 
 }
 
