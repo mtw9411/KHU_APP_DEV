@@ -222,18 +222,12 @@ public class Timeline_writing extends AppCompatActivity {
 
         RoomUploadDTO roomUpload = roomUploa;
 
-        contentCheck1 = writing_title.getText().toString();
         contentCheck2 = writing_content.getText().toString();
         //업로드할 내용이 있으면 수행
         // 스터디 카테고리
         roomUpload.setCategory(currentRoomCategory);
         // 글 종류
         roomUpload.setTextType("소식");
-        // 제목
-        if (contentCheck1.trim().length()>0){
-            roomUpload.setTitle(contentCheck1);
-            check_title = true;
-        }
         //내용
         if (contentCheck2.trim().length()>0) {
             roomUpload.setWriting_content(contentCheck2);

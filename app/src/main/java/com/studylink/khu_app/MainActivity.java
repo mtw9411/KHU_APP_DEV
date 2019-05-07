@@ -100,6 +100,9 @@ public class MainActivity extends Fragment {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 currentUser = dataSnapshot.getValue(AccountDTO.class);
+                // 스터디 매칭에 현재 유저 정보 넘기기
+                matching_Adapter.setUser(currentUser);
+
                 if(currentUser.getRoomId() != null){
                     myStudyNum.setText("+" + currentUser.getRoomId().size());
                 }
@@ -209,9 +212,7 @@ public class MainActivity extends Fragment {
                                 // 방의 멤버수 증가
                                 selectRoom.setMember(selectRoom.getMember() + 1);
                                 myRef.child(selectRoom.getId()).setValue(selectRoom);
-//                                Intent intent = new Intent(MainActivity.this, TimelineActivity.class);
-//                                intent.putExtra("Timeline", selectRoom);                //roomDTO 넘어옴
-//                                startActivity(intent);
+
                                 Fragment fragment = new TimelineActivity();
                                 Bundle bundle = new Bundle();
                                 bundle.putSerializable("Timeline", selectRoom);

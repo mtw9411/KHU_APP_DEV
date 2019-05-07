@@ -17,6 +17,7 @@ import android.os.Bundle;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -24,6 +25,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -54,8 +56,7 @@ import java.util.List;
 
 public class TimelineActivity extends Fragment {
 
-    private TextView write_content;
-    private ImageView image_vote;
+    private ImageView timelinePost;
     private String write_title;
     private RecyclerView recycler_studyname;
     private RecyclerView recycler_timelineBoard;
@@ -77,13 +78,12 @@ public class TimelineActivity extends Fragment {
     private int k = 0;
     private String currentRoomuid;
     private String roomkey;
-    private int selectedPostion = 0;
+    private int selectedPosition = 0;
     private ViewGroup view;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
     }
 
     @Nullable
@@ -105,33 +105,23 @@ public class TimelineActivity extends Fragment {
 
         getbundle();
 
-        write_content = view.findViewById(R.id.write_content);
-
-        write_content.setOnClickListener(new View.OnClickListener() {
+        // 글 작성버튼
+        timelinePost = view.findViewById(R.id.timelinePost);
+        timelinePost.setClickable(true);
+        timelinePost.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), Timeline_writing.class);
-                intent.putExtra("currentRoomid", currentRoomuid);
+                Intent intent = new Intent(getActivity(), TimelinePost.class);
                 if(nameofroom != null){
-                    intent.putExtra("currentRoomCategory", nameofroom.get(selectedPostion).getSpinner1());
+                    intent.putExtra("currentRoom", nameofroom.get(selectedPosition));
+                    intent.putExtra("selectedPosition", selectedPosition);
                 }
                 startActivity(intent);
+
                 Fragement_navi navi = new Fragement_navi();
                 navi.finish();
-
             }
         });
-
-        image_vote = view.findViewById(R.id.image_vote);
-        image_vote.setClickable(true);
-        image_vote.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), VoteMain.class);
-                startActivity(intent);
-            }
-        });
-
 
         recycler_studyname = view.findViewById(R.id.recycler_studyname);
 
@@ -148,12 +138,13 @@ public class TimelineActivity extends Fragment {
 
         StudynameAdapter.notifyDataSetChanged();
 
+        // 초기 선택된 방 - 가장 최근에 참여한 스터디
         dataref.child("users").child(currentUser).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 AccountDTO acc = dataSnapshot.getValue(AccountDTO.class);
                 if(acc.getRoomId()!=null){
-                    currentRoomuid = acc.getRoomId().get(selectedPostion);
+                    currentRoomuid = acc.getRoomId().get(selectedPosition);
                     setTimelineData();
 
                     timelineBoardViewAdapter.notifyDataSetChanged();
@@ -169,6 +160,9 @@ public class TimelineActivity extends Fragment {
         recycler_timelineBoard = view.findViewById(R.id.recycler_timelineBoard);
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
+        layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+        layoutManager.setReverseLayout(true);
+        layoutManager.setStackFromEnd(true);
         recycler_timelineBoard.setLayoutManager(layoutManager);
 
         timelineBoardViewAdapter = new TimelineBoardViewAdapter(uploadDTOArrayList);
@@ -182,13 +176,18 @@ public class TimelineActivity extends Fragment {
     }
 
     private void getbundle(){
+        int myRoomNum = ((Fragement_navi)getActivity()).myRoomNum;
+
         if(getArguments() != null){
             Bundle bundle = getArguments();
-            selectedPostion = bundle.getInt("myRoomNum");
+            selectedPosition = bundle.getInt("myRoomNum");
 //            imageUri = bundle.getParcelableArrayList("ImageData");
 //            roomkey = bundle.getString("roomkey");
 //            write_title = bundle.getString("puttitle");
 //            timelineBoardViewAdapter.notifyDataSetChanged();
+        }
+        if(myRoomNum!=0){
+            selectedPosition = myRoomNum;
         }
     }
 
@@ -298,7 +297,7 @@ public class TimelineActivity extends Fragment {
         @Override
         public void onBindViewHolder(@NonNull final RecyclerView.ViewHolder viewHolder, final int position) {
             ((StudynameViewHolder)viewHolder).studyname_title.setText(Room.get(position).getSpinner1());
-            if(selectedPostion == position){
+            if(selectedPosition == position){
                 ((StudynameViewHolder)viewHolder).timeline_studyName.setText(Room.get(position).getSpinner1()+" 스터디");
                 ((StudynameViewHolder) viewHolder).studyname_title.setBackground(getResources().getDrawable(R.drawable.timeline_studyname_cardview));
                 ((StudynameViewHolder)viewHolder).studyname_title.setTextColor(getResources().getColor(R.color.localBluecolor));
@@ -311,7 +310,7 @@ public class TimelineActivity extends Fragment {
                 @Override
                 public void onClick(View v) {
                     Intent intent = new Intent(getActivity(), StudydetailActivity.class);
-                    intent.putExtra("roomDetail", Room.get(selectedPostion));
+                    intent.putExtra("roomDetail", Room.get(selectedPosition));
                     startActivity(intent);
                 }
             });
@@ -320,7 +319,7 @@ public class TimelineActivity extends Fragment {
                 @Override
                 public void onClick(View v) {
                 currentRoomuid = Room.get(position).getId();
-                selectedPostion = position;
+                selectedPosition = position;
                 setTimelineData();
                 notifyDataSetChanged();
                 }
@@ -379,7 +378,7 @@ public class TimelineActivity extends Fragment {
         @Override
         public void onBindViewHolder(@NonNull RecyclerView.ViewHolder viewHolder, int position) {
             ((FileViewHolder)viewHolder).file_username.setText(dtoArrayList.get(position).getUploadername());
-            ((FileViewHolder)viewHolder).file_contentText.setText(dtoArrayList.get(position).getTitle());
+            ((FileViewHolder)viewHolder).file_contentText.setText(dtoArrayList.get(position).getWriting_content());
 
             SimpleDateFormat dateFormat = new SimpleDateFormat("M월 d일");
             Date nowDate = new Date();          // 현재 시간
@@ -445,14 +444,14 @@ public class TimelineActivity extends Fragment {
 
         private class FileViewHolder extends RecyclerView.ViewHolder{
 
-            TextView file_username, file_time;
-            TextView file_contentText;
+            TextView file_username, file_textview, file_time, file_contentText;
             RecyclerView recyclerView;
             ImageView file_scrap;
 
             public FileViewHolder(@NonNull View itemView) {
                 super(itemView);
                 file_username = itemView.findViewById(R.id.file_username);
+                file_textview = itemView.findViewById(R.id.file_textview);
                 file_time = itemView.findViewById(R.id.file_time);
                 file_contentText = itemView.findViewById(R.id.file_contentText);
                 recyclerView = itemView.findViewById(R.id.image_recycler);
@@ -491,7 +490,7 @@ public class TimelineActivity extends Fragment {
         public void onBindViewHolder(@NonNull final RecyclerView.ViewHolder viewHolder, final int position) {
             if(uploadDTOS.getFiletitle() != null) {
                 for (int i = 0; i < uploadDTOS.getFiletitle().size(); i++) {
-                    storageReference.child(currentRoomuid + "/" + uploadDTOS.getTitle() + "/" + uploadDTOS.getFiletitle().get(position))
+                    storageReference.child(currentRoomuid + "/" + uploadDTOS.getWriting_content() + "/" + uploadDTOS.getFiletitle().get(position))
                             .getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                         @Override
                         public void onSuccess(Uri uri) {

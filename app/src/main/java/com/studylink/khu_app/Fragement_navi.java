@@ -24,6 +24,7 @@ public class Fragement_navi extends AppCompatActivity {
     private Mypage_main mypage_fragment = new Mypage_main();
     private BottomNavigationView bottomNavigationview;
     private int frag_num = 0;
+    public int myRoomNum = 0;
     private Fragment currentfrag;
 
     @Override
@@ -35,6 +36,10 @@ public class Fragement_navi extends AppCompatActivity {
 
         Bundle bundle = getIntent().getExtras();
         frag_num = (Integer) bundle.get("frag_num");
+
+        if(bundle.get("myRoomNum")!=null){
+            myRoomNum = (Integer) bundle.get("myRoomNum");
+        }
 
         fragmentManager = getSupportFragmentManager();
         fragmentTransaction = fragmentManager.beginTransaction();
@@ -75,7 +80,7 @@ public class Fragement_navi extends AppCompatActivity {
                         return false;
                     }
                 });
-        setFrag(0);
+        setFrag(frag_num);
 //      setCurrentFrag()
 //      itemCheck();
     }

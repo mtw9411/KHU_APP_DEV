@@ -21,6 +21,7 @@ public class RoomDTO implements Serializable {
     private Long total_member;
     private int member;
     private Date time;
+    private Date newsTime;
 
     public Long getTotal_member() {
         return total_member;
@@ -142,6 +143,12 @@ public class RoomDTO implements Serializable {
         this.time = time;
     }
 
+    public Date getNewsTime() {
+        return newsTime;
+    }
 
+    public void setNewsTime(Date newsTime) {
+        this.newsTime = newsTime;
+    }
 
 }

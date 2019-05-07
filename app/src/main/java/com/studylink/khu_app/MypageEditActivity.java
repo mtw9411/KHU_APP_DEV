@@ -3,11 +3,9 @@ package com.studylink.khu_app;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
-import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.RelativeLayout;
@@ -88,8 +86,8 @@ public class MypageEditActivity extends AppCompatActivity {
     }
 
     public void colorChange(TextView select_txt, TextView select_mark, TextView non_txt, TextView non_mark){
-        select_txt.setTextColor(Color.parseColor("#c895ff"));
-        select_mark.setBackgroundResource(R.drawable.pink_bar);
+        select_txt.setTextColor(Color.parseColor("#0065ff"));
+        select_mark.setBackgroundResource(R.drawable.blue_bar);
         non_txt.setTextColor(Color.parseColor("#b1b1b1"));
         non_mark.setBackgroundColor(Color.parseColor("#ffffff"));
     }

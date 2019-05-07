@@ -55,7 +55,7 @@
                 android:layout_height="16dp"
                 android:layout_marginStart="14dp"
                 android:layout_marginLeft="14dp"
-                android:background="@drawable/text_roundshape"
+                android:background="#ffffff"
                 android:gravity="center"
                 android:lineSpacingExtra="4.5dp"
                 android:text="사진첨부"
@@ -78,7 +78,7 @@
                 app:layout_constraintStart_toEndOf="@+id/file_imageview"
                 app:layout_constraintTop_toBottomOf="@+id/file_username" />
 
-            <EditText
+            <TextView
                 android:id="@+id/file_contentText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

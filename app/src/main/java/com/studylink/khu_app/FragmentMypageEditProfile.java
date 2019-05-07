@@ -47,8 +47,8 @@ public class FragmentMypageEditProfile extends Fragment {
     private static final int GALLERY_CODE1 = 10;
     ImageView profileImg;
     EditText mypageEdit_name, mypageEdit_birth;
-    TextView mypageEdit_female, mypageEdit_male;
-    CardView mypageEdit_finish, mypageEdit_address;
+    TextView mypageEdit_female, mypageEdit_male, mypageEdit_finish;
+    CardView mypageEdit_address;
     private MypageEditPopupActivity popUp;
     private int check = 0;
     private Uri uri;
@@ -150,6 +150,7 @@ public class FragmentMypageEditProfile extends Fragment {
 
                 Toast.makeText(getActivity(), "수정 완료", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(getActivity(), Fragement_navi.class);
+                intent.putExtra("frag_num",3);
                 startActivity(intent);
 
 //                android.support.v4.app.Fragment fragment = new Mypage_main();
@@ -210,11 +211,12 @@ public class FragmentMypageEditProfile extends Fragment {
 
     @SuppressLint("NewApi")
     public void colorChange(TextView select, TextView non){
-        select.setBackground(getResources().getDrawable(R.drawable.pink_border, null));
+        select.setBackground(getResources().getDrawable(R.drawable.blue_border, null));
         non.setBackground(null);
     }
 
     private void uploadimage() {
+        if(uri != null){
             //storage
             FirebaseStorage storage = FirebaseStorage.getInstance();
 
@@ -223,6 +225,7 @@ public class FragmentMypageEditProfile extends Fragment {
             //storage 주소와 폴더 파일명을 지정해 준다.
             StorageReference storageRef = storage.getReferenceFromUrl("gs://studylink-ec173.appspot.com").child("images/" + auth.getCurrentUser().getUid() + "/" + filename);
             storageRef.putFile(uri);
+        }
     }
 
 }

@@ -57,12 +57,14 @@ public class AlarmActivity extends Fragment {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 currentUser = dataSnapshot.getValue(AccountDTO.class);
+                // 현재 유저 이름
+                alarm_Adapter.setUser(currentUser.getUsername());
                 if(currentUser.getRoomId()!=null){
-                    for(int i=0; i<currentUser.getRoomId().size(); i++){
+//                    for(int i=0; i<currentUser.getRoomId().size(); i++){
                         // 유저가 참여한 방 id - 수정해야함###########################################################################3
-                        RoomId = currentUser.getRoomId().get(i);
-                        setData();
-                    }
+                    RoomId = currentUser.getRoomId().get(0);
+                    setData();
+//                    }
                 }
             }
 
@@ -104,8 +106,6 @@ public class AlarmActivity extends Fragment {
     }
 
     public void setData(){
-        // 현재 유저 이름
-        alarm_Adapter.setUser(currentUser.getUsername());
         // 내가 참여한 스터디방과 같은 방
         databaseReference.child("RoomUpload").child(RoomId).addValueEventListener(new ValueEventListener() {
             @Override

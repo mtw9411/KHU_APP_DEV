@@ -10,7 +10,6 @@ import java.util.List;
 
 public class RoomUploadDTO implements Serializable {
 
-    private String title;
     private String writing_content;
     private String uploadername;
     private List<String> filename;
@@ -18,14 +17,6 @@ public class RoomUploadDTO implements Serializable {
     private Date time;
     private String category;
     private String textType;
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
 
     public String getWriting_content() {
         return writing_content;
