@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -82,6 +83,7 @@ public class MainDetailActivity extends AppCompatActivity {
                         AccountDTO currentUser = dataSnapshot.getValue(AccountDTO.class);
                         // 참여한 스터디가 1개라도 있으면
                         if(currentUser.getRoomId() != null){
+                            Log.d("##############3", "???");
                             // 가입한 스터디방이 3개이면
                             if (currentUser.getRoomId().size() == 3){
                                 Toast.makeText(MainDetailActivity.this, "3개 이상의 스터디를 가입할 수 없습니다.", Toast.LENGTH_SHORT).show();
@@ -119,6 +121,8 @@ public class MainDetailActivity extends AppCompatActivity {
                             roomList.add(roomDTO.getId());
                             currentUser.setRoomId(roomList);
                             dr.setValue(currentUser);
+                            roomDTO.setMember(roomDTO.getMember()+1);
+                            database.child("room").child(roomDTO.getId()).setValue(roomDTO);
 
                             Intent intent = new Intent(MainDetailActivity.this, Fragement_navi.class);
                             intent.putExtra("frag_num", 1);

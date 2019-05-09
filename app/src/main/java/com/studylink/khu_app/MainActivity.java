@@ -229,6 +229,8 @@ public class MainActivity extends Fragment {
                         roomList.add(selectRoom.getId());
                         currentUser.setRoomId(roomList);
                         dr.setValue(currentUser);
+                        selectRoom.setMember(selectRoom.getMember()+1);
+                        myRef.child(selectRoom.getId()).setValue(selectRoom);
 
                         Fragment fragment = new TimelineActivity();
                         Bundle bundle = new Bundle();
