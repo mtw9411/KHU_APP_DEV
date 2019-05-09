@@ -28,6 +28,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.GlideContext;
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
+import com.bumptech.glide.request.RequestOptions;
 import com.bumptech.glide.request.target.BitmapImageViewTarget;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
@@ -39,30 +40,23 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
-import de.hdodenhof.circleimageview.CircleImageView;
-
 public class Mypage_main extends Fragment{
 
-    private RelativeLayout mypage_schedule, mypage_store;
-    private TextView mypage_Logout;
+    private RelativeLayout mypage_schedule, mypage_store, mypage_relativeEditProfile;
     private FirebaseAuth auth;
     private Mypage_schedule_fragment scheduleFragment;
     private Mypage_store_fragment storeFragment;
     private android.support.v4.app.FragmentManager fm;
     private FragmentTransaction ft;
-    private TextView icontext1;
-    private TextView icontext2;
-
-    private ImageView test1, myPage_img1, myPage_img2;
-
-    private ImageView mypage_editProfile;
-    private ViewGroup mypage_schedulelayout;
-    private ViewGroup mypage_storelayout;
-    private TextView mypage_myName;
+    private TextView icontext1, icontext2, mypage_Logout, mypage_myName;
+    private ImageView test1, myPage_img1, myPage_img2, mypage_editProfile;
+    private ViewGroup mypage_schedulelayout, mypage_storelayout;
     private int layoutIndex = 0;
     private DatabaseReference dr;
     private StorageReference storageReference;
     private FirebaseStorage storage;
+    private AccountDTO currentUser;
+    private String uid;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -77,22 +71,19 @@ public class Mypage_main extends Fragment{
         fm = getFragmentManager();
         ft = fm.beginTransaction();
         storage = FirebaseStorage.getInstance();
-        storageReference = storage.getReferenceFromUrl("gs://studylink-ec173.appspot.com").child("images/");
+        storageReference = storage.getReferenceFromUrl("gs://studylink-ec173.appspot.com").child("images/profiles/");
 
         icontext1 = view.findViewById(R.id.iconText1);
         icontext2 = view.findViewById(R.id.iconText2);
         myPage_img1 = view.findViewById(R.id.myPage_img1);
         myPage_img2 = view.findViewById(R.id.myPage_img2);
 
-        mypage_Logout = (TextView) view.findViewById(R.id.mypage_Logout);
+        mypage_Logout = view.findViewById(R.id.mypage_Logout);
         mypage_schedule = view.findViewById(R.id.mypage_schedule);
         mypage_store = view.findViewById(R.id.mypage_store);
 
-        scheduleFragment = new Mypage_schedule_fragment();
-        storeFragment = new Mypage_store_fragment();
-        dr = FirebaseDatabase.getInstance().getReference().child("users").child(auth.getCurrentUser().getUid());
-
         mypage_Logout = view.findViewById(R.id.mypage_Logout);
+        mypage_relativeEditProfile = view.findViewById(R.id.mypage_relativeEditProfile);
         mypage_editProfile = view.findViewById(R.id.mypage_editProfile);
         mypage_myName = view.findViewById(R.id.mypage_myName);
         mypage_schedule = view.findViewById(R.id.mypage_schedule);
@@ -100,25 +91,36 @@ public class Mypage_main extends Fragment{
         mypage_schedulelayout = view.findViewById(R.id.mypage_schedulelayout);
 //        mypage_storelayout = view.findViewById(R.id.mypage_storelayout);
 
-        mypage_editProfile.setClickable(true);
-        mypage_editProfile.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), MypageEditActivity.class);
-                startActivity(intent);
-            }
-        });
+        // 프래그먼트 초기화
+        scheduleFragment = new Mypage_schedule_fragment();
+        storeFragment = new Mypage_store_fragment();
+        ft.replace(R.id.main_frame, scheduleFragment).commit();
 
+        // 현재 유저
+        uid = auth.getCurrentUser().getUid();
+        dr = FirebaseDatabase.getInstance().getReference().child("users").child(uid);
         dr.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                AccountDTO me = dataSnapshot.getValue(AccountDTO.class);
-                mypage_myName.setText(me.getUsername()+"님,");
+                currentUser = dataSnapshot.getValue(AccountDTO.class);
+                mypage_myName.setText(currentUser.getUsername()+"님,");
+                setprofile();
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
 
+            }
+        });
+
+
+        mypage_relativeEditProfile.setClickable(true);
+        mypage_relativeEditProfile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), MypageEditActivity.class);
+                intent.putExtra("currentUser", currentUser);
+                startActivity(intent);
             }
         });
 
@@ -158,15 +160,10 @@ public class Mypage_main extends Fragment{
             }
         });
 
-        setFrag(0);
-        setprofile();
-
         return view;
     }
 
     public void setFrag(int n){    //프래그먼트를 교체하는 작업을 하는 메소드를 만들었습니다
-        fm = getFragmentManager();
-        ft = fm.beginTransaction();
         switch (n){
             case 0:
                 ft.setCustomAnimations(R.animator.enter_from_left, R.animator.exit_to_right, R.animator.enter_from_right, R.animator.exit_to_left)
@@ -211,15 +208,15 @@ public class Mypage_main extends Fragment{
 //            Bitmap bmp = BitmapFactory.decodeByteArray(byteArray, 0, byteArray.length);
 //            mypage_editProfile.setImageBitmap(bmp);
 //        }
-
-
-        storageReference.child(auth.getCurrentUser().getUid() + "/" + auth.getCurrentUser().getUid() + ".jpeg").getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-            @Override
-            public void onSuccess(Uri uri) {
-                mypage_editProfile.setImageURI(uri);
-                Glide.with(getActivity()).load(uri).centerCrop().transition(DrawableTransitionOptions.withCrossFade()).into(mypage_editProfile);
-
-            }
-        });
+        if(currentUser.getProfileImg()!=null){
+            storageReference.child(uid + "/" + uid + ".jpeg").getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                @Override
+                public void onSuccess(Uri uri) {
+                    mypage_editProfile.setImageURI(uri);
+                    Glide.with(getActivity()).load(uri.toString()).apply(RequestOptions.circleCropTransform())
+                            .override(50,50).into(mypage_editProfile);
+                }
+            });
+        }
     }
 }

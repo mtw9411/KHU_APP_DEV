@@ -22,9 +22,10 @@ public class MypageEditActivity extends AppCompatActivity {
 
     TextView mypageEdit_editProfile, mypageEdit_editProfileBar, mypageEdit_editDispo, mypageEdit_editDispoBar;
     RelativeLayout mypageEdit_relativeProfile, mypageEdit_relativeDispo;
-    private int check = 1;
+    private int check = 0;
     private Fragment fragment, fragment2;
     private FragmentManager fm = getFragmentManager();
+    public AccountDTO currentUser;
 
 
     @Override
@@ -34,27 +35,18 @@ public class MypageEditActivity extends AppCompatActivity {
 
         fragment2 = new FragmentMypageEditDispo();
 
-        final FirebaseAuth auth = FirebaseAuth.getInstance();
-        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("users").child(auth.getUid());
-        databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                // fragment에 현재 유저 정보 넘기기
-                fragment = new FragmentMypageEditProfile();
-                Bundle bundle = new Bundle();
-                bundle.putSerializable("userData", dataSnapshot.getValue(AccountDTO.class));
-                fragment.setArguments(bundle);
+        // 현재 유저 intent로 받아오기
+        currentUser = (AccountDTO)getIntent().getSerializableExtra("currentUser");
 
-                // fragment 초기화
-                FragmentTransaction fragmentTransaction = fm.beginTransaction();
-                fragmentTransaction.replace(R.id.mypageEdit_fragment, fragment).commit();
-            }
+        // fragment에 현재 유저 정보 넘기기
+        fragment = new FragmentMypageEditProfile();
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("userData", currentUser);
+        fragment.setArguments(bundle);
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
+        // fragment 초기화
+        FragmentTransaction fragmentTransaction = fm.beginTransaction();
+        fragmentTransaction.replace(R.id.mypageEdit_fragment, fragment).commit();
 
         mypageEdit_editProfile = findViewById(R.id.mypageEdit_editProfile);
         mypageEdit_editProfileBar = findViewById(R.id.mypageEdit_editProfileBar);
@@ -81,8 +73,6 @@ public class MypageEditActivity extends AppCompatActivity {
                 switchFragment(check);
             }
         });
-        switchFragment(check);
-
     }
 
     public void colorChange(TextView select_txt, TextView select_mark, TextView non_txt, TextView non_mark){

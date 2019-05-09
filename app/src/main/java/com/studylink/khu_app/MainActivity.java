@@ -124,22 +124,12 @@ public class MainActivity extends Fragment {
             }
         });
 
-        //스터디 검색 버튼
-        addStudy.setClickable(true);
-        addStudy.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), StudySearchActivity.class);
-                startActivity(intent);
-            }
-        });
-
 // "내가 참여중인 방" RecyclerView 구현
         // 레이아웃 종류 정의
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
         layoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
-        layoutManager.setReverseLayout(true);
-        layoutManager.setStackFromEnd(true);
+//        layoutManager.setReverseLayout(true);
+//        layoutManager.setStackFromEnd(true);
         recyclerView_myStudy.setLayoutManager(layoutManager);
 
         // 어댑터 연결
@@ -158,7 +148,15 @@ public class MainActivity extends Fragment {
                     ft.replace(R.id.Frame_navi, fragment).commit();
                 }
             }
+        }, new View.OnClickListener() {
+            @Override
+            // "검색 버튼" 클릭 이벤트
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), StudySearchActivity.class);
+                startActivity(intent);
+            }
         });
+
         recyclerView_myStudy.setAdapter(myStudy_Adapter);
 
 // "스터디 매칭" RecyclerView 구현
@@ -215,7 +213,7 @@ public class MainActivity extends Fragment {
 
                                 Fragment fragment = new TimelineActivity();
                                 Bundle bundle = new Bundle();
-                                bundle.putSerializable("Timeline", selectRoom);
+                                bundle.putInt("myRoomNum", currentUser.getRoomId().size()-1);
                                 fragment.setArguments(bundle);
 
                                 ft.replace(R.id.Frame_navi, fragment).commit();

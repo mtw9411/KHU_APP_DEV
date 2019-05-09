@@ -105,6 +105,7 @@ public class MainDetailActivity extends AppCompatActivity {
 
                                     Intent intent = new Intent(MainDetailActivity.this, Fragement_navi.class);
                                     intent.putExtra("frag_num", 1);
+                                    intent.putExtra("myRoomNum", currentUser.getRoomId().size()-1);
                                     startActivity(intent);
                                 }
                                 // 중복된 스터디가 있으면

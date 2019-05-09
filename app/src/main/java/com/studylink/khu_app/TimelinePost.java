@@ -53,14 +53,13 @@ public class TimelinePost extends AppCompatActivity {
     private int checkMulti = 0;
     private int checkDeadline = 0;
     private boolean check_content = false;
-    private String currentuser;
     private int selectedPosition;
     private static final int GALLERY_CODE = 10;
 
     private RoomDTO currentRoom;
     private RoomUploadDTO roomUploadDTO = new RoomUploadDTO();
+    private AccountDTO currentUser;
     private FirebaseStorage storage;
-    private FirebaseAuth auth;
     private FirebaseDatabase database;
     private DatabaseReference dataref, dataref2;
     private ArrayList<Uri> mDataset = new ArrayList<>();
@@ -76,11 +75,10 @@ public class TimelinePost extends AppCompatActivity {
         Intent intent = getIntent();
         currentRoom = (RoomDTO)intent.getSerializableExtra("currentRoom");
         selectedPosition = intent.getIntExtra("selectedPosition", 0);
+        currentUser = (AccountDTO)intent.getSerializableExtra("currentUser");
 
         storage = FirebaseStorage.getInstance();
-        auth = FirebaseAuth.getInstance();
         database = FirebaseDatabase.getInstance();
-        currentuser = auth.getCurrentUser().getUid();
 
         timelinePost_write = findViewById(R.id.timelinePost_write);
         timelinePost_writeTitle = findViewById(R.id.timelinePost_writeTitle);
@@ -103,19 +101,6 @@ public class TimelinePost extends AppCompatActivity {
         timelinePost_voteChildTitle = findViewById(R.id.timelinePost_voteChildTitle);
 
         timelinePost_fin = findViewById(R.id.timelinePost_fin);
-
-        // 현재 유저
-        database.getReference().child("users").child(currentuser).addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                AccountDTO acc = dataSnapshot.getValue(AccountDTO.class);
-                roomUploadDTO.setUploadername(acc.getUsername());
-            }
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
 
         RecyclerView.LayoutManager horizontalLayoutManager = new LinearLayoutManager(this);
         ((LinearLayoutManager)horizontalLayoutManager).setOrientation(LinearLayoutManager.HORIZONTAL);
@@ -231,6 +216,13 @@ public class TimelinePost extends AppCompatActivity {
         roomUpload.setCategory(currentRoom.getSpinner1());
         // 글 종류
         roomUpload.setTextType("소식");
+        // 글쓴이 id & 닉네임
+        roomUpload.setUploaderId(currentUser.getUid());
+        roomUpload.setUploadername(currentUser.getUsername());
+        // 글쓴이 프로필
+        if(currentUser.getProfileImg()!=null){
+            roomUpload.setUploaderImg(currentUser.getProfileImg());
+        }
         // 내용
         if (contentCheck.trim().length()>0){
             roomUpload.setWriting_content(contentCheck);

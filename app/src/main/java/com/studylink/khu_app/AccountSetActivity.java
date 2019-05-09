@@ -30,7 +30,6 @@ import static android.os.Build.ID;
 
 public class AccountSetActivity extends AppCompatActivity {
     private FirebaseDatabase FirebaseDatabase;
-    private FirebaseAuth auth;
     private FirebaseUser mUser;
     private TextView account_set_next;
     private EditText account_username;
@@ -45,7 +44,6 @@ public class AccountSetActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_account_set);
-        auth = FirebaseAuth.getInstance();
         mUser = FirebaseAuth.getInstance().getCurrentUser();
         FirebaseDatabase = FirebaseDatabase.getInstance();
         account_username = (EditText) findViewById(R.id.account_username);
@@ -94,6 +92,8 @@ public class AccountSetActivity extends AppCompatActivity {
     public void databaseAccountset(){                                                               //데이터를 파이어베이스에 올림
         AccountDTO Accountset = new AccountDTO();
 
+        String uid = mUser.getUid();
+
         String name = account_username.getText().toString();
         String birth = account_userbirth.getText().toString();
         String region = account_userregion.getText().toString();
@@ -102,6 +102,7 @@ public class AccountSetActivity extends AppCompatActivity {
         if(name.trim().length()>0){
             if (birth.trim().length()>0){
                 if (!sex_check.equals("false")){
+                    Accountset.setUid(uid);
                     Accountset.setUsername(name);
                     Accountset.setUserbirth(birth);
                     Accountset.setUsersex(sex_check);
@@ -111,7 +112,6 @@ public class AccountSetActivity extends AppCompatActivity {
                     else{
                         Accountset.setUserregion("지역 상관없음");
                     }
-                    String uid = auth.getCurrentUser().getUid();
                     FirebaseDatabase.getReference().child("users").child(uid).setValue(Accountset);
                     Toast.makeText(this, "성공", Toast.LENGTH_SHORT).show();
 

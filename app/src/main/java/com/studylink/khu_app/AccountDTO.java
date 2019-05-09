@@ -9,14 +9,23 @@ import java.util.Map;
 
 public class AccountDTO implements Serializable {
 
+    private String uid;
     public String username;
     public String userbirth;
     public String usersex;
     public String userregion;
     public List<String> disposition;
     private List<String> roomId;
+    private String profileImg;
 //    public String registcheck = "false";
 
+    public String getUid() {
+        return uid;
+    }
+
+    public void setUid(String uid) {
+        this.uid = uid;
+    }
 
     public String getUsername() {
         return username;
@@ -64,6 +73,14 @@ public class AccountDTO implements Serializable {
 
     public void setRoomId(List<String> roomId) {
         this.roomId = roomId;
+    }
+
+    public String getProfileImg() {
+        return profileImg;
+    }
+
+    public void setProfileImg(String profileImg) {
+        this.profileImg = profileImg;
     }
 
 

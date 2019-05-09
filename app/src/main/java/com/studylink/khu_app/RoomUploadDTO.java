@@ -11,6 +11,8 @@ import java.util.List;
 public class RoomUploadDTO implements Serializable {
 
     private String writing_content;
+    private String uploaderId;
+    private String uploaderImg;
     private String uploadername;
     private List<String> filename;
     private ArrayList<String> filetitle;
@@ -24,6 +26,22 @@ public class RoomUploadDTO implements Serializable {
 
     public void setWriting_content(String writing_content) {
         this.writing_content = writing_content;
+    }
+
+    public String getUploaderId() {
+        return uploaderId;
+    }
+
+    public void setUploaderId(String uploaderId) {
+        this.uploaderId = uploaderId;
+    }
+
+    public String getUploaderImg() {
+        return uploaderImg;
+    }
+
+    public void setUploaderImg(String uploaderImg) {
+        this.uploaderImg = uploaderImg;
     }
 
     public String getUploadername() {
