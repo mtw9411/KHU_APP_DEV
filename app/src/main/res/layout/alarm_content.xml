@@ -32,7 +32,8 @@
         android:textColor="#e6222222"
         android:textSize="12sp"
         app:layout_constraintStart_toEndOf="@+id/alarm_image"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:fontFamily="@font/notosanscjkkr_medium"/>
 
     <TextView
         android:id="@+id/alarm_content"
@@ -48,7 +49,8 @@
         android:textSize="11sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/alarm_title" />
+        app:layout_constraintTop_toBottomOf="@+id/alarm_title"
+        android:fontFamily="@font/notosanscjkkr_light"/>
 
     <TextView
         android:id="@+id/alarm_time"
@@ -62,5 +64,6 @@
         android:textColor="#e6222222"
         android:textSize="11sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:fontFamily="@font/notosanscjkkr_light"/>
 </android.support.constraint.ConstraintLayout>

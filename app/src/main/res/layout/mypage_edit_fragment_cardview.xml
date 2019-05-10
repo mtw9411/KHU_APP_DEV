@@ -19,7 +19,8 @@
             android:lineSpacingExtra="2.5sp"
             android:text="취업"
             android:textColor="#707070"
-            android:textSize="12sp" />
+            android:textSize="12sp"
+            android:fontFamily="@font/notosanscjkkr_bold"/>
 
         <ImageView
             android:layout_width="30dp"
@@ -35,7 +36,8 @@
             android:lineSpacingExtra="2.5sp"
             android:text="공기업"
             android:textColor="#707070"
-            android:textSize="12sp" />
+            android:textSize="12sp"
+            android:fontFamily="@font/notosanscjkkr_bold"/>
 
         <ImageView
             android:layout_width="30dp"

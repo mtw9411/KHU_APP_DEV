@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:tools="http://schemas.android.com/tools"
+<ScrollView
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:android="http://schemas.android.com/apk/res/android"
@@ -20,7 +20,8 @@
         android:gravity="center"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:fontFamily="@font/notosanscjkkr_bold"/>
 
     <ImageView
         android:id="@+id/back_btn"
@@ -44,7 +45,8 @@
         android:lineSpacingExtra="6.5sp"
         android:text="공부중인 분야"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/textView22" />
+        app:layout_constraintTop_toTopOf="@+id/textView22"
+        android:fontFamily="@font/notosanscjkkr_medium"/>
 
     <android.support.v7.widget.CardView
         android:id="@+id/cardView3"
@@ -97,7 +99,8 @@
         android:lineSpacingExtra="6.5sp"
         android:text="스터디 세션 이름"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cardView3" />
+        app:layout_constraintTop_toBottomOf="@+id/cardView3"
+        android:fontFamily="@font/notosanscjkkr_medium"/>
 
     <android.support.v7.widget.CardView
         android:id="@+id/cardView4"
@@ -120,7 +123,8 @@
             android:hint="스터디 모임 이름을 입력해 주세요."
             android:lineSpacingExtra="6sp"
             android:textColorHint="#e4e4e4"
-            android:textSize="13sp" />
+            android:textSize="13sp"
+            android:fontFamily="@font/notosanscjkkr_medium"/>
 
         <RelativeLayout
 
@@ -137,7 +141,8 @@
                 android:lineSpacingExtra="5.5sp"
                 android:text="0"
                 android:textColor="#707070"
-                android:textSize="11sp" />
+                android:textSize="11sp"
+                android:fontFamily="@font/sfcompactdisplay_light"/>
 
             <TextView
                 android:id="@+id/textView41"
@@ -147,7 +152,8 @@
                 android:lineSpacingExtra="5.5sp"
                 android:text="/20 자"
                 android:textColor="#707070"
-                android:textSize="11sp" />
+                android:textSize="11sp"
+                android:fontFamily="@font/sfcompactdisplay_light"/>
 
         </RelativeLayout>
     </android.support.v7.widget.CardView>
@@ -165,7 +171,8 @@
         android:textSize="14sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/cardView4"
-        android:text="나이" />
+        android:text="나이"
+        android:fontFamily="@font/notosanscjkkr_medium"/>
 
     <android.support.v7.widget.CardView
         android:id="@+id/cardView14"
@@ -190,7 +197,8 @@
             android:lineSpacingExtra="2.5sp"
             android:textColorHint="#63707070"
             android:textColor="#707070"
-            android:textSize="13sp" />
+            android:textSize="13sp"
+            android:fontFamily="@font/notosanscjkkr_medium"/>
 
     </android.support.v7.widget.CardView>
 
@@ -206,7 +214,8 @@
         android:textColor="#E6222222"
         android:textSize="14sp"
         app:layout_constraintStart_toEndOf="@+id/textView91"
-        app:layout_constraintTop_toTopOf="@+id/textView91" />
+        app:layout_constraintTop_toTopOf="@+id/textView91"
+        android:fontFamily="@font/notosanscjkkr_medium"/>
 
     <android.support.v7.widget.CardView
         android:id="@+id/cardView15"
@@ -231,7 +240,8 @@
             android:lineSpacingExtra="2.5sp"
             android:textColorHint="#63707070"
             android:textColor="#707070"
-            android:textSize="13sp" />
+            android:textSize="13sp"
+            android:fontFamily="@font/notosanscjkkr_medium"/>
 
     </android.support.v7.widget.CardView>
 
@@ -248,7 +258,8 @@
         android:textColor="#E6222222"
         android:textSize="14sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cardView14" />
+        app:layout_constraintTop_toBottomOf="@+id/cardView14"
+        android:fontFamily="@font/notosanscjkkr_medium"/>
 
     <android.support.v7.widget.CardView
         android:id="@+id/cardView16"
@@ -289,7 +300,8 @@
         android:lineSpacingExtra="6.5sp"
         android:text="성향 키워드 설정하기"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cardView16" />
+        app:layout_constraintTop_toBottomOf="@+id/cardView16"
+        android:fontFamily="@font/notosanscjkkr_medium"/>
 
     <TextView
         android:id="@+id/textView43"
@@ -305,7 +317,8 @@
         android:background="@drawable/gray_border"
         android:gravity="center"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView42" />
+        app:layout_constraintTop_toBottomOf="@+id/textView42"
+        android:fontFamily="@font/notosanscjkkr_light"/>
 
     <TextView
         android:id="@+id/textView49"
@@ -321,7 +334,8 @@
         android:textSize="13sp"
         app:layout_constraintStart_toEndOf="@+id/textView43"
         app:layout_constraintTop_toBottomOf="@+id/textView42"
-        android:text="내향적인" />
+        android:text="내향적인"
+        android:fontFamily="@font/notosanscjkkr_light"/>
 
     <TextView
         android:id="@+id/textView53"
@@ -337,7 +351,8 @@
         android:textSize="13sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView43"
-        android:text="직관적인" />
+        android:text="직관적인"
+        android:fontFamily="@font/notosanscjkkr_light"/>
 
     <TextView
         android:id="@+id/textView54"
@@ -353,7 +368,8 @@
         android:textSize="13sp"
         app:layout_constraintStart_toEndOf="@+id/textView53"
         app:layout_constraintTop_toBottomOf="@+id/textView43"
-        android:text="현실적인" />
+        android:text="현실적인"
+        android:fontFamily="@font/notosanscjkkr_light"/>
 
     <TextView
         android:id="@+id/textView55"
@@ -369,7 +385,8 @@
         android:textSize="13sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView53"
-        android:text="이상적인" />
+        android:text="이상적인"
+        android:fontFamily="@font/notosanscjkkr_light"/>
 
     <TextView
         android:id="@+id/textView56"
@@ -385,7 +402,8 @@
         android:textSize="13sp"
         app:layout_constraintStart_toEndOf="@+id/textView55"
         app:layout_constraintTop_toBottomOf="@+id/textView53"
-        android:text="원칙적인" />
+        android:text="원칙적인"
+        android:fontFamily="@font/notosanscjkkr_light"/>
 
     <TextView
         android:id="@+id/textView57"
@@ -401,7 +419,8 @@
         android:textSize="13sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView55"
-        android:text="계획적인" />
+        android:text="계획적인"
+        android:fontFamily="@font/notosanscjkkr_light"/>
 
     <TextView
         android:id="@+id/textView58"
@@ -417,7 +436,8 @@
         android:textSize="13sp"
         app:layout_constraintStart_toEndOf="@+id/textView57"
         app:layout_constraintTop_toBottomOf="@+id/textView55"
-        android:text="탐색적인" />
+        android:text="탐색적인"
+        android:fontFamily="@font/notosanscjkkr_light"/>
 
     <TextView
         android:id="@+id/textView59"
@@ -431,7 +451,8 @@
         android:lineSpacingExtra="6.5sp"
         android:text="결석 및 과제 벌금"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView57" />
+        app:layout_constraintTop_toBottomOf="@+id/textView57"
+        android:fontFamily="@font/notosanscjkkr_medium"/>
 
     <android.support.v7.widget.CardView
         android:id="@+id/cardView17"
@@ -454,7 +475,8 @@
             android:hint="5,000"
             android:lineSpacingExtra="2.5sp"
             android:textColorHint="#63707070"
-            android:textSize="13sp" />
+            android:textSize="13sp"
+            android:fontFamily="@font/sfcompactdisplay_medium"/>
 
         <TextView
             android:layout_width="wrap_content"
@@ -465,7 +487,8 @@
             android:lineSpacingExtra="2.5sp"
             android:textColor="#75707070"
             android:textSize="13sp"
-            android:text="원" />
+            android:text="원"
+            android:fontFamily="@font/sfcompactdisplay_semibold"/>
     </android.support.v7.widget.CardView>
 
     <TextView
@@ -479,7 +502,8 @@
         android:textColor="#E6222222"
         android:textSize="14sp"
         app:layout_constraintStart_toEndOf="@+id/textView59"
-        app:layout_constraintTop_toTopOf="@+id/textView59" />
+        app:layout_constraintTop_toTopOf="@+id/textView59"
+        android:fontFamily="@font/notosanscjkkr_medium"/>
 
     <android.support.v7.widget.CardView
         android:id="@+id/cardView18"
@@ -501,7 +525,8 @@
             android:hint="6"
             android:lineSpacingExtra="2.5sp"
             android:textColorHint="#63707070"
-            android:textSize="13sp" />
+            android:textSize="13sp"
+            android:fontFamily="@font/sfcompactdisplay_medium"/>
 
         <TextView
             android:layout_width="wrap_content"
@@ -512,7 +537,8 @@
             android:lineSpacingExtra="2.5sp"
             android:text="명"
             android:textColor="#75707070"
-            android:textSize="13sp" />
+            android:textSize="13sp"
+            android:fontFamily="@font/sfcompactdisplay_semibold"/>
     </android.support.v7.widget.CardView>
 
     <TextView
@@ -527,7 +553,8 @@
         android:text="다음"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cardView17" />
+        app:layout_constraintTop_toBottomOf="@+id/cardView17"
+        android:fontFamily="@font/notosanscjkkr_regular"/>
 
 </android.support.constraint.ConstraintLayout>
 </ScrollView>

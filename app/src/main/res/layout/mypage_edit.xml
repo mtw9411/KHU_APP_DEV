@@ -12,7 +12,8 @@
         android:textSize="13sp"
         android:textColor="#222222"
         android:lineSpacingExtra="6sp"
-        android:text="프로필 편집"/>
+        android:text="SESSION 프로필"
+        android:fontFamily="@font/notosanscjkkr_bold"/>
 
     <ImageView
         android:layout_width="31dp"
@@ -41,7 +42,8 @@
                 android:lineSpacingExtra="6sp"
                 android:text="프로필 편집"
                 android:textColor="#0065ff"
-                android:textSize="12sp" />
+                android:textSize="12sp"
+                android:fontFamily="@font/notosanscjkkr_medium"/>
 
             <TextView
                 android:id="@+id/mypageEdit_editProfileBar"
@@ -68,7 +70,8 @@
                 android:lineSpacingExtra="6sp"
                 android:text="성향 설정"
                 android:textColor="#b1b1b1"
-                android:textSize="12sp" />
+                android:textSize="12sp"
+                android:fontFamily="@font/notosanscjkkr_medium"/>
 
             <TextView
                 android:id="@+id/mypageEdit_editDispoBar"

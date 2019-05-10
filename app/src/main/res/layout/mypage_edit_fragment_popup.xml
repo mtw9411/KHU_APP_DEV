@@ -22,7 +22,8 @@
             android:hint="예) 역삼동"
             android:lineSpacingExtra="6sp"
             android:textColor="#707070"
-            android:textSize="12sp" />
+            android:textSize="12sp"
+            android:fontFamily="@font/notosanscjkkr_bold"/>
 
         <ImageView
             android:layout_width="42dp"

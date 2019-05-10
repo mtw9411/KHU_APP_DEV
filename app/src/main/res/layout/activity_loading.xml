@@ -20,7 +20,8 @@
         android:textSize="11sp"
         android:textColor="#b1b1b1"
         android:lineSpacingExtra="2.5sp"
-        android:text="STUDY LINK"
+        android:text="STUDY SESSION"
+        android:fontFamily="@font/notosanscjkkr_light"
         />
 </RelativeLayout>
 

@@ -15,11 +15,11 @@
         android:text="일정"
         android:textColor="#222222"
         android:textSize="16sp"
-        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="MissingConstraints" />
+        tools:ignore="MissingConstraints"
+        android:fontFamily="@font/notosanscjkkr_bold"/>
 
     <ScrollView
         android:layout_width="0dp"
@@ -58,13 +58,14 @@
                 android:text="다음 스터디"
                 android:textColor="#222222"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView85" />
+                app:layout_constraintTop_toBottomOf="@+id/textView85"
+                android:fontFamily="@font/notosanscjkkr_bold"/>
 
             <android.support.v7.widget.RecyclerView
                 android:layout_width="match_parent"
                 android:layout_height="100dp"
-                android:layout_marginTop="8dp"
-                android:paddingLeft="20dp"
+                android:layout_marginTop="20dp"
+                android:paddingVertical="20dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"

@@ -43,7 +43,6 @@
         <activity android:name=".StudySearchActivity" />
         <activity android:name=".StudySearchingActivity" />
         <activity android:name=".absent_registrate" />
-        <activity android:name=".Timeline_writing" />
         <activity android:name=".TimelinePost" />
         <activity android:name=".MypageEditActivity" />
     </application>

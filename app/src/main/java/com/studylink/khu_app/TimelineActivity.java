@@ -512,7 +512,7 @@ public class TimelineActivity extends Fragment {
                     public void onSuccess(Uri uri) {
                         ((FileViewHolder)viewHolder).file_imageview.setImageURI(uri);
                         Glide.with(getActivity()).load(uri.toString()).apply(RequestOptions.circleCropTransform())
-                                .override(43,43).into(((FileViewHolder)viewHolder).file_imageview);
+                                .override(50,50).into(((FileViewHolder)viewHolder).file_imageview);
                     }
                 });
             }

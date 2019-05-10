@@ -25,8 +25,8 @@
 
             <ImageView
                 android:id="@+id/file_imageview"
-                android:layout_width="43dp"
-                android:layout_height="43dp"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
                 android:layout_marginStart="12dp"
                 android:layout_marginLeft="12dp"
                 android:layout_marginTop="12dp"
@@ -41,13 +41,13 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="13.5dp"
                 android:layout_marginLeft="13.5dp"
-                android:layout_marginTop="5dp"
                 android:lineSpacingExtra="2.5sp"
                 android:text="Zkqmmsl"
                 android:textColor="#707070"
                 android:textSize="13sp"
                 app:layout_constraintStart_toEndOf="@+id/file_imageview"
-                app:layout_constraintTop_toTopOf="@+id/file_imageview" />
+                app:layout_constraintTop_toTopOf="@+id/file_imageview"
+                android:fontFamily="@font/notosanscjkkr_regular"/>
 
             <TextView
                 android:id="@+id/file_textview"
@@ -62,7 +62,8 @@
                 android:textColor="#ffffff"
                 android:textSize="10sp"
                 app:layout_constraintStart_toEndOf="@+id/file_username"
-                app:layout_constraintTop_toTopOf="@+id/file_username" />
+                app:layout_constraintTop_toTopOf="@+id/file_username"
+                android:fontFamily="@font/notosanscjkkr_regular"/>
 
             <TextView
                 android:id="@+id/file_time"
@@ -76,7 +77,8 @@
                 android:textColor="#707070"
                 android:textSize="10.5sp"
                 app:layout_constraintStart_toEndOf="@+id/file_imageview"
-                app:layout_constraintTop_toBottomOf="@+id/file_username" />
+                app:layout_constraintTop_toBottomOf="@+id/file_username"
+                android:fontFamily="@font/notosanscjkkr_demilight"/>
 
             <TextView
                 android:id="@+id/file_contentText"
@@ -92,7 +94,8 @@
                 android:textColor="#707070"
                 android:textSize="12sp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/file_imageview" />
+                app:layout_constraintTop_toBottomOf="@+id/file_imageview"
+                android:fontFamily="@font/notosanscjkkr_regular"/>
 
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/image_recycler"

@@ -2,7 +2,6 @@
 <ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -18,12 +17,13 @@
             android:layout_height="52dp"
             android:gravity="center"
             android:lineSpacingExtra="6sp"
-            android:text="스터디 상세"
+            android:text="SESSION 설명"
             android:textColor="#222222"
             android:textSize="13sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            android:fontFamily="@font/notosanscjkkr_bold"/>
 
         <ImageView
             android:id="@+id/imageView11"
@@ -34,7 +34,6 @@
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@mipmap/icon_23" />
->>>>>>> 6e459be9c1249d73749bf441f851c267916d9064
 
         <TextView
             android:id="@+id/textView23"
@@ -48,7 +47,8 @@
             android:textColor="#E6222222"
             android:textSize="11.5sp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/textView22" />
+            app:layout_constraintTop_toTopOf="@+id/textView22"
+            android:fontFamily="@font/notosanscjkkr_regular"/>
 
         <TextView
             android:id="@+id/Detail_title"
@@ -62,7 +62,8 @@
             android:textColor="#E6222222"
             android:textSize="16sp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView23" />
+            app:layout_constraintTop_toBottomOf="@+id/textView23"
+            android:fontFamily="@font/notosanscjkkr_bold"/>
 
         <TextView
             android:id="@+id/Detail_member"
@@ -76,7 +77,8 @@
             android:textColor="#222222"
             android:textSize="13sp"
             app:layout_constraintStart_toEndOf="@+id/Detail_title"
-            app:layout_constraintTop_toBottomOf="@+id/textView23" />
+            app:layout_constraintTop_toBottomOf="@+id/textView23"
+            android:fontFamily="@font/notosanscjkkr_medium"/>
 
         <TextView
             android:id="@+id/Detail_totalMem"
@@ -88,7 +90,8 @@
             android:textColor="#222222"
             android:textSize="11sp"
             app:layout_constraintStart_toEndOf="@+id/Detail_member"
-            app:layout_constraintTop_toBottomOf="@+id/textView23" />
+            app:layout_constraintTop_toBottomOf="@+id/textView23"
+            android:fontFamily="@font/notosanscjkkr_medium"/>
 
         <LinearLayout
             android:id="@+id/linearLayout"
@@ -108,7 +111,8 @@
                 android:lineSpacingExtra="5sp"
                 android:text="경기도 수원"
                 android:textColor="#222222"
-                android:textSize="10.5sp" />
+                android:textSize="10.5sp"
+                android:fontFamily="@font/notosanscjkkr_light"/>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -116,7 +120,8 @@
                 android:layout_marginRight="8dp"
                 android:text="|"
                 android:textColor="#222222"
-                android:textSize="10.5sp" />
+                android:textSize="10.5sp"
+                android:fontFamily="@font/notosanscjkkr_light"/>
 
             <TextView
                 android:id="@+id/Detail_age"
@@ -126,7 +131,8 @@
                 android:lineSpacingExtra="5sp"
                 android:text="30세 미만"
                 android:textColor="#222222"
-                android:textSize="10.5sp" />
+                android:textSize="10.5sp"
+                android:fontFamily="@font/notosanscjkkr_light"/>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -134,7 +140,8 @@
                 android:layout_marginRight="8dp"
                 android:text="|"
                 android:textColor="#222222"
-                android:textSize="10.5sp" />
+                android:textSize="10.5sp"
+                android:fontFamily="@font/notosanscjkkr_light"/>
 
             <TextView
                 android:id="@+id/Detail_gender"
@@ -143,7 +150,8 @@
                 android:lineSpacingExtra="5sp"
                 android:text="성별 상관없음"
                 android:textColor="#222222"
-                android:textSize="10.5sp" />
+                android:textSize="10.5sp"
+                android:fontFamily="@font/notosanscjkkr_light"/>
         </LinearLayout>
 
         <android.support.constraint.ConstraintLayout
@@ -170,7 +178,8 @@
                 app:layout_constraintHorizontal_chainStyle="packed"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toLeftOf="@+id/next_2"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                android:fontFamily="@font/sfcompactdisplay_bold"/>
 
             <TextView
                 android:id="@+id/next_2"
@@ -183,7 +192,8 @@
                 android:textSize="10sp"
                 app:layout_constraintLeft_toRightOf="@+id/num_2"
                 app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                android:fontFamily="@font/notosanscjkkr_light"/>
 
             <TextView
                 android:id="@+id/textView19"
@@ -191,7 +201,6 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/num_2"
                 android:layout_marginTop="3dp"
-                android:layout_marginRight="5dp"
                 android:lineSpacingExtra="16sp"
                 android:text="매칭률"
                 android:textColor="#0065ff"
@@ -199,21 +208,24 @@
                 app:layout_constraintHorizontal_chainStyle="packed"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toLeftOf="@+id/matching_rate"
-
-                app:layout_constraintTop_toBottomOf="@+id/num_2" />
+                app:layout_constraintTop_toBottomOf="@+id/num_2"
+                android:fontFamily="@font/notosanscjkkr_light"/>
 
             <TextView
                 android:id="@+id/matching_rate"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/num_2"
+                android:layout_marginTop="2dp"
+                android:layout_marginLeft="2dp"
                 android:lineSpacingExtra="16sp"
                 android:text="90%"
                 android:textColor="#0065ff"
                 android:textSize="14sp"
                 app:layout_constraintLeft_toRightOf="@+id/textView19"
                 app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/num_2" />
+                app:layout_constraintTop_toBottomOf="@+id/num_2"
+                android:fontFamily="@font/sfcompactdisplay_bold"/>
         </android.support.constraint.ConstraintLayout>
 
         <RelativeLayout
@@ -238,6 +250,7 @@
                     android:textColor="#ffffff"
                     android:letterSpacing="-0.03"
                     android:lineSpacingExtra="8.5sp"
+                    android:fontFamily="@font/notosanscjkkr_regular"
                     />
 
                 <ImageView
@@ -246,7 +259,8 @@
                     android:layout_height="27dp"
                     android:layout_toRightOf="@+id/textView28"
                     android:layout_marginLeft="3dp"
-                    app:srcCompat="@mipmap/icon_15" />
+                    app:srcCompat="@mipmap/icon_15"
+                    android:layout_gravity="center"/>
             </LinearLayout>
         </RelativeLayout>
 
@@ -256,13 +270,14 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
             android:layout_marginLeft="20dp"
-            android:layout_marginTop="23.5dp"
+            android:layout_marginTop="20dp"
             android:lineSpacingExtra="6.5sp"
             android:text="스터디 소개"
             android:textColor="#E6222222"
             android:textSize="14sp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/Detail_entrance" />
+            app:layout_constraintTop_toBottomOf="@+id/Detail_entrance"
+            android:fontFamily="@font/notosanscjkkr_bold"/>
 
         <ImageView
             android:id="@+id/imageView17"
@@ -270,23 +285,23 @@
             android:layout_height="18dp"
             android:layout_marginStart="16dp"
             android:layout_marginLeft="16dp"
-            android:layout_marginTop="23dp"
+            android:layout_marginTop="4dp"
             app:layout_constraintStart_toEndOf="@+id/textView29"
-            app:layout_constraintTop_toBottomOf="@+id/Detail_entrance"
+            app:layout_constraintTop_toTopOf="@+id/textView29"
             app:srcCompat="@mipmap/icon_27" />
 
         <TextView
             android:id="@+id/Detail_fine"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="23dp"
             android:layout_marginLeft="7dp"
             android:lineSpacingExtra="2.5sp"
             android:text="5000 won"
             android:textColor="#E62f78db"
             android:textSize="12.5sp"
             app:layout_constraintStart_toEndOf="@+id/imageView17"
-            app:layout_constraintTop_toBottomOf="@+id/Detail_entrance" />
+            app:layout_constraintTop_toTopOf="@+id/imageView17"
+            android:fontFamily="@font/sfcompactdisplay_medium"/>
 
         <TextView
             android:id="@+id/textView11"
@@ -294,10 +309,10 @@
             android:layout_height="13dp"
             android:layout_marginStart="20dp"
             android:layout_marginLeft="20dp"
-            android:layout_marginTop="25dp"
+            android:layout_marginTop="5dp"
             android:background="#2f78db"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView29" />
+            app:layout_constraintTop_toTopOf="@+id/Detail_content1" />
 
         <TextView
             android:id="@+id/Detail_content1"
@@ -305,7 +320,8 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginLeft="8dp"
-            android:layout_marginTop="24.5dp"
+            android:layout_marginTop="22dp"
+            android:fontFamily="@font/notosanscjkkr_bold"
             android:letterSpacing="-0.03"
             android:lineSpacingExtra="6sp"
             android:text="공기업 스터디 열심히 하실 분을 모십니다!"
@@ -331,7 +347,8 @@
             android:textSize="12sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/Detail_content1" />
+            app:layout_constraintTop_toBottomOf="@+id/Detail_content1"
+            android:fontFamily="@font/notosanscjkkr_regular"/>
 
         <TextView
             android:id="@+id/textView32"
@@ -345,7 +362,8 @@
             android:textColor="#222222"
             android:textSize="12sp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/Detail_content2" />
+            app:layout_constraintTop_toBottomOf="@+id/Detail_content2"
+            android:fontFamily="@font/notosanscjkkr_medium"/>
 
         <TextView
             android:id="@+id/Detail_roomdipo1"
@@ -361,7 +379,8 @@
             android:textColor="#2f78db"
             android:textSize="11.5sp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView32" />
+            app:layout_constraintTop_toBottomOf="@+id/textView32"
+            android:fontFamily="@font/notosanscjkkr_medium"/>
 
         <TextView
             android:id="@+id/Detail_roomdipo2"
@@ -377,7 +396,8 @@
             android:textColor="#2f78db"
             android:textSize="11.5sp"
             app:layout_constraintStart_toEndOf="@+id/Detail_roomdipo1"
-            app:layout_constraintTop_toBottomOf="@+id/textView32" />
+            app:layout_constraintTop_toBottomOf="@+id/textView32"
+            android:fontFamily="@font/notosanscjkkr_medium"/>
 
         <TextView
             android:id="@+id/Detail_roomdipo3"
@@ -393,7 +413,8 @@
             android:textColor="#2f78db"
             android:textSize="11.5sp"
             app:layout_constraintStart_toEndOf="@+id/Detail_roomdipo2"
-            app:layout_constraintTop_toBottomOf="@+id/textView32" />
+            app:layout_constraintTop_toBottomOf="@+id/textView32"
+            android:fontFamily="@font/notosanscjkkr_medium"/>
 
         <TextView
             android:id="@+id/Detail_roomdipo4"
@@ -409,7 +430,8 @@
             android:textColor="#2f78db"
             android:textSize="11.5sp"
             app:layout_constraintStart_toEndOf="@+id/Detail_roomdipo3"
-            app:layout_constraintTop_toBottomOf="@+id/textView32" />
+            app:layout_constraintTop_toBottomOf="@+id/textView32"
+            android:fontFamily="@font/notosanscjkkr_medium"/>
 
         <View
             android:id="@+id/view"
@@ -437,7 +459,8 @@
             android:textColor="#E6222222"
             android:textSize="14sp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/view" />
+            app:layout_constraintTop_toBottomOf="@+id/view"
+            android:fontFamily="@font/notosanscjkkr_medium"/>
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/recyclerView"

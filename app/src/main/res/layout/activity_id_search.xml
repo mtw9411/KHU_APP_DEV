@@ -16,6 +16,7 @@
         android:text="고객센터"
         android:gravity="center"
         android:layout_marginBottom="105dp"
+        android:fontFamily="@font/notosanscjkkr_bold"
         />
 
     <TextView
@@ -27,6 +28,7 @@
         android:text="아이디 찾기"
         android:layout_marginLeft="55.5dp"
         android:layout_marginBottom="45.5dp"
+        android:fontFamily="@font/notosanscjkkr_bold"
         />
 
     <TextView
@@ -38,6 +40,7 @@
         android:text="이메일로 아이디 찾기"
         android:layout_marginLeft="55.5dp"
         android:layout_marginBottom="14.5dp"
+        android:fontFamily="@font/notosanscjkkr_bold"
         />
 
     <EditText
@@ -51,6 +54,7 @@
         android:textSize="12sp"
         android:layout_marginHorizontal="42dp"
         android:layout_marginBottom="50dp"
+        android:fontFamily="@font/notosanscjkkr_bold"
         />
 
     <TextView
@@ -62,6 +66,7 @@
         android:text="휴대폰 번호로 아이디 찾기"
         android:layout_marginLeft="55.5dp"
         android:layout_marginBottom="14.5dp"
+        android:fontFamily="@font/notosanscjkkr_bold"
         />
 
     <EditText
@@ -74,6 +79,7 @@
         android:textSize="12sp"
         android:layout_marginHorizontal="42dp"
         android:layout_marginBottom="89.5dp"
+        android:fontFamily="@font/notosanscjkkr_bold"
         />
 
     <TextView
@@ -89,6 +95,7 @@
         android:gravity="center"
         android:layout_marginHorizontal="42dp"
         android:layout_marginBottom="100dp"
+        android:fontFamily="@font/notosanscjkkr_bold"
         />
 
 </LinearLayout>

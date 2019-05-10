@@ -2,6 +2,7 @@
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
     <ScrollView
@@ -10,19 +11,21 @@
         <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
+
             <TextView
                 android:id="@+id/textView77"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
                 android:layout_marginLeft="20dp"
-                android:layout_marginTop="57dp"
-                android:textSize="14sp"
-                android:textColor="#E6222222"
+                android:layout_marginTop="8dp"
+                android:fontFamily="@font/notosanscjkkr_medium"
                 android:lineSpacingExtra="6.5sp"
                 android:text="이름"
+                android:textColor="#E6222222"
+                android:textSize="14sp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="@+id/cardView7" />
 
             <android.support.v7.widget.CardView
                 android:id="@+id/cardView7"
@@ -46,7 +49,8 @@
                     android:lineSpacingExtra="6sp"
                     android:text="이지영"
                     android:textColor="#A1222222"
-                    android:textSize="12sp" />
+                    android:textSize="12sp"
+                    android:fontFamily="@font/notosanscjkkr_medium"/>
 
                 <ImageView
                     android:id="@+id/profileImg"
@@ -61,15 +65,13 @@
                 android:id="@+id/textView90"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="49.5dp"
-                android:textSize="14sp"
-                android:textColor="#E6222222"
+                android:fontFamily="@font/notosanscjkkr_medium"
                 android:lineSpacingExtra="6.5sp"
                 android:text="생년월일"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView77" />
+                android:textColor="#E6222222"
+                android:textSize="14sp"
+                tools:layout_editor_absoluteX="20dp"
+                tools:layout_editor_absoluteY="130dp" />
 
             <android.support.v7.widget.CardView
                 android:id="@+id/cardView8"
@@ -93,7 +95,8 @@
                     android:lineSpacingExtra="6sp"
                     android:text="1994. 07. 27"
                     android:textColor="#A1222222"
-                    android:textSize="12sp" />
+                    android:textSize="12sp"
+                    android:fontFamily="@font/notosanscjkkr_medium"/>
             </android.support.v7.widget.CardView>
 
             <TextView
@@ -102,13 +105,14 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
                 android:layout_marginLeft="20dp"
-                android:layout_marginTop="43.5dp"
-                android:textSize="14sp"
-                android:textColor="#E6222222"
+                android:layout_marginTop="8dp"
+                android:fontFamily="@font/notosanscjkkr_medium"
                 android:lineSpacingExtra="6.5sp"
                 android:text="성별"
+                android:textColor="#E6222222"
+                android:textSize="14sp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView90" />
+                app:layout_constraintTop_toTopOf="@+id/cardView10" />
 
             <android.support.v7.widget.CardView
                 android:id="@+id/cardView9"
@@ -131,7 +135,8 @@
                     android:lineSpacingExtra="6sp"
                     android:text="여성"
                     android:textColor="#A1222222"
-                    android:textSize="12sp" />
+                    android:textSize="12sp"
+                    android:fontFamily="@font/notosanscjkkr_medium"/>
             </android.support.v7.widget.CardView>
 
             <android.support.v7.widget.CardView
@@ -154,7 +159,8 @@
                     android:lineSpacingExtra="6sp"
                     android:text="남성"
                     android:textColor="#A1222222"
-                    android:textSize="12sp" />
+                    android:textSize="12sp"
+                    android:fontFamily="@font/notosanscjkkr_medium"/>
 
             </android.support.v7.widget.CardView>
 
@@ -164,13 +170,14 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
                 android:layout_marginLeft="20dp"
-                android:layout_marginTop="47dp"
-                android:textSize="14sp"
-                android:textColor="#E6222222"
+                android:layout_marginTop="8dp"
+                android:fontFamily="@font/notosanscjkkr_medium"
                 android:lineSpacingExtra="6.5sp"
                 android:text="주소"
+                android:textColor="#E6222222"
+                android:textSize="14sp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/mypageEdit_sex" />
+                app:layout_constraintTop_toTopOf="@+id/mypageEdit_address" />
 
             <android.support.v7.widget.CardView
                 android:id="@+id/mypageEdit_address"
@@ -197,7 +204,8 @@
                     android:layout_marginLeft="22.3dp"
                     android:lineSpacingExtra="6sp"
                     android:textColor="#A1222222"
-                    android:textSize="12sp" />
+                    android:textSize="12sp"
+                    android:fontFamily="@font/notosanscjkkr_medium"/>
                 <ImageView
                     android:layout_width="45dp"
                     android:layout_height="wrap_content"
@@ -218,7 +226,8 @@
                 android:lineSpacingExtra="6.5sp"
                 android:text="관심있는 분야를 선택해보세요!"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/mypageEdit_address" />
+                app:layout_constraintTop_toBottomOf="@+id/mypageEdit_address"
+                android:fontFamily="@font/notosanscjkkr_medium"/>
 
             <TextView
                 android:id="@+id/textView86"
@@ -232,7 +241,8 @@
                 android:lineSpacingExtra="5.5sp"
                 android:text="최대3개"
                 app:layout_constraintStart_toEndOf="@+id/textView85"
-                app:layout_constraintTop_toBottomOf="@+id/mypageEdit_address" />
+                app:layout_constraintTop_toBottomOf="@+id/mypageEdit_address"
+                android:fontFamily="@font/notosanscjkkr_demilight"/>
 
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/recyclerView6"
@@ -296,6 +306,7 @@
             android:lineSpacingExtra="3sp"
             android:text="수정 완료"
             android:textColor="#2f78db"
-            android:textSize="15sp"/>
+            android:textSize="15sp"
+            android:fontFamily="@font/notosanscjkkr_regular"/>
     </RelativeLayout>
 </RelativeLayout>

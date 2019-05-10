@@ -27,6 +27,7 @@
                 android:layout_height="52dp"
                 android:gravity="center"
                 android:lineSpacingExtra="2.5sp"
+                android:fontFamily="@font/notosanscjkkr_bold"
                 android:text="성향 선택"
                 android:textColor="#222222"
                 android:textSize="13sp" />
@@ -51,6 +52,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="40dp"
             android:layout_marginBottom="85.3dp"
+            android:fontFamily="@font/notosanscjkkr_bold"
             android:lineSpacingExtra="2.5sp"
             android:text="자신의 공부 성향을 선택해보세요. 매칭률이 올라갑니다!"
             android:textColor="#707070"
@@ -76,6 +78,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="center"
+                    android:fontFamily="@font/notosanscjkkr_medium"
                     android:lineSpacingExtra="6.5sp"
                     android:text="외향적인"
                     android:textColor="#66222222"
@@ -105,7 +108,8 @@
                     android:lineSpacingExtra="6.5sp"
                     android:text="내향적인"
                     android:textColor="#66222222"
-                    android:textSize="14sp" />
+                    android:textSize="14sp"
+                    android:fontFamily="@font/notosanscjkkr_medium"/>
 
                 <ImageView
                     android:id="@+id/btn2_img"
@@ -137,7 +141,8 @@
                     android:lineSpacingExtra="6.5sp"
                     android:text="직관적인"
                     android:textColor="#66222222"
-                    android:textSize="14sp" />
+                    android:textSize="14sp"
+                    android:fontFamily="@font/notosanscjkkr_medium"/>
 
                 <ImageView
                     android:id="@+id/btn3_img"
@@ -163,7 +168,8 @@
                     android:lineSpacingExtra="6.5sp"
                     android:text="현실적인"
                     android:textColor="#66222222"
-                    android:textSize="14sp" />
+                    android:textSize="14sp"
+                    android:fontFamily="@font/notosanscjkkr_medium"/>
 
                 <ImageView
                     android:id="@+id/btn4_img"
@@ -195,7 +201,8 @@
                     android:lineSpacingExtra="6.5sp"
                     android:text="이성적인"
                     android:textColor="#66222222"
-                    android:textSize="14sp" />
+                    android:textSize="14sp"
+                    android:fontFamily="@font/notosanscjkkr_medium"/>
 
                 <ImageView
                     android:id="@+id/btn5_img"
@@ -221,7 +228,8 @@
                     android:lineSpacingExtra="6.5sp"
                     android:text="원칙적인"
                     android:textColor="#66222222"
-                    android:textSize="14sp" />
+                    android:textSize="14sp"
+                    android:fontFamily="@font/notosanscjkkr_medium"/>
 
                 <ImageView
                     android:id="@+id/btn6_img"
@@ -254,7 +262,8 @@
                     android:lineSpacingExtra="6.5sp"
                     android:text="계획적인"
                     android:textColor="#66222222"
-                    android:textSize="14sp" />
+                    android:textSize="14sp"
+                    android:fontFamily="@font/notosanscjkkr_medium"/>
 
                 <ImageView
                     android:id="@+id/btn7_img"
@@ -280,7 +289,8 @@
                     android:lineSpacingExtra="6.5sp"
                     android:text="탐색적인"
                     android:textColor="#66222222"
-                    android:textSize="14sp" />
+                    android:textSize="14sp"
+                    android:fontFamily="@font/notosanscjkkr_medium"/>
 
                 <ImageView
                     android:id="@+id/btn8_img"
@@ -306,7 +316,8 @@
             android:paddingVertical="16dp"
             android:text="완료"
             android:textColor="#b1b1b1"
-            android:textSize="16.5sp" />
+            android:textSize="16.5sp"
+            android:fontFamily="@font/notosanscjkkr_bold"/>
 
     </LinearLayout>
 </ScrollView>

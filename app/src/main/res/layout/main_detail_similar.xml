@@ -13,7 +13,8 @@
         android:textColor="#ffffff"
         android:lineSpacingExtra="6.5sp"
         tools:text="수원시 영통동"
-        android:layout_centerInParent="true"/>
+        android:layout_centerInParent="true"
+        android:fontFamily="@font/notosanscjkkr_medium"/>
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -22,6 +23,7 @@
         android:lineSpacingExtra="5.5sp"
         tools:text="수원시 영통동"
         android:layout_below="@+id/textView27"
-        android:layout_centerHorizontal="true"/>
+        android:layout_centerHorizontal="true"
+        android:fontFamily="@font/notosanscjkkr_demilight"/>
 
 </RelativeLayout>

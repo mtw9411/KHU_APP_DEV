@@ -24,6 +24,7 @@
         android:lineSpacingExtra="6.5sp"
         android:text="취업"
         android:layout_centerHorizontal="true"
+        android:fontFamily="@font/notosanscjkkr_medium"
         />
     <TextView
         android:id="@+id/deadline_title"
@@ -36,6 +37,7 @@
         android:lineSpacingExtra="8sp"
         android:text="19 인적성"
         android:layout_centerHorizontal="true"
+        android:fontFamily="@font/notosanscjkkr_medium"
         />
 
 </RelativeLayout>

@@ -62,7 +62,7 @@ public class MainDetailActivity extends AppCompatActivity {
         Detail_region.setText(roomDTO.getRegion());
         Detail_age.setText(roomDTO.getAge());
         Detail_gender.setText(roomDTO.getGender());
-        Detail_fine.setText(roomDTO.getFine().toString());
+        Detail_fine.setText(roomDTO.getFine().toString() + "won");
         Detail_content1.setText(roomDTO.getContent1());
         Detail_content2.setText(roomDTO.getContent2());
         Detail_roomdipo1.setText(roomDTO.getRoomdisposition().get(0));

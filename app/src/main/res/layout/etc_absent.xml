@@ -20,7 +20,8 @@
         app:layout_constraintBottom_toBottomOf="@+id/imageView8"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/imageView8"
-        app:layout_constraintTop_toTopOf="@+id/imageView8" />
+        app:layout_constraintTop_toTopOf="@+id/imageView8"
+        android:fontFamily="@font/notosanscjkkr_bold"/>
 
     <ImageView
         android:id="@+id/imageView8"
@@ -34,17 +35,30 @@
         app:srcCompat="@mipmap/icon_23" />
 
     <TextView
-        android:id="@+id/textView35"
+        android:id="@+id/absent_userName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginTop="45dp"
         android:lineSpacingExtra="6sp"
-        android:text="지영님의 누적벌금은 5000원 입니다."
-        android:textColor="#070707"
+        android:text="지영님의 "
+        android:textColor="#707070"
         app:layout_constraintStart_toStartOf="@+id/imageView8"
-        app:layout_constraintTop_toBottomOf="@+id/imageView8" />
+        app:layout_constraintTop_toBottomOf="@+id/imageView8"
+        android:fontFamily="@font/notosanscjkkr_bold"/>
+
+    <TextView
+        android:id="@+id/absent_userFine"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="45dp"
+        android:lineSpacingExtra="6sp"
+        android:text="누적벌금은 5000원 입니다."
+        android:textColor="#707070"
+        app:layout_constraintLeft_toRightOf="@+id/absent_userName"
+        app:layout_constraintTop_toBottomOf="@+id/imageView8"
+        android:fontFamily="@font/notosanscjkkr_regular"/>
 
     <TextView
         android:id="@+id/textView36"
@@ -60,51 +74,45 @@
         android:padding="3sp"
         android:paddingStart="8sp"
         android:paddingEnd="8sp"
-        app:layout_constraintBottom_toBottomOf="@+id/textView35"
-        app:layout_constraintStart_toEndOf="@+id/textView35"
-        app:layout_constraintTop_toTopOf="@+id/textView35" />
+        app:layout_constraintBottom_toBottomOf="@+id/absent_userFine"
+        app:layout_constraintStart_toEndOf="@+id/absent_userFine"
+        app:layout_constraintTop_toTopOf="@+id/absent_userFine"
+        android:fontFamily="@font/notosanscjkkr_demilight"/>
 
-    <android.support.v7.widget.CardView
-        android:id="@+id/cardView3"
+
+    <RelativeLayout
+        android:id="@+id/relativelaout3"
         android:layout_width="0dp"
-        android:layout_height="65dp"
+        android:layout_height="wrap_content"
+        android:background="#d8d8d8"
+        android:paddingVertical="22.5dp"
         android:layout_marginTop="20dp"
-        app:cardBackgroundColor="@drawable/timeline_gradient"
-        app:cardElevation="3sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView35">
-
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:scaleType="fitXY"
-            android:src="@drawable/timeline_gradient" />
-
+        app:layout_constraintTop_toBottomOf="@+id/absent_userFine">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
-            android:layout_marginTop="22dp"
             android:letterSpacing="-0.03"
             android:lineSpacingExtra="6sp"
             android:textSize="15sp"
-            android:textStyle="bold"
-            android:text="스터디 벌금" />
+            android:text="스터디 벌금"
+            android:textColor="#0065ff"
+            android:fontFamily="@font/notosanscjkkr_bold"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="250dp"
-            android:layout_marginTop="22dp"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="25dp"
             android:lineSpacingExtra="3sp"
             android:text="15000 won"
             android:textSize="20sp"
-            android:textStyle="bold" />
-
-
-    </android.support.v7.widget.CardView>
+            android:textColor="#0065ff"
+            android:fontFamily="@font/sfcompactdisplay_medium"/>
+    </RelativeLayout>
 
     <TextView
         android:id="@+id/textView38"
@@ -115,10 +123,11 @@
         android:layout_marginTop="32dp"
         android:lineSpacingExtra="6sp"
         android:text="무단결석 벌금"
-        android:textColor="#070707"
+        android:textColor="#707070"
         android:textSize="15sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cardView3" />
+        app:layout_constraintTop_toBottomOf="@+id/relativelaout3"
+        android:fontFamily="@font/notosanscjkkr_medium"/>
 
     <TextView
         android:id="@+id/textView39"
@@ -127,11 +136,13 @@
         android:layout_marginTop="15dp"
         android:lineSpacingExtra="3sp"
         android:text="2회 경고"
-        android:background="@drawable/absentbox_check"
+        android:background="@drawable/blue_border_register"
+        android:textColor="#0065ff"
         android:padding="15dp"
         android:elevation="2dp"
         app:layout_constraintStart_toStartOf="@+id/textView38"
-        app:layout_constraintTop_toBottomOf="@+id/textView38" />
+        app:layout_constraintTop_toBottomOf="@+id/textView38"
+        android:fontFamily="@font/sfcompactdisplay_medium"/>
 
     <TextView
         android:id="@+id/textView40"
@@ -142,8 +153,10 @@
         android:background="@drawable/absentbox"
         android:padding="15dp"
         android:elevation="2dp"
+        android:textColor="#707070"
         app:layout_constraintStart_toStartOf="@+id/textView39"
-        app:layout_constraintTop_toBottomOf="@+id/textView39" />
+        app:layout_constraintTop_toBottomOf="@+id/textView39"
+        android:fontFamily="@font/sfcompactdisplay_medium"/>
 
     <TextView
         android:id="@+id/textView41"
@@ -153,10 +166,11 @@
         android:layout_marginLeft="20dp"
         android:layout_marginTop="30dp"
         android:text="스터디 벌금"
-        android:textColor="#070707"
+        android:textColor="#707070"
         android:textSize="12sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView40" />
+        app:layout_constraintTop_toBottomOf="@+id/textView40"
+        android:fontFamily="@font/notosanscjkkr_medium"/>
 
     <android.support.v7.widget.RecyclerView
         android:layout_width="0dp"

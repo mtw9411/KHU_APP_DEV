@@ -30,7 +30,8 @@
             android:textSize="13sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            android:fontFamily="@font/notosanscjkkr_bold"/>
 
         <RelativeLayout
             android:id="@+id/mypage_relativeEditProfile"
@@ -61,7 +62,8 @@
             android:textColor="#707070"
             android:textSize="15sp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView22" />
+            app:layout_constraintTop_toBottomOf="@+id/textView22"
+            android:fontFamily="@font/notosanscjkkr_medium"/>
 
         <TextView
             android:id="@+id/textView78"
@@ -72,7 +74,8 @@
             android:textColor="#707070"
             android:textSize="11sp"
             app:layout_constraintStart_toStartOf="@+id/mypage_myName"
-            app:layout_constraintTop_toBottomOf="@+id/mypage_myName" />
+            app:layout_constraintTop_toBottomOf="@+id/mypage_myName"
+            android:fontFamily="@font/notosanscjkkr_light"/>
     </android.support.constraint.ConstraintLayout>
 
     <View
@@ -114,7 +117,8 @@
                 android:layout_centerHorizontal="true"
                 android:text="일정관리"
                 android:textColor="#70222222"
-                android:textSize="11sp" />
+                android:textSize="11sp"
+                android:fontFamily="@font/notosanscjkkr_demilight"/>
 
             <TextView
                 android:id="@+id/textView81"
@@ -122,7 +126,7 @@
                 android:layout_height="wrap_content"
                 android:layout_above="@+id/iconText1"
                 android:layout_marginLeft="95dp"
-                android:layout_marginBottom="4dp"
+                android:layout_marginBottom="1dp"
                 android:text="+1"
                 android:textColor="#5b6eff"
                 android:textSize="11sp"
@@ -151,7 +155,8 @@
                 android:layout_centerHorizontal="true"
                 android:text="저장소식"
                 android:textColor="#70222222"
-                android:textSize="11sp" />
+                android:textSize="11sp"
+                android:fontFamily="@font/notosanscjkkr_demilight"/>
 
             <TextView
                 android:id="@+id/textView82"
@@ -159,7 +164,7 @@
                 android:layout_height="wrap_content"
                 android:layout_above="@+id/iconText2"
                 android:layout_marginLeft="97dp"
-                android:layout_marginBottom="13dp"
+                android:layout_marginBottom="9dp"
                 android:text="+2"
                 android:textColor="#70222222"
                 android:textSize="11sp"
@@ -171,13 +176,15 @@
         android:id="@+id/mypage_Logout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
         android:layout_marginRight="20dp"
-        android:text="Logout"
-        android:textSize="11sp"
-        android:textColor="#707070"
+        android:fontFamily="@font/notosanscjkkr_medium"
         android:lineSpacingExtra="9sp"
+        android:text="Logout"
+        android:textColor="#707070"
+        android:textSize="11sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/myPageLinearLayout" />
+        app:layout_constraintTop_toTopOf="@+id/editProfile_constraintLayout" />
 
     <FrameLayout
         android:id="@+id/main_frame"
@@ -187,7 +194,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/mypage_Logout">
+        app:layout_constraintTop_toBottomOf="@+id/myPageLinearLayout">
 
     </FrameLayout>
 

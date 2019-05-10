@@ -6,7 +6,8 @@
 <android.support.constraint.ConstraintLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="188.3dp">
+    android:paddingBottom="188.3dp"
+    android:background="#f4f7fc">
 
     <TextView
         android:id="@+id/writing_title"
@@ -14,12 +15,14 @@
         android:layout_height="52dp"
         android:gravity="center"
         android:lineSpacingExtra="6sp"
-        android:text="스터디"
+        android:text="SESSION 검색"
         android:textColor="#222222"
         android:textSize="13sp"
+        android:background="#ffffff"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:fontFamily="@font/notosanscjkkr_bold"/>
 
     <LinearLayout
         android:id="@+id/linearLayout3"
@@ -35,9 +38,10 @@
             android:layout_marginLeft="22dp"
             android:layout_marginTop="25.5dp"
             android:lineSpacingExtra="7.5sp"
-            android:text="스터디세션 검색"
+            android:text="검색"
             android:textColor="#ffffff"
-            android:textSize="16sp" />
+            android:textSize="16sp"
+            android:fontFamily="@font/notosanscjkkr_bold"/>
 
         <RelativeLayout
             android:layout_width="wrap_content"
@@ -49,11 +53,14 @@
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="35.5dp"
+                android:paddingLeft="41.5dp"
                 android:background="@drawable/white_back"
                 android:textSize="14sp"
-                android:textColor="#707070"
+                android:textColor="#b9b9b9"
+                android:hint="1달 스터디"
                 android:letterSpacing="-0.03"
-                android:lineSpacingExtra="6.5sp"/>
+                android:lineSpacingExtra="6.5sp"
+                android:fontFamily="@font/notosanscjkkr_medium"/>
 
             <ImageView
                 android:id="@+id/imageView21"
@@ -63,31 +70,33 @@
         </RelativeLayout>
     </LinearLayout>
 
-    <TextView
-        android:id="@+id/textView62"
-        android:layout_width="wrap_content"
+    <RelativeLayout
+        android:id="@+id/studySearch_relativelayout"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="35dp"
-        android:textSize="13sp"
-        android:textColor="#707070"
-        android:lineSpacingExtra="6sp"
-        android:text="지영"
+        android:layout_marginTop="5dp"
+        android:background="#ffffff"
+        android:elevation="6dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout3" />
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout3">
+        <TextView
+            android:id="@+id/texView63"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="26dp"
+            android:textSize="16sp"
+            android:textColor="#222222"
+            android:lineSpacingExtra="7.5sp"
+            android:text="스터디세션"
+            android:fontFamily="@font/notosanscjkkr_bold"/>
 
-    <TextView
-        android:id="@+id/textView66"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="35dp"
-        android:textSize="13sp"
-        android:textColor="#707070"
-        android:lineSpacingExtra="6sp"
-        android:text="님을 위한 스터디 매칭"
-        app:layout_constraintStart_toEndOf="@+id/textView62"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout3" />
+        <android.support.v7.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:layout_marginTop="15dp"
+            android:layout_below="@+id/texView63"/>
+    </RelativeLayout>
 
     <android.support.v7.widget.RecyclerView
         android:layout_width="match_parent"
@@ -99,7 +108,7 @@
         android:layout_marginRight="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView62" />
+        app:layout_constraintTop_toBottomOf="@+id/studySearch_relativelayout" />
 
 </android.support.constraint.ConstraintLayout>
 </ScrollView>

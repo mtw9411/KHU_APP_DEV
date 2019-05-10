@@ -1,26 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="horizontal"
+    android:weightSum="1"
+    android:paddingTop="5dp"
+    android:paddingHorizontal="3dp">
 
     <TextView
         android:id="@+id/textView83"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:layout_marginRight="36.5dp"
+        android:textColor="#4c81f8"
+        android:text="02.26"
+        android:textSize="14sp"
+        android:lineSpacingExtra="16sp"
+        android:fontFamily="@font/notosanscjkkr_regular"/>
+
+    <TextView
+        android:id="@+id/textView88"
         android:layout_width="0dp"
         android:layout_height="30dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginTop="33dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
-        android:background="@drawable/study_gradient2"
-        android:gravity="fill_vertical"
-        android:paddingLeft="20sp"
+        android:layout_weight="1"
+        android:background="@drawable/text_roundshape"
+        android:gravity="center"
         android:textColor="#ffffff"
-        android:text="2.26               공기업 스터디"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-</android.support.constraint.ConstraintLayout>
+        android:text="09:00 공기업 스터디"
+        android:fontFamily="@font/notosanscjkkr_medium"/>
+</LinearLayout>

@@ -17,7 +17,8 @@
             android:textSize="13sp"
             android:textColor="#707070"
             android:lineSpacingExtra="2.5sp"
-            android:text="SESSION 게시" />
+            android:text="SESSION 게시"
+            android:fontFamily="@font/notosanscjkkr_bold"/>
 
         <ImageView
             android:id="@+id/imageView13"
@@ -56,6 +57,7 @@
                     android:lineSpacingExtra="2.5sp"
                     android:text="SESSION 글쓰기"
                     android:layout_centerVertical="true"
+                    android:fontFamily="@font/notosanscjkkr_bold"
                     />
                 <ImageView
                     android:id="@+id/timelinePost_writeImg"
@@ -98,7 +100,8 @@
                             android:maxWidth="300dp"
                             android:textColorHint="#4D222222"
                             android:textColor="#707070"
-                            android:textSize="12sp" />
+                            android:textSize="12sp"
+                            android:fontFamily="@font/notosanscjkkr_regular"/>
                         <ImageView
                             android:id="@+id/timelinePost_img"
                             android:layout_width="40dp"
@@ -135,6 +138,7 @@
                     android:lineSpacingExtra="2.5sp"
                     android:text="SESSION 투표"
                     android:layout_centerVertical="true"
+                    android:fontFamily="@font/notosanscjkkr_bold"
                     />
                 <ImageView
                     android:id="@+id/timelinePost_voteImg"
@@ -270,5 +274,6 @@
         android:text="완료"
         android:gravity="center"
         android:elevation="11dp"
-        android:background="#ffffff"/>
+        android:background="#ffffff"
+        android:fontFamily="@font/notosanscjkkr_regular"/>
 </LinearLayout>

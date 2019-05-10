@@ -25,6 +25,7 @@
         android:lineSpacingExtra="5sp"
         android:text="스터디 추가"
         android:textColor="#ffffff"
-        android:textSize="10.5sp" />
+        android:textSize="10.5sp"
+        android:fontFamily="@font/notosanscjkkr_medium"/>
 
 </RelativeLayout>

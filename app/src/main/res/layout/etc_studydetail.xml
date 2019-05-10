@@ -8,20 +8,17 @@
     tools:context=".StudydetailActivity">
 
     <TextView
-        android:layout_width="0dp"
+        android:layout_width="327dp"
         android:layout_height="17dp"
-        android:layout_marginEnd="40dp"
-        android:layout_marginRight="40dp"
+        android:fontFamily="@font/notosanscjkkr_bold"
         android:gravity="center"
         android:lineSpacingExtra="6sp"
         android:text="STUDY 상세"
         android:textColor="#222222"
         android:textSize="13sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@+id/imageView3"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/imageView3"
-        app:layout_constraintTop_toTopOf="@+id/imageView3" />
+        tools:layout_editor_absoluteX="44dp"
+        tools:layout_editor_absoluteY="18dp" />
 
     <ImageView
         android:id="@+id/imageView3"
@@ -43,10 +40,11 @@
         android:layout_marginLeft="5dp"
         android:layout_marginTop="50dp"
         android:lineSpacingExtra="3dp"
-        android:textColor="#222222"
+        android:textColor="#E6707070"
         android:textSize="12sp"
         app:layout_constraintStart_toStartOf="@+id/imageView3"
-        app:layout_constraintTop_toBottomOf="@+id/imageView3" />
+        app:layout_constraintTop_toBottomOf="@+id/imageView3"
+        android:fontFamily="@font/notosanscjkkr_regular"/>
 
     <TextView
         android:id="@+id/textView17"
@@ -55,24 +53,26 @@
         android:layout_marginTop="4dp"
         android:lineSpacingExtra="7dp"
         android:text="공기업 스터디"
-        android:textColor="#222222"
+        android:textColor="#E6222222"
         android:textSize="16sp"
-        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="@+id/textView14"
-        app:layout_constraintTop_toBottomOf="@+id/textView14" />
+        app:layout_constraintTop_toBottomOf="@+id/textView14"
+        android:fontFamily="@font/notosanscjkkr_bold"/>
 
     <TextView
-        android:id="@+id/textView18"
+        android:id="@+id/studyDetail_member"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="12dp"
         android:layout_marginLeft="12dp"
         android:layout_marginTop="1dp"
-        android:textColor="#222222"
+        android:textColor="#E6222222"
         android:textSize="13sp"
+        android:text="0/6"
         app:layout_constraintBottom_toBottomOf="@+id/textView17"
         app:layout_constraintStart_toEndOf="@+id/textView17"
-        app:layout_constraintTop_toTopOf="@+id/textView17" />
+        app:layout_constraintTop_toTopOf="@+id/textView17"
+        android:fontFamily="@font/sfcompactdisplay_medium"/>
 
     <TextView
         android:id="@+id/studyDetail_region"
@@ -83,7 +83,8 @@
         android:textColor="#2f78db"
         android:textSize="11sp"
         app:layout_constraintStart_toStartOf="@+id/textView17"
-        app:layout_constraintTop_toBottomOf="@+id/textView17" />
+        app:layout_constraintTop_toBottomOf="@+id/textView17"
+        android:fontFamily="@font/notosanscjkkr_medium"/>
 
     <TextView
         android:id="@+id/textView20"
@@ -96,7 +97,8 @@
         android:textSize="11sp"
         app:layout_constraintBottom_toBottomOf="@+id/studyDetail_region"
         app:layout_constraintStart_toEndOf="@+id/studyDetail_region"
-        app:layout_constraintTop_toTopOf="@+id/studyDetail_region" />
+        app:layout_constraintTop_toTopOf="@+id/studyDetail_region"
+        android:fontFamily="@font/notosanscjkkr_medium"/>
 
     <TextView
         android:id="@+id/studyDetail_age"
@@ -109,7 +111,8 @@
         android:textSize="11sp"
         app:layout_constraintBottom_toBottomOf="@+id/textView20"
         app:layout_constraintStart_toEndOf="@+id/textView20"
-        app:layout_constraintTop_toTopOf="@+id/textView20" />
+        app:layout_constraintTop_toTopOf="@+id/textView20"
+        android:fontFamily="@font/notosanscjkkr_medium"/>
 
     <TextView
         android:id="@+id/textView22"
@@ -122,7 +125,8 @@
         android:textSize="11sp"
         app:layout_constraintBottom_toBottomOf="@+id/studyDetail_age"
         app:layout_constraintStart_toEndOf="@+id/studyDetail_age"
-        app:layout_constraintTop_toTopOf="@+id/studyDetail_age" />
+        app:layout_constraintTop_toTopOf="@+id/studyDetail_age"
+        android:fontFamily="@font/notosanscjkkr_medium"/>
 
     <TextView
         android:id="@+id/studyDetail_gender"
@@ -134,7 +138,8 @@
         android:textColor="#2f78db"
         android:textSize="11sp"
         app:layout_constraintStart_toEndOf="@+id/textView22"
-        app:layout_constraintTop_toTopOf="@+id/textView22" />
+        app:layout_constraintTop_toTopOf="@+id/textView22"
+        android:fontFamily="@font/notosanscjkkr_medium"/>
 
     <TextView
         android:id="@+id/textView24"
@@ -175,11 +180,12 @@
                 android:layout_marginTop="15dp"
                 android:lineSpacingExtra="6.5sp"
                 android:text="스터디 소개"
-                android:textColor="#222222"
+                android:textColor="#E6222222"
                 android:textSize="14sp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                android:fontFamily="@font/notosanscjkkr_bold"/>
 
             <ImageView
                 android:id="@+id/back_btn"
@@ -187,6 +193,7 @@
                 android:layout_height="20dp"
                 android:layout_marginStart="20dp"
                 android:layout_marginLeft="20dp"
+                android:layout_marginTop="3dp"
                 app:layout_constraintBottom_toBottomOf="@+id/textView31"
                 app:layout_constraintStart_toEndOf="@+id/textView31"
                 app:layout_constraintTop_toTopOf="@+id/textView31"
@@ -199,11 +206,12 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginLeft="8dp"
                 android:lineSpacingExtra="2.5sp"
-                android:textColor="#2f78db"
+                android:textColor="#E62f78db"
                 android:textSize="12.5sp"
                 app:layout_constraintBottom_toBottomOf="@+id/back_btn"
                 app:layout_constraintStart_toEndOf="@+id/back_btn"
-                app:layout_constraintTop_toTopOf="@+id/back_btn" />
+                app:layout_constraintTop_toTopOf="@+id/back_btn"
+                android:fontFamily="@font/sfcompactdisplay_medium"/>
 
             <TextView
                 android:id="@+id/textView95"
@@ -211,10 +219,10 @@
                 android:layout_height="13dp"
                 android:layout_marginStart="25dp"
                 android:layout_marginLeft="25dp"
-                android:layout_marginTop="24dp"
+                android:layout_marginTop="6dp"
                 android:background="#2f78db"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView31" />
+                app:layout_constraintTop_toTopOf="@+id/studyDetail_contentTitle" />
 
             <TextView
                 android:id="@+id/studyDetail_contentTitle"
@@ -229,7 +237,8 @@
                 android:textColor="#707070"
                 android:textSize="12sp"
                 app:layout_constraintStart_toEndOf="@+id/textView95"
-                app:layout_constraintTop_toBottomOf="@+id/textView31" />
+                app:layout_constraintTop_toBottomOf="@+id/textView31"
+                android:fontFamily="@font/notosanscjkkr_bold"/>
 
             <TextView
                 android:id="@+id/textView33"
@@ -249,7 +258,8 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/studyDetail_contentTitle" />
+                app:layout_constraintTop_toBottomOf="@+id/studyDetail_contentTitle"
+                android:fontFamily="@font/notosanscjkkr_regular"/>
         </android.support.constraint.ConstraintLayout>
     </ScrollView>
 
@@ -277,10 +287,11 @@
         android:layout_marginBottom="15dp"
         android:lineSpacingExtra="6.5sp"
         android:text="스터디 성향 분석"
-        android:textColor="#222222"
+        android:textColor="#E6222222"
         android:textSize="14sp"
         app:layout_constraintBottom_toTopOf="@+id/textView27"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        android:fontFamily="@font/notosanscjkkr_medium"/>
 
     <TextView
         android:id="@+id/textView27"
@@ -297,7 +308,8 @@
         android:textColor="#2f78db"
         android:textSize="11.5sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        android:fontFamily="@font/notosanscjkkr_medium"/>
 
     <TextView
         android:id="@+id/textView28"
@@ -314,7 +326,8 @@
         android:textSize="11.5sp"
         app:layout_constraintBottom_toBottomOf="@+id/textView27"
         app:layout_constraintStart_toEndOf="@+id/textView27"
-        app:layout_constraintTop_toTopOf="@+id/textView27" />
+        app:layout_constraintTop_toTopOf="@+id/textView27"
+        android:fontFamily="@font/notosanscjkkr_medium"/>
 
     <TextView
         android:id="@+id/textView29"
@@ -331,7 +344,8 @@
         android:textSize="11.5sp"
         app:layout_constraintBottom_toBottomOf="@+id/textView28"
         app:layout_constraintStart_toEndOf="@+id/textView28"
-        app:layout_constraintTop_toTopOf="@+id/textView28" />
+        app:layout_constraintTop_toTopOf="@+id/textView28"
+        android:fontFamily="@font/notosanscjkkr_medium"/>
 
     <TextView
         android:id="@+id/textView30"
@@ -348,7 +362,8 @@
         android:textSize="11.5sp"
         app:layout_constraintBottom_toBottomOf="@+id/textView29"
         app:layout_constraintStart_toEndOf="@+id/textView29"
-        app:layout_constraintTop_toTopOf="@+id/textView29" />
+        app:layout_constraintTop_toTopOf="@+id/textView29"
+        android:fontFamily="@font/notosanscjkkr_medium"/>
 
 
 </android.support.constraint.ConstraintLayout>

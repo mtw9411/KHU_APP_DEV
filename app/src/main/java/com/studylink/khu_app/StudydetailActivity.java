@@ -29,7 +29,7 @@ public class StudydetailActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.etc_studydetail);
 
-        total_member = findViewById(R.id.textView18);
+        total_member = findViewById(R.id.studyDetail_member);
         studyDetail_contentTitle = findViewById(R.id.studyDetail_contentTitle);
         content = findViewById(R.id.textView33);
         Fine = findViewById(R.id.textView32);

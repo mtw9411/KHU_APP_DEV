@@ -78,6 +78,8 @@ public class MainActivity extends Fragment {
         recyclerView_deadline = view.findViewById(R.id.recyclerView_deadline);
         recyclerView_newStudy = view.findViewById(R.id.recyclerView_newStudy);
 
+        // 폰트 지정
+
         fm = getFragmentManager();
         ft = fm.beginTransaction();
 
