@@ -112,7 +112,7 @@ public class AdapterMyStudy extends RecyclerView.Adapter<RecyclerView.ViewHolder
             // 이미지 설정
             if(room.getimageName() != null) {
                 String fileName = room.getimageName();
-                storageRef.child(room.getRoomName() + fileName).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                storageRef.child("roomImages/" + fileName).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                     @Override
                     public void onSuccess(Uri uri) {
                         ((MyViewHolder)holder).imageView_myStudy.setImageURI(uri);

@@ -27,15 +27,19 @@ import com.google.firebase.storage.UploadTask;
 import java.io.IOException;
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
 
 
 public class MakeStudyFinActivity extends AppCompatActivity {
 
     private ImageView changeBackImg,showBackImg;
     private TextView makeStudyFin,studyContent1, studyContent2;
-    private DatabaseReference databaseRoom;
+    private DatabaseReference databaseRoom, databaseUser;
     private Uri filePath;
+    private AccountDTO currentUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +53,7 @@ public class MakeStudyFinActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         final RoomDTO room = (RoomDTO) intent.getExtras().getSerializable("room");
+        currentUser = (AccountDTO)getIntent().getExtras().getSerializable("currentUser");
 
         changeBackImg.setClickable(true);
         changeBackImg.setOnClickListener(new View.OnClickListener() {
@@ -67,7 +72,8 @@ public class MakeStudyFinActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 uploadFile(room);
-                Intent intent = new Intent(MakeStudyFinActivity.this, temp_SearchroomActivity.class);
+                Intent intent = new Intent(MakeStudyFinActivity.this, Fragement_navi.class);
+                intent.putExtra("frag_num",0);
                 startActivity(intent);
             }
         });
@@ -92,6 +98,7 @@ public class MakeStudyFinActivity extends AppCompatActivity {
 
     //데이터 업로드
     private void uploadFile(RoomDTO room) {
+        databaseUser=FirebaseDatabase.getInstance().getReference("users");
         databaseRoom= FirebaseDatabase.getInstance().getReference("room");
         final RoomDTO roomFin = room;
 
@@ -124,9 +131,9 @@ public class MakeStudyFinActivity extends AppCompatActivity {
             //Unique한 파일명을 만들자.
             SimpleDateFormat formatter = new SimpleDateFormat("yyyyMMdd_HH:mm:ss");
             Date now = new Date();
-            String filename = formatter.format(now) + ".jpeg";
+            String filename = roomFin.getRoomName() + formatter.format(now) + ".jpeg";
             //storage 주소와 폴더 파일명을 지정해 준다.
-            StorageReference storageRef = storage.getReferenceFromUrl("gs://studylink-ec173.appspot.com").child("images/" + roomFin.getRoomName() + filename);
+            StorageReference storageRef = storage.getReferenceFromUrl("gs://studylink-ec173.appspot.com").child("images/roomImages/" + filename);
             storageRef.putFile(filePath)
                     //성공시
                     .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
@@ -156,6 +163,24 @@ public class MakeStudyFinActivity extends AppCompatActivity {
             roomFin.setimageName(filename);
         }
 
+        // 방에 현재 유저 추가
+        List<AccountDTO> roomMemberList = new ArrayList<>();
+        roomMemberList.add(currentUser);
+        roomFin.setMemberList(roomMemberList);
+
+        // 현재 유저에 방 추가
+        List<String> roomList;
+        if(currentUser.getRoomId()!=null){
+            roomList = currentUser.getRoomId();
+        }
+        else{
+            roomList = new ArrayList<>();
+        }
+        roomList.add(roomFin.getId());
+        currentUser.setRoomId(roomList);
+
+        // DB 업데이트
+        databaseUser.child(currentUser.getUid()).setValue(currentUser);
         databaseRoom.child(room.getId()).setValue(roomFin);
     }
 

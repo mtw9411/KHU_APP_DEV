@@ -10,6 +10,7 @@ import java.util.List;
 
 public class RoomUploadDTO implements Serializable {
 
+    private String roomId;
     private String writing_content;
     private String uploaderId;
     private String uploaderImg;
@@ -19,6 +20,18 @@ public class RoomUploadDTO implements Serializable {
     private Date time;
     private String category;
     private String textType;
+    private List<VoteDTO> voteList;
+    private Date voteDeadline;
+    private boolean duplicate;
+
+
+    public String getRoomId() {
+        return roomId;
+    }
+
+    public void setRoomId(String roomId) {
+        this.roomId = roomId;
+    }
 
     public String getWriting_content() {
         return writing_content;
@@ -90,5 +103,29 @@ public class RoomUploadDTO implements Serializable {
 
     public void setTextType(String textType) {
         this.textType = textType;
+    }
+
+    public List<VoteDTO> getVoteList() {
+        return voteList;
+    }
+
+    public void setVoteList(List<VoteDTO> voteList) {
+        this.voteList = voteList;
+    }
+
+    public Date getVoteDeadline() {
+        return voteDeadline;
+    }
+
+    public void setVoteDeadline(Date voteDeadline) {
+        this.voteDeadline = voteDeadline;
+    }
+
+    public boolean isDuplicate() {
+        return duplicate;
+    }
+
+    public void setDuplicate(boolean duplicate) {
+        this.duplicate = duplicate;
     }
 }

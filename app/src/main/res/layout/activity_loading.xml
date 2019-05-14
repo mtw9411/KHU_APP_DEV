@@ -16,11 +16,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_below="@+id/LOGO"
         android:textSize="11sp"
         android:textColor="#b1b1b1"
         android:lineSpacingExtra="2.5sp"
         android:text="STUDY SESSION"
+        android:layout_below="@+id/LOGO"
         android:fontFamily="@font/notosanscjkkr_light"
         />
 </RelativeLayout>

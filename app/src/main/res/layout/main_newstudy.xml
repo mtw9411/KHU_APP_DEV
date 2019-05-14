@@ -16,18 +16,18 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="3dp">
 
             <TextView
                 android:id="@+id/newStudy_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10.5dp"
-                android:layout_marginTop="6.8dp"
+                android:layout_marginTop="2dp"
                 android:textSize="14sp"
                 android:textColor="#222222"
                 android:letterSpacing="-0.03"
-                android:lineSpacingExtra="6.5sp"
                 android:text="4월 대기업 인정성"
                 android:fontFamily="@font/notosanscjkkr_medium"
                 />
@@ -37,11 +37,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="8.5dp"
-                android:layout_marginTop="8.8dp"
+                android:layout_marginTop="5dp"
                 android:textSize="11sp"
                 android:textColor="#222222"
                 android:letterSpacing="-0.03"
-                android:lineSpacingExtra="5.5sp"
                 android:text="방금"
                 android:layout_toRightOf="@+id/newStudy_title"
                 android:fontFamily="@font/notosanscjkkr_light"
@@ -57,7 +56,6 @@
                 android:textSize="10.5sp"
                 android:textColor="#b9b9b9"
                 android:letterSpacing="-0.03"
-                android:lineSpacingExtra="5sp"
                 android:text="자세히 보기"
                 android:fontFamily="@font/notosanscjkkr_regular"
                 />
@@ -66,14 +64,12 @@
                 android:id="@+id/newStudy_region"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/newStudy_title"
-                android:layout_marginTop="1.5dp"
+                android:layout_marginTop="27dp"
                 android:layout_marginLeft="10.5dp"
-                android:layout_marginBottom="7dp"
+                android:layout_marginBottom="4dp"
                 android:textSize="11sp"
                 android:textColor="#b9b9b9"
                 android:letterSpacing="-0.03"
-                android:lineSpacingExtra="5.5sp"
                 android:text="수원시 영통동"
                 android:fontFamily="@font/notosanscjkkr_regular"
                 />

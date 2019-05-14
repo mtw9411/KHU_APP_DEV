@@ -25,6 +25,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class AlarmActivity extends Fragment {
 
@@ -33,8 +34,7 @@ public class AlarmActivity extends Fragment {
     private AdapterAlarm alarm_Adapter;
     private DatabaseReference databaseReference;
     private AccountDTO currentUser;
-    private RoomUploadDTO roomUploadDTO;
-    private String RoomId;
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -51,28 +51,7 @@ public class AlarmActivity extends Fragment {
 
         arrayList_alarm.clear();
 
-        // 현재 유저
-        String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
-        databaseReference.child("users").child(uid).addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                currentUser = dataSnapshot.getValue(AccountDTO.class);
-                // 현재 유저 이름
-                alarm_Adapter.setUser(currentUser.getUsername());
-                if(currentUser.getRoomId()!=null){
-//                    for(int i=0; i<currentUser.getRoomId().size(); i++){
-                        // 유저가 참여한 방 id - 수정해야함###########################################################################3
-                    RoomId = currentUser.getRoomId().get(0);
-                    setData();
-//                    }
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
+        currentUser = ((Fragement_navi)getActivity()).currentUser;
 
 // "알림창" RecyclerView 구현
         // 레이아웃 종류 정의
@@ -82,7 +61,7 @@ public class AlarmActivity extends Fragment {
         recycler_alarm.setLayoutManager(layoutManager);
 
         // 어댑터 연결
-        alarm_Adapter = new AdapterAlarm(arrayList_alarm, new View.OnClickListener() {
+        alarm_Adapter = new AdapterAlarm(arrayList_alarm, currentUser, new View.OnClickListener() {
             @Override
             // "알림창" 클릭 이벤트
             public void onClick(View v) {
@@ -91,7 +70,6 @@ public class AlarmActivity extends Fragment {
                     int position = (int) obj;
                     Fragment fragment = new TimelineActivity();
                     Bundle bundle = new Bundle();
-
                     bundle.putInt("myRoomNum", position);
                     fragment.setArguments(bundle);
 
@@ -101,26 +79,15 @@ public class AlarmActivity extends Fragment {
         });
         recycler_alarm.setAdapter(alarm_Adapter);
 
+        // 알람이 있으면
+        if(currentUser.getMyAlarm() != null){
+            List<RoomUploadDTO> alarmList = currentUser.getMyAlarm();
+            for(int i=0; i<alarmList.size(); i++){
+                alarm_Adapter.addRoom(alarmList.get(i));
+            }
+        }
+
         return view;
 
-    }
-
-    public void setData(){
-        // 내가 참여한 스터디방과 같은 방
-        databaseReference.child("RoomUpload").child(RoomId).addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                // 글 하나하나
-                for(DataSnapshot snapshot : dataSnapshot.getChildren()){
-                    roomUploadDTO = snapshot.getValue(RoomUploadDTO.class);
-                    alarm_Adapter.addRoom(roomUploadDTO);
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
     }
 }

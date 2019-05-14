@@ -214,7 +214,7 @@ public class Mypage_main extends Fragment{
                 public void onSuccess(Uri uri) {
                     mypage_editProfile.setImageURI(uri);
                     Glide.with(getActivity()).load(uri.toString()).apply(RequestOptions.circleCropTransform())
-                            .override(50,50).into(mypage_editProfile);
+                            .override(60,60).into(mypage_editProfile);
                 }
             });
         }

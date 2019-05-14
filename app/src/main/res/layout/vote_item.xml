@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingVertical="5dp"
+    android:paddingLeft="20dp"
+    android:background="#38e4e4e4"
+    android:layout_marginTop="2dp">
+    <TextView
+        android:id="@+id/voteItem_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:textSize="12sp"
+        android:textColor="#707070"
+        android:letterSpacing="-0.03"
+        android:text="해커스 토익"
+        android:fontFamily="@font/notosanscjkkr_regular"
+        />
+    <TextView
+        android:id="@+id/voteItem_num"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="25dp"
+        android:textSize="12sp"
+        android:textColor="#707070"
+        android:text="0"
+        android:fontFamily="@font/notosanscjkkr_medium"
+        />
+</RelativeLayout>

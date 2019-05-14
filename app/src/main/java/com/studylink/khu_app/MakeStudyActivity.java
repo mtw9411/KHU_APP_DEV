@@ -28,11 +28,11 @@ import java.util.List;
 public class MakeStudyActivity extends AppCompatActivity {
 
     EditText editTextName, editAge, editGender, editFine, editTotalmember;
-    public FirebaseAuth auth;
     public boolean check1 = false;
     public boolean check2 = false;
     public boolean check3 = false;
     public boolean check4 = false;
+    private AccountDTO currentUser;
     DatabaseReference databaseRoom;
     public List<String> dispoRoom = new ArrayList<>();
     TextView textRegion, btn1, btn2, btn3, btn4, btn5, btn6, btn7, btn8, next;
@@ -48,8 +48,10 @@ public class MakeStudyActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_makestudy);
 
-       final Spinner s1 = (Spinner)findViewById(R.id.spinner1);
-       final Spinner s2 =(Spinner)findViewById(R.id.spinner2);
+        final Spinner s1 = (Spinner)findViewById(R.id.spinner1);
+        final Spinner s2 =(Spinner)findViewById(R.id.spinner2);
+
+        currentUser = (AccountDTO)getIntent().getExtras().getSerializable("currentUser");
 
         editTextName = findViewById(R.id.roomName);
         editAge = findViewById(R.id.editAge);
@@ -289,6 +291,7 @@ public class MakeStudyActivity extends AppCompatActivity {
                     //다음 화면에 roomDTO 객체 전달
                     Intent intent = new Intent(MakeStudyActivity.this, MakeStudyFinActivity.class);
                     intent.putExtra("room", roomDTO);
+                    intent.putExtra("currentUser", currentUser);
                     startActivity(intent);
                 } else {
                     Toast.makeText(this, "최대 정원은 20명입니다.", Toast.LENGTH_SHORT).show();

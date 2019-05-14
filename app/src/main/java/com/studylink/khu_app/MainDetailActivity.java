@@ -62,7 +62,7 @@ public class MainDetailActivity extends AppCompatActivity {
         Detail_region.setText(roomDTO.getRegion());
         Detail_age.setText(roomDTO.getAge());
         Detail_gender.setText(roomDTO.getGender());
-        Detail_fine.setText(roomDTO.getFine().toString() + "won");
+        Detail_fine.setText(roomDTO.getFine().toString() + " won");
         Detail_content1.setText(roomDTO.getContent1());
         Detail_content2.setText(roomDTO.getContent2());
         Detail_roomdipo1.setText(roomDTO.getRoomdisposition().get(0));
@@ -83,7 +83,6 @@ public class MainDetailActivity extends AppCompatActivity {
                         AccountDTO currentUser = dataSnapshot.getValue(AccountDTO.class);
                         // 참여한 스터디가 1개라도 있으면
                         if(currentUser.getRoomId() != null){
-                            Log.d("##############3", "???");
                             // 가입한 스터디방이 3개이면
                             if (currentUser.getRoomId().size() == 3){
                                 Toast.makeText(MainDetailActivity.this, "3개 이상의 스터디를 가입할 수 없습니다.", Toast.LENGTH_SHORT).show();
@@ -102,7 +101,14 @@ public class MainDetailActivity extends AppCompatActivity {
                                 if(check){
                                     currentUser.getRoomId().add(roomDTO.getId());
                                     dr.setValue(currentUser);
+                                    // 멤버수 + 1
                                     roomDTO.setMember(roomDTO.getMember()+1);
+                                    // 멤버 추가
+                                    List<AccountDTO> roomMemList = roomDTO.getMemberList();
+                                    roomMemList.add(currentUser);
+                                    roomDTO.setMemberList(roomMemList);
+
+                                    // 데이터 저장
                                     database.child("room").child(roomDTO.getId()).setValue(roomDTO);
 
                                     Intent intent = new Intent(MainDetailActivity.this, Fragement_navi.class);
@@ -121,7 +127,13 @@ public class MainDetailActivity extends AppCompatActivity {
                             roomList.add(roomDTO.getId());
                             currentUser.setRoomId(roomList);
                             dr.setValue(currentUser);
+                            // 멤버수 + 1
                             roomDTO.setMember(roomDTO.getMember()+1);
+                            // 멤버 추가
+                            List<AccountDTO> roomMemList = roomDTO.getMemberList();
+                            roomMemList.add(currentUser);
+                            roomDTO.setMemberList(roomMemList);
+                            // 데이터 저장
                             database.child("room").child(roomDTO.getId()).setValue(roomDTO);
 
                             Intent intent = new Intent(MainDetailActivity.this, Fragement_navi.class);

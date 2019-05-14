@@ -17,6 +17,7 @@ public class AccountDTO implements Serializable {
     public List<String> disposition;
     private List<String> roomId;
     private String profileImg;
+    private List<RoomUploadDTO> myAlarm;
 //    public String registcheck = "false";
 
     public String getUid() {
@@ -83,6 +84,13 @@ public class AccountDTO implements Serializable {
         this.profileImg = profileImg;
     }
 
+    public List<RoomUploadDTO> getMyAlarm() {
+        return myAlarm;
+    }
+
+    public void setMyAlarm(List<RoomUploadDTO> myAlarm) {
+        this.myAlarm = myAlarm;
+    }
 
     @Exclude
     public Map<String, Object> toMap() {

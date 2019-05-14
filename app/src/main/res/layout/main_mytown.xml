@@ -4,15 +4,16 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/linearLayout_myTown"
     android:layout_width="wrap_content"
-    android:layout_height="140dp">
+    android:layout_height="wrap_content">
 
     <android.support.v7.widget.CardView
         android:layout_width="110dp"
-        android:layout_height="133.7dp"
+        android:layout_height="wrap_content"
         app:cardCornerRadius="3.5dp"
         app:cardElevation="3dp"
         android:layout_marginLeft="3dp"
-        android:layout_marginRight="8.5dp">
+        android:layout_marginRight="8.5dp"
+        android:layout_marginBottom="5dp">
 
         <ImageView
             android:id="@+id/myTown_image"
@@ -25,12 +26,11 @@
             android:id="@+id/myTown_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="7dp"
-            android:layout_marginTop="86.8dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="80dp"
             android:textSize="14sp"
             android:textColor="#222222"
             android:letterSpacing="-0.03"
-            android:lineSpacingExtra="6.5sp"
             android:text="공기업 취준생"
             android:fontFamily="@font/notosanscjkkr_medium"/>
 
@@ -38,12 +38,12 @@
             android:id="@+id/myTown_region"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="7.5dp"
-            android:layout_marginTop="108.8dp"
+            android:layout_marginLeft="10.5dp"
+            android:layout_marginTop="105dp"
+            android:layout_marginBottom="3dp"
             android:textSize="11sp"
             android:textColor="#707070"
             android:letterSpacing="-0.03"
-            android:lineSpacingExtra="5.5sp"
             android:text="수원시 영통동"
             android:fontFamily="@font/notosanscjkkr_medium"/>
 

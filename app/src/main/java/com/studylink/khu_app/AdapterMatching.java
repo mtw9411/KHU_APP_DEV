@@ -98,7 +98,7 @@ public class AdapterMatching extends RecyclerView.Adapter<AdapterMatching.MyView
         // 이미지 설정
         if(room.getimageName() != null) {
             String fileName = room.getimageName();
-            storageRef.child(room.getRoomName()+ fileName).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+            storageRef.child("roomImages/" + fileName).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                 @Override
                 public void onSuccess(Uri uri) {
                     holder.imageView_matching.setImageURI(uri);

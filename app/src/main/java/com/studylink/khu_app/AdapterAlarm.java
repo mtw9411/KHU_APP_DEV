@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import java.text.ParseException;
@@ -19,10 +20,11 @@ public class AdapterAlarm extends RecyclerView.Adapter<AdapterAlarm.MyViewHolder
 
     private ArrayList<RoomUploadDTO> arrayList;
     private static View.OnClickListener onClickListener;
-    private String currentUser;
+    private AccountDTO currentUser;
 
-    public AdapterAlarm(ArrayList<RoomUploadDTO> items, View.OnClickListener onClick){
+    public AdapterAlarm(ArrayList<RoomUploadDTO> items, AccountDTO userName, View.OnClickListener onClick){
         arrayList = items;
+        currentUser = userName;
         onClickListener = onClick;
     }
 
@@ -30,7 +32,7 @@ public class AdapterAlarm extends RecyclerView.Adapter<AdapterAlarm.MyViewHolder
     public static class MyViewHolder extends RecyclerView.ViewHolder {
         public TextView alarm_title, alarm_content, alarm_time;
         public ImageView alarm_image;
-        public ConstraintLayout constraintLayout_alarm;
+        public RelativeLayout relativeLayout_alarm;
         public View root;
         public MyViewHolder(View v) {
             super(v);
@@ -39,11 +41,11 @@ public class AdapterAlarm extends RecyclerView.Adapter<AdapterAlarm.MyViewHolder
             alarm_content = v.findViewById(R.id.alarm_content);
             alarm_time = v.findViewById(R.id.alarm_time);
             alarm_image = v.findViewById(R.id.alarm_image);
-            constraintLayout_alarm = v.findViewById(R.id.constraintLayout_alarm);
+            relativeLayout_alarm = v.findViewById(R.id.relativeLayout_alarm);
 
-            constraintLayout_alarm.setClickable(true);
-            constraintLayout_alarm.setEnabled(true);
-            constraintLayout_alarm.setOnClickListener(onClickListener);
+            relativeLayout_alarm.setClickable(true);
+            relativeLayout_alarm.setEnabled(true);
+            relativeLayout_alarm.setOnClickListener(onClickListener);
         }
     }
 
@@ -64,10 +66,10 @@ public class AdapterAlarm extends RecyclerView.Adapter<AdapterAlarm.MyViewHolder
         // 텍스트 설정
         holder.alarm_title.setText("'" + room.getCategory() + "' 스터디 새로운 " + room.getTextType());
         if(room.getTextType().equals("소식")){
-            holder.alarm_content.setText(currentUser+"님, '"+room.getCategory()+"' 스터디에 새로운 글이 게시되었습니다. 지금 확인해 보세요!");
+            holder.alarm_content.setText(currentUser.getUsername()+"님, '"+room.getCategory()+"' 스터디에 새로운 글이 게시되었습니다. 지금 확인해 보세요!");
         }
         else{
-            holder.alarm_content.setText(currentUser+"님, '"+room.getCategory()+"' 스터디에 새로운 투표가 시작되었습니다. 지금 바로 투표해주세요!");
+            holder.alarm_content.setText(currentUser.getUsername()+"님, '"+room.getCategory()+"' 스터디에 새로운 투표가 시작되었습니다. 지금 바로 투표해주세요!");
         }
 
         // 이미지 설정
@@ -106,8 +108,13 @@ public class AdapterAlarm extends RecyclerView.Adapter<AdapterAlarm.MyViewHolder
         }
 
         // 태그 설정
-        holder.constraintLayout_alarm.setTag(0);
-
+        for(int i=0; i<currentUser.getRoomId().size(); i++){
+            // 누른 방과 같은 스터디 검색
+            if(room.getRoomId().equals(currentUser.getRoomId().get(i))){
+                holder.relativeLayout_alarm.setTag(i);
+                break;
+            }
+        }
     }
 
 
@@ -117,10 +124,7 @@ public class AdapterAlarm extends RecyclerView.Adapter<AdapterAlarm.MyViewHolder
     }
 
     public void addRoom(RoomUploadDTO room){
-        arrayList.add(0, room);
+        arrayList.add(room);
         notifyItemInserted(arrayList.size()-1);
-    }
-    public void setUser(String user){
-        currentUser = user;
     }
 }

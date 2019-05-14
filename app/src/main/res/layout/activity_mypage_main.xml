@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -24,7 +25,6 @@
             android:layout_width="0dp"
             android:layout_height="52dp"
             android:gravity="center"
-            android:lineSpacingExtra="6sp"
             android:text="MY ROOM"
             android:textColor="#222222"
             android:textSize="13sp"
@@ -37,17 +37,16 @@
             android:id="@+id/mypage_relativeEditProfile"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="24dp"
             android:layout_marginEnd="32dp"
             android:layout_marginRight="32dp"
-            app:layout_constraintBottom_toBottomOf="@+id/textView78"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/mypage_myName">
+            app:layout_constraintTop_toBottomOf="@+id/textView22">
 
             <ImageView
                 android:id="@+id/mypage_editProfile"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
                 android:src="@mipmap/icon_47" />
         </RelativeLayout>
 
@@ -69,13 +68,13 @@
             android:id="@+id/textView78"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="55dp"
+            android:fontFamily="@font/notosanscjkkr_light"
             android:text="일정을 추가하고 관리하세요."
             android:textColor="#707070"
             android:textSize="11sp"
             app:layout_constraintStart_toStartOf="@+id/mypage_myName"
-            app:layout_constraintTop_toBottomOf="@+id/mypage_myName"
-            android:fontFamily="@font/notosanscjkkr_light"/>
+            app:layout_constraintTop_toBottomOf="@+id/textView22" />
     </android.support.constraint.ConstraintLayout>
 
     <View
@@ -98,7 +97,7 @@
         <RelativeLayout
             android:id="@+id/mypage_schedule"
             android:layout_width="match_parent"
-            android:layout_height="70dp"
+            android:layout_height="wrap_content"
             android:layout_weight="0.5"
             android:background="@drawable/mypage_icon_after">
 
@@ -113,7 +112,7 @@
                 android:id="@+id/iconText1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
+                android:layout_marginTop="52dp"
                 android:layout_centerHorizontal="true"
                 android:text="일정관리"
                 android:textColor="#70222222"
@@ -124,9 +123,8 @@
                 android:id="@+id/textView81"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_above="@+id/iconText1"
+                android:layout_marginTop="35dp"
                 android:layout_marginLeft="95dp"
-                android:layout_marginBottom="1dp"
                 android:text="+1"
                 android:textColor="#5b6eff"
                 android:textSize="11sp"
@@ -136,7 +134,7 @@
         <RelativeLayout
             android:id="@+id/mypage_store"
             android:layout_width="match_parent"
-            android:layout_height="70dp"
+            android:layout_height="wrap_content"
             android:layout_weight="0.5"
             android:background="@drawable/mypage_icon_before">
 
@@ -151,7 +149,7 @@
                 android:id="@+id/iconText2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
+                android:layout_marginTop="52dp"
                 android:layout_centerHorizontal="true"
                 android:text="저장소식"
                 android:textColor="#70222222"
@@ -162,9 +160,8 @@
                 android:id="@+id/textView82"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_above="@+id/iconText2"
+                android:layout_marginTop="28dp"
                 android:layout_marginLeft="97dp"
-                android:layout_marginBottom="9dp"
                 android:text="+2"
                 android:textColor="#70222222"
                 android:textSize="11sp"
@@ -176,7 +173,7 @@
         android:id="@+id/mypage_Logout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="10dp"
         android:layout_marginRight="20dp"
         android:fontFamily="@font/notosanscjkkr_medium"
         android:lineSpacingExtra="9sp"

@@ -9,7 +9,7 @@
     <android.support.constraint.ConstraintLayout
         android:id="@+id/exitRoom"
         android:layout_width="88dp"
-        android:layout_height="31.5dp"
+        android:layout_height="38dp"
         android:layout_marginTop="8dp"
         android:layout_marginBottom="3dp"
         android:layout_marginRight="20.5dp"

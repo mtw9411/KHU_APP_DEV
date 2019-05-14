@@ -13,6 +13,8 @@ import android.support.annotation.Nullable;
 import android.support.constraint.ConstraintLayout;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.CardView;
@@ -55,6 +57,7 @@ import java.net.URI;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 
 public class TimelineActivity extends Fragment {
@@ -69,6 +72,7 @@ public class TimelineActivity extends Fragment {
     private StudynameRecyclerViewAdapter StudynameAdapter;
     private TimelineBoardViewAdapter timelineBoardViewAdapter;
     private PictureRecyclerViewAdapter pictureRecyclerViewAdapter;
+    private VoteRecyclerViewAdapter voteRecyclerViewAdapter;
     private FirebaseDatabase mdatabase;
     private DatabaseReference dataref;
     private StorageReference storageReference;
@@ -83,7 +87,7 @@ public class TimelineActivity extends Fragment {
     private String roomkey;
     private int selectedPosition = 0;
     private ViewGroup view;
-    private AccountDTO acc;
+    private AccountDTO currentUser;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -102,6 +106,18 @@ public class TimelineActivity extends Fragment {
         storage = FirebaseStorage.getInstance();
         storageReference = storage.getReferenceFromUrl("gs://studylink-ec173.appspot.com").child("images/");
 
+        dataref.child("users").child(currentUserId).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                currentUser = dataSnapshot.getValue(AccountDTO.class);
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+        //currentUser = ((Fragement_navi)getActivity()).currentUser;
+
         nameofroom.clear();
         getroomname.clear();
         uploadDTOArrayList.clear();
@@ -119,7 +135,7 @@ public class TimelineActivity extends Fragment {
                 if(nameofroom != null & selectedPosition != nameofroom.size()){             // "참여한 스터디가 없거나, 나가기 버튼을 누른 경우" 제외
                     intent.putExtra("currentRoom", nameofroom.get(selectedPosition));
                     intent.putExtra("selectedPosition", selectedPosition);
-                    intent.putExtra("currentUser", acc);
+                    intent.putExtra("currentUser", currentUser);
 
                     startActivity(intent);
 
@@ -143,10 +159,6 @@ public class TimelineActivity extends Fragment {
         StudynameAdapter = new StudynameRecyclerViewAdapter(nameofroom);
         recycler_studyname.setAdapter(StudynameAdapter);
 
-        setData();
-
-        StudynameAdapter.notifyDataSetChanged();
-
         // 초기 선택된 방 - 가장 최근에 참여한 스터디
         dataref.child("users").child(currentUserId).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -154,9 +166,8 @@ public class TimelineActivity extends Fragment {
                 AccountDTO acc = dataSnapshot.getValue(AccountDTO.class);
                 if(acc.getRoomId()!=null){
                     currentRoomuid = acc.getRoomId().get(selectedPosition);
+                    setData(acc);
                     setTimelineData();
-
-                    timelineBoardViewAdapter.notifyDataSetChanged();
                 }
             }
 
@@ -190,6 +201,7 @@ public class TimelineActivity extends Fragment {
         if(getArguments() != null){
             Bundle bundle = getArguments();
             selectedPosition = bundle.getInt("myRoomNum");
+            Log.d("######inArg", Integer.toString(selectedPosition));
 //            imageUri = bundle.getParcelableArrayList("ImageData");
 //            roomkey = bundle.getString("roomkey");
 //            write_title = bundle.getString("puttitle");
@@ -241,8 +253,15 @@ public class TimelineActivity extends Fragment {
 
 
 
-    private void setData(){
-        dataref.child("users").child(currentUserId).addListenerForSingleValueEvent(new ValueEventListener() {
+    private void setData(AccountDTO currentUser){
+        if(currentUser.getRoomId() != null){
+            List<String> myRoomList = currentUser.getRoomId();
+            for(int i = 0; i < myRoomList.size(); i++) {
+                String myRoom = myRoomList.get(i);
+                setData1(myRoom);
+            }
+        }
+        /*dataref.child("users").child(currentUserId).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 acc = dataSnapshot.getValue(AccountDTO.class);
@@ -257,11 +276,33 @@ public class TimelineActivity extends Fragment {
 
             }
         });
-        setData1();
+        setData1();*/
     }
 
-    private void setData1(){
-        dataref.child("room").addListenerForSingleValueEvent(new ValueEventListener() {
+    private void setData1(final String roomId){
+        dataref.child("room").child(roomId).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                RoomDTO myRoomDTO = dataSnapshot.getValue(RoomDTO.class);
+                nameofroom.add(myRoomDTO);
+                Log.d("############setData1", Integer.toString(nameofroom.size()));
+                Log.d("############roomname1", nameofroom.get(0).getRoomName());
+                if(nameofroom.size()>1){
+                    Log.d("############roomname2", nameofroom.get(1).getRoomName());
+                }
+                if(nameofroom.size()>2){
+                    Log.d("############roomname3", nameofroom.get(2).getRoomName());
+                }
+                StudynameAdapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+        /*dataref.child("room").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 int j = 0;
@@ -284,7 +325,7 @@ public class TimelineActivity extends Fragment {
             public void onCancelled(@NonNull DatabaseError databaseError) {
 
             }
-        });
+        });*/
     }
 
     class StudynameRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {      //어느 스터디인지를 선택하는 부분의 recycler
@@ -328,7 +369,7 @@ public class TimelineActivity extends Fragment {
         @Override
         public void onBindViewHolder(@NonNull final RecyclerView.ViewHolder viewHolder, final int position) {
             if(viewHolder instanceof FooterViewHolder){
-                if(selectedPosition == position){
+                if(selectedPosition == Room.size()){
                     ((FooterViewHolder)viewHolder).exitRoom.setBackground(getResources().getDrawable(R.drawable.timeline_studyname_cardview));
                     ((FooterViewHolder)viewHolder).exitRoomImg.setImageResource(R.mipmap.icon_48);
                 }
@@ -337,7 +378,7 @@ public class TimelineActivity extends Fragment {
                     ((FooterViewHolder)viewHolder).exitRoomImg.setImageResource(R.mipmap.icon_2);
                 }
 
-                ((FooterViewHolder)viewHolder).exitRoomImg.setOnClickListener(new View.OnClickListener() {
+                ((FooterViewHolder)viewHolder).exitRoom.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         selectedPosition = position;
@@ -362,7 +403,6 @@ public class TimelineActivity extends Fragment {
                 }
 
                 ((StudynameViewHolder)viewHolder).studyname_title.setText(Room.get(position).getSpinner1());
-
                 if(selectedPosition == position){
                     ((StudynameViewHolder)viewHolder).timeline_studyName.setText(Room.get(position).getSpinner1()+" 스터디");
                     ((StudynameViewHolder) viewHolder).studyname_title.setBackground(getResources().getDrawable(R.drawable.timeline_studyname_cardview));
@@ -389,7 +429,7 @@ public class TimelineActivity extends Fragment {
                         selectedPosition = position;
                         exitBtn = false;
                         setTimelineData();
-                        notifyDataSetChanged();
+                        StudynameAdapter.notifyDataSetChanged();
                     }
                 });
 
@@ -403,20 +443,42 @@ public class TimelineActivity extends Fragment {
                                     public void onClick(DialogInterface dialog, int which) {
                                         // 'YES'
                                         RoomDTO exitRoom = Room.get(position);
-                                        // 인원수 갱신
-                                        exitRoom.setMember(exitRoom.getMember()-1);
-                                        // DB수정
-                                        dataref.child("room").child(exitRoom.getId()).setValue(exitRoom);
-                                        dataref.child("users").child(currentUserId).child("roomId").child(Integer.toString(position)).removeValue();
+
+                                        List<AccountDTO> updateList = exitRoom.getMemberList();
+                                        for(int i=0; i<updateList.size(); i++){
+                                            if (updateList.get(i).getUid().equals(currentUserId)){
+                                                updateList.remove(i);
+                                                break;
+                                            }
+                                        }
+                                        // 방에 남은 인원이 없으면 방 삭제
+                                        if(updateList.size()==0){
+                                            dataref.child("room").child(exitRoom.getId()).removeValue();
+                                            dataref.child("RoomUpload").child(exitRoom.getId()).removeValue();
+                                        }
+                                        else{
+                                            // 인원수 갱신
+                                            exitRoom.setMember(exitRoom.getMember()-1);
+                                            // 방 멤버 리스트 갱신
+                                            exitRoom.setMemberList(updateList);
+                                            // 방DB 업데이트
+                                            dataref.child("room").child(exitRoom.getId()).setValue(exitRoom);
+                                        }
+                                        // 유저DB에서 삭제
+                                        List<String> userRoomList = currentUser.getRoomId();
+                                        userRoomList.remove(exitRoom.getId());
+                                        currentUser.setRoomId(userRoomList);
+                                        dataref.child("users").child(currentUserId).setValue(currentUser);
 
                                         selectedPosition = 0;
 
                                         Toast.makeText(getActivity(), "탈퇴완료", Toast.LENGTH_SHORT).show();
                                         notifyDataSetChanged();
 
-                                        Intent intent = new Intent(getActivity(), Fragement_navi.class);
-                                        intent.putExtra("frag_num", 0);
-                                        startActivity(intent);
+                                        Fragment fragment = new MainActivity();
+                                        FragmentManager fm = getFragmentManager();
+                                        FragmentTransaction ft = fm.beginTransaction();
+                                        ft.replace(R.id.Frame_navi, fragment).commit();
                                     }
                                 }).setNegativeButton("취소",
                                 new DialogInterface.OnClickListener() {
@@ -474,8 +536,8 @@ public class TimelineActivity extends Fragment {
 
     class TimelineBoardViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{           //Timeline에 올라가는 컨텐츠의 recycler
 
-//        private static final int VIEW_TYPE_FILE = 0;
-//        private static final int VIEW_TYPE_VOTE = 1;
+        private static final int VIEW_TYPE_FILE = 0;
+        private static final int VIEW_TYPE_VOTE = 1;
 
         private ArrayList<ArrayList<Uri>> uriArrayList;
         private ArrayList<RoomUploadDTO> dtoArrayList;
@@ -484,45 +546,31 @@ public class TimelineActivity extends Fragment {
             dtoArrayList = uploadDTOArrayList;
         }
 
-//        @Override
-//        public int getItemViewType(int position){
-//            return position % 2 == 0 ? VIEW_TYPE_FILE : VIEW_TYPE_VOTE;
-//        }
+        @Override
+        public int getItemViewType(int position){
+            if(dtoArrayList.get(position).getTextType().equals("소식")){
+                return VIEW_TYPE_FILE;
+            }
+            else{
+                return VIEW_TYPE_VOTE;
+            }
+        }
 
         @NonNull
         @Override
         public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int viewType) {
-
- //           if (viewType == VIEW_TYPE_FILE) {
-            View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.timeline_cardview_file, viewGroup, false);
-            return new FileViewHolder(view);
- //           } else {
- //               View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.timeline_cardview_vote, viewGroup, false);
- //               return new VoteViewHolder(view);
- //                    }
+            if (viewType == VIEW_TYPE_FILE) {
+                View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.timeline_cardview_file, viewGroup, false);
+                return new FileViewHolder(view);
+            }
+            else {
+                View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.timeline_cardview_vote, viewGroup, false);
+                return new VoteViewHolder(view);
+             }
         }
         @Override
         public void onBindViewHolder(@NonNull final RecyclerView.ViewHolder viewHolder, int position) {
-
             RoomUploadDTO roomUploadDTO = dtoArrayList.get(position);
-            // 글쓴이 프로필 이미지 설정
-            if(roomUploadDTO.getUploaderImg() != null){
-                storageReference.child("profiles/" + roomUploadDTO.getUploaderId() + "/" + roomUploadDTO.getUploaderId() + ".jpeg").getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-                    @Override
-                    public void onSuccess(Uri uri) {
-                        ((FileViewHolder)viewHolder).file_imageview.setImageURI(uri);
-                        Glide.with(getActivity()).load(uri.toString()).apply(RequestOptions.circleCropTransform())
-                                .override(50,50).into(((FileViewHolder)viewHolder).file_imageview);
-                    }
-                });
-            }
-            else{
-                Glide.with(getActivity()).load(R.mipmap.icon_24).apply(RequestOptions.circleCropTransform())
-                        .override(43,43).into(((FileViewHolder)viewHolder).file_imageview);
-            }
-
-            ((FileViewHolder)viewHolder).file_username.setText(roomUploadDTO.getUploadername());
-            ((FileViewHolder)viewHolder).file_contentText.setText(roomUploadDTO.getWriting_content());
 
             SimpleDateFormat dateFormat = new SimpleDateFormat("M월 d일");
             Date nowDate = new Date();          // 현재 시간
@@ -535,39 +583,114 @@ public class TimelineActivity extends Fragment {
             day = Math.abs(day);
             hour = Math.abs(hour);
             minute = Math.abs(minute);
-            if (day == 0){
-                if(hour == 0){
-                    if(minute < 1){
-                        ((FileViewHolder)viewHolder).file_time.setText("방금");
-                    }
-                    else if(minute < 60){
-                        ((FileViewHolder)viewHolder).file_time.setText(minute + "분 전");
+
+        // "새 소식" 이면
+            if(viewHolder instanceof FileViewHolder){
+                // 글쓴이 프로필 이미지 설정
+                if(roomUploadDTO.getUploaderImg() != null){
+                    storageReference.child("profiles/" + roomUploadDTO.getUploaderId() + "/" + roomUploadDTO.getUploaderId() + ".jpeg").getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                        @Override
+                        public void onSuccess(Uri uri) {
+                            ((FileViewHolder)viewHolder).file_imageview.setImageURI(uri);
+                            Glide.with(getActivity()).load(uri.toString()).apply(RequestOptions.circleCropTransform())
+                                    .override(50,50).into(((FileViewHolder)viewHolder).file_imageview);
+                        }
+                    });
+                }
+                else{
+                    Glide.with(getActivity()).load(R.mipmap.icon_24).apply(RequestOptions.circleCropTransform())
+                            .override(50,50).into(((FileViewHolder)viewHolder).file_imageview);
+                }
+
+                ((FileViewHolder)viewHolder).file_username.setText(roomUploadDTO.getUploadername());
+                ((FileViewHolder)viewHolder).file_contentText.setText(roomUploadDTO.getWriting_content());
+
+                if (day == 0){
+                    if(hour == 0){
+                        if(minute < 1){
+                            ((FileViewHolder)viewHolder).file_time.setText("방금");
+                        }
+                        else if(minute < 60){
+                            ((FileViewHolder)viewHolder).file_time.setText(minute + "분 전");
+                        }
+                        else{
+                            ((FileViewHolder)viewHolder).file_time.setText("안보임");
+                        }
                     }
                     else{
-                        ((FileViewHolder)viewHolder).file_time.setText("안보임");
+                        ((FileViewHolder)viewHolder).file_time.setText(hour + "시간 전");
                     }
                 }
                 else{
-                    ((FileViewHolder)viewHolder).file_time.setText(hour + "시간 전");
+                    ((FileViewHolder)viewHolder).file_time.setText(dateFormat.format(uploadDate));
                 }
+
+
+                ((FileViewHolder)viewHolder).file_scrap.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+
+                    }
+                });
+                RecyclerView.LayoutManager horizontalLayoutManager = new LinearLayoutManager(getContext());
+                ((LinearLayoutManager)horizontalLayoutManager).setOrientation(LinearLayoutManager.HORIZONTAL);
+                ((FileViewHolder)viewHolder).recyclerView.setLayoutManager(horizontalLayoutManager);
+                pictureRecyclerViewAdapter = new PictureRecyclerViewAdapter(roomUploadDTO);
+                ((FileViewHolder)viewHolder).recyclerView.setAdapter(pictureRecyclerViewAdapter);
+                pictureRecyclerViewAdapter.notifyDataSetChanged();
             }
+
+        // "투표" 이면
             else{
-                ((FileViewHolder)viewHolder).file_time.setText(dateFormat.format(uploadDate));
-            }
-
-
-            ((FileViewHolder)viewHolder).file_scrap.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-
+                // 글쓴이 프로필 이미지 설정
+                if(roomUploadDTO.getUploaderImg() != null){
+                    storageReference.child("profiles/" + roomUploadDTO.getUploaderId() + "/" + roomUploadDTO.getUploaderId() + ".jpeg").getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                        @Override
+                        public void onSuccess(Uri uri) {
+                            ((VoteViewHolder)viewHolder).vote_imageview.setImageURI(uri);
+                            Glide.with(getActivity()).load(uri.toString()).apply(RequestOptions.circleCropTransform())
+                                    .override(50,50).into(((VoteViewHolder)viewHolder).vote_imageview);
+                        }
+                    });
                 }
-            });
-            RecyclerView.LayoutManager horizontalLayoutManager = new LinearLayoutManager(getContext());
-            ((LinearLayoutManager)horizontalLayoutManager).setOrientation(LinearLayoutManager.HORIZONTAL);
-            ((FileViewHolder)viewHolder).recyclerView.setLayoutManager(horizontalLayoutManager);
-            pictureRecyclerViewAdapter = new PictureRecyclerViewAdapter(roomUploadDTO);
-            ((FileViewHolder)viewHolder).recyclerView.setAdapter(pictureRecyclerViewAdapter);
-            pictureRecyclerViewAdapter.notifyDataSetChanged();
+                else{
+                    Glide.with(getActivity()).load(R.mipmap.icon_24).apply(RequestOptions.circleCropTransform())
+                            .override(50,50).into(((VoteViewHolder)viewHolder).vote_imageview);
+                }
+
+                ((VoteViewHolder)viewHolder).vote_username.setText(roomUploadDTO.getUploadername());
+                ((VoteViewHolder)viewHolder).vote_contentText.setText(roomUploadDTO.getWriting_content());
+
+                if (day == 0){
+                    if(hour == 0){
+                        if(minute < 1){
+                            ((VoteViewHolder)viewHolder).vote_time.setText("방금");
+                        }
+                        else if(minute < 60){
+                            ((VoteViewHolder)viewHolder).vote_time.setText(minute + "분 전");
+                        }
+                        else{
+                            ((VoteViewHolder)viewHolder).vote_time.setText("안보임");
+                        }
+                    }
+                    else{
+                        ((VoteViewHolder)viewHolder).vote_time.setText(hour + "시간 전");
+                    }
+                }
+                else{
+                    ((VoteViewHolder)viewHolder).vote_time.setText(dateFormat.format(uploadDate));
+                }
+
+                // 투표 리사이클러 뷰
+                LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
+                ((VoteViewHolder)viewHolder).vote_recycler.setLayoutManager(layoutManager);
+
+                voteRecyclerViewAdapter = new VoteRecyclerViewAdapter(roomUploadDTO.getVoteList());
+                ((VoteViewHolder)viewHolder).vote_recycler.setAdapter(voteRecyclerViewAdapter);
+
+                voteRecyclerViewAdapter.notifyDataSetChanged();
+
+            }
         }
 
         @Override
@@ -604,13 +727,69 @@ public class TimelineActivity extends Fragment {
             }
         }
 
-        class VoteViewHolder extends RecyclerView.ViewHolder{
+        private class VoteViewHolder extends RecyclerView.ViewHolder{
+
+            ImageView vote_imageview;
+            TextView vote_username, vote_time, vote_contentText, vote_btn;
+            RecyclerView vote_recycler;
 
             public VoteViewHolder(@NonNull View itemView) {
                 super(itemView);
+                vote_imageview = itemView.findViewById(R.id.vote_imageview);
+                vote_username = itemView.findViewById(R.id.vote_username);
+                vote_time = itemView.findViewById(R.id.vote_time);
+                vote_contentText = itemView.findViewById(R.id.vote_contentText);
+                vote_btn = itemView.findViewById(R.id.vote_btn);
+                vote_recycler = itemView.findViewById(R.id.vote_recycler);
             }
         }
     }
+
+
+
+    public class VoteRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
+
+        private List<VoteDTO> voteDTOList;
+
+        public VoteRecyclerViewAdapter(List<VoteDTO> array){
+            voteDTOList = array;
+        }
+
+        @NonNull
+        @Override
+        public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+            View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.vote_item, viewGroup, false);
+
+            return new PVoteViewHolder(view);
+        }
+
+        @Override
+        public void onBindViewHolder(@NonNull final RecyclerView.ViewHolder viewHolder, int position) {
+            VoteDTO voteDTO = voteDTOList.get(position);
+            ((PVoteViewHolder)viewHolder).voteItem_title.setText(voteDTO.getContent());
+        }
+
+        @Override
+        public int getItemCount() {
+            return voteDTOList.size();
+        }
+
+        private class PVoteViewHolder extends RecyclerView.ViewHolder {
+
+            TextView voteItem_title, voteItem_num;
+
+            public PVoteViewHolder(View view) {
+                super(view);
+                voteItem_title = view.findViewById(R.id.voteItem_title);
+                voteItem_num = view.findViewById(R.id.voteItem_num);
+            }
+        }
+    }
+
+
+
+
+
 
 
 

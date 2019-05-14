@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="52dp"
         android:gravity="center"
-        android:lineSpacingExtra="6sp"
+        android:background="#ffffff"
         android:text="SESSION 알림"
         android:textColor="#222222"
         android:textSize="13sp"

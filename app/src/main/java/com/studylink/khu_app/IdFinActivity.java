@@ -21,8 +21,6 @@ public class IdFinActivity extends AppCompatActivity {
         Bundle bundle = intent.getExtras();
         String email = bundle.getString("email");
 
-        client_email.setText(email);
-
         Linkify.addLinks(client_email, Linkify.EMAIL_ADDRESSES);
 
     }
