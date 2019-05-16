@@ -37,7 +37,7 @@ public class FragmentMypageEditDispo extends Fragment {
     private TextView btn1_txt, btn2_txt, btn3_txt, btn4_txt, btn5_txt, btn6_txt, btn7_txt, btn8_txt;
     private ImageView btn1_img, btn2_img, btn3_img, btn4_img, btn5_img, btn6_img, btn7_img, btn8_img;
     private List<String> dispo;
-    private CardView mypageEditDispo_finish;
+    private TextView mypageEditDispo_finish;
 
     public FragmentMypageEditDispo(){
     }
@@ -202,9 +202,9 @@ public class FragmentMypageEditDispo extends Fragment {
 
 
     public void selectChange(TextView selectTxt, TextView nonTxt, ImageView selected_image, ImageView non_image){
-        selected_image.setImageResource(R.mipmap.icon_17);
+        selected_image.setImageResource(R.mipmap.icon_16);
         non_image.setImageResource(R.mipmap.icon_15);
-        selectTxt.setTextColor(Color.parseColor("#8c47ff"));
+        selectTxt.setTextColor(Color.parseColor("#0065ff"));
         nonTxt.setTextColor(Color.parseColor("#66222222"));
     }
 

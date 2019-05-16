@@ -12,7 +12,16 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
+import android.widget.Toast;
+
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class Fragement_navi extends AppCompatActivity {
 
@@ -23,7 +32,10 @@ public class Fragement_navi extends AppCompatActivity {
     private AlarmActivity alarm_fragment = new AlarmActivity();
     private Mypage_main mypage_fragment = new Mypage_main();
     private BottomNavigationView bottomNavigationview;
+    private DatabaseReference databaseReference;
+    public AccountDTO currentUser;
     private int frag_num = 0;
+    public int myRoomNum = 0;
     private Fragment currentfrag;
 
     @Override
@@ -33,8 +45,29 @@ public class Fragement_navi extends AppCompatActivity {
         Intent intent = new Intent(this, LoadingActivity.class);
         startActivity(intent);
 
+        // 파이어베이스 db
+        databaseReference = FirebaseDatabase.getInstance().getReference();
+
+        // 현재 유저
+        String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        databaseReference.child("users").child(uid).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                currentUser = dataSnapshot.getValue(AccountDTO.class);
+                Log.d("###########check1", currentUser.getUsername());
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
         Bundle bundle = getIntent().getExtras();
-//        frag_num = (Integer) bundle.get("frag_num");
+        frag_num = (Integer) bundle.get("frag_num");
+
+        if(bundle.get("myRoomNum")!=null){
+            myRoomNum = (Integer) bundle.get("myRoomNum");
+        }
 
         fragmentManager = getSupportFragmentManager();
         fragmentTransaction = fragmentManager.beginTransaction();
@@ -44,7 +77,7 @@ public class Fragement_navi extends AppCompatActivity {
 //        alarm_fragment = new AlarmActivity();
 //        mypage_fragment = new Mypage_main();
 
-        bottomNavigationview = (BottomNavigationView) findViewById(R.id.bottomNavigationView_navi);
+        bottomNavigationview = findViewById(R.id.bottomNavigationView_navi);
         bottomNavigationview.setOnNavigationItemSelectedListener(
                 new BottomNavigationView.OnNavigationItemSelectedListener() {
                     @Override
@@ -75,7 +108,7 @@ public class Fragement_navi extends AppCompatActivity {
                         return false;
                     }
                 });
-        setFrag(0);
+        setFrag(frag_num);
 //      setCurrentFrag()
 //      itemCheck();
     }

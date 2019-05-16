@@ -12,9 +12,9 @@
         android:layout_height="52dp"
         android:textSize="13sp"
         android:textColor="#222222"
-        android:lineSpacingExtra="2.5sp"
         android:text="회원가입 (1/2)"
         android:gravity="center"
+        android:fontFamily="@font/notosanscjkkr_bold"
         />
 
     <View
@@ -30,16 +30,16 @@
         android:layout_height="wrap_content"
         android:textSize="12sp"
         android:textColor="#707070"
-        android:lineSpacingExtra="2.5sp"
         android:text="서비스 이용을 위해 필수 항목에 동의해 주세요."
         android:layout_gravity="center"
         android:layout_marginBottom="23dp"
+        android:fontFamily="@font/notosanscjkkr_bold"
         />
 
     <RelativeLayout
         android:id="@+id/select_all"
         android:layout_width="match_parent"
-        android:layout_height="40.5dp"
+        android:layout_height="wrap_content"
         android:background="@drawable/gray_border"
         android:paddingLeft="13dp"
         android:layout_marginHorizontal="42dp"
@@ -51,14 +51,15 @@
             android:layout_height="wrap_content"
             android:textSize="12sp"
             android:textColor="#707070"
-            android:lineSpacingExtra="2.5sp"
             android:text="전체 동의"
-            android:paddingVertical="13dp"
+            android:paddingVertical="10dp"
+            android:fontFamily="@font/notosanscjkkr_bold"
+            android:layout_centerVertical="true"
             />
         <ImageView
             android:id="@+id/tosImage"
             android:layout_width="50dp"
-            android:layout_height="wrap_content"
+            android:layout_height="50dp"
             android:src="@mipmap/check_btn"
             android:layout_alignParentRight="true"/>
     </RelativeLayout>
@@ -77,84 +78,88 @@
         <RelativeLayout
             android:id="@+id/select_item1"
             android:layout_width="match_parent"
-            android:layout_height="40.5dp"
+            android:layout_height="wrap_content"
             >
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="12sp"
                 android:textColor="#707070"
-                android:lineSpacingExtra="2.5sp"
                 android:text="서비스 이용약관 동의 (필수)"
-                android:paddingVertical="13dp"
+                android:paddingVertical="10dp"
+                android:layout_centerVertical="true"
+                android:fontFamily="@font/notosanscjkkr_light"
                 />
             <ImageView
                 android:id="@+id/tosImage1"
                 android:layout_width="50dp"
-                android:layout_height="wrap_content"
+                android:layout_height="50dp"
                 android:src="@mipmap/check_btn"
                 android:layout_alignParentRight="true"/>
         </RelativeLayout>
         <RelativeLayout
             android:id="@+id/select_item2"
             android:layout_width="match_parent"
-            android:layout_height="40.5dp"
+            android:layout_height="wrap_content"
             >
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="12sp"
                 android:textColor="#707070"
-                android:lineSpacingExtra="2.5sp"
                 android:text="위치기반서비스 이용약관 동의 (필수)"
-                android:paddingVertical="13dp"
+                android:paddingVertical="10dp"
+                android:layout_centerVertical="true"
+                android:fontFamily="@font/notosanscjkkr_light"
                 />
             <ImageView
                 android:id="@+id/tosImage2"
                 android:layout_width="50dp"
-                android:layout_height="wrap_content"
+                android:layout_height="50dp"
                 android:src="@mipmap/check_btn"
                 android:layout_alignParentRight="true"/>
         </RelativeLayout>
         <RelativeLayout
             android:id="@+id/select_item3"
             android:layout_width="match_parent"
-            android:layout_height="40.5dp"
+            android:layout_height="wrap_content"
             >
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="12sp"
                 android:textColor="#707070"
-                android:lineSpacingExtra="2.5sp"
                 android:text="개인정보 수집 및 제3자 제공 동의 (필수)"
-                android:paddingVertical="13dp"
+                android:paddingVertical="10dp"
+                android:layout_centerVertical="true"
+                android:fontFamily="@font/notosanscjkkr_light"
                 />
             <ImageView
                 android:id="@+id/tosImage3"
                 android:layout_width="50dp"
-                android:layout_height="wrap_content"
+                android:layout_height="50dp"
                 android:src="@mipmap/check_btn"
                 android:layout_alignParentRight="true"/>
         </RelativeLayout>
         <RelativeLayout
             android:id="@+id/select_item4"
             android:layout_width="match_parent"
-            android:layout_height="40.5dp"
+            android:layout_height="wrap_content"
             >
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="12sp"
                 android:textColor="#707070"
-                android:lineSpacingExtra="2.5sp"
                 android:text="마케팅 정보 수신 동의 (선택)"
-                android:paddingVertical="13dp"
+                android:paddingVertical="10dp"
+                android:layout_centerVertical="true"
+                android:fontFamily="@font/notosanscjkkr_light"
                 />
             <ImageView
                 android:id="@+id/tosImage4"
                 android:layout_width="50dp"
-                android:layout_height="wrap_content"
+                android:layout_height="50dp"
                 android:src="@mipmap/check_btn"
                 android:layout_alignParentRight="true"/>
         </RelativeLayout>
@@ -167,10 +172,10 @@
         android:layout_height="wrap_content"
         android:textSize="10.5sp"
         android:textColor="#707070"
-        android:lineSpacingExtra="2sp"
         android:layout_gravity="center"
         android:layout_marginBottom="136dp"
         android:text="선택 약관에 동의하지 않으셔도 가입을 진행할 수 있습니다."
+        android:fontFamily="@font/notosanscjkkr_light"
         />
 
     <View
@@ -186,10 +191,10 @@
         android:layout_height="wrap_content"
         android:textSize="16.5sp"
         android:textColor="#3664cd"
-        android:lineSpacingExtra="3.5sp"
-        android:paddingVertical="16dp"
+        android:paddingVertical="10dp"
         android:gravity="center"
         android:text="다음"
+        android:fontFamily="@font/notosanscjkkr_bold"
         />
 </LinearLayout>
 </ScrollView>

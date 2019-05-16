@@ -2,6 +2,7 @@ package com.studylink.khu_app;
 
 
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -18,11 +19,13 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class AdapterMatching extends RecyclerView.Adapter<AdapterMatching.MyViewHolder> {
 
     private ArrayList<RoomDTO> arrayList;
     private static View.OnClickListener onClickListener, onClickListener2;
+    private AccountDTO currentUser;
 
     // 생성자
     public AdapterMatching(ArrayList<RoomDTO> items, View.OnClickListener onclick, View.OnClickListener onclick2){
@@ -37,13 +40,14 @@ public class AdapterMatching extends RecyclerView.Adapter<AdapterMatching.MyView
 
     // 아이템 뷰에서 아이디 찾기
     public static class MyViewHolder extends RecyclerView.ViewHolder {
-        public TextView matching_title,matching_member,matching_totalMember,matching_region,matching_age,matching_gender;
+        public TextView matching_percent, matching_title,matching_member,matching_totalMember,matching_region,matching_age,matching_gender;
         public ImageView imageView_matching, img_ribbon;
         public LinearLayout btn_detail, btn_entrance;
         public View root;
         public MyViewHolder(View v) {
             super(v);
             root = v;
+            matching_percent = v.findViewById(R.id.matching_percent);
             matching_title = v.findViewById(R.id.matching_title);
             matching_member = v.findViewById(R.id.matching_member);
             matching_totalMember = v.findViewById(R.id.matching_totalMember);
@@ -78,10 +82,23 @@ public class AdapterMatching extends RecyclerView.Adapter<AdapterMatching.MyView
     @Override
     public void onBindViewHolder(final MyViewHolder holder, int position) {
         RoomDTO room = arrayList.get(position);
+        // 매칭률 설정
+        double matchingNum=0;
+        List<String> userDispo = currentUser.getDisposition();
+        List<String> roomDispo = room.getRoomdisposition();
+        for(int i=0; i<4; i++){
+            // 성향이 같으면
+            if(userDispo.get(i).equals(roomDispo.get(i))){
+                matchingNum++;
+            }
+        }
+        int matchingRate = (int)Math.round(matchingNum/4*100);
+
+        holder.matching_percent.setText("매칭 " + matchingRate + "%");
         // 이미지 설정
         if(room.getimageName() != null) {
             String fileName = room.getimageName();
-            storageRef.child(room.getRoomName()+ fileName).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+            storageRef.child("roomImages/" + fileName).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                 @Override
                 public void onSuccess(Uri uri) {
                     holder.imageView_matching.setImageURI(uri);
@@ -118,5 +135,9 @@ public class AdapterMatching extends RecyclerView.Adapter<AdapterMatching.MyView
 
     public RoomDTO getRoom(int position){
         return arrayList.get(position);
+    }
+
+    public void setUser(AccountDTO user){
+        currentUser = user;
     }
 }

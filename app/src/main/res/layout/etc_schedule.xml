@@ -18,9 +18,10 @@
         android:textSize="13sp"
         app:layout_constraintBottom_toBottomOf="@+id/back_topage"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/back_topage"
-        app:layout_constraintTop_toTopOf="@+id/back_topage"
-        android:text="공기업 스터디 출결관리" />
+        app:layout_constraintStart_toEndOf="@+id/imageView13"
+        app:layout_constraintTop_toTopOf="@+id/imageView13"
+        android:text="공기업 스터디 출결관리"
+        android:fontFamily="@font/notosanscjkkr_bold"/>
 
     <ImageView
         android:id="@+id/back_topage"
@@ -45,9 +46,11 @@
         android:background="@drawable/absentcheck_box"
         android:gravity="center"
         android:text="28일 출석체크하기"
+        android:textColor="#ffffff"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/back_topage" />
+        app:layout_constraintTop_toBottomOf="@+id/imageView13"
+        android:fontFamily="@font/notosanscjkkr_regular"/>
 
     <ImageView
         android:id="@+id/imageView16"
@@ -73,7 +76,8 @@
         android:textSize="14sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="@+id/textView45"
-        app:layout_constraintTop_toBottomOf="@+id/textView45" />
+        app:layout_constraintTop_toBottomOf="@+id/textView45"
+        android:fontFamily="@font/notosanscjkkr_bold"/>
 
     <TextView
         android:id="@+id/textView47"
@@ -83,9 +87,11 @@
         android:layout_marginLeft="8dp"
         android:text="1회 무단 결석을 하셨습니다."
         android:textSize="11sp"
+        android:textColor="#707070"
         app:layout_constraintBottom_toBottomOf="@+id/textView46"
         app:layout_constraintStart_toEndOf="@+id/textView46"
-        app:layout_constraintTop_toTopOf="@+id/textView46" />
+        app:layout_constraintTop_toTopOf="@+id/textView46"
+        android:fontFamily="@font/notosanscjkkr_regular"/>
 
     <TextView
         android:id="@+id/textView48"
@@ -146,14 +152,14 @@
         android:layout_marginTop="20dp"
         android:background="@drawable/emptyround_shape"
         android:paddingLeft="10dp"
-        android:paddingTop="2dp"
         android:paddingRight="10dp"
         android:paddingBottom="2dp"
         android:text="출석"
         android:textColor="#2f78db"
         android:textSize="12sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView60" />
+        app:layout_constraintTop_toBottomOf="@+id/textView60"
+        android:fontFamily="@font/notosanscjkkr_demilight"/>
 
     <TextView
         android:id="@+id/textView51"
@@ -163,7 +169,6 @@
         android:layout_marginLeft="20dp"
         android:background="@drawable/emptyround_shape2"
         android:paddingLeft="10dp"
-        android:paddingTop="2dp"
         android:paddingRight="10dp"
         android:paddingBottom="2dp"
         android:text="결석"
@@ -171,7 +176,8 @@
         android:textSize="12sp"
         app:layout_constraintBottom_toBottomOf="@+id/textView50"
         app:layout_constraintStart_toEndOf="@+id/textView50"
-        app:layout_constraintTop_toTopOf="@+id/textView50" />
+        app:layout_constraintTop_toTopOf="@+id/textView50"
+        android:fontFamily="@font/notosanscjkkr_demilight"/>
 
     <TextView
         android:id="@+id/textView52"
@@ -181,7 +187,6 @@
         android:layout_marginLeft="20dp"
         android:background="@drawable/emptyround_shape3"
         android:paddingLeft="10dp"
-        android:paddingTop="2dp"
         android:paddingRight="10dp"
         android:paddingBottom="2dp"
         android:text="무단 결석"
@@ -189,27 +194,6 @@
         android:textSize="12sp"
         app:layout_constraintBottom_toBottomOf="@+id/textView51"
         app:layout_constraintStart_toEndOf="@+id/textView51"
-        app:layout_constraintTop_toTopOf="@+id/textView51" />
-
-    <ImageView
-        android:id="@+id/imageView5"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="20dp"
-        android:layout_marginRight="20dp"
-        app:layout_constraintBottom_toBottomOf="@+id/to_absent_page"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/to_absent_page"
-        app:srcCompat="@mipmap/icon_42" />
-
-    <ImageView
-        android:id="@+id/to_absent_page"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="4dp"
-        android:layout_marginRight="4dp"
-        app:layout_constraintBottom_toBottomOf="@+id/textView47"
-        app:layout_constraintEnd_toStartOf="@+id/imageView5"
-        app:layout_constraintTop_toTopOf="@+id/textView47"
-        app:srcCompat="@mipmap/icon_41" />
+        app:layout_constraintTop_toTopOf="@+id/textView51"
+        android:fontFamily="@font/notosanscjkkr_demilight"/>
 </android.support.constraint.ConstraintLayout>

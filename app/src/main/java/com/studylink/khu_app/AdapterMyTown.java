@@ -73,7 +73,7 @@ public class AdapterMyTown extends RecyclerView.Adapter<AdapterMyTown.MyViewHold
         // 이미지 설정
         if(room.getimageName() != null) {
             String fileName = room.getimageName();
-            storageRef.child(fileName).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+            storageRef.child("roomImages/" + fileName).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                 @Override
                 public void onSuccess(Uri uri) {
                     holder.myTown_image.setImageURI(uri);

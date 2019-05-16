@@ -47,13 +47,15 @@ public class FragmentMypageEditProfile extends Fragment {
     private static final int GALLERY_CODE1 = 10;
     ImageView profileImg;
     EditText mypageEdit_name, mypageEdit_birth;
-    TextView mypageEdit_female, mypageEdit_male;
-    CardView mypageEdit_finish, mypageEdit_address;
+    TextView mypageEdit_female, mypageEdit_male, mypageEdit_finish;
+    CardView mypageEdit_address;
     private MypageEditPopupActivity popUp;
     private int check = 0;
     private Uri uri;
     private FirebaseAuth auth;
     private Bitmap mbitmap;
+    private AccountDTO savaData;
+    private String uid;
 
     public FragmentMypageEditProfile(){
     }
@@ -63,6 +65,7 @@ public class FragmentMypageEditProfile extends Fragment {
         View view = inflater.inflate(R.layout.mypage_edit_fragment, container, false);
 
         final Bundle bundle = this.getArguments();
+        savaData = ((MypageEditActivity)getActivity()).currentUser;
 
         auth = FirebaseAuth.getInstance();
         mypageEdit_name = view.findViewById(R.id.mypageEdit_name);
@@ -73,7 +76,7 @@ public class FragmentMypageEditProfile extends Fragment {
         mypageEdit_address = view.findViewById(R.id.mypageEdit_address);
         mypageEdit_finish = view.findViewById(R.id.mypageEdit_finish);
 
-        String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        uid = auth.getCurrentUser().getUid();
         final DatabaseReference dr = FirebaseDatabase.getInstance().getReference().child("users").child(uid);
 
         if(bundle!=null){
@@ -130,17 +133,18 @@ public class FragmentMypageEditProfile extends Fragment {
                 dr.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        AccountDTO saveData = dataSnapshot.getValue(AccountDTO.class);
+                        savaData.setUsername(mypageEdit_name.getText().toString());
+                        savaData.setUserbirth(mypageEdit_birth.getText().toString());
 
-                        saveData.setUsername(mypageEdit_name.getText().toString());
-                        saveData.setUserbirth(mypageEdit_birth.getText().toString());
+                        uploadimage();
+
                         if(check == 1){
-                            saveData.setUsersex("male");
+                            savaData.setUsersex("male");
                         }
                         else{
-                            saveData.setUsersex("female");
+                            savaData.setUsersex("female");
                         }
-                        dr.setValue(saveData);
+                        dr.setValue(savaData);
                     }
                     @Override
                     public void onCancelled(@NonNull DatabaseError databaseError) {
@@ -150,6 +154,7 @@ public class FragmentMypageEditProfile extends Fragment {
 
                 Toast.makeText(getActivity(), "수정 완료", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(getActivity(), Fragement_navi.class);
+                intent.putExtra("frag_num",3);
                 startActivity(intent);
 
 //                android.support.v4.app.Fragment fragment = new Mypage_main();
@@ -160,9 +165,6 @@ public class FragmentMypageEditProfile extends Fragment {
 //                bundle.putByteArray("imagebyte", byteArray);
 //
 //                fragment.setArguments(bundle);
-
-                uploadimage();
-
             }
         });
 
@@ -210,19 +212,23 @@ public class FragmentMypageEditProfile extends Fragment {
 
     @SuppressLint("NewApi")
     public void colorChange(TextView select, TextView non){
-        select.setBackground(getResources().getDrawable(R.drawable.pink_border, null));
+        select.setBackground(getResources().getDrawable(R.drawable.blue_border, null));
         non.setBackground(null);
     }
 
     private void uploadimage() {
+        if(uri != null){
             //storage
             FirebaseStorage storage = FirebaseStorage.getInstance();
 
             //Unique한 파일명을 만들자.
-            String filename = auth.getCurrentUser().getUid() + ".jpeg";
+            String filename = uid + ".jpeg";
+            // 현재 유저에 프로필 이미지 정보 저장
+            savaData.setProfileImg(filename);
             //storage 주소와 폴더 파일명을 지정해 준다.
-            StorageReference storageRef = storage.getReferenceFromUrl("gs://studylink-ec173.appspot.com").child("images/" + auth.getCurrentUser().getUid() + "/" + filename);
+            StorageReference storageRef = storage.getReferenceFromUrl("gs://studylink-ec173.appspot.com").child("images/profiles/" + uid + "/" + filename);
             storageRef.putFile(uri);
+        }
     }
 
 }

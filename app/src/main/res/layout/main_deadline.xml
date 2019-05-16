@@ -11,31 +11,33 @@
         android:layout_width="83dp"
         android:layout_height="83dp"
         android:src="@drawable/study_test"
-        android:layout_centerInParent="true"/>
+        android:layout_centerInParent="true"
+        />
 
     <TextView
         android:id="@+id/deadline_category"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="23.1dp"
-        android:textSize="13.5sp"
-        android:textColor="#ffffff"
-        android:letterSpacing="-0.03"
-        android:lineSpacingExtra="6.5sp"
-        android:text="취업"
         android:layout_centerHorizontal="true"
-        />
+        android:layout_marginTop="14dp"
+        android:fontFamily="@font/notosanscjkkr_medium"
+        android:letterSpacing="-0.03"
+        android:text="취업"
+        android:textColor="#ffffff"
+        android:textSize="13.5sp" />
+
     <TextView
         android:id="@+id/deadline_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="41.2dp"
-        android:textSize="17sp"
-        android:textColor="#ffffff"
-        android:letterSpacing="-0.03"
-        android:lineSpacingExtra="8sp"
-        android:text="19 인적성"
         android:layout_centerHorizontal="true"
-        />
+        android:layout_marginTop="32dp"
+        android:maxWidth="76dp"
+        android:maxLines="1"
+        android:letterSpacing="-0.03"
+        android:text="19 인적성"
+        android:textColor="#ffffff"
+        android:textSize="17sp"
+        android:fontFamily="@font/notosanscjkkr_medium"/>
 
 </RelativeLayout>

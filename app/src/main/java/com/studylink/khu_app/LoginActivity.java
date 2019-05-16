@@ -88,7 +88,15 @@ public class LoginActivity extends AppCompatActivity {
         email_login_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                loginUser(email_login_email.getText().toString(),email_login_password.getText().toString());
+                if(email_login_email.getText().toString().trim().length()>0 & email_login_password.getText().toString().trim().length()>0){
+                    loginUser(email_login_email.getText().toString(),email_login_password.getText().toString());
+                }
+                else if(email_login_email.getText().toString().trim().length()==0) {
+                    Toast.makeText(LoginActivity.this, "이메일을 입력해 주세요", Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    Toast.makeText(LoginActivity.this, "비밀번호를 입력해 주세요", Toast.LENGTH_SHORT).show();
+                }
 
             }
         });
@@ -118,6 +126,7 @@ public class LoginActivity extends AppCompatActivity {
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
                 FirebaseUser user = firebaseAuth.getCurrentUser();
                 if (user != null) {
+                    Log.d("#############", user.getUid());
                     Intent intent = new Intent (LoginActivity.this, Fragement_navi.class);
                     intent.putExtra("frag_num", 0);
                     startActivity(intent);

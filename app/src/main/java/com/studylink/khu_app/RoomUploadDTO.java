@@ -10,21 +10,27 @@ import java.util.List;
 
 public class RoomUploadDTO implements Serializable {
 
-    private String title;
+    private String roomId;
     private String writing_content;
+    private String uploaderId;
+    private String uploaderImg;
     private String uploadername;
     private List<String> filename;
     private ArrayList<String> filetitle;
     private Date time;
     private String category;
     private String textType;
+    private List<VoteDTO> voteList;
+    private Date voteDeadline;
+    private boolean duplicate;
 
-    public String getTitle() {
-        return title;
+
+    public String getRoomId() {
+        return roomId;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public void setRoomId(String roomId) {
+        this.roomId = roomId;
     }
 
     public String getWriting_content() {
@@ -33,6 +39,22 @@ public class RoomUploadDTO implements Serializable {
 
     public void setWriting_content(String writing_content) {
         this.writing_content = writing_content;
+    }
+
+    public String getUploaderId() {
+        return uploaderId;
+    }
+
+    public void setUploaderId(String uploaderId) {
+        this.uploaderId = uploaderId;
+    }
+
+    public String getUploaderImg() {
+        return uploaderImg;
+    }
+
+    public void setUploaderImg(String uploaderImg) {
+        this.uploaderImg = uploaderImg;
     }
 
     public String getUploadername() {
@@ -81,5 +103,29 @@ public class RoomUploadDTO implements Serializable {
 
     public void setTextType(String textType) {
         this.textType = textType;
+    }
+
+    public List<VoteDTO> getVoteList() {
+        return voteList;
+    }
+
+    public void setVoteList(List<VoteDTO> voteList) {
+        this.voteList = voteList;
+    }
+
+    public Date getVoteDeadline() {
+        return voteDeadline;
+    }
+
+    public void setVoteDeadline(Date voteDeadline) {
+        this.voteDeadline = voteDeadline;
+    }
+
+    public boolean isDuplicate() {
+        return duplicate;
+    }
+
+    public void setDuplicate(boolean duplicate) {
+        this.duplicate = duplicate;
     }
 }

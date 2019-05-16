@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class IdSearchActivity extends AppCompatActivity {
 
@@ -24,11 +25,15 @@ public class IdSearchActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String email = email_search.getText().toString();
+                if(email.trim().length()>0){
+                    Intent intent = new Intent(IdSearchActivity.this, IdFinActivity.class);
+                    intent.putExtra("email", email);
 
-                Intent intent = new Intent(IdSearchActivity.this, IdFinActivity.class);
-                intent.putExtra("email", email);
-
-                startActivity(intent);
+                    startActivity(intent);
+                }
+                else{
+                    Toast.makeText(IdSearchActivity.this, "이메일을 입력해 주세요",Toast.LENGTH_SHORT).show();
+                }
             }
         });
     }

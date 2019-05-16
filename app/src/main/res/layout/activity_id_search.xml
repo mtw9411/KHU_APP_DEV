@@ -12,10 +12,10 @@
         android:layout_height="52dp"
         android:textSize="13sp"
         android:textColor="#222222"
-        android:lineSpacingExtra="2.5sp"
         android:text="고객센터"
         android:gravity="center"
         android:layout_marginBottom="105dp"
+        android:fontFamily="@font/notosanscjkkr_bold"
         />
 
     <TextView
@@ -23,10 +23,10 @@
         android:layout_height="wrap_content"
         android:textSize="15sp"
         android:textColor="#707070"
-        android:lineSpacingExtra="3sp"
         android:text="아이디 찾기"
-        android:layout_marginLeft="55.5dp"
-        android:layout_marginBottom="45.5dp"
+        android:layout_marginLeft="50dp"
+        android:layout_marginBottom="40dp"
+        android:fontFamily="@font/notosanscjkkr_bold"
         />
 
     <TextView
@@ -34,10 +34,10 @@
         android:layout_height="wrap_content"
         android:textSize="12sp"
         android:textColor="#707070"
-        android:lineSpacingExtra="2.5sp"
         android:text="이메일로 아이디 찾기"
         android:layout_marginLeft="55.5dp"
-        android:layout_marginBottom="14.5dp"
+        android:layout_marginBottom="10dp"
+        android:fontFamily="@font/notosanscjkkr_bold"
         />
 
     <EditText
@@ -45,12 +45,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/gray_border"
-        android:padding="13dp"
+        android:paddingLeft="15dp"
         android:hint="이메일 주소"
         android:textColorHint="@color/colorLightGray"
         android:textSize="12sp"
         android:layout_marginHorizontal="42dp"
-        android:layout_marginBottom="50dp"
+        android:layout_marginBottom="45dp"
+        android:fontFamily="@font/notosanscjkkr_bold"
         />
 
     <TextView
@@ -58,37 +59,38 @@
         android:layout_height="wrap_content"
         android:textSize="12sp"
         android:textColor="#707070"
-        android:lineSpacingExtra="2.5sp"
         android:text="휴대폰 번호로 아이디 찾기"
         android:layout_marginLeft="55.5dp"
-        android:layout_marginBottom="14.5dp"
+        android:layout_marginBottom="10dp"
+        android:fontFamily="@font/notosanscjkkr_bold"
         />
 
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/gray_border"
-        android:padding="13dp"
+        android:paddingLeft="15dp"
         android:hint="-없이 휴대폰 번호 입력"
         android:textColorHint="@color/colorLightGray"
         android:textSize="12sp"
         android:layout_marginHorizontal="42dp"
-        android:layout_marginBottom="89.5dp"
+        android:layout_marginBottom="85dp"
+        android:fontFamily="@font/notosanscjkkr_bold"
         />
 
     <TextView
         android:id="@+id/id_search_btn"
         android:layout_width="match_parent"
-        android:layout_height="41dp"
+        android:layout_height="wrap_content"
         android:textSize="16.5sp"
         android:textColor="#2f78db"
-        android:lineSpacingExtra="3.5sp"
         android:text="아이디 찾기"
         android:background="@drawable/btn_login"
         android:layout_gravity="center"
         android:gravity="center"
         android:layout_marginHorizontal="42dp"
         android:layout_marginBottom="100dp"
+        android:fontFamily="@font/notosanscjkkr_bold"
         />
 
 </LinearLayout>

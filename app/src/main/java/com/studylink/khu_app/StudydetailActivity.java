@@ -15,83 +15,62 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class StudydetailActivity extends AppCompatActivity {
 
-    private Button Enter;
+    private TextView total_member, studyDetail_contentTitle, content, Fine, spinner2, studyDetail_region, studyDetail_age, studyDetail_gender,
+            dispo1, dispo2, dispo3, dispo4, type2;
+    private List<String> dispo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.etc_studydetail);
 
-        Enter = findViewById(R.id.Enter);
+        total_member = findViewById(R.id.studyDetail_member);
+        studyDetail_contentTitle = findViewById(R.id.studyDetail_contentTitle);
+        content = findViewById(R.id.textView33);
+        Fine = findViewById(R.id.textView32);
+        spinner2 = findViewById(R.id.textView17);
+        studyDetail_region = findViewById(R.id.studyDetail_region);
+        studyDetail_age = findViewById(R.id.studyDetail_age);
+        studyDetail_gender = findViewById(R.id.studyDetail_gender);
+        type2 = findViewById(R.id.textView14);
+        dispo1 = findViewById(R.id.textView27);
+        dispo2 = findViewById(R.id.textView28);
+        dispo3 = findViewById(R.id.textView29);
+        dispo4 = findViewById(R.id.textView30);
 
+        Bundle bundle = getIntent().getExtras();
+        RoomDTO room = (RoomDTO)bundle.getSerializable("roomDetail");
 
+        total_member.setText(room.getMember() + "/" + room.getTotal_member());
+        studyDetail_contentTitle.setText(room.getContent1());
+        content.setText(room.getContent2());
+        Log.d("##################3", room.getId());
+        Log.d("##################3", room.getFine().toString());
+        Fine.setText(room.getFine().toString());
+        spinner2.setText(room.getSpinner2() + " 스터디");
+        studyDetail_region.setText(room.getRegion());
+        studyDetail_age.setText(room.getAge());
+        studyDetail_gender.setText(room.getGender());
 
+        dispo = room.getRoomdisposition();
+        dispo1.setText(dispo.get(0));
+        dispo2.setText(dispo.get(1));
+        dispo3.setText(dispo.get(2));
+        dispo4.setText(dispo.get(3));
 
-            TextView total_member = (TextView) findViewById(R.id.textView18);
-            Intent member_intent = getIntent();
-            Long totalmember = member_intent.getLongExtra("member", 0);
-            total_member.setText("1/" + String.valueOf(totalmember));
+        String str1 = dispo.get(0);
+        if(str1.equals("내향적인")) {
+            type2.setText("조용한 성향이신 분들을 위한");
+        }
 
-            TextView content = (TextView)findViewById(R.id.textView33);
-            Intent content_intent = getIntent();
-            String contents = content_intent.getStringExtra("content");
-            content.setText(contents);
-
-            TextView Fine = (TextView) findViewById(R.id.textView32);
-            Intent fine_intent = getIntent();
-            Long fine = fine_intent.getLongExtra("fine", 0);
-            Fine.setText( String.valueOf(fine)+"won");
-
-            TextView spinner2 = (TextView)findViewById(R.id.textView17);
-            Intent spinner2_intent = getIntent();
-            String spinner_2 = spinner2_intent.getStringExtra("spinner2");
-            spinner2.setText(spinner_2+"스터디");
-
-
-
-
-
-            Intent dispo_intent = getIntent();
-            String dispo[] = dispo_intent.getExtras().getStringArray("dispor");
-            final String str1=dispo[0];
-
-            TextView dispo1 = (TextView)findViewById(R.id.textView27);
-            String dispo_1 = dispo[0];
-            dispo1.setText(dispo_1);
-
-            TextView dispo2 = (TextView)findViewById(R.id.textView28);
-            String dispo_2 = dispo[1];
-            dispo2.setText(dispo_2);
-
-            TextView dispo3 = (TextView)findViewById(R.id.textView29);
-            String dispo_3 = dispo[2];
-            dispo3.setText(dispo_3);
-
-            TextView dispo4 = (TextView)findViewById(R.id.textView30);
-            String dispo_4 = dispo[3];
-            dispo4.setText(dispo_4);
-
-
-            if(str1.equals("내향적인")) {
-
-                TextView type2 = (TextView) findViewById(R.id.textView14);
-                String type_2 = "조용한 성향이신 분들을 위한";
-                type2.setText(type_2);
-            }
-
-            else if(str1.equals("외향적인")){
-                TextView type2 = (TextView) findViewById(R.id.textView14);
-                String type_2 = "활발한 성향이신 분들을 위한";
-                type2.setText(type_2);
-            }
-
-
-
-
+        else{
+            type2.setText("활발한 성향이신 분들을 위한");
+        }
 
     }
 }

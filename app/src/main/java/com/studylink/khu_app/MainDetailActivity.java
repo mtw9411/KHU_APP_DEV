@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -61,7 +62,7 @@ public class MainDetailActivity extends AppCompatActivity {
         Detail_region.setText(roomDTO.getRegion());
         Detail_age.setText(roomDTO.getAge());
         Detail_gender.setText(roomDTO.getGender());
-        Detail_fine.setText(roomDTO.getFine().toString());
+        Detail_fine.setText(roomDTO.getFine().toString() + " won");
         Detail_content1.setText(roomDTO.getContent1());
         Detail_content2.setText(roomDTO.getContent2());
         Detail_roomdipo1.setText(roomDTO.getRoomdisposition().get(0));
@@ -100,11 +101,19 @@ public class MainDetailActivity extends AppCompatActivity {
                                 if(check){
                                     currentUser.getRoomId().add(roomDTO.getId());
                                     dr.setValue(currentUser);
+                                    // 멤버수 + 1
                                     roomDTO.setMember(roomDTO.getMember()+1);
+                                    // 멤버 추가
+                                    List<AccountDTO> roomMemList = roomDTO.getMemberList();
+                                    roomMemList.add(currentUser);
+                                    roomDTO.setMemberList(roomMemList);
+
+                                    // 데이터 저장
                                     database.child("room").child(roomDTO.getId()).setValue(roomDTO);
 
                                     Intent intent = new Intent(MainDetailActivity.this, Fragement_navi.class);
                                     intent.putExtra("frag_num", 1);
+                                    intent.putExtra("myRoomNum", currentUser.getRoomId().size()-1);
                                     startActivity(intent);
                                 }
                                 // 중복된 스터디가 있으면
@@ -118,6 +127,14 @@ public class MainDetailActivity extends AppCompatActivity {
                             roomList.add(roomDTO.getId());
                             currentUser.setRoomId(roomList);
                             dr.setValue(currentUser);
+                            // 멤버수 + 1
+                            roomDTO.setMember(roomDTO.getMember()+1);
+                            // 멤버 추가
+                            List<AccountDTO> roomMemList = roomDTO.getMemberList();
+                            roomMemList.add(currentUser);
+                            roomDTO.setMemberList(roomMemList);
+                            // 데이터 저장
+                            database.child("room").child(roomDTO.getId()).setValue(roomDTO);
 
                             Intent intent = new Intent(MainDetailActivity.this, Fragement_navi.class);
                             intent.putExtra("frag_num", 1);

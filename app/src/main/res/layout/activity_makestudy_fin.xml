@@ -14,13 +14,13 @@
         android:layout_width="0dp"
         android:layout_height="52dp"
         android:gravity="center"
-        android:lineSpacingExtra="6sp"
         android:text="SESSION 만들기"
         android:textColor="#222222"
         android:textSize="13sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:fontFamily="@font/notosanscjkkr_bold"/>
 
     <ImageView
         android:id="@+id/backImage"
@@ -32,38 +32,37 @@
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@mipmap/icon_23" />
 
-    <LinearLayout
+    <RelativeLayout
         android:id="@+id/linearLayout2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
         app:layout_constraintTop_toBottomOf="@+id/writing_title">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="33.5dp"
-            android:layout_marginTop="41.5dp"
-            android:lineSpacingExtra="7.5sp"
+            android:layout_marginTop="37dp"
             android:text="스터디 소개"
             android:textColor="#E6222222"
-            android:textSize="16sp" />
+            android:textSize="16sp"
+            android:fontFamily="@font/notosanscjkkr_bold"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="33.5dp"
-            android:layout_marginTop="4dp"
-            android:lineSpacingExtra="5.5sp"
+            android:layout_marginTop="68dp"
             android:text="스터디 모임의 소개 글을 자유롭게 작성해주세요."
             android:textColor="#E6222222"
-            android:textSize="11.5sp" />
+            android:textSize="11.5sp"
+            android:fontFamily="@font/notosanscjkkr_regular"/>
 
         <android.support.v7.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="269.5dp"
             android:layout_marginHorizontal="20dp"
-            android:layout_marginTop="24.5dp"
+            android:layout_marginTop="110dp"
             android:layout_marginBottom="37.9dp"
             app:cardElevation="3dp">
 
@@ -72,7 +71,7 @@
                 android:layout_height="13dp"
                 android:layout_marginStart="21dp"
                 android:layout_marginLeft="21dp"
-                android:layout_marginTop="37dp"
+                android:layout_marginTop="39dp"
                 android:background="#2f78db"/>
 
             <EditText
@@ -80,37 +79,37 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="33dp"
-                android:layout_marginTop="34dp"
+                android:layout_marginTop="30dp"
                 android:background="@null"
                 android:hint="스터디 열심히 하실 분을 모십니다!"
                 android:textSize="12sp"
                 android:textColor="#707070"
                 android:letterSpacing="-0.03"
-                android:lineSpacingExtra="6sp"/>
+                android:fontFamily="@font/notosanscjkkr_bold"/>
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="0.1dp"
                 android:layout_marginStart="20dp"
                 android:layout_marginLeft="20dp"
-                android:layout_marginTop="61dp"
+                android:layout_marginTop="65dp"
                 android:layout_marginEnd="20dp"
                 android:layout_marginRight="20dp"
-                android:background="#78222222" />
+                android:background="#29000000" />
 
             <EditText
                 android:id="@+id/studyContent2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="20dp"
-                android:layout_marginTop="73dp"
+                android:layout_marginTop="70dp"
                 android:background="@null"
-                android:hint="스터디 모임 이름을 입력해 주세요."
+                android:hint="스터디 모임에 대한 설명을 입력해 주세요."
                 android:letterSpacing="-0.03"
-                android:lineSpacingExtra="6sp"
                 android:textColor="#707070"
                 android:textColorHint="#e4e4e4"
-                android:textSize="12sp" />
+                android:textSize="12sp"
+                android:fontFamily="@font/notosanscjkkr_regular"/>
 
             <RelativeLayout
                 android:layout_width="wrap_content"
@@ -124,10 +123,10 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentBottom="true"
                     android:layout_toLeftOf="@+id/ttt1"
-                    android:lineSpacingExtra="1.5sp"
                     android:text="0"
                     android:textColor="#e4e4e4"
-                    android:textSize="9sp" />
+                    android:textSize="9sp"
+                    android:fontFamily="@font/sfcompactdisplay_light"/>
 
                 <TextView
                     android:id="@+id/ttt1"
@@ -137,14 +136,14 @@
                     android:layout_alignParentBottom="true"
                     android:layout_marginRight="15.8dp"
                     android:layout_marginBottom="9dp"
-                    android:lineSpacingExtra="1.5sp"
                     android:text="/300 자"
                     android:textColor="#e4e4e4"
-                    android:textSize="9sp" />
+                    android:textSize="9sp"
+                    android:fontFamily="@font/sfcompactdisplay_light"/>
 
             </RelativeLayout>
         </android.support.v7.widget.CardView>
-    </LinearLayout>
+    </RelativeLayout>
 
     <TextView
         android:id="@+id/textView64"
@@ -152,13 +151,13 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="34dp"
         android:layout_marginLeft="34dp"
-        android:layout_marginTop="43dp"
+        android:layout_marginTop="35dp"
         android:textSize="14sp"
         android:textColor="#E6222222"
-        android:lineSpacingExtra="6.5sp"
         android:text="배경사진 변경하기"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout2" />
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout2"
+        android:fontFamily="@font/notosanscjkkr_medium"/>
 
     <ImageView
         android:id="@+id/changeBackImg"
@@ -185,15 +184,17 @@
     <TextView
         android:id="@+id/makeStudyFin"
         android:layout_width="match_parent"
-        android:layout_height="42dp"
-        android:gravity="center"
+        android:layout_height="wrap_content"
+        android:paddingVertical="10dp"
         android:layout_marginTop="45dp"
-        android:lineSpacingExtra="6.5sp"
+        android:background="#ffffff"
+        android:gravity="center"
         android:text="스터디 만들기"
         android:textColor="#2f78db"
         android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/showBackImg" />
+        app:layout_constraintTop_toBottomOf="@+id/showBackImg"
+        android:fontFamily="@font/notosanscjkkr_bold"/>
 </android.support.constraint.ConstraintLayout>
 </ScrollView>

@@ -1,24 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
-    android:layout_width="91dp"
-    android:layout_height="35dp"
-    android:layout_marginRight="20.5dp">
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="12.5dp">
 
     <TextView
         android:elevation="3dp"
         android:id="@+id/studyname_title"
         android:layout_width="88dp"
-        android:layout_height="31.5dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
         android:background="@drawable/timeline_studyname_default"
         android:gravity="center"
-        android:lineSpacingExtra="6sp"
         android:text="공기업"
         android:textColor="#ffffff"
         android:textSize="13sp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:fontFamily="@font/notosanscjkkr_bold"/>
 
-</android.support.constraint.ConstraintLayout>
+    <ImageView
+        android:id="@+id/exitImg"
+        android:elevation="3dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="78dp"
+        android:src="@mipmap/icon_49"/>
+
+</RelativeLayout>

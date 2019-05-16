@@ -2,6 +2,7 @@ package com.studylink.khu_app;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 
 public class RoomDTO implements Serializable {
@@ -21,6 +22,8 @@ public class RoomDTO implements Serializable {
     private Long total_member;
     private int member;
     private Date time;
+    private Date newsTime;
+    private List<AccountDTO> memberList;
 
     public Long getTotal_member() {
         return total_member;
@@ -142,6 +145,20 @@ public class RoomDTO implements Serializable {
         this.time = time;
     }
 
+    public Date getNewsTime() {
+        return newsTime;
+    }
 
+    public void setNewsTime(Date newsTime) {
+        this.newsTime = newsTime;
+    }
+
+    public List<AccountDTO> getMemberList() {
+        return memberList;
+    }
+
+    public void setMemberList(List<AccountDTO> memberList) {
+        this.memberList = memberList;
+    }
 
 }
