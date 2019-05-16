@@ -75,6 +75,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="347dp"
                 android:background="#ffffff"
+                app:mcv_showOtherDates="out_of_range"
+                app:mcv_selectionColor="@color/localBluecolor"
+                app:mcv_arrowColor="#222222"
+                app:mcv_allowClickDaysOutsideCurrentMonth="true"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">

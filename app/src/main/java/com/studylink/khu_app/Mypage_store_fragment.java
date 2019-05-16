@@ -17,6 +17,4 @@ public class Mypage_store_fragment extends Fragment {
 
         return rootView;
     }
-
-
 }
